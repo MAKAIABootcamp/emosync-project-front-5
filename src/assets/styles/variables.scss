@@ -6,13 +6,14 @@ $box-shadow-square:  0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px -4px 4px 0px rgba(
 $light-azure-blue: #E9FFFD;
 $font-poppins-core:  'Poppins', sans-serif;
 $font-monserrat: 'Montserrat Alternates', sans-serif;
+$dark-azure-blue: #001524;
 
 @mixin mobile {
     @media (max-width: 600px) {
       @content;
     }
   }
-  
+
   @mixin tablet {
     @media (max-width: 1000px) {
       @content;
