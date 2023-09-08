@@ -1,0 +1,361 @@
+@import "../../assets/styles/reset.scss";
+@import "../../assets/styles/variables.scss";
+
+.landingPage {
+  &__header {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    &__banner {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      & img {
+        width: 1600px;
+        @include tablet {
+          width: 666px;
+        }
+        @include mobile {
+          width: 375px;
+        }
+        height: 100%;
+      }
+    }
+    &__nav {
+      position: absolute;
+      top: 0;
+      right: 0;
+      display: flex;
+      padding: 20px 30px;
+      gap: 20px;
+      @include tablet {
+        padding: 10px;
+        gap: 10px;
+      }
+      @include mobile {
+        padding: 3px;
+        gap: 10px;
+      }
+
+      &__button1 {
+        border-radius: 11px;
+        border: 1px solid #d1d1d1;
+        background: #fff;
+        color: #000;
+        width: 89px;
+        &:hover {
+          background: #1caca5;
+          color: #fff;
+        }
+        @include mobile {
+          width: 50px;
+        }
+      }
+      &__button2 {
+        border-radius: 11px;
+        border: 1px solid #1caca5;
+        background: #1caca5;
+        color: #fff;
+        width: 135px;
+        &:hover {
+          background: #fff;
+          color: #000;
+        }
+        @include tablet {
+          width: 100px;
+        }
+        @include mobile {
+          width: 70px;
+        }
+      }
+      & button {
+        cursor: pointer;
+        font-family: $font-monserrat;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 18px;
+        height: 33px;
+        text-align: center;
+        @include tablet {
+          font-size: calc(10px + 0.5vw);
+          height: 28px;
+        }
+        @include mobile {
+          font-size: 8px;
+          height: 18px;
+        }
+      }
+    }
+    &__start {
+      position: absolute;
+      bottom: 12%;
+      font-family: $font-monserrat;
+      border-radius: 25px;
+      width: 250px;
+      cursor: pointer;
+      left: 64%;
+      font-size: 20px;
+      &:hover {
+        background: #fff;
+        color: #000;
+        border: 1px solid #d1d1d1;
+      }
+      @include tablet {
+        //padding: 10px 30px;
+        width: calc(160px);
+        left: calc(53% + 5vw);
+        bottom: 10%;
+        padding: calc(5px + 0.5vw) 0px;
+        font-size: calc(10px + 0.5vw);
+      }
+      @include mobile {
+        width: 100px;
+        padding: 7px 0px;
+        font-size: 9px;
+        left: 60%;
+        bottom: 5%;
+      }
+      padding: 12px 0px;
+      background-color: $azure-blue;
+      border: none;
+      color: white;
+      font-weight: 700;
+    }
+  }
+  &__body {
+    border-top: 1px solid #d1d1d1;
+    font-family: $font-poppins-core;
+    &__first {
+      position: relative;
+      background-color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 20px;
+      //justify-content: center;
+      height: 200px;
+      @include mobile {
+        height: 120px;
+      }
+      & > p {
+        text-align: center;
+        font-size: calc(15px + 0.5vw);
+        font-weight: 600;
+        line-height: 20px;
+        @include mobile {
+          font-size: calc(10px + 0.5vw);
+        }
+      }
+      &__squares {
+        display: flex;
+        gap: 20px;
+        position: absolute;
+        bottom: -120px;
+        justify-content: space-between;
+        @include tablet {
+          gap: 10px;
+        }
+        @include mobile {
+          gap: 5px;
+          width: 100vw;
+          overflow: auto;
+          bottom: -50px;
+        }
+        & > article {
+          background-color: #fff;
+          width: calc(180px + 6vw);
+          height: 244px;
+          padding: 15px;
+          border: 1px solid #d1d1d1;
+          border-radius: 15px;
+          @include tablet {
+            width: calc(145px + 5vw);
+            height: 244px;
+            overflow: auto;
+          }
+          @include mobile {
+            height: 110px;
+            & > p {
+              display: none;
+            }
+          }
+          //box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px -4px 4px 0px rgba(0, 0, 0, 0.25);
+          & > figure {
+            width: calc(40px + 0.5vw);
+            height: calc(40px + 0.5vw);
+            @include mobile {
+              width: calc(20px + 0.5vw);
+              height: calc(20px + 0.5vw);
+            }
+            & > img {
+              height: 100%;
+              width: 100%;
+            }
+          }
+          & > h3 {
+            font-size: calc(9px + 0.5vw);
+            @include mobile {
+              padding-top: 9px;
+              font-size: calc(7px + 0.5vw);
+            }
+          }
+          & > p {
+            padding-top: 9px;
+            font-size: calc(7px + 0.5vw);
+          }
+        }
+      }
+    }
+    &__middle {
+      background-color: $azure-blue;
+      height: 450px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      @include mobile {
+        height: 250px;
+      }
+      & > p {
+        color: #fff;
+        text-align: center;
+        font-size: calc(18px + 0.5vw);
+        font-weight: 500;
+        line-height: 30px;
+        @include mobile {
+          font-size: calc(14px + 0.5vw);
+        }
+      }
+    }
+    &__plans {
+      background-color: $light-azure-blue;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      position: relative;
+      height: 200px;
+      align-items: center;
+      @include tablet {
+        gap: 10px;
+      }
+      @include mobile {
+        gap: 5px;
+      }
+      &__plan {
+        width: 368px;
+        height: 501px;
+        @include tablet {
+          width: 250px;
+          height: 451px;
+        }
+        @include mobile {
+            width: 120px;
+            height:auto;
+          }
+        border-radius: 39px;
+        background: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        & > figure {
+          width: calc(80px + 2vw);
+          height: calc(80px + 2vw);
+          & > img {
+            height: 100%;
+            width: 100%;
+          }
+        }
+        & > h2 {
+          font-size: calc(20px + 0.5vw);
+          font-style: normal;
+          font-weight: 500;
+          line-height: 35px;
+        }
+        &__benefits {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+          & > div {
+            display: flex;
+            & > figure {
+              width: calc(12px + 0.5vw);
+              height: calc(12px + 0.5vw);
+              & > img {
+                height: 100%;
+                width: 100%;
+              }
+            }
+            & > p {
+              font-size: calc(8px + 0.4vw);
+              width: 260px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: 20px;
+              @include tablet {
+                width: 200px;
+              }
+              @include tablet {
+                width: 80px;
+                line-height: normal;
+              }
+            }
+          }
+        }
+        &__price {
+          padding-top: 20px;
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+          gap: 15px;
+          justify-content: center;
+          @include tablet {
+            width: 200px;
+          }
+          @include tablet {
+            gap: 0px;
+          }
+          &> p {
+            font-size: calc(12px + 0.5vw);
+            font-style: normal;
+            font-weight: 500;
+            line-height: 20px;
+            @include tablet {
+                font-size: calc(9px + 0.5vw);
+              }
+              @include mobile {
+                font-size: calc(7px + 0.5vw);
+                width: 80px;
+                text-align: center;
+                border: 1px red solid;;
+              }
+          }
+          &> h2 {
+            color: $azure-blue;
+            font-size: calc(20px + 0.5vw);
+            font-style: normal;
+            font-weight: 500;
+            line-height: 20px;
+            @include tablet {
+                font-size: calc(15px + 0.5vw);
+              }
+              @include mobile {
+                font-size: calc(10px + 0.5vw);
+              }
+          }
+        }
+      }
+    }
+    &__emptyBackground1 {
+      background-color: $azure-blue;
+      height: 280px;
+    }
+    &__emptyBackground2 {
+      background-color: $light-azure-blue;
+      height: 150px;
+    }
+  }
+}

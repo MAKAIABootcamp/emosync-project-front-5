@@ -1,0 +1,69 @@
+html {
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+    padding: 0;
+    margin: 0;
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    background-color: #fff;
+    margin: 0;
+    font: inherit;
+    color: #000;
+    width: 1.15em;
+    height: 1.15em;
+   // border: 1px solid #000;
+   background-color: #e0e0e0;
+    border-radius: 0.15em;
+    transform: translateY(-0.075em);
+    cursor: pointer;
+    display: grid;
+    place-content: center;
+    &::before{
+        content: "";
+        width: 0.65em;
+        height: 0.65em;
+        transform: scale(0);
+        transition: 120ms transform ease-in-out;
+        box-shadow: inset 1em 1em var(--form-control-color);
+        background-color: #6C6C6C;
+        transform-origin: bottom left;
+        font-size: calc(11px + 0.5vw);
+        clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+    }
+    &:checked{
+        border: 0.15em solid #FFE031;
+        background-color: #FFE031;
+        &::before{
+            transform: scale(1);
+        }
+    }
+  }
+
+/* Estilos de scroll personalizado para navegadores WebKit */
+::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #A7A7A7;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: transparent;
+}
+
+/* Estilos de scroll personalizado para navegadores que no sean de WebKit */
+body {
+    scrollbar-width: thin;
+    scrollbar-color: #A7A7A7 transparent;
+}
