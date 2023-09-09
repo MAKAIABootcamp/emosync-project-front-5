@@ -1,0 +1,31 @@
+@import "../../assets/styles/variables.scss";
+
+.client-feed {
+    width: 100%;
+    padding-top: 25px;
+    
+    &__search-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid $light-gray;
+        width: max-content;
+        margin: 0 auto;
+        padding: 0.5rem 1rem;
+        border-radius: 33px;
+        gap: 0.7rem;
+    }
+
+    &__search-icon {
+        width: 20px;
+        filter: invert(73%) sepia(94%) saturate(2%) hue-rotate(325deg) brightness(92%) contrast(80%);
+    }
+
+    &__input {
+        border: none;
+        width: 60vw;
+        outline: none;
+        font-family: $font-poppins-core;
+        font-weight: 400;
+    }
+}

@@ -4,15 +4,15 @@ import "./headerClient.scss"
 const HeaderClient = ({ menuMobileActive, setMenuMobileActive }) => {
     const navMobile = [
         {
-            name: "",
+            name: "Inicio",
             path: ""
         },
         {
-            name: "",
+            name: "Citas Pendientes",
             path: ""
         },
         {
-            name: "",
+            name: "Perfil",
             path: ""
         }
     ]
@@ -67,9 +67,11 @@ const HeaderClient = ({ menuMobileActive, setMenuMobileActive }) => {
                                     onClick={handleMobileMenu}
                                 />
                                 <ul className="header__mobile-menu__list">
-                                    <li onClick={handleMobileMenu}>Inicio</li>
-                                    <li onClick={handleMobileMenu}>Citas Pendientes</li>
-                                    <li onClick={handleMobileMenu}>Perfil</li>
+                                    {
+                                        navMobile.map((element, index) => (
+                                            <li key={index+1} onClick={handleMobileMenu}>{element.name}</li>
+                                        ))
+                                    }
                                 </ul>
                             </nav>
                         </section>
