@@ -77,17 +77,17 @@ const HeaderClient = ({ menuMobileActive, setMenuMobileActive }) => {
                         </section>
                     </>
                 ) : (
-                    <nav>
-                        <ul>
-                            <li>
+                    <nav className="header__desktop-menu">
+                        <ul className="header__desktop-menu__list">
+                            <li className="header__desktop-menu__item">
                                 Inicio
                                 <hr />
                             </li>
-                            <li>
+                            <li className="header__desktop-menu__item">
                                 Citas Pendientes
                                 <hr />
                             </li>
-                            <li>Perfil</li>
+                            <li className="header__desktop-menu__item">Perfil</li>
                         </ul>
                     </nav>
                 )

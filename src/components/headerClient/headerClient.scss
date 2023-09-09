@@ -5,8 +5,11 @@
     padding: 0.7rem 1rem;
     justify-content: space-between;
     align-items: center;
-    position: relative;
+    position: sticky;
+    top: 0;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    background-color: white;
+    z-index: 100;
 
     &__logo-container {
         display: flex;
@@ -62,5 +65,39 @@
         width: 1.5rem;
         top: 10px;
         right: 10px
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .header {
+        padding: 0.5rem 1rem;
+
+        &__logo {
+            width: 1.5rem;
+        }
+
+        &__desktop-menu {
+
+            &__list {
+                font-family: $font-monserrat;
+                list-style: none;
+                display: flex;
+                gap: 0.5rem;
+                font-weight: 500;
+                color: $dark-azure-blue;
+            }
+
+            &__item {
+                display: flex;
+                gap: 0.5rem;
+                font-size: 14px;
+                hr {
+                    color: #E3E3E3;
+                    border: 1px solid #E3E3E3;
+                    border-left: none;
+                }
+            }
+
+        }
     }
 }
