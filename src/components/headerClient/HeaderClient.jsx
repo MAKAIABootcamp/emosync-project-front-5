@@ -2,7 +2,20 @@ import React, { useEffect, useState } from 'react'
 import "./headerClient.scss"
 
 const HeaderClient = ({ menuMobileActive, setMenuMobileActive }) => {
-
+    const navMobile = [
+        {
+            name: "",
+            path: ""
+        },
+        {
+            name: "",
+            path: ""
+        },
+        {
+            name: "",
+            path: ""
+        }
+    ]
     const [desktopMenu, setDesktopMenu] = useState(false)
     const [mobileMenu, setMobileMenu] = useState(false)
     useEffect(() => {
