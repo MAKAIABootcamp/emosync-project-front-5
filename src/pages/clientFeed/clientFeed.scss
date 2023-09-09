@@ -3,7 +3,7 @@
 .client-feed {
     width: 100%;
     padding-top: 25px;
-    
+
     &__search-container {
         display: flex;
         justify-content: center;
@@ -27,5 +27,11 @@
         outline: none;
         font-family: $font-poppins-core;
         font-weight: 400;
+    }
+
+    &__cards-container {
+        padding: 1.3rem;
+        display: grid;
+        gap: 0.8rem;
     }
 }

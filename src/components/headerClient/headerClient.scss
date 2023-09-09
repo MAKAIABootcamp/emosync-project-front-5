@@ -33,14 +33,16 @@
         left: 0;
         display: flex;
         justify-content: flex-end;
+        background-color: rgba(0, 0, 0, 0.082);
+        z-index: 200;
     }
 
     &__mobile-menu {
-        backdrop-filter: blur(11px) saturate(180%);
-        -webkit-backdrop-filter: blur(11px) saturate(180%);
-        background-color: rgba(255, 255, 255, 0.63);
-        border-radius: 10px;
-        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+        backdrop-filter: blur(6px) saturate(180%);
+        -webkit-backdrop-filter: blur(6px) saturate(180%);
+        background-color: rgba(255, 255, 255, 0.75);
+        border-radius: 12px;
+        border: 1px solid rgba(209, 213, 219, 0.3);
         padding: 2.5rem 1.5rem;
         position: relative;
 
