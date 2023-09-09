@@ -55,3 +55,12 @@
     }
 }
 
+.psychologist-card {
+
+    &__info-btn {
+        &:hover {
+            cursor: pointer;
+            background-color: #00b8ae;
+        }
+    }
+}

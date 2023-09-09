@@ -91,10 +91,34 @@
                 display: flex;
                 gap: 0.5rem;
                 font-size: 14px;
+                position: relative;
+
                 hr {
                     color: #E3E3E3;
                     border: 1px solid #E3E3E3;
                     border-left: none;
+                }
+
+                
+                &::before {
+                    content: "";
+                    position: absolute;
+                    width: 0%;
+                    height: 1px;
+                }
+
+                &:hover {
+                    cursor: pointer;
+                }
+
+                &:hover::before {
+                    content: "";
+                    position: absolute;
+                    width: 50%;
+                    height: 1px;
+                    background-color: $dark-azure-blue;
+                    bottom: -2px;
+                    transition: all ease 0.5s;
                 }
             }
 
