@@ -1,0 +1,129 @@
+@import "../../assets/styles/reset.scss";
+@import "../../assets/styles/variables.scss";
+
+.LoginContainer {
+  background-image: url(/public/Login/bg-desktop-1700.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: flex-end;
+  font-family: $font-poppins-core;
+
+  & .LoginForm {
+    background-color: white;
+    height: 100vh;
+    width: 33vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2vh;
+    border-radius: 80px 0 0 80px;
+    box-shadow: $box-shadow-square;
+
+    &__icon {
+      height: 10vh;
+
+      & img {
+        height: 100%;
+      }
+    }
+
+    &__title {
+      font-size: calc(12px + 1vh);
+    }
+
+    &__text {
+      font-size: calc(4px + 1vh);
+      color: $light-gray;
+      width: 80%;
+      text-align: center;
+    }
+
+    &__box {
+      height: 7vh;
+      display: flex;
+      border: #A4A4A4 solid 1px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1vh;
+      gap: 1vh;
+
+      & figure {
+        height: 50%;
+        display: flex;
+
+        & img {
+          height: 100%;
+        }
+      }
+
+      & input {
+        border: none;
+
+        &:focus,
+        :active {
+          outline: none;
+        }
+      }
+    }
+
+    &__method {
+      width: 80%;
+      height: 7vh;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1vh;
+
+      &__box {
+        display: flex;
+        height: 100%;
+        width: 45%;
+        align-items: center;
+        justify-content: center;
+        gap: 1vh;
+
+        background-color: $light-orange;
+        border-radius: 20px;
+
+        & button {
+          border: none;
+          background-color: transparent;
+          color: white;
+          font-size: calc(12px + 1vh);
+        }
+      }
+
+      & .google {
+        background-color: $orange;
+        cursor: pointer;
+
+        & button {
+          cursor: pointer;
+        }
+      }
+
+    }
+
+    &__register {
+      font-size: calc(4px + 1vh);
+      width: 80%;
+      text-align: center;
+
+      & a {
+        color: $light-orange;
+        text-decoration: none;
+
+        &:hover {
+          color: $orange;
+        }
+      }
+    }
+  }
+}

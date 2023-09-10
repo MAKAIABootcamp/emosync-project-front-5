@@ -1,0 +1,112 @@
+@import "../../assets/styles/reset.scss";
+@import "../../assets/styles/variables.scss";
+
+.RegisterContainer {
+  background-image: url(/public/Register/bg-desktop-1100.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: $font-poppins-core;
+  height: 100vh;
+  width: 100vw;
+
+  & .Register {
+    height: 60vh;
+    width: 60vw;
+    background-color: white;
+    border-radius: 80px;
+    padding: 5vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5vh;
+    box-shadow: $box-shadow-square;
+    position: relative;
+
+    &__welcome {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      // border: solid 1px red;
+
+      & h2 {
+        font-size: calc(12px + 1vh);
+
+        & span {
+          color: $azure-blue;
+          font-family: $font-monserrat;
+        }
+      }
+
+      & p {
+        font-size: calc(4px + 1vh);
+      }
+    }
+
+    &__select {
+      display: flex;
+      gap: 10vw;
+      height: 50%;
+      // border: solid 1px green;
+      align-items: center;
+      justify-content: center;
+
+      &__box {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 2vh;
+        border: solid 1px $light-gray;
+        border-radius: 20px;
+        cursor: pointer;
+
+        & figure {
+          height: 80%;
+
+          & img {
+            height: 100%;
+          }
+        }
+      }
+
+      & .activated1 {
+        border: solid 1px $orange;
+        box-shadow: $box-shadow-square;
+      }
+
+    }
+
+    &__next {
+      width: 200px;
+      background-color: $light-orange;
+      padding: 1vh;
+      border-radius: 10px;
+      text-align: center;
+      font-size: calc(12px + 1vh);
+      color: white;
+    }
+
+    & .activated2 {
+      background-color: $orange;
+      cursor: pointer;
+    }
+
+    &__back {
+      width: 50px;
+      position: absolute;
+      top: 10%;
+      left: 10%;
+      cursor: pointer;
+
+      & img {
+        height: 100%;
+      }
+    }
+  }
+}
