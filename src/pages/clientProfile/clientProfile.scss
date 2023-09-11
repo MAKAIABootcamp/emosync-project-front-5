@@ -33,6 +33,7 @@
         font-weight: 500;
         color: $dark-azure-blue;
         font-size: 20px;
+        text-align: center;
     }
 
     &__info-subtitle {
@@ -72,5 +73,133 @@
     &__logout-icon {
         filter: invert(53%) sepia(15%) saturate(3475%) hue-rotate(136deg) brightness(98%) contrast(78%);
         width: 2rem;
+    }
+
+    &__notifications {
+        padding: 1.5rem 1rem;
+    }
+
+    &__title {
+        font-family: $font-monserrat;
+        font-weight: 500;
+        color: $dark-azure-blue;
+        font-size: 24px;
+        margin-bottom: 1rem;
+    }
+
+    &__notifications-list {
+        list-style: none;
+        border: 1px solid $light-gray;
+        border-radius: 5px;
+
+        hr {
+            border: 1px solid $light-gray;
+            border-bottom: none;
+        }
+    }
+
+    &__notifications-list hr:last-of-type {
+        display: none;
+    }
+
+    &__notifications-item {
+        font-family: $font-poppins-core;
+        padding: 0.5rem 1rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        p {
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 14px;
+            font-weight: 300;
+        }
+
+        div {
+            min-width: 15px;
+            height: 15px;
+
+            border-radius: 50%
+        }
+    }
+
+    &__accepted {
+        p {
+            color: #30AC1C;
+        }
+
+        div {
+            background-color: #30AC1C;
+        }
+    }
+
+    &__rejected {
+        p {
+            color: $alert;
+        }
+
+        div {
+            background-color: $alert;
+        }
+    }
+
+    &__viewed {
+        p {
+            color: #747474E3;
+        }
+
+        div {
+            border: 1px solid $light-gray;
+            background-color: transparent;
+        }
+    }
+
+
+}
+
+@media screen and (min-width: 768px) {
+    .client-profile {
+        display: flex;
+
+        &__profile {
+            width: 45%;
+            border-right: 1px solid $light-gray;
+            border-bottom: none;
+            height: calc(100vh - 46px);
+            justify-content: space-between;
+        }
+
+        &__notifications {
+            padding: 2.5rem 2rem;
+            width: 55%;
+        }
+
+        &__notifications-list {
+            width: 100%;
+        }
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .client-profile {
+        display: flex;
+
+        &__profile {
+            width: 30%;
+            max-width: 340px;
+        }
+
+        &__notifications {
+            padding: 2.5rem 2rem;
+            margin: 0 auto;
+        }
+
+        &__notifications-list {
+            width: 100%;
+        }
     }
 }

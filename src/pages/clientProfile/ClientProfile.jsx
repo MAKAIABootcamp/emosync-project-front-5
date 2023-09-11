@@ -2,6 +2,24 @@ import React from 'react'
 import "./clientProfile.scss"
 
 const ClientProfile = () => {
+
+    const notifications = [
+        {
+            psychologist: "Juliana Sanchez",
+            isAccepted: true,
+            isView: false
+        },
+        {
+            psychologist: "Juliana Sanchez",
+            isAccepted: false,
+            isView: false
+        },
+        {
+            psychologist: "Juliana Sanchez",
+            isAccepted: true,
+            isView: true
+        },
+    ]
     return (
         <main className='client-profile'>
             <article className='client-profile__profile'>
@@ -34,8 +52,33 @@ const ClientProfile = () => {
                     <img className='client-profile__logout-icon' src="/User/logout.svg" alt="" />
                 </section>
             </article>
-            <article>
-
+            <article className='client-profile__notifications'>
+                <h1 className='client-profile__title'>Notificaciones</h1>
+                <ul className='client-profile__notifications-list'>
+                    {
+                        notifications.map((notification, index) => (
+                            <>
+                                <li className={
+                                    `client-profile__notifications-item
+                                    ${notification.isAccepted
+                                        ? "client-profile__accepted"
+                                        : "client-profile__rejected"}
+                                    ${notification.isView ? "client-profile__viewed" : ""}
+                                        `}>
+                                    <div></div>
+                                    <p>
+                                        {
+                                            `${notification.isAccepted
+                                                ? "Cita confirmada por "
+                                                : "Cita rechazada por "}
+                                        ${notification.psychologist}`}
+                                    </p>
+                                </li>
+                                <hr />
+                            </>
+                        ))
+                    }
+                </ul>
             </article>
         </main>
     )
