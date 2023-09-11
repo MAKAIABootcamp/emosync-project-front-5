@@ -1,0 +1,102 @@
+@import "../../../assets/styles/variables.scss";
+
+.WeekSchedule__father {
+    display: flex;
+  }
+  .WeekSchedule{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 40px;
+    margin-top: 15vh;
+    &__pager{
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+     
+      width: 65%;
+     &__arrows{
+    
+      display: flex;
+     }
+      & figure{
+        height: 16px;
+        & img{
+          height: 100%
+        }
+      };
+    }
+    & h2 {
+      color: $azure-blue;
+      font-family: Montserrat Alternates;
+      font-size: calc(16px + 0.5vw);
+      font-style: normal;
+      font-weight: 500;
+    }
+    &__table{
+      border: 1px solid #e3e3e3;
+      border-radius: 20px;
+      display: grid;
+      grid-template-rows: repeat(5, 1fr); /* 4 filas de igual altura */
+      grid-template-columns: repeat(4, 1fr);
+      &__celda {
+        font-family: $font-poppins-core;
+        border: 0.1vw solid #e0e0e0;
+        padding: 10px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 400;
+        gap: 10px;
+        & h3{
+          font-weight: 500;
+          font-size: calc(12px + 0.4vw);
+          
+        }
+        & figure {
+          height: 15px;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          & img {
+            height: 100%;
+            width: 100%;
+          }
+        }
+        & strong {
+          color: $azure-blue;
+          cursor: pointer;
+          font-weight: 500;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+        & p {
+          color: $orange-hard;
+          cursor: pointer;
+          font-weight: 400;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+      & .upRight {
+        border: 0;
+      }
+      & .upMiddle {
+        border-top: 0;
+      }
+      & .upLeft {
+        border: 0;
+      }
+      & .downRight {
+        border: 0;
+      }
+      & .downLeft {
+        border: 0;
+      }
+    }
+  }
