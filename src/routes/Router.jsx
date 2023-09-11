@@ -8,7 +8,7 @@ const Router = () => {
   return (
    <BrowserRouter>
         <Routes>
-            <Route path='/' element={<LandingPage/>}>
+            <Route path='/' element={<FeedPsycho/>}>
             </Route>
         </Routes>
    </BrowserRouter>

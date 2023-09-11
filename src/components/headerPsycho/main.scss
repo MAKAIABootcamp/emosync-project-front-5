@@ -9,12 +9,14 @@
     align-items: center;
     justify-content: space-between;
     padding: 15px 0px;
-    width: 60px;
+    width: 40px;
+    position: sticky;top: 0; 
+    z-index: 100;
     & figure{
         cursor: pointer;
     }
     &> figure{
-        height: 60px;
+        height: 40px;
         &> img{
             height: 100%;
         }
@@ -25,8 +27,8 @@
         justify-content: center;
         gap: 20px;
         &> figure{
-            height: 40px;
-            width: 40px;
+            height: 25px;
+            width: 25px;
             &> img{
                 height: 100%;
                 width: 100%;
@@ -39,8 +41,8 @@
         justify-content: center;
         gap: 20px;
         &> figure{
-            height: 40px;
-            width: 40px;
+            height: 25px;
+            width: 25px;
             &> img{
                 height: 100%;
                 object-fit: cover;

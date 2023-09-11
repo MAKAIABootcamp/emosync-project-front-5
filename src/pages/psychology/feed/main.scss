@@ -1,49 +1,129 @@
 @import "../../../assets/styles/variables.scss";
 
-
-
-.feed__father{
-    display: flex;
+.feed__father {
+  display: flex;
 }
 
-.feed{
-    font-family: $font-monserrat;
+.feed {
+  font-family: $font-monserrat;
+  display: flex;
+  height: 100dvh;
+  width: 100%;
+  &__welcome {
+    width: 30%;
     display: flex;
-    height: 100dvh;
-    &__welcome{
-        
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    &__title {
+      color: $azure-blue;
+      font-weight: 500;
+      font-size: 32px;
+    }
+    &__advicer {
+        height: 80%;
+      & > img {
+        height: 100%;
+        object-fit: cover;
+        border-radius: 34px;
+      }
+    }
+  }
+  &__appointments {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+    height: 100vh;
+    padding: 0 80px;
+    & table {
+      border-collapse: separate;
+      width: auto;
+      background-color: transparent;
+      border-spacing: 0px;
+      border: 1px solid #e3e3e3;
+      & th,
+      td {
+        border: 1px solid #e3e3e3;
+        padding: 8px;
+        text-align: left;
+      }
+    }
+    &__appoint,
+    &__pendingAppoint {
+      //border: 1px solid #E3E3E3;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      & h2 {
+        color: $azure-blue;
+        font-family: Montserrat Alternates;
+        font-size: calc(16px + 0.5vw);
+        font-style: normal;
+        font-weight: 500;
+      }
+      &__table {
+        border: 1px solid #e3e3e3;
+        border-radius: 20px;
         display: grid;
-      
-       justify-content: center;
-        &__title{
-            color: $azure-blue;
-            font-weight: 500;
-            font-size: 32px;
-        }
-        &__advicer{
-            &> img{
-                border-radius: 34px;
+        grid-template-rows: repeat(4, 1fr); /* 4 filas de igual altura */
+        grid-template-columns: repeat(3, 1fr); /* 3 columnas de igual ancho */
+        //grid-gap: 10px; /* Espacio entre las celdas */
+        &__celda {
+          font-family: $font-poppins-core;
+          border: 0.1vw solid #e0e0e0;
+          padding: 10px;
+          text-align: center;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: 400;
+          gap: 10px;
+          & figure {
+            height: 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            & img {
+              height: 100%;
+              width: 100%;
             }
+          }
+          & strong {
+            color: $azure-blue;
+            cursor: pointer;
+            font-weight: 500;
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+          & p {
+            color: $orange-hard;
+            cursor: pointer;
+            font-weight: 400;
+            &:hover {
+              text-decoration: underline;
+            }
+          }
         }
-    }
-    &__appointments{
-       display: flex;
-       flex-direction: column;
-       justify-content: center;
-       & table{
-        border-collapse: separate;
-        width: auto;
-        background-color: transparent;
-        border-spacing: 0px;
-        border: 1px solid  #E3E3E3;
-        &  th, td {
-            border: 1px solid  #E3E3E3;
-            padding: 8px;
-            text-align: left;
+        & .upRight {
+          border: 0;
         }
-       }
-       &__appoint{
-        background-color: #E3E3E3;
-       }
+        & .upMiddle {
+          border-top: 0;
+        }
+        & .upLeft {
+          border: 0;
+        }
+        & .downRight {
+          border: 0;
+        }
+        & .downLeft {
+          border: 0;
+        }
+      }
     }
+  }
 }
