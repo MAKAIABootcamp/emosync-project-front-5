@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import LandingPage from '../pages/landingPage/LandingPage'
-import Login from '../pages/login/login'
+import Login from '../pages/login/Login'
 import Welcome from '../pages/welcome/Welcome'
 import Register from '../pages/register/Register'
 import RegisterExtend from '../pages/register/RegisterExtend'
