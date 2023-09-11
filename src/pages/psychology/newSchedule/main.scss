@@ -1,0 +1,127 @@
+@import "../../../assets/styles/variables.scss";
+
+.NewSchedule__father {
+    display: flex;
+  }
+
+  .NewSchedule{
+    font-family: Montserrat Alternates;
+    border: 1px red solid;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 15px;
+    gap: 30px;
+    &__title{
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        width: 100%;
+       
+        & > span{
+            color: $azure-blue;
+      
+            font-size: calc(12px + 0.5vw);
+            font-style: normal;
+            font-weight: 500;
+        }
+        &> figure{
+            cursor: pointer;
+            height: 32px;
+            &> img{
+                    height: 100%;
+                }
+            }
+        
+    }
+    &__table{
+        border: 1px #c3c3c3 solid;
+        border-radius: 20px;
+        width: 500px;
+        height: 85%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        &__title{
+           line-height: 22px;
+            padding: 22px 0 10px 0px;
+           
+            border-bottom: 1px #cccc solid;
+            width: 90%;
+            &> h2{
+                font-size: calc(10px + 0.5vw);
+                font-weight: 600;
+            }
+            &> span{
+                color: #c3c3c3;
+                font-size: calc(7px + 0.5vw);
+            }
+        }
+        &__week{
+            display: flex;
+
+            width: 100%;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px 0;
+            &> div{
+                display: flex;
+                flex-direction: column;
+                background-color: $azure-blue;
+                justify-content: center;
+                text-align: center;
+                border-radius: 15px;
+                padding: 10px;
+                color: #fff;
+                width: 55px;
+                cursor: pointer;
+                &:hover{
+                    border: 1px $azure-blue solid;
+                    color: rgba(0, 21, 36, 0.56);;
+                    background-color: $light-azure-blue;
+                }
+                &>strong{
+                    font-size: calc(9px + 0.5vw);
+                    font-weight: 600;
+                }
+                &>span{
+                    font-size: calc(6px + 0.5vw);
+                    font-weight: 500;
+                }
+            }
+
+        }
+        &__time{
+            width: 90%;
+            border-bottom: 1px #c3c3c3 solid;
+            &> div{
+                display: flex;
+                justify-content: space-between;
+                border-top: 1px #c3c3c3 solid;
+                padding: 20px 0;
+                &>input{
+
+                }
+                &>span{
+                    font-weight: 500;
+                }
+            }
+        }
+        &__button{
+            margin-top: auto;
+            margin-bottom: 20px;
+            cursor: pointer;
+            font-family: Montserrat Alternates;
+            color: $azure-blue;
+            background-color: #fff;
+            border: 0;
+            width: 100%;
+            border-top: 1px #c3c3c3 solid;
+            padding-top: 20px;
+            &:hover{
+                text-decoration: underline;
+            }
+        }
+    }
+  }
