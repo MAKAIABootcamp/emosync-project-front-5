@@ -1,35 +1,37 @@
 import React from 'react'
+import "./clientProfile.scss"
 
 const ClientProfile = () => {
     return (
         <main className='client-profile'>
             <article className='client-profile__profile'>
-                <section>
-                    <div>
-                        <h2>Nombre Completo</h2>
-                        <p>Alejandra Sanchez</p>
+                <section className='client-profile__info-container'>
+                    <div className='client-profile__info'>
+                        <h2 className='client-profile__info-title'>Nombre Completo</h2>
+                        <p className='client-profile__info-subtitle'>Alejandra Sanchez</p>
                     </div>
-                    <div>
-                        <h2>Correo Electrónico</h2>
-                        <p>alejandra@example.com</p>
+                    <div className='client-profile__info'>
+                        <h2 className='client-profile__info-title'>Correo Electrónico</h2>
+                        <p className='client-profile__info-subtitle'>alejandra@example.com</p>
                     </div>
-                    <div>
-                        <h2>Suscripción</h2>
-                        <p>Plata</p>
+                    <div className='client-profile__info'>
+                        <h2 className='client-profile__info-title'>Suscripción</h2>
+                        <p className='client-profile__info-subtitle'>Plata</p>
                     </div>
-                    <div>
-                        <h2>Citas cumplidas en el mes</h2>
-                        <p>0</p>
+                    <div className='client-profile__info'>
+                        <h2 className='client-profile__info-title'>Citas cumplidas en el mes</h2>
+                        <p className='client-profile__info-subtitle'>0</p>
                     </div>
-                    <div>
-                        <h2>Método de pago </h2>
-                        <p>******* 3456</p>
+                    <div className='client-profile__info'>
+                        <h2 className='client-profile__info-title'>Método de pago </h2>
+                        <p className='client-profile__info-subtitle'>******* 3456</p>
                     </div>
-                    <button>Editar Información</button>
+                    <button className='client-profile__btn-edit'>Editar Información</button>
+                    <button className='client-profile__btn-emergency'>¡Tengo una emergencia!</button>
                 </section>
-                <section>
-                    <p>Cerrar Sesión</p>
-                    <img src="" alt="" />
+                <section className='client-profile__logout-container'>
+                    <p className='client-profile__logout'>Cerrar Sesión</p>
+                    <img className='client-profile__logout-icon' src="/User/logout.svg" alt="" />
                 </section>
             </article>
             <article>

@@ -8,6 +8,10 @@ const HeaderClient = ({ menuMobileActive, setMenuMobileActive }) => {
             path: ""
         },
         {
+            name: "Psicólogos",
+            path: ""
+        },
+        {
             name: "Citas Pendientes",
             path: ""
         },
@@ -81,6 +85,10 @@ const HeaderClient = ({ menuMobileActive, setMenuMobileActive }) => {
                         <ul className="header__desktop-menu__list">
                             <li className="header__desktop-menu__item">
                                 Inicio
+                                <hr />
+                            </li>
+                            <li className="header__desktop-menu__item">
+                                Psicólogos
                                 <hr />
                             </li>
                             <li className="header__desktop-menu__item">
