@@ -2,35 +2,22 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
     isAuthenticated: false,
-    key: null,
-    userRole: null,
-    address: null,
+    authMethod: null,
+    typeUser: null,
 }
 
-export const userSlice = createSlice({
-    name: 'user',
+export const authSlice = createSlice({
+    name: 'auth',
     initialState,
     reducers: {
-        setIsChecking: (state) => {
-            state.isChecking = !state.isChecking
-        },
-        login: (state, { payload }) => {
-            localStorage.setItem("infoUser", JSON.stringify(payload))
-            state.isChecking = false;
-            state.key = payload.key
-            state.userRole = payload.userRole
-            state.address = payload.address
-        },
-        logout: (state) => {
-            state.isChecking = false
-            state.key = null
-            state.userRole = null
-            state.address = null
+        setIsAuthenticated: (state) => {
+            state.isAuthenticated = !state.isChecking
         },
         updateInfo: (state, { payload }) => {
-            state.address = payload;
+            state.authMethod = payload.authMethod;
+            state.typeUser = payload.typeUser;
         }
     }
 })
 
-export const { setIsChecking, login, logout, updateInfo } = userSlice.actions
+export const { setIsAuthenticated, updateInfo } = authSlice.actions

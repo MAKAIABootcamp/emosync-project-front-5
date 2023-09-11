@@ -4,8 +4,6 @@ import LandingPage from '../pages/landingPage/LandingPage'
 import Login from '../pages/login/Login'
 import Welcome from '../pages/welcome/Welcome'
 import Register from '../pages/register/Register'
-import RegisterExtend from '../pages/register/RegisterExtend'
-
 
 const Router = () => {
   return (
@@ -15,7 +13,6 @@ const Router = () => {
         <Route path='/login' element={<Login />} />
         <Route path='/welcome' element={<Welcome />} />
         <Route path='/register' element={<Register />} />
-        <Route path='/register/:userType' element={<RegisterExtend />} />
       </Routes>
     </BrowserRouter>
   )
