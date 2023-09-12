@@ -73,7 +73,6 @@ const RegisterForm = () => {
                             <label className='register__label'>
                                 Especialidad
                                 <input className='register__input' type="text" />
-                                <p className='register__alert'>Si no tienes especialidad, coloca "Psicólogo General"</p>
                             </label>
                             <label className='register__label'>
                                 Tipo de cuenta

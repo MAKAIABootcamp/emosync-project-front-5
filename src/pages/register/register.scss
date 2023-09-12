@@ -37,7 +37,9 @@
 
     &__arrow-back {
         width: 2rem;
+        filter: invert(45%) sepia(89%) saturate(408%) hue-rotate(128deg) brightness(104%) contrast(85%);
     }
+
     &__text {
         font-size: 12px;
         text-align: center;
@@ -73,6 +75,7 @@
             border: 1px solid #A4A4A4;
             padding: 0.2rem 0.5rem;
             border-radius: 7px;
+            font-family: $font-poppins-core;
           }
     }
 
@@ -84,6 +87,7 @@
         font-family: $font-poppins-core;
         background-color: white;
         font-size: 13px;
+        width: 100%;
     }
 
     &__alert {
@@ -97,12 +101,110 @@
     &__btn {
         background-color: $orange;
         border: none;
-        padding: 0.5rem 1rem;
+        padding: 0.6rem 1.5rem;
         width: max-content;
         align-self: center;
         font-family: $font-poppins-core;
         color: white;
         border-radius: 10px;
+        grid-area: button;
+        margin-top: 0.5rem;
     }
 
+}
+
+@media screen and (min-width: 768px) {
+    .register {
+        background-image: url("/Register/bg-tablet.svg");
+
+        &__form-container {
+            width: 75%;
+            height: 80%;
+            max-height: 600px;
+            justify-content: center;
+            padding: 2.5rem;
+        }
+
+        &__text-container {
+            flex-direction: row;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        &__arrow-back {
+            width: 3rem;
+            filter: invert(45%) sepia(89%) saturate(408%) hue-rotate(128deg) brightness(104%) contrast(85%);
+        }
+
+        &__text {
+            font-size: 14px;
+            line-height: 17px;
+        }
+
+        &__form {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.2rem;
+            row-gap: 1.3rem;
+            grid-template-areas:
+            ". ."
+            ". ."
+            ". ."
+            ". ."
+            "button button";
+            place-items: center;
+        }
+
+        &__label {
+            font-size: 15px;
+            position: relative;
+            width: 100%;
+
+            input[type=file] {
+                font-size: 14px;
+              }
+
+              input[type=file]::file-selector-button {
+                padding: 0.3rem 0.7rem;
+                border-radius: 10px;
+              }
+        }
+
+        &__alert {
+            position: absolute;
+            bottom: -16px;
+            font-size: 10px;
+            color: #A4A4A4;
+            line-height: 15px;
+            margin-top: 0.2rem;
+            padding: 0 0.3rem;
+        }
+
+        &__btn {
+            font-size: 16px;
+        }
+    }
+}
+
+@media screen and (min-width: 1100px) {
+    .register {
+        background-image: url("/Register/bg-desktop-1100.svg");
+        background-position: top left;
+
+        &__form-container {
+            width: 75%;
+            height: 85%;
+            max-width: 900px;
+        }
+
+        &__form {
+            width: 60%;
+            gap: 1rem;
+        }
+
+        &__btn {
+            font-size: 16px;
+            cursor: pointer;
+        }
+    }
 }
