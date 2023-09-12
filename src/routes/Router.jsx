@@ -5,6 +5,7 @@ import Login from '../pages/login/login'
 import Welcome from '../pages/welcome/Welcome'
 import Register from '../pages/register/Register'
 import RegisterSelectType from '../components/registerSelectType/RegisterSelectType'
+import CalendarPsycho from '../pages/psychology/calendar/CalendarPsycho'
 
 const Router = () => {
   return (
@@ -15,6 +16,7 @@ const Router = () => {
         <Route path='/welcome' element={<Welcome />} />
         <Route path='/register' element={<Register />} />
         <Route path='/RegisterSelectType' element={<RegisterSelectType/>} />
+        <Route path='/CalendarPsycho' element={<CalendarPsycho/>} />
       </Routes>
     </BrowserRouter>
   )

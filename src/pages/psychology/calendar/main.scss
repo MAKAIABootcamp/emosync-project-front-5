@@ -1,0 +1,29 @@
+@import 'react-big-calendar/lib/sass/styles';
+@import 'react-big-calendar/lib/addons/dragAndDrop/styles'; // if using DnD
+@import "../../../assets/styles/variables.scss";
+
+
+.CalendarPsycho__father{
+    display: flex;
+}
+.CalendarPsycho{
+font-family: $font-monserrat;
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   & button{
+    font-family: $font-poppins-core;
+    cursor: pointer;
+}
+   &> section{
+    border: 1px $azure-blue solid;
+    padding: 5vh 0 0px 0;
+    border-radius: 20px;
+    border-bottom: 0;
+   }
+   &__calendar{
+    height: 80vh !important;
+    width: 70vw;
+   }
+}
