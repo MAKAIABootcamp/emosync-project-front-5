@@ -4,7 +4,7 @@ import { Navigate, Outlet } from 'react-router-dom'
 const ClientRoutes = ({ userRole }) => {
   return (
     <div>
-      {userRole === "ADMIN" ? <Outlet /> : <Navigate to="/" />}
+      {userRole === "ADMIN" ? <Outlet /> : <Navigate to="/home" />}
     </div>
   )
 }

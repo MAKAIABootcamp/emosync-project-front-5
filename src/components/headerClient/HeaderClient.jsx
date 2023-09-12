@@ -89,7 +89,7 @@ const HeaderClient = ({ menuMobileActive, setMenuMobileActive }) => {
                                 <hr />
                             </li>
                             <li className="header__desktop-menu__item">
-                                <Link to="psychologists">Psicólogos</Link>
+                                <Link to="home">Psicólogos</Link>
                                 <hr />
                             </li>
                             <li className="header__desktop-menu__item">

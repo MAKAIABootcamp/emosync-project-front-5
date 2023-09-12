@@ -4,7 +4,7 @@ import { Navigate, Outlet } from 'react-router-dom'
 const PublicRoutes = ({ userRole }) => {
   return (
     <div>
-      {userRole ? <Navigate to="/psychologists" /> : <Outlet />}
+      {userRole ? <Navigate to="/" /> : <Outlet />}
     </div>
   )
 }
