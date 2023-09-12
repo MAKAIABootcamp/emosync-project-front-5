@@ -5,7 +5,7 @@ import RegisterForm from '../../components/registerForm/RegisterForm'
 
 
 const Register = () => {
-  const [step, setStep] = useState(2)
+  const [step, setStep] = useState(1)
   return (
     <main className='register'>
       <article className='register__form-container'>
