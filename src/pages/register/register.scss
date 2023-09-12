@@ -72,7 +72,7 @@
           input[type=file]::file-selector-button {
             background-color: white;
             cursor: pointer;
-            border: 1px solid #A4A4A4;
+            border: 1px solid $light-gray;
             padding: 0.2rem 0.5rem;
             border-radius: 7px;
             font-family: $font-poppins-core;
@@ -82,7 +82,7 @@
     &__input {
         padding: 0.34rem 0.8rem;
         border-radius: 10px;
-        border: 1px solid #A4A4A4;
+        border: 1px solid $light-gray;
         outline: none;
         font-family: $font-poppins-core;
         background-color: white;
@@ -92,13 +92,13 @@
 
     &__alert {
         font-size: 11px;
-        color: #A4A4A4;
+        color: $light-gray;
         line-height: 15px;
         margin-top: 0.2rem;
         padding: 0 0.3rem;
     }
 
-    &__btn {
+    &__btn, &__btn-continue {
         background-color: $orange;
         border: none;
         padding: 0.6rem 1.5rem;
@@ -111,6 +111,54 @@
         margin-top: 0.5rem;
     }
 
+    &__select-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    &__select-title {
+        font-size: 18px;
+        font-weight: 600;
+        font-family: $font-monserrat;
+        margin-bottom: 0.7rem;
+        span {
+            color: $azure-blue;
+        }
+    }
+
+    &__select-text {
+        text-align: center;
+        font-size: 12px;
+        margin-bottom: 1rem;
+    }
+
+    &__type-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    &__type-image-container {
+        padding: 0.7rem;
+        border: 1px solid $light-gray;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        font-size: 13px;
+        font-family: $font-monserrat;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        gap: 0.5rem;
+    }
+
+    &__type-image {
+        width: 5rem;
+    }
 }
 
 @media screen and (min-width: 768px) {
@@ -174,14 +222,37 @@
             position: absolute;
             bottom: -16px;
             font-size: 10px;
-            color: #A4A4A4;
+            color: $light-gray;
             line-height: 15px;
             margin-top: 0.2rem;
             padding: 0 0.3rem;
         }
 
-        &__btn {
+        &__btn, &__btn-continue {
             font-size: 16px;
+        }
+
+        &__select-title {
+            font-size: 22px;
+        }
+
+        &__select-text {
+            font-size: 14px;
+            margin-bottom: 1.5rem;
+        }
+
+        &__type-container {
+            gap: 1rem;
+        }
+
+        &__type-image-container {
+            padding: 1rem;
+            border-radius: 20px;
+            font-size: 15px;
+        }
+
+        &__type-image {
+            width: 7rem;
         }
     }
 }
@@ -203,10 +274,35 @@
             gap: 1rem;
         }
 
-        &__btn {
+        &__btn, &__btn-continue {
             font-size: 14px;
             margin-top: 2rem;
             cursor: pointer;
+        }
+
+        &__select-title {
+            font-size: 24px;
+        }
+
+        &__select-text {
+            font-size: 16px;
+            max-width: 450px;
+        }
+
+        &__type-container {
+            gap: 1.5rem;
+        }
+
+        &__type-image-container {
+            font-size: 16px;
+            &:hover {
+                cursor: pointer;
+                transform: scale(1.04);
+            }
+        }
+
+        &__type-image {
+            width: 7rem;
         }
     }
 }
