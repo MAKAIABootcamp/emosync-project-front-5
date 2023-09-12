@@ -12,20 +12,19 @@ import ClientLayout from '../pages/clientLayout/ClientLayout'
 import PrivateRoutes from './privateRoutes/PrivateRoutes'
 
 const Router = () => {
-  const { authenticated } = useSelector(state => state.auth)
-  console.log(authenticated)
+  const { isAuthenticated, userRole } = useSelector(state => state.auth)
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<PublicRoutes authenticated={authenticated} />}>
+        <Route element={<PublicRoutes isAuthenticated={isAuthenticated} />}>
           <Route path='/home' element={<LandingPage />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
         </Route>
-        <Route element={<PrivateRoutes authenticated={authenticated} />}>
+        <Route element={<PrivateRoutes isAuthenticated={isAuthenticated} />}>
           {
-            authenticated === "CLIENT" && (
+            userRole === "CLIENT" && (
               <Route path='/' element={<ClientLayout />}>
                 <Route index element={<ClientFeed />} />
                 <Route path='profile' element={<ClientProfile />} />
@@ -33,7 +32,7 @@ const Router = () => {
             )
           }
           {
-            authenticated === "PSYCHOLOGIST" && (
+            userRole === "PSYCHOLOGIST" && (
               <Route path='/' element={<FeedPsycho />} />
             )
           }

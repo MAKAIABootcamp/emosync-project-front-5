@@ -1,10 +1,10 @@
 import React from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
 
-const PublicRoutes = ({ authenticated }) => {
+const PublicRoutes = ({ isAuthenticated }) => {
   return (
     <div>
-      {authenticated ? <Navigate to="/" /> : <Outlet />}
+      {isAuthenticated ? <Navigate to="/" /> : <Outlet />}
     </div>
   )
 }

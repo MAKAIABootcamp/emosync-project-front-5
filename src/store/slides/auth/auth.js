@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    authenticated: "PSYCHOLOGIST",
+    isAuthenticated: false,
     authGoogle: false,
-    userRole: null,
+    userRole: "CLIENT",
     email: null,
     displayName: null
 }
