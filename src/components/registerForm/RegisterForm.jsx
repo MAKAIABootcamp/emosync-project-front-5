@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import InputMask from "react-input-mask";
 import { useDispatch, useSelector } from 'react-redux';
 import uploadFile from '../../services/updaloadFile';
+import Loader from '../loader/Loader';
 
 const RegisterForm = ({ setStep }) => {
     const { userRole, displayName, authGoogle, email } = useSelector(state => state.auth)
@@ -23,7 +24,6 @@ const RegisterForm = ({ setStep }) => {
                 updatedAt: new Date().getTime(),
                 userRole
             }
-            console.log(dataClient)
         } else {
             const photo = await uploadFile(data.photo[0])
             const dataPsychologist = {
@@ -44,7 +44,6 @@ const RegisterForm = ({ setStep }) => {
                 loginMethod: authGoogle ? "GOOGLE" : "EMAIL",
                 weeklyAgenda: []
             }
-            console.log(dataPsychologist)
         }
     }
 
@@ -62,6 +61,7 @@ const RegisterForm = ({ setStep }) => {
 
     return (
         <>
+            {/* <Loader /> */}
             <section className='register__text-container'>
                 <img className='register__arrow-back' src="/Register/arrow-back.svg" alt="arrow icon" onClick={returnPrevStep} />
                 <p className='register__text'>

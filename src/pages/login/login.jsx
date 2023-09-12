@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { getUserById, startGoogle } from '../../store/slides/auth/thunk'
 import { useNavigate } from 'react-router-dom'
 import { authWithGoogle, reset } from '../../store/slides/auth/auth'
+import Loader from '../../components/loader/Loader'
 
 const Login = () => {
   const [checkingGoogle, setCheckingGoogle] = useState(false)
@@ -31,6 +32,7 @@ const Login = () => {
 
   return (
     <main className='login'>
+      {/* <Loader/> */}
       <article className='login__container'>
         <figure className='login__logo-container'>
           <img className='login__logo' src="/Logo.svg" alt="" />
