@@ -84,7 +84,7 @@
                 display: flex;
                 gap: 0.5rem;
                 font-weight: 500;
-                color: $dark-azure-blue;
+
             }
 
             &__item {
@@ -93,13 +93,18 @@
                 font-size: 14px;
                 position: relative;
 
+                a {
+                    color: $dark-azure-blue;
+                    text-decoration: none;
+                }
+
                 hr {
                     color: #E3E3E3;
                     border: 1px solid #E3E3E3;
                     border-left: none;
                 }
 
-                
+
                 &::before {
                     content: "";
                     position: absolute;

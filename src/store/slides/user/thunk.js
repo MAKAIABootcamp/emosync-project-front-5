@@ -3,23 +3,12 @@ import { firebaseDB } from "../../../firebase/firebaseConfig";
 import { login } from "./user";
 import { registerUserWithEmailPassword, signInWithGoogle } from "../../../firebase/providers";
 
-export const startGoogle = () => {
+export const startGoogle = (navigate) => {
     return async (dispatch) => {
         try {
             const resp = await signInWithGoogle()
             if (resp.ok) {
-                const userInfo = {
-                    avatar: resp.photoURL,
-                    createdAt: new Date().getTime(),
-                    email: resp.email,
-                    loginMethod: "GOOGLE",
-                    name: resp.displayName,
-                    role: "CLIENT",
-                    updatedAt: new Date().getTime(),
-                }
-                const user = await getUserById(resp.uid)
-                dispatch(login({ key: resp.uid, userRole: userInfo.role, address: user?.address ? user.address : "" }))
-                await addNewUser(resp.uid, userInfo)
+                console.log(resp)
                 return true
             }
         } catch (error) {
