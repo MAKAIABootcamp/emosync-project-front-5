@@ -2,16 +2,17 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import InputMask from "react-input-mask";
 import { useDispatch, useSelector } from 'react-redux';
+import uploadFile from '../../services/updaloadFile';
 
 const RegisterForm = ({ setStep }) => {
     const { userRole, displayName, authGoogle, email } = useSelector(state => state.auth)
     const dispatch = useDispatch()
     const { register, handleSubmit, formState: { errors }, reset } = useForm()
 
-    const onSubmit = (data) => {
-        console.log(data)
+    const onSubmit = async (data) => {
+
         if (userRole === "CLIENT") {
-            const dataUser = {
+            const dataClient = {
                 appointmentsPerMonth: 0,
                 cardNumber: data.cardNumber,
                 createdAt: new Date().getTime(),
@@ -20,10 +21,30 @@ const RegisterForm = ({ setStep }) => {
                 loginMethod: authGoogle ? "GOOGLE" : "EMAIL",
                 suscription: data.suscription,
                 updatedAt: new Date().getTime(),
-                userRole: "CLIENT"
+                userRole
             }
+            console.log(dataClient)
         } else {
-            
+            const photo = await uploadFile(data.photo[0])
+            const dataPsychologist = {
+                bank: data.bank,
+                bankAccount: Number(data.bankAccount),
+                createdAt: new Date().getTime(),
+                description: "",
+                displayName: authGoogle ? displayName : data.name,
+                email: authGoogle ? email : data.email,
+                isVerified: false,
+                missedAppointments: 0,
+                photo,
+                specialty: data.specialty,
+                typeOfBankAccount: data.typeOfBankAccount,
+                updatedAt: new Date().getTime(),
+                userRole,
+                verifiedSpecialty: false,
+                loginMethod: authGoogle ? "GOOGLE" : "EMAIL",
+                weeklyAgenda: []
+            }
+            console.log(dataPsychologist)
         }
     }
 
@@ -31,6 +52,13 @@ const RegisterForm = ({ setStep }) => {
         setStep(1)
         reset()
     }
+
+    const isGmailEmail = (value) => {
+        if (userRole === "PSYCHOLOGIST" && !authGoogle) {
+            return value.endsWith("gmail.com");
+        }
+        return true;
+    };
 
     return (
         <>
@@ -50,20 +78,20 @@ const RegisterForm = ({ setStep }) => {
                         {...register("name", { required: displayName ? false : true })}
                         disabled={authGoogle ? "disabled" : ""}
                     />
-                    {
-                        !authGoogle && userRole === "PSYCHOLOGIST" && (
-                            <p className='register__alert'>Solo puedes registrarte con correos de Gmail</p>
-                        )
-                    }
                 </label>
                 <label className='register__label'>
                     Correo Electrónico
                     <input
                         className='register__input' type="email"
                         defaultValue={email ? email : ""}
-                        {...register("email", { required: email ? false : true })}
+                        {...register("email", { required: email ? false : true, validate: isGmailEmail })}
                         disabled={authGoogle ? "disabled" : ""}
                     />
+                    {
+                        !authGoogle && userRole === "PSYCHOLOGIST" && (
+                            <p className='register__alert'>Solo puedes registrarte con correos de Gmail</p>
+                        )
+                    }
                 </label>
                 {
                     !authGoogle && (
