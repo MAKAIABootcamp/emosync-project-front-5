@@ -5,7 +5,8 @@ const initialState = {
     authGoogle: false,
     userRole: null,
     email: null,
-    displayName: null
+    displayName: null,
+    key: null,
 }
 
 export const authSlice = createSlice({
@@ -21,6 +22,7 @@ export const authSlice = createSlice({
         authWithGoogle: (state, { payload }) => {
             state.email = payload.email;
             state.displayName = payload.displayName;
+            state.key = payload.key;
             state.authGoogle = true;
         },
         reset: (state) => {
@@ -29,6 +31,7 @@ export const authSlice = createSlice({
             state.userRole = null
             state.email = null
             state.displayName = null
+            state.key= null
         }
     }
 })

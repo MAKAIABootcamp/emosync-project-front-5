@@ -19,6 +19,7 @@ const Login = () => {
         const dataAuth = {
           email: resp.email,
           displayName: resp.displayName,
+          key: resp.key
         }
         dispatch(authWithGoogle(dataAuth))
         navigate("/register")

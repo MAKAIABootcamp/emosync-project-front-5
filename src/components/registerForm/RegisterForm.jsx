@@ -1,7 +1,7 @@
-import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import InputMask from "react-input-mask";
+import React from 'react';
 import { useForm } from 'react-hook-form';
+import InputMask from "react-input-mask";
+import { useDispatch, useSelector } from 'react-redux';
 
 const RegisterForm = ({ setStep }) => {
     const { userRole, displayName, authGoogle, email } = useSelector(state => state.auth)
@@ -10,6 +10,21 @@ const RegisterForm = ({ setStep }) => {
 
     const onSubmit = (data) => {
         console.log(data)
+        if (userRole === "CLIENT") {
+            const dataUser = {
+                appointmentsPerMonth: 0,
+                cardNumber: data.cardNumber,
+                createdAt: new Date().getTime(),
+                displayName: authGoogle ? displayName : data.name,
+                email: authGoogle ? email : data.email,
+                loginMethod: authGoogle ? "GOOGLE" : "EMAIL",
+                suscription: data.suscription,
+                updatedAt: new Date().getTime(),
+                userRole: "CLIENT"
+            }
+        } else {
+            
+        }
     }
 
     const returnPrevStep = () => {
@@ -20,7 +35,7 @@ const RegisterForm = ({ setStep }) => {
     return (
         <>
             <section className='register__text-container'>
-                <img className='register__arrow-back' src="/Register/arrow-back.svg" alt="arrow icon" onClick={returnPrevStep}/>
+                <img className='register__arrow-back' src="/Register/arrow-back.svg" alt="arrow icon" onClick={returnPrevStep} />
                 <p className='register__text'>
                     ¡Perfecto! llena los campos a continuación para que puedas terminar tu proceso de registro y hacer parte de <span>EMOSYNC</span>
                 </p>
@@ -57,7 +72,8 @@ const RegisterForm = ({ setStep }) => {
                             <input
                                 className='register__input'
                                 type="password"
-                                {...register("password", { required: authGoogle ? false : true })}
+                                placeholder="min 6 caracteres"
+                                {...register("password", { required: authGoogle ? false : true, minLength: 6 })}
                             />
                         </label>
                     )
@@ -69,7 +85,7 @@ const RegisterForm = ({ setStep }) => {
                                 Tipo de Suscripción
                                 <select
                                     className='register__input'
-                                    {...register("suscription", { required: userRole === "CLIENT" ? true : false })}>
+                                    {...register("suscription", { required: userRole === "CLIENT" })}>
                                     <option value="">Selecciona una opción</option>
                                     <option value="BRONZE">Bronce</option>
                                     <option value="SILVER" >Plata</option>
@@ -80,7 +96,7 @@ const RegisterForm = ({ setStep }) => {
                                 Nombre de la tarjeta
                                 <input
                                     className='register__input' type="text"
-                                    {...register("cardName", { required: userRole === "CLIENT" ? true : false })}
+                                    {...register("cardName", { required: userRole === "CLIENT" })}
                                 />
                             </label>
                             <label className='register__label'>
@@ -89,7 +105,11 @@ const RegisterForm = ({ setStep }) => {
                                     className='register__input'
                                     mask="9999 9999 9999 9999"
                                     placeholder='1234 1234 1234 1234'
-                                    {...register("cardNumber", { required: userRole === "CLIENT" ? true : false })}
+                                    {...register("cardNumber", {
+                                        required: userRole === "CLIENT", pattern: {
+                                            value: /^[0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4}$/,
+                                        }
+                                    })}
                                 />
                             </label>
                             <label className='register__label'>
@@ -98,7 +118,11 @@ const RegisterForm = ({ setStep }) => {
                                     className='register__input'
                                     mask="99/99"
                                     placeholder='MM/YY'
-                                    {...register("expeditionDate", { required: userRole === "CLIENT" ? true : false })}
+                                    {...register("expeditionDate", {
+                                        required: userRole === "CLIENT", pattern: {
+                                            value: /^[0-1]{1}[0-9]{1}\/[0-9]{1}[1-9]{1}$/,
+                                        }
+                                    })}
                                 />
                             </label>
                             <label className='register__label'>
@@ -107,7 +131,11 @@ const RegisterForm = ({ setStep }) => {
                                     className='register__input'
                                     mask="999"
                                     placeholder='CVV'
-                                    {...register("cvv", { required: userRole === "CLIENT" ? true : false })}
+                                    {...register("cvv", {
+                                        required: userRole === "CLIENT", pattern: {
+                                            value: /^[0-9]{3}$/,
+                                        }
+                                    })}
                                 />
                             </label>
                         </>
@@ -117,21 +145,21 @@ const RegisterForm = ({ setStep }) => {
                                 Foto de perfil
                                 <input
                                     type="file"
-                                    {...register("photo", { required: userRole === "PSYCHOLOGIST" ? true : false })} />
+                                    {...register("photo", { required: userRole === "PSYCHOLOGIST" })} />
                             </label>
                             <label className='register__label'>
                                 Especialidad
                                 <input
                                     className='register__input'
                                     type="text"
-                                    {...register("specialty", { required: userRole === "PSYCHOLOGIST" ? true : false })}
+                                    {...register("specialty", { required: userRole === "PSYCHOLOGIST" })}
                                 />
                             </label>
                             <label className='register__label'>
                                 Tipo de cuenta
                                 <select
                                     className='register__input'
-                                    {...register("typeOfBankAccount", { required: userRole === "PSYCHOLOGIST" ? true : false })}>
+                                    {...register("typeOfBankAccount", { required: userRole === "PSYCHOLOGIST" })}>
                                     <option value="">Selecciona una opción</option>
                                     <option value="Ahorros">Ahorros</option>
                                     <option value="Corriente" >Corriente</option>
@@ -141,14 +169,14 @@ const RegisterForm = ({ setStep }) => {
                                 Banco
                                 <input
                                     className='register__input' type="text"
-                                    {...register("bank", { required: userRole === "PSYCHOLOGIST" ? true : false })}
+                                    {...register("bank", { required: userRole === "PSYCHOLOGIST" })}
                                 />
                             </label>
                             <label className='register__label'>
                                 Número de cuenta
-                                <InputMask
-                                    className='register__input' mask="99999999999"
-                                    {...register("bankAccount", { required: userRole === "PSYCHOLOGIST" ? true : false })}
+                                <input
+                                    className='register__input' type="number"
+                                    {...register("bankAccount", { required: userRole === "PSYCHOLOGIST", minLength: 9 })}
                                 />
                             </label>
                         </>
