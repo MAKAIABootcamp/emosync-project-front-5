@@ -9,29 +9,34 @@ import ClientRoutes from './privateRoutes/ClientRoutes'
 import ClientFeed from '../pages/clientFeed/ClientFeed'
 import ClientProfile from '../pages/clientProfile/ClientProfile'
 import FeedPsycho from '../pages/psychology/feed/FeedPsycho'
-import PsychologistRoutes from './privateRoutes/PsychologistRoutes'
 import ClientLayout from '../pages/clientLayout/ClientLayout'
 
 const Router = () => {
-  const { userRole } = useSelector(state => state.auth)
-  console.log(userRole)
+  const { authenticated } = useSelector(state => state.auth)
+  console.log(authenticated)
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<PublicRoutes userRole={userRole} />}>
+        <Route element={<PublicRoutes authenticated={authenticated} />}>
           <Route path='/home' element={<LandingPage />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
         </Route>
-        <Route element={<ClientRoutes userRole={userRole} />}>
-          <Route path='/' element={<ClientLayout />}>
-            <Route index element={<ClientFeed />} />
-            <Route path='profile' element={<ClientProfile />} />
-          </Route>
-        </Route>
-        <Route element={<PsychologistRoutes userRole={userRole} />}>
-          <Route path='/' element={<FeedPsycho />} />
+        <Route element={<ClientRoutes authenticated={authenticated} />}>
+          {
+            authenticated === "CLIENT" && (
+              <Route path='/' element={<ClientLayout />}>
+                <Route index element={<ClientFeed />} />
+                <Route path='profile' element={<ClientProfile />} />
+              </Route>
+            )
+          }
+          {
+            authenticated === "PSYCHOLOGIST" && (
+              <Route path='/' element={<FeedPsycho />} />
+            )
+          }
         </Route>
       </Routes>
     </BrowserRouter>

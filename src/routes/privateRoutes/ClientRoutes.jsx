@@ -1,12 +1,13 @@
 import React from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
 
-const ClientRoutes = ({ userRole }) => {
-  return (
-    <div>
-      {userRole === "CLIENT" ? <Outlet /> : <Navigate to="/home" />}
-    </div>
-  )
+const ClientRoutes = ({ authenticated }) => {
+    console.log('client routes, authenticated')
+    return (
+        <div>
+            {authenticated ? <Outlet /> : <Navigate to="/home" />}
+        </div>
+    )
 }
 
 export default ClientRoutes

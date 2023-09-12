@@ -1,10 +1,10 @@
 import React from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
 
-const PublicRoutes = ({ userRole }) => {
+const PublicRoutes = ({ authenticated }) => {
   return (
     <div>
-      {userRole ? <Navigate to="/" /> : <Outlet />}
+      {authenticated ? <Navigate to="/" /> : <Outlet />}
     </div>
   )
 }

@@ -1,17 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
+    authenticated: "PSYCHOLOGIST",
     authGoogle: false,
-    userRole: "CLIENT",
+    userRole: null,
     email: null,
-    displayName: null,
+    displayName: null
 }
 
 export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        setTuserRole: (state, { payload }) => {
+        setUserRole: (state, { payload }) => {
             state.typeOfUser = payload;
         },
         setEmailAndDisplayName: (state, { payload }) => {
@@ -21,4 +22,4 @@ export const authSlice = createSlice({
     }
 })
 
-export const { setTuserRoled,  setEmailAndDisplayName } = authSlice.actions
+export const { setUserRole,  setEmailAndDisplayName } = authSlice.actions
