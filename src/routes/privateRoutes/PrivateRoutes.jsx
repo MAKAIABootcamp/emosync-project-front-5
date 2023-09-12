@@ -1,7 +1,7 @@
 import React from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
 
-const ClientRoutes = ({ authenticated }) => {
+const PrivateRoutes = ({ authenticated }) => {
     console.log('client routes, authenticated')
     return (
         <div>
@@ -10,4 +10,4 @@ const ClientRoutes = ({ authenticated }) => {
     )
 }
 
-export default ClientRoutes
+export default PrivateRoutes

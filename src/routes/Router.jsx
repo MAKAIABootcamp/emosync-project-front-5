@@ -5,11 +5,11 @@ import Login from '../pages/login/login'
 import Register from '../pages/register/Register'
 import { useSelector } from 'react-redux'
 import PublicRoutes from './publicRoutes/PublicRoutes'
-import ClientRoutes from './privateRoutes/ClientRoutes'
 import ClientFeed from '../pages/clientFeed/ClientFeed'
 import ClientProfile from '../pages/clientProfile/ClientProfile'
 import FeedPsycho from '../pages/psychology/feed/FeedPsycho'
 import ClientLayout from '../pages/clientLayout/ClientLayout'
+import PrivateRoutes from './privateRoutes/PrivateRoutes'
 
 const Router = () => {
   const { authenticated } = useSelector(state => state.auth)
@@ -23,7 +23,7 @@ const Router = () => {
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
         </Route>
-        <Route element={<ClientRoutes authenticated={authenticated} />}>
+        <Route element={<PrivateRoutes authenticated={authenticated} />}>
           {
             authenticated === "CLIENT" && (
               <Route path='/' element={<ClientLayout />}>
