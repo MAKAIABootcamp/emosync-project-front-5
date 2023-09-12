@@ -1,7 +1,7 @@
 import React from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
 
-const ClientRoutes = ({ userRole }) => {
+const AdminRoutes = ({ userRole }) => {
   return (
     <div>
       {userRole === "ADMIN" ? <Outlet /> : <Navigate to="/home" />}
@@ -9,4 +9,4 @@ const ClientRoutes = ({ userRole }) => {
   )
 }
 
-export default ClientRoutes
+export default AdminRoutes

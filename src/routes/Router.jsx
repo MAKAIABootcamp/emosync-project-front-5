@@ -8,8 +8,8 @@ import PublicRoutes from './publicRoutes/PublicRoutes'
 import ClientRoutes from './privateRoutes/ClientRoutes'
 import ClientFeed from '../pages/clientFeed/ClientFeed'
 import ClientProfile from '../pages/clientProfile/ClientProfile'
-import PsychologistRoutes from './privateRoutes/PsychologistRoutes'
 import FeedPsycho from '../pages/psychology/feed/FeedPsycho'
+import PsychologistRoutes from './privateRoutes/PsychologistRoutes'
 import ClientLayout from '../pages/clientLayout/ClientLayout'
 
 const Router = () => {
@@ -19,21 +19,20 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-          <Route element={<PublicRoutes userRole={userRole} />}>
-            <Route path='/home' element={<LandingPage />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/register' element={<Register />} />
+        <Route element={<PublicRoutes userRole={userRole} />}>
+          <Route path='/home' element={<LandingPage />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+        </Route>
+        <Route element={<ClientRoutes userRole={userRole} />}>
+          <Route path='/' element={<ClientLayout />}>
+            <Route index element={<ClientFeed />} />
+            <Route path='profile' element={<ClientProfile />} />
           </Route>
-          <Route element={<ClientRoutes userRole={userRole} />}>
-            <Route path='/' element={<ClientLayout />}>
-              <Route index element={<ClientFeed />}/>
-              <Route path='profile' element={<ClientProfile/> }/>
-            </Route>
-          </Route>
-          <Route element={<PsychologistRoutes userRole={userRole} />}>
-            <Route path='/' element={<FeedPsycho />}/>
-          </Route>
-
+        </Route>
+        <Route element={<PsychologistRoutes userRole={userRole} />}>
+          <Route path='/' element={<FeedPsycho />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   )
