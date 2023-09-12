@@ -38,6 +38,7 @@
     &__arrow-back {
         width: 2rem;
         filter: invert(45%) sepia(89%) saturate(408%) hue-rotate(128deg) brightness(104%) contrast(85%);
+        cursor: pointer;
     }
 
     &__text {
@@ -279,7 +280,7 @@
         }
 
         &__form {
-            width: 60%;
+            width: 65%;
             gap: 1rem;
         }
 

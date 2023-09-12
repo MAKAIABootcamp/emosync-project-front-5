@@ -1,12 +1,18 @@
 import React from 'react'
 import "./main.scss"
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { reset } from '../../store/slides/auth/auth'
+
 const LandingPage = () => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+
   const toLogin = () => {
     navigate('/login')
   }
   const toRegister = () => {
+    dispatch(reset())
     navigate('/register')
   }
   return (
