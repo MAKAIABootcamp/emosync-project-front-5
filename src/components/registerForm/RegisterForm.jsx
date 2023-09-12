@@ -41,7 +41,7 @@ const RegisterForm = ({setStep}) => {
                             <label className='register__label'>
                                 Tipo de Suscripción
                                 <select className='register__input'>
-                                    <option value="" selected>Selecciona una opción</option>
+                                    <option value="">Selecciona una opción</option>
                                     <option value="BRONZE">Bronce</option>
                                     <option value="SILVER" >Plata</option>
                                     <option value="GOLD">Oro</option>
@@ -77,7 +77,7 @@ const RegisterForm = ({setStep}) => {
                             <label className='register__label'>
                                 Tipo de cuenta
                                 <select className='register__input'>
-                                    <option value="" selected>Selecciona una opción</option>
+                                    <option value="">Selecciona una opción</option>
                                     <option value="Ahorros">Ahorros</option>
                                     <option value="Corriente" >Corriente</option>
                                 </select>

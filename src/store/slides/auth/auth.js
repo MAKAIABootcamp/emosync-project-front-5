@@ -12,7 +12,7 @@ export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        setisAuthenticated: (state) => {
+        setIsAuthenticated: (state) => {
             state.isAuthenticated = !state.isAuthenticated;
         },
         setUserRole: (state, { payload }) => {
@@ -33,4 +33,4 @@ export const authSlice = createSlice({
     }
 })
 
-export const { setUserRole, authWithGoogle, reset } = authSlice.actions
+export const { setIsAuthenticated, setUserRole, authWithGoogle, reset } = authSlice.actions

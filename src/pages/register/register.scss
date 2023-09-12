@@ -159,6 +159,15 @@
     &__type-image {
         width: 5rem;
     }
+
+    &__inactive-btn {
+        background-color: #F7A57A;
+    }
+
+    &__selected {
+        border: 1px solid $orange;
+        box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25)
+    }
 }
 
 @media screen and (min-width: 768px) {
@@ -275,7 +284,6 @@
         }
 
         &__btn, &__btn-continue {
-            font-size: 14px;
             margin-top: 2rem;
             cursor: pointer;
         }

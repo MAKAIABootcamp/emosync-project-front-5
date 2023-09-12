@@ -10,7 +10,10 @@ const Register = () => {
     <main className='register'>
       <article className='register__form-container'>
         {
-          step === 1 ? <RegisterSelectType setStep={setStep}/> : <RegisterForm setStep={setStep}/>
+          step === 1 && <RegisterSelectType setStep={setStep}/>
+        }
+        {
+          step === 2 && <RegisterForm setStep={setStep}/>
         }
       </article>
     </main>
