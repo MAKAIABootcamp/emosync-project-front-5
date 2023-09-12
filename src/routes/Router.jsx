@@ -1,21 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import LandingPage from '../pages/landingPage/LandingPage'
-import FeedPsycho from '../pages/psychology/feed/FeedPsycho'
-import WeekSchedule from '../pages/psychology/weekSchedule/WeekSchedule'
-import HistoryPsycho from '../pages/psychology/history/HistoryPsycho'
-import NewSchedule from '../pages/psychology/newSchedule/NewSchedule'
-import ProfilePsycho from '../pages/psychology/profilePsycho/ProfilePsycho'
-
+import Login from '../pages/login/Login'
+import Welcome from '../pages/welcome/Welcome'
+import Register from '../pages/register/Register'
 
 const Router = () => {
   return (
-   <BrowserRouter>
-        <Routes>
-            <Route path='/' element={<ProfilePsycho/>}>
-            </Route>
-        </Routes>
-   </BrowserRouter>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<LandingPage />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/welcome' element={<Welcome />} />
+        <Route path='/register' element={<Register />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
