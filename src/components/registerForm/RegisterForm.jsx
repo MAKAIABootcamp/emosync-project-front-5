@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import InputMask from "react-input-mask";
 
 const RegisterForm = () => {
-    const { typeUser, authGoogle } = useSelector(state => state.auth)
+    const { userRole, authGoogle } = useSelector(state => state.auth)
 
     return (
         <>
@@ -18,7 +18,7 @@ const RegisterForm = () => {
                     Nombre completo
                     <input className='register__input' type="text" />
                     {
-                        !authGoogle && typeUser === "PSYCHOLOGIST" && (
+                        !authGoogle && userRole === "PSYCHOLOGIST" && (
                             <p className='register__alert'>Solo puedes registrarte con correos de Gmail</p>
                         )
                     }
@@ -36,7 +36,7 @@ const RegisterForm = () => {
                     )
                 }
                 {
-                    typeUser === "CLIENT" ? (
+                    userRole === "CLIENT" ? (
                         <>
                             <label className='register__label'>
                                 Tipo de Suscripción

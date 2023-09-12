@@ -1,23 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    isAuthenticated: false,
     authGoogle: false,
-    typeUser: "CLIENT",
+    userRole: "CLIENT",
+    email: null,
+    displayName: null,
 }
 
 export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        setIsAuthenticated: (state) => {
-            state.isAuthenticated = !state.isChecking
+        setTuserRole: (state, { payload }) => {
+            state.typeOfUser = payload;
         },
-        updateInfo: (state, { payload }) => {
-            state.authMethod = payload.authMethod;
-            state.typeUser = payload.typeUser;
+        setEmailAndDisplayName: (state, { payload }) => {
+            state.email = payload.email;
+            state.displayName = displayName;
         }
     }
 })
 
-export const { setIsAuthenticated, updateInfo } = authSlice.actions
+export const { setTuserRoled,  setEmailAndDisplayName } = authSlice.actions

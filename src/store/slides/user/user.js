@@ -3,8 +3,11 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
     isChecking: false,
     key: null,
-    userRole: null,
-    address: null,
+    appointmentsPerMonth: null,
+    cardNumber: null,
+    displayName: null,
+    loginMethod: null,
+    subscription: null,
 }
 
 export const userSlice = createSlice({
@@ -15,22 +18,19 @@ export const userSlice = createSlice({
             state.isChecking = !state.isChecking
         },
         login: (state, { payload }) => {
-            localStorage.setItem("infoUser", JSON.stringify(payload))
+            localStorage.setItem("key", JSON.stringify(payload.key))
             state.isChecking = false;
             state.key = payload.key
-            state.userRole = payload.userRole
-            state.address = payload.address
+            state.appointmentsPerMonth = payload.appointmentsPerMonth
+            state.cardNumber = payload.cardNumber
+            state.displayName = payload.displayName
+            state.loginMethod = payload.loginMethod
+            state.subscription = payload.subscription
         },
         logout: (state) => {
-            state.isChecking = false
-            state.key = null
-            state.userRole = null
-            state.address = null
-        },
-        updateInfo: (state, { payload }) => {
-            state.address = payload;
+            state = initialState;
         }
     }
 })
 
-export const { setIsChecking, login, logout, updateInfo } = userSlice.actions
+export const { setIsChecking, login, logout } = userSlice.actions
