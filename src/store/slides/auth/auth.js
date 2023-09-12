@@ -25,6 +25,11 @@ export const authSlice = createSlice({
             state.key = payload.key;
             state.authGoogle = true;
         },
+        login: (state, { payload }) => {
+            state.isAuthenticated = true
+            state.userRole = payload.userRole
+            state.key= payload.key
+        },
         reset: (state) => {
             state.isAuthenticated = false
             state.authGoogle = false
