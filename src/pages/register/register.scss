@@ -119,8 +119,8 @@
 
         &__form-container {
             width: 75%;
-            height: 80%;
-            max-height: 600px;
+            height: 85%;
+            max-height: 620px;
             justify-content: center;
             padding: 2.5rem;
         }
@@ -156,7 +156,7 @@
         }
 
         &__label {
-            font-size: 15px;
+            font-size: 14px;
             position: relative;
             width: 100%;
 
@@ -194,6 +194,7 @@
         &__form-container {
             width: 75%;
             height: 85%;
+            max-height: 590px;
             max-width: 900px;
         }
 
@@ -203,6 +204,7 @@
         }
 
         &__btn {
+            font-size: 14px;
             margin-top: 2rem;
             cursor: pointer;
         }
