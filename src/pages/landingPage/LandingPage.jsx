@@ -4,10 +4,10 @@ import { useNavigate } from 'react-router-dom'
 const LandingPage = () => {
   const navigate = useNavigate()
   const toLogin = () => {
-    navigate('login')
+    navigate('/login')
   }
   const toRegister = () => {
-    navigate('register')
+    navigate('/register')
   }
   return (
     <section className='landingPage'>

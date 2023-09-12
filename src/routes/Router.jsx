@@ -18,24 +18,26 @@ const Router = () => {
     <BrowserRouter>
       <Routes>
         <Route element={<PublicRoutes isAuthenticated={isAuthenticated} />}>
-          <Route path='/home' element={<LandingPage />} />
+          <Route path='/' element={<LandingPage />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
         </Route>
         <Route element={<PrivateRoutes isAuthenticated={isAuthenticated} />}>
-          {
-            userRole === "CLIENT" && (
-              <Route path='/' element={<ClientLayout />}>
-                <Route index element={<ClientFeed />} />
-                <Route path='profile' element={<ClientProfile />} />
-              </Route>
-            )
-          }
-          {
-            userRole === "PSYCHOLOGIST" && (
-              <Route path='/' element={<FeedPsycho />} />
-            )
-          }
+          <Route path='/home'>
+            {
+              userRole === "CLIENT" && (
+                <Route path='/home' element={<ClientLayout />}>
+                  <Route index element={<ClientFeed />} />
+                  <Route path='profile' element={<ClientProfile />} />
+                </Route>
+              )
+            }
+            {
+              userRole === "PSYCHOLOGIST" && (
+                <Route index element={<FeedPsycho />} />
+              )
+            }
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>

@@ -4,7 +4,7 @@ import { Navigate, Outlet } from 'react-router-dom'
 const PublicRoutes = ({ isAuthenticated }) => {
   return (
     <div>
-      {isAuthenticated ? <Navigate to="/" /> : <Outlet />}
+      {isAuthenticated ? <Navigate to="/home" /> : <Outlet />}
     </div>
   )
 }
