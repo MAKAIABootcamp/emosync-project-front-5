@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-const RegisterSelectType = () => {
+const RegisterSelectType = ({setStep}) => {
+  const [selected, setSelected] = useState(null)
+  
   return (
     <>
       <section className='register__select-container'>

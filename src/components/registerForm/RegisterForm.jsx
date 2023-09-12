@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import InputMask from "react-input-mask";
 
-const RegisterForm = () => {
+const RegisterForm = ({setStep}) => {
     const { userRole, authGoogle } = useSelector(state => state.auth)
 
     return (
