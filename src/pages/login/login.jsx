@@ -1,7 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./login.scss"
+import { useDispatch } from 'react-redux'
+import { getUserById, startGoogle } from '../../store/slides/auth/thunk'
+import { useNavigate } from 'react-router-dom'
+import { authWithGoogle, reset } from '../../store/slides/auth/auth'
 
 const Login = () => {
+  const [checkingGoogle, setCheckingGoogle] = useState(false)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const authGoogle = async () => {
+    dispatch(reset())
+    const resp = await dispatch(startGoogle())
+    if (resp?.ok) {
+      const userData = await getUserById(resp.key)
+      if (!userData) {
+        const dataAuth = {
+          email: resp.email,
+          displayName: resp.displayName,
+        }
+        dispatch(authWithGoogle(dataAuth))
+        navigate("/register")
+      } else {
+        navigate("/")
+      }
+    }
+  }
+
   return (
     <main className='login'>
       <article className='login__container'>
@@ -22,7 +48,7 @@ const Login = () => {
           </div>
           <div className='login__btn-container'>
             <button type='submit' className='login__btn-login'>Ingresar</button>
-            <button type='button' className='login__btn-google'>
+            <button type='button' className='login__btn-google' onClick={authGoogle}>
               <img className='login__google-icon' src="/Login/google-icon.svg" alt="" />
               <p>Goolge</p>
             </button>

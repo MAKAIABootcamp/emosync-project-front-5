@@ -1,3 +1,4 @@
+import { doc, getDoc } from "firebase/firestore";
 import { firebaseDB } from "../../../firebase/firebaseConfig";
 import { registerUserWithEmailPassword, signInWithGoogle } from "../../../firebase/providers";
 
@@ -6,11 +7,16 @@ export const startGoogle = () => {
         try {
             const resp = await signInWithGoogle()
             if (resp.ok) {
-                console.log(resp)
-                return true
+                return resp
             }
         } catch (error) {
             return false
         }
     }
+}
+
+export const getUserById = async (id) => {
+    const userRef = doc(firebaseDB, `users`, id);
+    const userSnapshot = await getDoc(userRef);
+    return userSnapshot.data();
 }

@@ -12,14 +12,25 @@ export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
+        setisAuthenticated: (state) => {
+            state.isAuthenticated = !state.isAuthenticated;
+        },
         setUserRole: (state, { payload }) => {
             state.userRole = payload;
         },
-        setEmailAndDisplayName: (state, { payload }) => {
+        authWithGoogle: (state, { payload }) => {
             state.email = payload.email;
-            state.displayName = displayName;
+            state.displayName = payload.displayName;
+            state.authGoogle = true;
+        },
+        reset: (state) => {
+            state.isAuthenticated = false
+            state.authGoogle = false
+            state.userRole = null
+            state.email = null
+            state.displayName = null
         }
     }
 })
 
-export const { setUserRole,  setEmailAndDisplayName } = authSlice.actions
+export const { setUserRole, authWithGoogle, reset } = authSlice.actions
