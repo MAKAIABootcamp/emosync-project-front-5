@@ -1,0 +1,66 @@
+@import "../../assets/styles/variables.scss";
+
+.psychologist-card {
+    display: flex;
+    border: 1px solid #E3E3E3;
+    border-radius: 17px;
+    overflow: hidden;
+    width: 100%;
+
+    &__image-container {
+        display: flex;
+    }
+
+    &__image {
+        width: 110px;
+        height: 110px;
+        object-fit: cover;
+    }
+
+    &__info-container {
+        padding: 0.8rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 100%;
+    }
+    &__name, &__specialty {
+        font-family: $font-poppins-core;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-weight: 400;
+    }
+
+    &__name {
+        font-size: 17px;
+    }
+
+    &__specialty {
+        font-size: 13px;
+        color: #ACACAC;
+    }
+
+    &__info-btn {
+        width: max-content;
+        padding: 0.2rem 0.7rem;
+        background-color: $azure-blue;
+        border: none;
+        color: white;
+        font-family: $font-poppins-core;
+        font-size: 13px;
+        border-radius: 5px;
+    }
+}
+
+.psychologist-card {
+
+    &__info-btn {
+        &:hover {
+            cursor: pointer;
+            background-color: #00b8ae;
+        }
+    }
+}
