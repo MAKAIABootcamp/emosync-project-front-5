@@ -7,14 +7,14 @@ import { authWithGoogle, isLogged, reset } from '../../store/slides/auth/auth'
 import Loader from '../../components/loader/Loader'
 
 const Login = () => {
-  const [checkingGoogle, setCheckingGoogle] = useState(false)
+  const [checking, setChecking] = useState(false)
   const [googleError, setGoogleError] = useState(false)
   const [loginError, setLoginError] = useState(false)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const authGoogle = async () => {
-    setCheckingGoogle(true)
+    setChecking(true)
     setGoogleError(false)
     setLoginError(false)
     dispatch(reset())
@@ -41,14 +41,14 @@ const Login = () => {
       }
     } else {
       setGoogleError(true)
-      setCheckingGoogle(false)
+      setChecking(false)
     }
   }
 
   return (
     <main className='login'>
       {
-        checkingGoogle && (
+        checking && (
           <Loader />
         )
       }
