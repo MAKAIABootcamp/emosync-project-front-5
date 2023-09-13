@@ -28,24 +28,7 @@ const RegisterForm = ({ setStep }) => {
                 updatedAt: new Date().getTime(),
                 userRole
             }
-
-            if (!authGoogle) {
-                const resp = await dispatch(signUpWithEmailAndPassword({ email: data.email, password: data.password }))
-                if (resp === "Firebase: Error (auth/email-already-in-use).") {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Ese correo ya está en uso, prueba con otro!',
-                    })
-                } else {
-                    dispatch(addNewUser(resp, dataClient))
-                }
-
-                return
-            }
-
-            dispatch(addNewUser(key, dataClient))
-
+            await registerInFirebase(dataClient, data.email, data.password)
         } else {
             const photo = await uploadFile(data.photo[0])
             const dataPsychologist = {
@@ -66,7 +49,25 @@ const RegisterForm = ({ setStep }) => {
                 loginMethod: authGoogle ? "GOOGLE" : "EMAIL",
                 weeklyAgenda: []
             }
+            await registerInFirebase(dataPsychologist, data.email, data.password)
         }
+    }
+
+    const registerInFirebase = async (data, email, password) => {
+        if (!authGoogle) {
+            const resp = await dispatch(signUpWithEmailAndPassword({ email, password}))
+            if (resp === "Firebase: Error (auth/email-already-in-use).") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Ese correo ya está en uso, prueba con otro!',
+                })
+            } else {
+                dispatch(addNewUser(resp, data))
+            }
+            return
+        }
+        dispatch(addNewUser(key, data))
     }
 
     const returnPrevStep = () => {
