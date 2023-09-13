@@ -23,18 +23,18 @@ const Router = () => {
           <Route path='/register' element={<Register />} />
         </Route>
         <Route element={<PrivateRoutes isAuthenticated={isAuthenticated} />}>
-          <Route path='/home'>
+          <Route path='/'>
             {
               userRole === "CLIENT" && (
-                <Route path='/home' element={<ClientLayout />}>
-                  <Route index element={<ClientFeed />} />
+                <Route path='/' element={<ClientLayout />}>
+                  <Route path='home' element={<ClientFeed />} />
                   <Route path='profile' element={<ClientProfile />} />
                 </Route>
               )
             }
             {
               userRole === "PSYCHOLOGIST" && (
-                <Route index element={<FeedPsycho />} />
+                <Route path='home' element={<FeedPsycho />} />
               )
             }
           </Route>

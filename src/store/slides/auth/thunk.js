@@ -2,6 +2,7 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 import { firebaseDB } from "../../../firebase/firebaseConfig";
 import { registerUserWithEmailPassword, signInWithGoogle } from "../../../firebase/providers";
 import { login } from "../user/user";
+import { endRegister, setKey } from "./auth";
 
 export const startGoogle = () => {
     return async (dispatch) => {
@@ -19,7 +20,6 @@ export const startGoogle = () => {
 export const addNewUser = (id, userInfo) => {
     return async (dispatch) => {
         try {
-            console.log("hola")
             // const resp = await setDoc(doc(firebaseDB, "users", id), userInfo)
             const infoLogin = {
                 key: id,
@@ -30,8 +30,9 @@ export const addNewUser = (id, userInfo) => {
                 subscription: userInfo.subscription,
                 email: userInfo.email
             }
-
-            dispatch(login(infoLogin))
+            dispatch(setKey(id))
+            dispatch(endRegister())
+            userInfo.userRole === "CLIENT" && dispatch(login(infoLogin))
             return resp && true
 
         } catch (error) {

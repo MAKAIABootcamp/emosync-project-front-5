@@ -23,22 +23,18 @@ const RegisterForm = ({ setStep }) => {
                 displayName: authGoogle ? displayName : data.name,
                 email: authGoogle ? email : data.email,
                 loginMethod: authGoogle ? "GOOGLE" : "EMAIL",
-                suscription: data.suscription,
+                subscription: data.subscription,
                 updatedAt: new Date().getTime(),
                 userRole
             }
-            console.log(dataClient)
+
             if (!authGoogle) {
-                
                 dispatch(addNewUser(key, dataClient))
-                dispatch(endRegister())
-                dispatch(setKey(key))
                 return
             }
 
-            dispatch(setKey(key))
             dispatch(addNewUser(key, dataClient))
-            dispatch(endRegister())
+
 
         } else {
             const photo = await uploadFile(data.photo[0])
@@ -129,7 +125,7 @@ const RegisterForm = ({ setStep }) => {
                                 Tipo de Suscripción
                                 <select
                                     className='register__input'
-                                    {...register("suscription", { required: userRole === "CLIENT" })}>
+                                    {...register("subscription", { required: userRole === "CLIENT" })}>
                                     <option value="">Selecciona una opción</option>
                                     <option value="BRONZE">Bronce</option>
                                     <option value="SILVER" >Plata</option>
