@@ -3,7 +3,7 @@ import "./login.scss"
 import { useDispatch } from 'react-redux'
 import { getUserById, startGoogle } from '../../store/slides/auth/thunk'
 import { useNavigate } from 'react-router-dom'
-import { authWithGoogle, reset } from '../../store/slides/auth/auth'
+import { authWithGoogle, isLogged, reset } from '../../store/slides/auth/auth'
 import Loader from '../../components/loader/Loader'
 
 const Login = () => {
@@ -25,9 +25,15 @@ const Login = () => {
         dispatch(authWithGoogle(dataAuth))
         navigate("/register")
       } else {
-        navigate("/")
+        const loginInfo = {
+          userRole: userData.userRole,
+          key: resp.key
+        }
+        dispatch(isLogged(loginInfo))
+        navigate("/home")
       }
     }
+    console.log(resp)
   }
 
   return (

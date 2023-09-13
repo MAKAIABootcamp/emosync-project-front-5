@@ -18,7 +18,7 @@ export const userSlice = createSlice({
             state.isChecking = !state.isChecking
         },
         login: (state, { payload }) => {
-            localStorage.setItem("key", JSON.stringify(payload.key))
+
             state.isChecking = false;
             state.appointmentsPerMonth = payload.appointmentsPerMonth
             state.cardNumber = payload.cardNumber
@@ -28,7 +28,7 @@ export const userSlice = createSlice({
             state.email = payload.email
         },
         logout: (state) => {
-            localStorage.clear()
+            
             state.isChecking = false
             state.appointmentsPerMonth = null
             state.cardNumber = null
