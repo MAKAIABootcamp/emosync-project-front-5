@@ -21,9 +21,9 @@ export const signUpWithEmailAndPassword = (data) => {
     return async (dispatch) => {
         try {
             const resp = await registerUserWithEmailPassword(data)
-            return resp.ok ? resp.uid : false
+            return resp.ok ? resp.uid : resp.errorMessage
         } catch (error) {
-            return false
+            return {errorMessage: error.message}
         }
     }
 }

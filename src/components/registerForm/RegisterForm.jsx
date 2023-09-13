@@ -6,6 +6,7 @@ import uploadFile from '../../services/updaloadFile';
 import Loader from '../loader/Loader';
 import { addNewUser, signUpWithEmailAndPassword } from '../../store/slides/auth/thunk';
 import { endRegister, setKey } from '../../store/slides/auth/auth';
+import Swal from 'sweetalert2';
 
 
 const RegisterForm = ({ setStep }) => {
@@ -29,13 +30,21 @@ const RegisterForm = ({ setStep }) => {
             }
 
             if (!authGoogle) {
-                const id = await dispatch(signUpWithEmailAndPassword({email: data.email, password: data.password}))
-                dispatch(addNewUser(id, dataClient))
+                const resp = await dispatch(signUpWithEmailAndPassword({ email: data.email, password: data.password }))
+                if (resp === "Firebase: Error (auth/email-already-in-use).") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Ese correo ya está en uso, prueba con otro!',
+                    })
+                } else {
+                    dispatch(addNewUser(resp, dataClient))
+                }
+
                 return
             }
 
             dispatch(addNewUser(key, dataClient))
-
 
         } else {
             const photo = await uploadFile(data.photo[0])

@@ -28,7 +28,14 @@ export const userSlice = createSlice({
             state.email = payload.email
         },
         logout: (state) => {
-            state = initialState;
+            localStorage.clear()
+            state.isChecking = false
+            state.appointmentsPerMonth = null
+            state.cardNumber = null
+            state.displayName = null
+            state.loginMethod = null
+            state.subscription = null
+            state.email = null
         }
     }
 })
