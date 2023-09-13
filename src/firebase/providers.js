@@ -32,14 +32,12 @@ export const loginWithEmailAndPassword = async (email, password) => {
     }
 }
 
-export const registerUserWithEmailPassword = async ({ name, email, password }) => {
+export const registerUserWithEmailPassword = async ({ email, password }) => {
     try {
         const resp = await createUserWithEmailAndPassword(firebaseAuth, email, password)
         const { uid } = resp.user;
         const infoUser = {
             ok: true,
-            email,
-            name,
             uid
         }
         return infoUser

@@ -4,7 +4,7 @@ import InputMask from "react-input-mask";
 import { useDispatch, useSelector } from 'react-redux';
 import uploadFile from '../../services/updaloadFile';
 import Loader from '../loader/Loader';
-import { addNewUser } from '../../store/slides/auth/thunk';
+import { addNewUser, signUpWithEmailAndPassword } from '../../store/slides/auth/thunk';
 import { endRegister, setKey } from '../../store/slides/auth/auth';
 
 
@@ -29,7 +29,8 @@ const RegisterForm = ({ setStep }) => {
             }
 
             if (!authGoogle) {
-                dispatch(addNewUser(key, dataClient))
+                const id = await dispatch(signUpWithEmailAndPassword({email: data.email, password: data.password}))
+                dispatch(addNewUser(id, dataClient))
                 return
             }
 

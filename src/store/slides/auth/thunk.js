@@ -17,10 +17,21 @@ export const startGoogle = () => {
     }
 }
 
+export const signUpWithEmailAndPassword = (data) => {
+    return async (dispatch) => {
+        try {
+            const resp = await registerUserWithEmailPassword(data)
+            return resp.ok ? resp.uid : false
+        } catch (error) {
+            return false
+        }
+    }
+}
+
 export const addNewUser = (id, userInfo) => {
     return async (dispatch) => {
         try {
-            // const resp = await setDoc(doc(firebaseDB, "users", id), userInfo)
+            const resp = await setDoc(doc(firebaseDB, "users", id), userInfo)
             const infoLogin = {
                 key: id,
                 appointmentsPerMonth: userInfo.appointmentsPerMonth,
