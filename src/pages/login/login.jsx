@@ -5,6 +5,8 @@ import { getUserById, startGoogle } from '../../store/slides/auth/thunk'
 import { Link, useNavigate } from 'react-router-dom'
 import { authWithGoogle, isLogged, reset } from '../../store/slides/auth/auth'
 import Loader from '../../components/loader/Loader'
+import { useForm } from 'react-hook-form'
+import { loginWithEmailAndPassword } from '../../firebase/providers'
 
 const Login = () => {
   const [checking, setChecking] = useState(false)
@@ -12,6 +14,7 @@ const Login = () => {
   const [loginError, setLoginError] = useState(false)
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const { register, handleSubmit, formState: { errors }, reset } = useForm()
 
   const authGoogle = async () => {
     setChecking(true)
@@ -45,6 +48,15 @@ const Login = () => {
     }
   }
 
+  const loginWithEmail = async (data) => {
+    setGoogleError(false)
+    setLoginError(false)
+    const resp = await loginWithEmailAndPassword(data.email, data.password)
+    if (resp.ok) {
+    }
+    console.log(resp)
+  }
+
   return (
     <main className='login'>
       {
@@ -58,14 +70,21 @@ const Login = () => {
         </figure>
         <h1 className='login__title'>Iniciar Sesión</h1>
         <p className='login__subtitle'>Encuentra la ayuda que necesitas a un click.</p>
-        <form className='login__form'>
+        <form className='login__form' onSubmit={handleSubmit(loginWithEmail)}>
           <div className='login__inputs-continer'>
             <img className='login__icon-form' src="/Login/email.svg" alt="email icon" />
-            <input className='login__input' type="text" placeholder='Correo Electrónico' />
+            <input
+              className='login__input'
+              type="text"
+              placeholder='Correo Electrónico'
+              {...register("email", { required: true })} />
           </div>
           <div className='login__inputs-continer'>
             <img className='login__icon-form' src="/Login/password.svg" alt="password icon" />
-            <input className='login__input' type="text" placeholder='Contraseña' />
+            <input
+              className='login__input'
+              type="password" placeholder='Contraseña'
+              {...register("password", { required: true })} />
             <p>Recuperar Contraseña</p>
           </div>
           <div className='login__btn-container'>
