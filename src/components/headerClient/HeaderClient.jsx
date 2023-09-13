@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import "./headerClient.scss"
+import { Link } from 'react-router-dom'
 
 const HeaderClient = ({ menuMobileActive, setMenuMobileActive }) => {
     const navMobile = [
@@ -73,7 +74,7 @@ const HeaderClient = ({ menuMobileActive, setMenuMobileActive }) => {
                                 <ul className="header__mobile-menu__list">
                                     {
                                         navMobile.map((element, index) => (
-                                            <li key={index+1} onClick={handleMobileMenu}>{element.name}</li>
+                                            <li key={index + 1} onClick={handleMobileMenu}>{element.name}</li>
                                         ))
                                     }
                                 </ul>
@@ -88,14 +89,16 @@ const HeaderClient = ({ menuMobileActive, setMenuMobileActive }) => {
                                 <hr />
                             </li>
                             <li className="header__desktop-menu__item">
-                                Psicólogos
+                                <Link to="home">Psicólogos</Link>
                                 <hr />
                             </li>
                             <li className="header__desktop-menu__item">
                                 Citas Pendientes
                                 <hr />
                             </li>
-                            <li className="header__desktop-menu__item">Perfil</li>
+                            <li className="header__desktop-menu__item">
+                                <Link to="profile">Perfil</Link>
+                            </li>
                         </ul>
                     </nav>
                 )

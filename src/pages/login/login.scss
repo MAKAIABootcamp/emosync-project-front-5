@@ -43,7 +43,7 @@
     }
 
     &__subtitle {
-        color: #A4A4A4;
+        color: $light-gray;
         font-size: 13px;
         text-align: center;
         margin-bottom: 25px;
@@ -61,7 +61,7 @@
         align-items: center;
         gap: 0.7rem;
         width: 90%;
-        border: 1px solid #A4A4A4;
+        border: 1px solid $light-gray;
         padding: 0.5rem 1rem;
         border-radius: 20px;
         position: relative;

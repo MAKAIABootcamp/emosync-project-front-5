@@ -1,9 +1,44 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./login.scss"
+import { useDispatch } from 'react-redux'
+import { getUserById, startGoogle } from '../../store/slides/auth/thunk'
+import { useNavigate } from 'react-router-dom'
+import { authWithGoogle, isLogged, reset } from '../../store/slides/auth/auth'
+import Loader from '../../components/loader/Loader'
 
 const Login = () => {
+  const [checkingGoogle, setCheckingGoogle] = useState(false)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const authGoogle = async () => {
+    dispatch(reset())
+    const resp = await dispatch(startGoogle())
+    if (resp?.ok) {
+      const userData = await getUserById(resp.key)
+      if (!userData) {
+        const dataAuth = {
+          email: resp.email,
+          displayName: resp.displayName,
+          key: resp.key
+        }
+        dispatch(authWithGoogle(dataAuth))
+        navigate("/register")
+      } else {
+        const loginInfo = {
+          userRole: userData.userRole,
+          key: resp.key
+        }
+        dispatch(isLogged(loginInfo))
+        navigate("/home")
+      }
+    }
+    console.log(resp)
+  }
+
   return (
     <main className='login'>
+      {/* <Loader/> */}
       <article className='login__container'>
         <figure className='login__logo-container'>
           <img className='login__logo' src="/Logo.svg" alt="" />
@@ -22,7 +57,7 @@ const Login = () => {
           </div>
           <div className='login__btn-container'>
             <button type='submit' className='login__btn-login'>Ingresar</button>
-            <button type='button' className='login__btn-google'>
+            <button type='button' className='login__btn-google' onClick={authGoogle}>
               <img className='login__google-icon' src="/Login/google-icon.svg" alt="" />
               <p>Goolge</p>
             </button>

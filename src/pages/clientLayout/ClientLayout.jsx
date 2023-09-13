@@ -1,20 +1,18 @@
 import React, { useState } from 'react'
 import HeaderClient from '../../components/headerClient/HeaderClient'
-import "./layoutClient.scss"
-import ClientFeed from '../clientFeed/ClientFeed'
-import ClientProfile from '../clientProfile/ClientProfile'
+import "./clientLayout.scss"
+import { Outlet } from 'react-router'
 
-const LayoutClient = () => {
+const ClientLayout = () => {
   const [menuMobileActive, setMenuMobileActive] = useState(false)
   return (
     <main className={`layout ${menuMobileActive ? "layout__fixed" : ""}`}>
       <HeaderClient menuMobileActive={menuMobileActive} setMenuMobileActive={setMenuMobileActive} />
       <article className="layout__content-container">
-        {/* <ClientFeed /> */}
-        <ClientProfile/>
+        <Outlet/>
       </article>
     </main>
   )
 }
 
-export default LayoutClient
+export default ClientLayout

@@ -57,8 +57,8 @@ const ClientProfile = () => {
                 <ul className='client-profile__notifications-list'>
                     {
                         notifications.map((notification, index) => (
-                            <>
-                                <li className={
+                            <li key={index + 1} className='client-profile__container'>
+                                <section className={
                                     `client-profile__notifications-item
                                     ${notification.isAccepted
                                         ? "client-profile__accepted"
@@ -73,9 +73,9 @@ const ClientProfile = () => {
                                                 : "Cita rechazada por "}
                                         ${notification.psychologist}`}
                                     </p>
-                                </li>
+                                </section>
                                 <hr />
-                            </>
+                            </li>
                         ))
                     }
                 </ul>
