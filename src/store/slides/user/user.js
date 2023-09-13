@@ -18,7 +18,6 @@ export const userSlice = createSlice({
             state.isChecking = !state.isChecking
         },
         login: (state, { payload }) => {
-
             state.isChecking = false;
             state.appointmentsPerMonth = payload.appointmentsPerMonth
             state.cardNumber = payload.cardNumber
@@ -28,7 +27,6 @@ export const userSlice = createSlice({
             state.email = payload.email
         },
         logout: (state) => {
-            
             state.isChecking = false
             state.appointmentsPerMonth = null
             state.cardNumber = null
