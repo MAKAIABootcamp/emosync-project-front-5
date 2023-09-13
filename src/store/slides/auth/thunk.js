@@ -8,9 +8,7 @@ export const startGoogle = () => {
     return async (dispatch) => {
         try {
             const resp = await signInWithGoogle()
-            if (resp.ok) {
-                return resp
-            }
+            return resp.ok ? resp : resp.errorMessage
         } catch (error) {
             return false
         }

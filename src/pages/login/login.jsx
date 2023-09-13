@@ -8,10 +8,15 @@ import Loader from '../../components/loader/Loader'
 
 const Login = () => {
   const [checkingGoogle, setCheckingGoogle] = useState(false)
+  const [googleError, setGoogleError] = useState(false)
+  const [loginError, setLoginError] = useState(false)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const authGoogle = async () => {
+    setCheckingGoogle(true)
+    setGoogleError(false)
+    setLoginError(false)
     dispatch(reset())
     const resp = await dispatch(startGoogle())
     if (resp?.ok) {
@@ -29,16 +34,24 @@ const Login = () => {
           userRole: userData.userRole,
           key: resp.key
         }
+        setCheckingGoogle(false)
         dispatch(isLogged(loginInfo))
         navigate("/home")
       }
+    } else {
+      setGoogleError(true)
+      setCheckingGoogle(false)
     }
     console.log(resp)
   }
 
   return (
     <main className='login'>
-      {/* <Loader/> */}
+      {
+        checkingGoogle && (
+          <Loader />
+        )
+      }
       <article className='login__container'>
         <figure className='login__logo-container'>
           <img className='login__logo' src="/Logo.svg" alt="" />
