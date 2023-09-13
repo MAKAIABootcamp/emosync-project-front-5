@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import InputMask from "react-input-mask";
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,9 +13,10 @@ const RegisterForm = ({ setStep }) => {
     const { key, userRole, displayName, authGoogle, email } = useSelector(state => state.auth)
     const dispatch = useDispatch()
     const { register, handleSubmit, formState: { errors }, reset } = useForm()
+    const [checking, setChecking] = useState(false)
 
     const onSubmit = async (data) => {
-
+        setChecking(true)
         if (userRole === "CLIENT") {
             const dataClient = {
                 appointmentsPerMonth: 0,
@@ -29,6 +30,7 @@ const RegisterForm = ({ setStep }) => {
                 userRole
             }
             await registerInFirebase(dataClient, data.email, data.password)
+            setChecking(false)
         } else {
             const photo = await uploadFile(data.photo[0])
             const dataPsychologist = {
@@ -50,12 +52,13 @@ const RegisterForm = ({ setStep }) => {
                 weeklyAgenda: []
             }
             await registerInFirebase(dataPsychologist, data.email, data.password)
+            setChecking(false)
         }
     }
 
     const registerInFirebase = async (data, email, password) => {
         if (!authGoogle) {
-            const resp = await dispatch(signUpWithEmailAndPassword({ email, password}))
+            const resp = await dispatch(signUpWithEmailAndPassword({ email, password }))
             if (resp === "Firebase: Error (auth/email-already-in-use).") {
                 Swal.fire({
                     icon: 'error',
@@ -63,10 +66,13 @@ const RegisterForm = ({ setStep }) => {
                     text: 'Ese correo ya está en uso, prueba con otro!',
                 })
             } else {
+                localStorage.setItem("infoUser", JSON.stringify({userRole, key: resp}))
                 dispatch(addNewUser(resp, data))
             }
             return
         }
+        
+        localStorage.setItem("infoUser", JSON.stringify({userRole, key}))
         dispatch(addNewUser(key, data))
     }
 
@@ -84,7 +90,11 @@ const RegisterForm = ({ setStep }) => {
 
     return (
         <>
-            {/* <Loader /> */}
+            {
+                checking && (
+                    <Loader />
+                )
+            }
             <section className='register__text-container'>
                 <img className='register__arrow-back' src="/Register/arrow-back.svg" alt="arrow icon" onClick={returnPrevStep} />
                 <p className='register__text'>

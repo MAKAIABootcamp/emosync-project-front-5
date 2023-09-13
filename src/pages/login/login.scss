@@ -120,10 +120,19 @@
 
     &__register {
         font-size: 13px;
-        span {
+        a {
             color: $orange;
             font-weight: 400;
+            text-decoration: none;
+            cursor: pointer;
         }
+    }
+
+    &__error {
+        font-size: 12px;
+        color: rgb(209, 2, 2);
+        margin-top: 1rem;
+        text-align: center;
     }
 }
 
@@ -194,10 +203,15 @@
 
         &__register {
             font-size: 14px;
-            span {
+            a {
                 color: $orange;
                 font-weight: 400;
             }
+        }
+
+        &__error {
+            font-size: 13px;
+            max-width: 70%;
         }
     }
 }
@@ -264,10 +278,15 @@
 
         &__register {
             font-size: 14px;
-            span {
+            a {
                 color: $orange;
                 font-weight: 400;
             }
+        }
+
+        &__error {
+            font-size: 14px;
+            max-width: 70%;
         }
     }
 }

@@ -1,8 +1,10 @@
 import React from 'react'
 import "./clientFeed.scss"
 import PsychologistCard from '../../components/psychologistCard/PsychologistCard'
+import { useSelector } from 'react-redux'
 
 const ClientFeed = () => {
+  const user = useSelector(state => state.user)
   const psicologos = [
     {
       name: "Juliana Sánchez Sáenz ",
@@ -115,6 +117,8 @@ const ClientFeed = () => {
       image: "https://res.cloudinary.com/dd3qzm4in/image/upload/v1692829468/deliveryApp/client-1.jpg"
     }
   ]
+
+  console.log(user)
   return (
     <section className='client-feed'>
       <div className='client-feed__search-container'>
