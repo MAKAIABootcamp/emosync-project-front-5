@@ -13,8 +13,8 @@ export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        setIsAuthenticated: (state) => {
-            state.isAuthenticated = !state.isAuthenticated;
+        setKey: (state, {payload}) => {
+            state.key = payload;
         },
         setUserRole: (state, { payload }) => {
             state.userRole = payload;
@@ -25,10 +25,16 @@ export const authSlice = createSlice({
             state.key = payload.key;
             state.authGoogle = true;
         },
-        login: (state, { payload }) => {
+        isLogged: (state, { payload }) => {
             state.isAuthenticated = true
             state.userRole = payload.userRole
-            state.key= payload.key
+            state.key = payload.key
+        },
+        endRegister: (state, { payload }) => {
+            state.isAuthenticated = true
+            state.authGoogle = false
+            state.email = null
+            state.displayName = null
         },
         reset: (state) => {
             state.isAuthenticated = false
@@ -41,4 +47,4 @@ export const authSlice = createSlice({
     }
 })
 
-export const { setIsAuthenticated, setUserRole, authWithGoogle, reset } = authSlice.actions
+export const { setUserRole, authWithGoogle, reset, endRegister, isLogged, setKey } = authSlice.actions

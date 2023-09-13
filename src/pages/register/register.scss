@@ -196,7 +196,7 @@
 
         &__text {
             font-size: 14px;
-            line-height: 17px;
+            line-height: 19px;
         }
 
         &__form {
@@ -280,8 +280,13 @@
         }
 
         &__form {
-            width: 65%;
+            width: 70%;
             gap: 1rem;
+        }
+
+        &__text {
+            max-width: 80%;
+            margin: 0 auto;
         }
 
         &__btn, &__btn-continue {

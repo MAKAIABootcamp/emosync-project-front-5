@@ -4,9 +4,12 @@ import InputMask from "react-input-mask";
 import { useDispatch, useSelector } from 'react-redux';
 import uploadFile from '../../services/updaloadFile';
 import Loader from '../loader/Loader';
+import { addNewUser } from '../../store/slides/auth/thunk';
+import { endRegister, setKey } from '../../store/slides/auth/auth';
+
 
 const RegisterForm = ({ setStep }) => {
-    const { userRole, displayName, authGoogle, email } = useSelector(state => state.auth)
+    const { key, userRole, displayName, authGoogle, email } = useSelector(state => state.auth)
     const dispatch = useDispatch()
     const { register, handleSubmit, formState: { errors }, reset } = useForm()
 
@@ -24,6 +27,19 @@ const RegisterForm = ({ setStep }) => {
                 updatedAt: new Date().getTime(),
                 userRole
             }
+            console.log(dataClient)
+            if (!authGoogle) {
+                
+                dispatch(addNewUser(key, dataClient))
+                dispatch(endRegister())
+                dispatch(setKey(key))
+                return
+            }
+
+            dispatch(setKey(key))
+            dispatch(addNewUser(key, dataClient))
+            dispatch(endRegister())
+
         } else {
             const photo = await uploadFile(data.photo[0])
             const dataPsychologist = {

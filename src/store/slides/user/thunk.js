@@ -82,7 +82,3 @@ export const deletePaymentMethods = (id, key) => {
 
 
 
-const addNewUser = async (id, userInfo) => {
-    const userData = await getUserById(id)
-    !userData && await setDoc(doc(firebaseDB, "users", id), userInfo)
-}
