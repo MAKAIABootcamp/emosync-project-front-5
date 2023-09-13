@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import uploadFile from '../../services/updaloadFile';
 import Loader from '../loader/Loader';
 import { addNewUser, signUpWithEmailAndPassword } from '../../store/slides/auth/thunk';
-import { endRegister, setKey } from '../../store/slides/auth/auth';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 
 const RegisterForm = ({ setStep }) => {
@@ -14,6 +14,7 @@ const RegisterForm = ({ setStep }) => {
     const dispatch = useDispatch()
     const { register, handleSubmit, formState: { errors }, reset } = useForm()
     const [checking, setChecking] = useState(false)
+    const navigate = useNavigate()
 
     const onSubmit = async (data) => {
         setChecking(true)
@@ -67,13 +68,15 @@ const RegisterForm = ({ setStep }) => {
                 })
             } else {
                 localStorage.setItem("infoUser", JSON.stringify({userRole, key: resp}))
-                dispatch(addNewUser(resp, data))
+                await dispatch(addNewUser(resp, data))
+                navigate("/welcome")
             }
             return
         }
-        
+
         localStorage.setItem("infoUser", JSON.stringify({userRole, key}))
-        dispatch(addNewUser(key, data))
+        await dispatch(addNewUser(key, data))
+        navigate("/welcome")
     }
 
     const returnPrevStep = () => {
