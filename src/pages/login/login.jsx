@@ -50,6 +50,9 @@ const Login = () => {
     if (resp.ok) {
       const userData = await getUserById(resp.uid)
       handleAuth(resp.uid, userData)
+    } else {
+      setChecking(false)
+      setLoginError(true)
     }
   }
 
@@ -119,6 +122,11 @@ const Login = () => {
         {
           googleError && (
             <p className='login__error'>Hubo un error en la auteticación con Google, vuelve a intentarlo</p>
+          )
+        }
+        {
+          loginError && (
+            <p className='login__error'>Hubo un error al iniciar sesión, vuelve a intentarlo</p>
           )
         }
       </article>
