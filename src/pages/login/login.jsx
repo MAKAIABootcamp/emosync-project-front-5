@@ -35,6 +35,7 @@ const Login = () => {
           key: resp.key
         }
         setCheckingGoogle(false)
+        localStorage.setItem("infoUser", JSON.stringify(loginInfo))
         dispatch(isLogged(loginInfo))
         navigate("/home")
       }

@@ -26,7 +26,6 @@ export const authSlice = createSlice({
             state.authGoogle = true;
         },
         isLogged: (state, { payload }) => {
-            localStorage.setItem("infoUser", JSON.stringify(payload))
             state.isAuthenticated = true
             state.userRole = payload.userRole
             state.key = payload.key
