@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import "./login.scss"
 import { useDispatch } from 'react-redux'
 import { getUserById, startGoogle } from '../../store/slides/auth/thunk'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { authWithGoogle, isLogged, reset } from '../../store/slides/auth/auth'
 import Loader from '../../components/loader/Loader'
 
@@ -43,7 +43,6 @@ const Login = () => {
       setGoogleError(true)
       setCheckingGoogle(false)
     }
-    console.log(resp)
   }
 
   return (
@@ -77,7 +76,7 @@ const Login = () => {
             </button>
           </div>
         </form>
-        <p className='login__register'>¿No tienes cuenta? <span>Registrate</span></p>
+        <p className='login__register'>¿No tienes cuenta? <Link to="/register">Registrate</Link></p>
       </article>
     </main>
   )

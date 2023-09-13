@@ -120,9 +120,11 @@
 
     &__register {
         font-size: 13px;
-        span {
+        a {
             color: $orange;
             font-weight: 400;
+            text-decoration: none;
+            cursor: pointer;
         }
     }
 }
@@ -194,7 +196,7 @@
 
         &__register {
             font-size: 14px;
-            span {
+            a {
                 color: $orange;
                 font-weight: 400;
             }
@@ -264,7 +266,7 @@
 
         &__register {
             font-size: 14px;
-            span {
+            a {
                 color: $orange;
                 font-weight: 400;
             }
