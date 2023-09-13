@@ -127,6 +127,13 @@
             cursor: pointer;
         }
     }
+
+    &__error {
+        font-size: 12px;
+        color: rgb(209, 2, 2);
+        margin-top: 1rem;
+        text-align: center;
+    }
 }
 
 @media screen and (min-width: 768px) {
@@ -201,6 +208,11 @@
                 font-weight: 400;
             }
         }
+
+        &__error {
+            font-size: 13px;
+            max-width: 70%;
+        }
     }
 }
 
@@ -270,6 +282,11 @@
                 color: $orange;
                 font-weight: 400;
             }
+        }
+
+        &__error {
+            font-size: 14px;
+            max-width: 70%;
         }
     }
 }

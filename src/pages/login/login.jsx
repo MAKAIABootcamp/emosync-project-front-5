@@ -77,6 +77,11 @@ const Login = () => {
           </div>
         </form>
         <p className='login__register'>¿No tienes cuenta? <Link to="/register">Registrate</Link></p>
+        {
+          googleError && (
+            <p className='login__error'>Hubo un error en la auteticación con Google, vuelve a intentarlo</p>
+          )
+        }
       </article>
     </main>
   )
