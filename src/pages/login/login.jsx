@@ -7,6 +7,7 @@ import { authWithGoogle, isLogged, reset } from '../../store/slides/auth/auth'
 import Loader from '../../components/loader/Loader'
 import { useForm } from 'react-hook-form'
 import { loginWithEmailAndPassword } from '../../firebase/providers'
+import { login } from '../../store/slides/user/user'
 
 const Login = () => {
   const [checking, setChecking] = useState(false)
@@ -20,7 +21,6 @@ const Login = () => {
     setChecking(true)
     setGoogleError(false)
     setLoginError(false)
-    dispatch(reset())
     const resp = await dispatch(startGoogle())
     if (resp?.ok) {
       const userData = await getUserById(resp.key)
@@ -33,14 +33,8 @@ const Login = () => {
         dispatch(authWithGoogle(dataAuth))
         navigate("/register")
       } else {
-        const loginInfo = {
-          userRole: userData.userRole,
-          key: resp.key
-        }
-        setCheckingGoogle(false)
-        localStorage.setItem("infoUser", JSON.stringify(loginInfo))
-        dispatch(isLogged(loginInfo))
-        navigate("/home")
+        setChecking(false)
+        handleAuth(resp.key, userData)
       }
     } else {
       setGoogleError(true)
@@ -49,12 +43,38 @@ const Login = () => {
   }
 
   const loginWithEmail = async (data) => {
+    setChecking(true)
     setGoogleError(false)
     setLoginError(false)
     const resp = await loginWithEmailAndPassword(data.email, data.password)
     if (resp.ok) {
+      const userData = await getUserById(resp.uid)
+      handleAuth(resp.uid, userData)
     }
-    console.log(resp)
+  }
+
+  const handleAuth = (key, data) => {
+    if (data.userRole === "CLIENT") {
+      const loginInfo = {
+        key,
+        appointmentsPerMonth: data.appointmentsPerMonth,
+        cardNumber: data.cardNumber,
+        displayName: data.displayName,
+        loginMethod: data.loginMethod,
+        subscription: data.subscription,
+        email: data.email
+      }
+      dispatch(login(loginInfo))
+    }
+    const authInfo = {
+      userRole: data.userRole,
+      key
+    }
+
+    localStorage.setItem("infoUser", JSON.stringify(authInfo))
+    dispatch(isLogged(authInfo))
+    navigate("/home")
+    setChecking(false)
   }
 
   return (
