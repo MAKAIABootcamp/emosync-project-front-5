@@ -15,9 +15,10 @@ const Login = () => {
   const [loginError, setLoginError] = useState(false)
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { register, handleSubmit, formState: { errors }, reset } = useForm()
+  const { register, handleSubmit, formState: { errors } } = useForm()
 
   const authGoogle = async () => {
+    dispatch(reset())
     setChecking(true)
     setGoogleError(false)
     setLoginError(false)
