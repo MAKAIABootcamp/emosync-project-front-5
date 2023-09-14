@@ -1,7 +1,19 @@
 import React from 'react'
 import "./clientProfile.scss"
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router'
+import { reset } from '../../store/slides/auth/auth'
+import { logout } from '../../store/slides/user/user'
 
 const ClientProfile = () => {
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+    const handleLogout = () => {
+        dispatch(reset())
+        dispatch(logout())
+        navigate('/')
+    }
 
     const notifications = [
         {
@@ -20,6 +32,7 @@ const ClientProfile = () => {
             isView: true
         },
     ]
+    
     return (
         <main className='client-profile'>
             <article className='client-profile__profile'>
@@ -47,7 +60,7 @@ const ClientProfile = () => {
                     <button className='client-profile__btn-edit'>Editar Información</button>
                     <button className='client-profile__btn-emergency'>¡Tengo una emergencia!</button>
                 </section>
-                <section className='client-profile__logout-container'>
+                <section className='client-profile__logout-container' onClick={handleLogout}>
                     <p className='client-profile__logout'>Cerrar Sesión</p>
                     <img className='client-profile__logout-icon' src="/User/logout.svg" alt="" />
                 </section>
