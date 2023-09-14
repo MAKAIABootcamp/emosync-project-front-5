@@ -9,6 +9,7 @@
   display: flex;
   height: 100dvh;
   width: 100%;
+  padding: 0 calc(20px + 0.5vw);;
   &__welcome {
     width: 30%;
     display: flex;
@@ -19,7 +20,8 @@
     &__title {
       color: $azure-blue;
       font-weight: 500;
-      font-size: 32px;
+      font-size: calc(20px + 0.5vw);
+      text-align: center;
     }
     &__advicer {
         height: 80%;
@@ -37,7 +39,7 @@
     justify-content: center;
     gap: 30px;
     height: 100vh;
-    padding: 0 80px;
+    padding: 0 0 0 calc(20px + 0.5vw);
     & table {
       border-collapse: separate;
       width: auto;
@@ -61,6 +63,7 @@
         color: $azure-blue;
         font-family: Montserrat Alternates;
         font-size: calc(16px + 0.5vw);
+       
         font-style: normal;
         font-weight: 500;
       }

@@ -1,16 +1,25 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./main.scss"
 import HeaderPsycho from '../../../components/headerPsycho/HeaderPsycho'
 import { Calendar, dayjsLocalizer } from 'react-big-calendar'
 import dayjs from 'dayjs'
 const localizer = dayjsLocalizer(dayjs)
-import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Input} from "@nextui-org/react";
-import ModalEvent from '../../../components/modalCalendarEvent/ModalEvent'
+import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Input } from "@nextui-org/react";
+
+//import googleCalendar from '../../../services/googleCalendar/googleCalendar'
+//import { getGoogleCalendarEvents } from '../../../services/googleServices/getGoogleCalendar'
+//import { createGoogleCalendarEvent } from '../../../services/googleServices/createGoogleCalendarEvent'
+
+
+
+
+
+
 
 const CalendarPsycho = () => {
-  const {isOpen, onOpen, onOpenChange} = useDisclosure();
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [modalPlacement, setModalPlacement] = React.useState("auto");
-  const [eventName, setEventName] = useState('');
+  const email = 'sebasruiz15@gmail.com'
   const [infoEvent, setInfoEvent] = useState([]);
 
   const [events, setEvents] = useState([
@@ -24,83 +33,104 @@ const CalendarPsycho = () => {
       start: new Date(2023, 8, 15),
       end: new Date(2023, 8, 16),
     },
-    // Agrega más eventos aquí
   ]);
+  // const fetchGoogleCalendarEvents = async () => {
+  //   try {
+  //     const googleEvents = await getGoogleCalendarEvents(email);
+  //     const combinedEvents = [...events, ...googleEvents];
+  //     setEvents(combinedEvents);
+  //   } catch (error) {
+  //     console.error('Error al obtener eventos de Google Calendar en el componente:', error);
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   fetchGoogleCalendarEvents();
+  // }, [])
+
+
+
   const handleSelectSlot = (slotInfo) => {
-    // Aquí puedes crear un nuevo evento con la información del slot seleccionado
-    //console.log(slotInfo);
+
     onOpen()
     setInfoEvent(slotInfo)
   };
 
-  const handleEvent = ()=>{
+
+
+
+  const handleSelectEvent = (event) => {
+    console.log(event);
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
     const newEvent = {
-      title: eventName,
+      title: e.target[0].value,
       start: infoEvent.start,
       end: infoEvent.end,
     };
     setEvents([...events, newEvent]);
+    // Agrega el nuevo evento a Google Calendar
+    // try {
+    //   const createdEvent = await createGoogleCalendarEvent(email, newEvent);
+    //   // Actualiza el estado de eventos con el nuevo evento
+    //   setEvents([...events, createdEvent]);
+    // } catch (error) {
+    //   console.error('Error al crear el evento en Google Calendar:', error);
+    // }
   }
-
-  const handleChangeInput = (e)=>{
-  setEventName(e)
-
-  }
-
-  const handleSelectEvent = (event) => {
-    // Aquí puedes mostrar la información del evento como desees
-    console.log(event);
-  };
-
-
   return (
     <main className='CalendarPsycho__father'>
-    <HeaderPsycho />
-   <div className='CalendarPsycho'>
+      <HeaderPsycho />
+  
+      <div className='CalendarPsycho'>
 
-   
-    <section>
-    <Calendar className='CalendarPsycho__calendar'
-      localizer={localizer}
-     events={events}
-      startAccessor="start"
-      endAccessor="end"
-      selectable={true}
-        onSelectSlot={handleSelectSlot}
-        onSelectEvent={handleSelectEvent}
-    /></section>
-  </div>
- 
-      <Modal 
-        isOpen={isOpen} 
+
+        <section>
+          <Calendar className='CalendarPsycho__calendar'
+            localizer={localizer}
+            events={events}
+            startAccessor="start"
+            endAccessor="end"
+            selectable={true}
+            onSelectSlot={handleSelectSlot}
+            onSelectEvent={handleSelectEvent}
+          /></section>
+      </div>
+
+      <Modal
+        isOpen={isOpen}
         placement={modalPlacement}
-        onOpenChange={onOpenChange} 
+        onOpenChange={onOpenChange}
       >
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader>
-              <ModalBody>
+              <form onSubmit={handleSubmit}>
+                <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader>
+                <ModalBody>
+                  <Input
+                    label="Enter the name of the event"
+                    placeholder="Event name"
+                    type="text"
+                    variant="bordered" />
+                </ModalBody>
+                <ModalFooter>
+                  <Button color="danger" variant="light" onPress={onClose} >
+                    Close
+                  </Button>
+                  <Button color="primary" onPress={onClose} type='submit' >
+                    Action
+                  </Button>
 
-                <Input
-                 label="Enter the name of the event"
-                 placeholder="Event name"
-                 type="text"
-                 variant="bordered" onValueChange={(value)=>handleChangeInput(value)}/>
-              </ModalBody>
-              <ModalFooter>
-                <Button color="danger" variant="light" onPress={onClose} >
-                  Close
-                </Button>
-                <Button color="primary" onPress={onClose} type='submit' onClick={handleEvent}>
-                  Action
-                </Button>
-              </ModalFooter>
+                </ModalFooter>
+              </form>
             </>
           )}
         </ModalContent>
       </Modal>
-    
+
 
     </main>
   )
