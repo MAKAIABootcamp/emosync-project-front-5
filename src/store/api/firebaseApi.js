@@ -40,20 +40,7 @@ export const firebaseApi = createApi({
       },
       invalidatesTags: ['user']
     }),
-    // patchOrder: builder.mutation({
-    //   providesTags: ['defaultCache'],
-    //   async queryFn(objState, orderId) {
-    //     try {
-    //       const orderRef = doc(firebaseDB, `orders`, orderId);
-    //       await updateDoc(orderRef, objState)
-    //       return "hola"
-    //     } catch (error) {
-    //       console.log(error);
-    //       return error
-    //     }
-    //   },
-    //   invalidatesTags: ['orders']
-    // }),
+ 
   })
 
 })

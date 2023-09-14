@@ -5,6 +5,7 @@
 
 .CalendarPsycho__father{
     display: flex;
+    position: relative;
 }
 .CalendarPsycho{
 font-family: $font-monserrat;
@@ -26,4 +27,11 @@ font-family: $font-monserrat;
     height: 80vh !important;
     width: 70vw;
    }
+}
+
+.modal__Psycho{
+
+    display: flex;
+    justify-content: center !important;
+    align-items: center;
 }

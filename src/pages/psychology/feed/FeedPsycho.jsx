@@ -1,16 +1,33 @@
-import React from 'react'
-import "./main.scss"
-import HeaderPsycho from '../../../components/headerPsycho/HeaderPsycho'
-
+import React, { useEffect, useState } from 'react';
+import "./main.scss";
+import HeaderPsycho from '../../../components/headerPsycho/HeaderPsycho';
+import { useSelector } from 'react-redux';
 
 
 const FeedPsycho = () => {
+
+  const [userInfo, setUserInfo] = useState(false)
+  const [nameArray, setNameArray] = useState(false)
+  const cacheUser = useSelector(state => state.psycho.userInfo)
+
+ 
+useEffect(() => {
+  setUserInfo(cacheUser[1])
+  if(cacheUser[1]){
+    console.log(cacheUser[1]);
+    setNameArray(cacheUser[1].displayName.split(" "))
+  }
+}, [cacheUser])
+
+
   return (
     <main className='feed__father'>
       <HeaderPsycho />
       <section className='feed'>
         <aside className='feed__welcome'>
-          <h2 className='feed__welcome__title'>Bienvenida, Juliana</h2>
+
+         { userInfo &&
+         <h2 className='feed__welcome__title'>Bienvenid@, {nameArray[0]}</h2>}
           <figure className='feed__welcome__advicer'>
             <img src="/Psychologist/infografia.jpg" alt="infografia" />
           </figure>

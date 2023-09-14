@@ -2,6 +2,7 @@
 
 .WeekSchedule__father {
     display: flex;
+    position: relative;
   }
   .WeekSchedule{
     display: flex;
@@ -15,7 +16,8 @@
       display: flex;
       gap: 10px;
       justify-content: flex-end;
-     
+
+     align-items: center;
       width: 65%;
      &__arrows{
     

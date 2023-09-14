@@ -14,6 +14,11 @@ import { isLogged } from '../store/slides/auth/auth'
 import Welcome from '../pages/welcome/Welcome'
 import { getUserById } from '../store/slides/auth/thunk'
 import { login } from '../store/slides/user/user'
+import CalendarPsycho from '../pages/psychology/calendar/CalendarPsycho'
+import HistoryPsycho from '../pages/psychology/history/HistoryPsycho'
+import WeekSchedule from '../pages/psychology/weekSchedule/WeekSchedule'
+import ProfilePsycho from '../pages/psychology/profilePsycho/ProfilePsycho'
+
 
 const Router = () => {
   const { isAuthenticated, userRole } = useSelector(state => state.auth)
@@ -75,6 +80,10 @@ const Router = () => {
                   <Route path='/'>
                     <Route path='home' element={<FeedPsycho />} />
                   </Route>
+                  <Route path='/calendarpsycho' element={<CalendarPsycho/>} />
+                  <Route path='/WeekSchedule' element={<WeekSchedule/>} />
+                  <Route path='/history' element={<HistoryPsycho/>} />
+                  <Route path='/profilePsycho' element={<ProfilePsycho/>} />
                 </>
               )
             }

@@ -108,20 +108,21 @@ const CalendarPsycho = () => {
           {(onClose) => (
             <>
               <form onSubmit={handleSubmit}>
-                <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader>
+                <ModalHeader className="flex flex-col gap-1">Crear evento</ModalHeader>
                 <ModalBody>
                   <Input
+                  className='modal__input'
                     label="Enter the name of the event"
-                    placeholder="Event name"
+                    placeholder="Nombre del evento"
                     type="text"
                     variant="bordered" />
                 </ModalBody>
-                <ModalFooter>
-                  <Button color="danger" variant="light" onPress={onClose} >
-                    Close
+                <ModalFooter className='modal__Psycho'>
+                  <Button  className='bg-[#c3c3c3] text-white rounded-large hover:bg-light-gray' variant="light" onPress={onClose} >
+                    Cerrar
                   </Button>
-                  <Button color="primary" onPress={onClose} type='submit' >
-                    Action
+                  <Button  className="bg-azure-blue text-white hover:bg-light-gray" onPress={onClose} type='submit' >
+                    Crear
                   </Button>
 
                 </ModalFooter>

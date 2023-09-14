@@ -2,6 +2,7 @@
 
 .ProfilePsycho__father {
     display: flex;
+    position: relative;
   }
   .ProfilePsycho{
     font-family: Montserrat Alternates;
@@ -10,11 +11,12 @@
     align-items: center;
     justify-content: center;
     gap: 20px;
- 
+    width: 100%;
     &__title{
         color: $azure-blue;
         font-size: calc(14x + 0.5vw);
         font-weight: 500;
+        text-transform: capitalize;
     }
     &__picture{
       
@@ -42,6 +44,9 @@
             flex-direction: column;
             justify-content: space-between;
             gap: 20px;
+            &__name{
+                text-transform: capitalize;
+            }
             &> div{
                 text-align: center;
                 display: flex;

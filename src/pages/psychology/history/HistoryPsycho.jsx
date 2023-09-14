@@ -3,6 +3,10 @@ import React from 'react'
 import HeaderPsycho from '../../../components/headerPsycho/HeaderPsycho'
 
 const HistoryPsycho = () => {
+    //const navigate = useNavigate()
+   
+  
+
     const actualPage = 1
     const prevPage = 1
   return (

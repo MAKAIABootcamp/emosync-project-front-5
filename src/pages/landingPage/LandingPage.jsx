@@ -23,7 +23,7 @@ const LandingPage = () => {
           <button className='landingPage__header__nav__button1' onClick={toLogin}>Entrar</button>
           <button className='landingPage__header__nav__button2' onClick={toRegister}>Registrarse</button>
         </nav>
-        <button className='landingPage__header__start'>Comienza Aqui</button>
+        <button className='landingPage__header__start' onClick={toRegister}>Comienza Aqui</button>
       </header>
       <main className='landingPage__body'>
         <section className='landingPage__body__first'>
