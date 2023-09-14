@@ -12,57 +12,77 @@ import ClientLayout from '../pages/clientLayout/ClientLayout'
 import PrivateRoutes from './privateRoutes/PrivateRoutes'
 import { isLogged } from '../store/slides/auth/auth'
 import Welcome from '../pages/welcome/Welcome'
+import { getUserById } from '../store/slides/auth/thunk'
+import { login } from '../store/slides/user/user'
 
 const Router = () => {
   const { isAuthenticated, userRole } = useSelector(state => state.auth)
   const dispatch = useDispatch()
+  const [isAuth, setIsAuth] = useState(false)
 
   useEffect(() => {
     validateAuth()
   }, [])
 
-  const validateAuth = () => {
+  const validateAuth = async () => {
     const infoUser = JSON.parse(localStorage.getItem("infoUser"))
-    infoUser?.userRole && dispatch(isLogged(infoUser))
+    if (infoUser?.userRole && !isAuthenticated) {
+      dispatch(isLogged(infoUser))
+      if (infoUser.userRole === "CLIENT") {
+        const data = await getUserById(infoUser.key)
+        const loginInfo = {
+          key: infoUser.key,
+          appointmentsPerMonth: data.appointmentsPerMonth,
+          cardNumber: data.cardNumber,
+          displayName: data.displayName,
+          loginMethod: data.loginMethod,
+          subscription: data.subscription,
+          email: data.email
+        }
+        dispatch(login(loginInfo))
+      }
+    }
+    setIsAuth(true)
   }
 
   return (
     <BrowserRouter>
-      {
-          <Routes>
-            <Route element={<PublicRoutes isAuthenticated={isAuthenticated} />}>
-              <Route path='/'>
-                <Route index element={<LandingPage />} />
-                <Route path='/login' element={<Login />} />
-                <Route path='/register' element={<Register />} />
-              </Route>
+      {isAuth && (
+        <Routes>
+          <Route element={<PublicRoutes isAuthenticated={isAuthenticated} />}>
+            <Route path='/'>
+              <Route index element={<LandingPage />} />
+              <Route path='/login' element={<Login />} />
+              <Route path='/register' element={<Register />} />
             </Route>
-            <Route element={<PrivateRoutes isAuthenticated={isAuthenticated} />}>
-              {
-                userRole === "CLIENT" && (
-                  <>
-                    <Route path='/welcome' element={<Welcome />} />
-                    <Route path='/' element={<ClientLayout />}>
-                      <Route path='home' element={<ClientFeed />} />
-                      <Route path='profile' element={<ClientProfile />} />
-                    </Route>
-                  </>
-                )
-              }
-              {
-                userRole === "PSYCHOLOGIST" && (
-                  <>
-                    <Route path='/welcome' element={<Welcome />} />
-                    <Route path='/'>
-                      <Route path='home' element={<FeedPsycho />} />
-                    </Route>
-                  </>
-                )
-              }
-            </Route>
-          </Routes>
-      }
+          </Route>
+          <Route element={<PrivateRoutes isAuthenticated={isAuthenticated} />}>
+            {
+              userRole === "CLIENT" && (
+                <>
+                  <Route path='/welcome' element={<Welcome />} />
+                  <Route path='/' element={<ClientLayout />}>
+                    <Route path='home' element={<ClientFeed />} />
+                    <Route path='profile' element={<ClientProfile />} />
+                  </Route>
+                </>
+              )
+            }
+            {
+              userRole === "PSYCHOLOGIST" && (
+                <>
+                  <Route path='/welcome' element={<Welcome />} />
+                  <Route path='/'>
+                    <Route path='home' element={<FeedPsycho />} />
+                  </Route>
+                </>
+              )
+            }
+          </Route>
+        </Routes>
+      )
 
+      }
     </BrowserRouter>
   )
 }
