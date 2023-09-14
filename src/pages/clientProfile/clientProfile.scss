@@ -95,14 +95,18 @@
         border: 1px solid $light-gray;
         border-radius: 5px;
 
+        & li:last-of-type {
+            & hr {
+                display: none;
+            }
+        }
+    }
+
+    &__container {
         hr {
             border: 1px solid $light-gray;
             border-bottom: none;
         }
-    }
-
-    &__notifications-list hr:last-of-type {
-        display: none;
     }
 
     &__notifications-item {
