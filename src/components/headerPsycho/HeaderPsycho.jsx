@@ -5,6 +5,7 @@ import { useGetUserByIdQuery } from '../../store/api/firebaseApi'
 import Loader from '../loader/Loader'
 import { useDispatch } from "react-redux"
 import { addUserInfo } from '../../store/slides/psychologist/psycho'
+import { reset } from '../../store/slides/auth/auth'
 
 
 const HeaderPsycho = () => {
@@ -26,10 +27,15 @@ const HeaderPsycho = () => {
   const toProfile = () => {
     navigate('/profilePsycho')
   }
+
 useEffect(() => {
   dispatch(addUserInfo(userInfo))
 }, [])
 
+const logout = () => {
+  dispatch(reset())
+  navigate('/')
+}
 
 
   return (
@@ -46,14 +52,14 @@ useEffect(() => {
         </section>
         <section className='headerPsycho__end'>
            <figure><img src="/Psychologist/configuration.svg" alt="configuration" /></figure>
-           <figure className='headerPsycho__end__logout'><img src="/Psychologist/logout.svg" alt="logout" /></figure>
+           <figure className='headerPsycho__end__logout' onClick={logout}><img src="/Psychologist/logout.svg" alt="logout" /></figure>
         </section>
     </aside>
     <figure>
      { isSuccess ?
      <img src={userInfo.photo} alt="psychologist" onClick={toProfile}/>
     : <Loader/>
-    
+
     }
     </figure>
     </section>
