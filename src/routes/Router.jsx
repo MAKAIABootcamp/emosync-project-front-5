@@ -80,10 +80,19 @@ const Router = () => {
                   <Route path='/'>
                     <Route path='home' element={<FeedPsycho />} />
                   </Route>
-                  <Route path='/calendarpsycho' element={<CalendarPsycho/>} />
-                  <Route path='/WeekSchedule' element={<WeekSchedule/>} />
-                  <Route path='/history' element={<HistoryPsycho/>} />
-                  <Route path='/profilePsycho' element={<ProfilePsycho/>} />
+                  <Route path='/calendarpsycho' element={<CalendarPsycho />} />
+                  <Route path='/WeekSchedule' element={<WeekSchedule />} />
+                  <Route path='/history' element={<HistoryPsycho />} />
+                  <Route path='/profilePsycho' element={<ProfilePsycho />} />
+                </>
+              )
+            }
+            {
+              userRole === "ADMIN" && (
+                <>
+                  <Route path='/'>
+                    <Route path='home'/>
+                  </Route>
                 </>
               )
             }

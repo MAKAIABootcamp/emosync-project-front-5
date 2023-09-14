@@ -241,6 +241,7 @@ const RegisterForm = ({ setStep }) => {
                                 <input
                                     className='register__input' type="number"
                                     {...register("bankAccount", { required: userRole === "PSYCHOLOGIST", minLength: 9 })}
+                                    placeholder="Min 9 números"
                                 />
                             </label>
                         </>

@@ -49,6 +49,7 @@
         &:hover {
           background: #1caca5;
           color: #fff;
+          border: 1px solid #1caca5;
         }
         @include mobile {
           width: 50px;
@@ -155,7 +156,7 @@
         display: flex;
         gap: 20px;
         position: absolute;
-  
+
         bottom: -120px;
         justify-content: space-between;
         @include tablet {
@@ -184,10 +185,6 @@
           }
           @include mobile {
             height: 155px;
-      
-            & > p {
-              //display: none;
-            }
           }
           //box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px -4px 4px 0px rgba(0, 0, 0, 0.25);
           & > figure {
@@ -205,7 +202,7 @@
           & > h3 {
             font-size: calc(9px + 0.5vw);
             @include mobile {
-            
+
               padding-top: 9px;
               font-size: calc(7px + 0.5vw);
             }
@@ -247,7 +244,7 @@
       position: relative;
       height: 200px;
       align-items: center;
-      
+
       @include tablet {
         gap: 10px;
       }
@@ -261,18 +258,18 @@
       &__plan {
         width: 367px;
         height: 501px;
-       
+
         @include tablet {
           width: 250px;
           height: 451px;
-         
+
         }
         @include mobile {
-     
+
             width: 300px;
             height: 500px;
-          
-           
+
+
 
           }
         border-radius: 39px;
@@ -307,13 +304,13 @@
          align-items: center;
          padding: 0 20px;
           & > div {
-            
+
             display: flex;
             @include mobile {
               text-align: center;
               align-items: start;
               justify-content: center;
-              
+
             }
             & > figure {
               width: calc(12px + 0.5vw);
@@ -323,7 +320,7 @@
               @include mobile{
                 height: 12px;
                 width: 12px;
-              
+
               }
               & > img {
                 height: 100%;
@@ -341,7 +338,7 @@
               }
               @include mobile {
                 width: 80%;
-                
+
                 padding: 0;
                 line-height: normal;
               }
@@ -374,7 +371,7 @@
               @include mobile {
                 font-size: calc(7px + 0.5vw);
                 width: 100%;
-                
+
                 text-align: center;
               }
           }
