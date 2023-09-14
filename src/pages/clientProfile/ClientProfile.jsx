@@ -32,11 +32,11 @@ const ClientProfile = () => {
             isView: true
         },
     ]
-    
+
     return (
-        <main className='client-profile'>
-            <article className='client-profile__profile'>
-                <section className='client-profile__info-container'>
+        <section className='client-profile'>
+            <div className='client-profile__profile'>
+                <div className='client-profile__info-container'>
                     <div className='client-profile__info'>
                         <h2 className='client-profile__info-title'>Nombre Completo</h2>
                         <p className='client-profile__info-subtitle'>Alejandra Sanchez</p>
@@ -59,13 +59,13 @@ const ClientProfile = () => {
                     </div>
                     <button className='client-profile__btn-edit'>Editar Información</button>
                     <button className='client-profile__btn-emergency'>¡Tengo una emergencia!</button>
-                </section>
-                <section className='client-profile__logout-container' onClick={handleLogout}>
+                </div>
+                <div className='client-profile__logout-container' onClick={handleLogout}>
                     <p className='client-profile__logout'>Cerrar Sesión</p>
                     <img className='client-profile__logout-icon' src="/User/logout.svg" alt="" />
-                </section>
-            </article>
-            <article className='client-profile__notifications'>
+                </div>
+            </div>
+            <div className='client-profile__notifications'>
                 <h1 className='client-profile__title'>Notificaciones</h1>
                 <ul className='client-profile__notifications-list'>
                     {
@@ -92,8 +92,8 @@ const ClientProfile = () => {
                         ))
                     }
                 </ul>
-            </article>
-        </main>
+            </div>
+        </section>
     )
 }
 

@@ -18,6 +18,7 @@ import CalendarPsycho from '../pages/psychology/calendar/CalendarPsycho'
 import HistoryPsycho from '../pages/psychology/history/HistoryPsycho'
 import WeekSchedule from '../pages/psychology/weekSchedule/WeekSchedule'
 import ProfilePsycho from '../pages/psychology/profilePsycho/ProfilePsycho'
+import EditProfileClient from '../pages/editProfileClient/EditProfileClient'
 
 
 const Router = () => {
@@ -69,7 +70,9 @@ const Router = () => {
                   <Route path='/' element={<ClientLayout />}>
                     <Route path='home' element={<ClientFeed />} />
                     <Route path='profile' element={<ClientProfile />} />
+                    <Route path='edit-profile' element={<EditProfileClient />} />
                   </Route>
+
                 </>
               )
             }
@@ -91,7 +94,7 @@ const Router = () => {
               userRole === "ADMIN" && (
                 <>
                   <Route path='/'>
-                    <Route path='home'/>
+                    <Route path='home' />
                   </Route>
                 </>
               )

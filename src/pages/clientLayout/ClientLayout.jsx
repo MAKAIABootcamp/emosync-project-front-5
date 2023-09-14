@@ -6,12 +6,14 @@ import { Outlet } from 'react-router'
 const ClientLayout = () => {
   const [menuMobileActive, setMenuMobileActive] = useState(false)
   return (
-    <main className={`layout ${menuMobileActive ? "layout__fixed" : ""}`}>
+    <>
       <HeaderClient menuMobileActive={menuMobileActive} setMenuMobileActive={setMenuMobileActive} />
-      <article className="layout__content-container">
-        <Outlet/>
-      </article>
-    </main>
+      <main className={`layout ${menuMobileActive ? "layout__fixed" : ""}`}>
+        <article className="layout__content-container">
+          <Outlet />
+        </article>
+      </main>
+    </>
   )
 }
 
