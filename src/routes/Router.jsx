@@ -28,7 +28,7 @@ const Router = () => {
     const infoUser = JSON.parse(localStorage.getItem("infoUser"))
     if (infoUser?.userRole && !isAuthenticated) {
       dispatch(isLogged(infoUser))
-      if (infoUser.userRole == "CLIENT") {
+      if (infoUser.userRole === "CLIENT") {
         const data = await getUserById(infoUser.key)
         const loginInfo = {
           key: infoUser.key,
