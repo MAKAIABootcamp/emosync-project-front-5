@@ -19,11 +19,6 @@ const ClientLayout = () => {
 
   return (
     <>
-      {
-        psychologistInfoActive && (
-          <PsychologistInfo />
-        )
-      }
       <HeaderClient menuMobileActive={menuMobileActive} setMenuMobileActive={setMenuMobileActive} />
       <main className={`layout ${validation() ? "layout__fixed" : ""}`}>
         <article className="layout__content-container">

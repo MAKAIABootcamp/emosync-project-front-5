@@ -212,7 +212,7 @@ const RegisterForm = ({ setStep }) => {
                                     {...register("photo", { required: userRole === "PSYCHOLOGIST" })} />
                             </label>
                             <label className='register__label'>
-                                Especialidad
+                                Profesión
                                 <input
                                     className='register__input'
                                     type="text"
