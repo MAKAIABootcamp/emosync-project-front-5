@@ -82,12 +82,12 @@
 
 }
 
-@media screen and (min-width: 1440px) {
+@media screen and (min-width: 1400px) {
     .edit-profile-client {
 
         &__return-container {
-            top: 2rem;
-            left: 2rem;
+            top: 1.5rem;
+            left: 1.5rem;
             font-size: 18px;
         }
 
@@ -105,7 +105,7 @@
         }
 
         &__form-container {
-            gap: 1.5rem;
+            gap: 1rem;
         }
 
         &__label {
@@ -116,31 +116,13 @@
         }
 
         &__input {
-            padding: 0.5rem 0.8rem;
-            border-radius: 15px;
-            border: 1px solid $light-gray;
-            outline: none;
-            font-family: $font-poppins-core;
-            background-color: white;
-            font-size: 13px;
-            width: 100%;
-            option {
-                font-size: 13px;
-            }
+            font-size: 15px;
         }
 
         &__btn-submit {
-            background-color: $azure-blue;
-            border: none;
-            padding: 0.6rem 1.5rem;
-            width: max-content;
-            align-self: center;
-            font-family: $font-poppins-core;
-            color: white;
-            border-radius: 10px;
-            grid-area: button;
-            margin-top: 0.5rem;
-            cursor: pointer;
+            &:hover {
+                background-color: #46c0ba;
+            }
         }
 
     }
