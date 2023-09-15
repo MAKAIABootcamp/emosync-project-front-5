@@ -1,12 +1,20 @@
 import React from 'react'
 import InputMask from "react-input-mask";
+import "./editProfileClient.scss"
+import { useNavigate } from 'react-router-dom';
 
 const EditProfileClient = () => {
+    const navigate = useNavigate()
+
+    const handleReturn = () => {
+        navigate("/profile")
+    }
+
     return (
         <section className='edit-profile-client'>
-            <figure className='edit-profile-client__return-container'>
-                <img className='edit-profile-client__return-icon' src="" alt="" />
-                <figcaption className='edit-profile-client__return-text'></figcaption>
+            <figure className='edit-profile-client__return-container' onClick={handleReturn}>
+                <img className='edit-profile-client__return-icon' src="/Register/arrow-back.svg" alt="" />
+                <figcaption className='edit-profile-client__return-text'>Volver</figcaption>
             </figure>
             <form className='edit-profile-client__form'>
                 <h1 className='edit-profile-client__title'>Editar Información Personal</h1>
@@ -21,7 +29,7 @@ const EditProfileClient = () => {
                     </label>
                     <label className='edit-profile-client__label'>
                         <p className='edit-profile-client__label--text'>Suscripción</p>
-                        <select className='edit-profile-client__select'>
+                        <select className='edit-profile-client__input'>
                             <option value="BRONZE">Bronce</option>
                             <option value="SILVER">Plata</option>
                             <option value="GOLD">Oro</option>

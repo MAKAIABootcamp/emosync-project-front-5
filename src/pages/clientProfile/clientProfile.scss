@@ -44,14 +44,18 @@
 
     &__btn-edit,
     &__btn-emergency {
-        font-family: $font-monserrat;
         padding: 0.45rem 0.8rem;
         border: none;
         border-radius: 5px;
-        color: white;
         cursor: pointer;
         font-weight: 400;
         font-size: 14px;
+
+        a {
+            color: white;
+            text-decoration: none;
+            font-family: $font-monserrat;
+        }
     }
 
     &__btn-edit {

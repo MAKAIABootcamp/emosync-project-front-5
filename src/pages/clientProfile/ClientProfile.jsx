@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { reset } from '../../store/slides/auth/auth'
 import { logout } from '../../store/slides/user/user'
+import { Link } from 'react-router-dom'
 
 const ClientProfile = () => {
     const navigate = useNavigate()
@@ -57,8 +58,14 @@ const ClientProfile = () => {
                         <h2 className='client-profile__info-title'>Método de pago </h2>
                         <p className='client-profile__info-subtitle'>******* 3456</p>
                     </div>
-                    <button className='client-profile__btn-edit'>Editar Información</button>
-                    <button className='client-profile__btn-emergency'>¡Tengo una emergencia!</button>
+                    <button className='client-profile__btn-edit'>
+                        <Link to="/edit-profile">Editar Información</Link>
+                    </button>
+                    <button className='client-profile__btn-emergency'>
+                        <a href="https://api.whatsapp.com/send/?phone=%2B573107185211&text=Hola%2C+necesito+ayuda&type=phone_number&app_absent=0">
+                            ¡Tengo una emergencia!
+                        </a>
+                    </button>
                 </div>
                 <div className='client-profile__logout-container' onClick={handleLogout}>
                     <p className='client-profile__logout'>Cerrar Sesión</p>
