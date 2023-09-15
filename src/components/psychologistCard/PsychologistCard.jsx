@@ -1,10 +1,17 @@
 import React from 'react'
 import "./psychologistCard.scss"
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import PsychologistInfo from '../modales/psychologistInfo/PsychologistInfo'
+import { setPsychologistInfoActive } from '../../store/slides/modals/modals'
 
 const PsychologistCard = ({ psychologist: { name, specialty, image } }) => {
   const { psychologistInfoActive } = useSelector(state => state.modals)
+  const dispatch = useDispatch()
+
+  const showPsychologistInfo = () => {
+    dispatch(setPsychologistInfoActive())
+  }
+
   return (
     <div className='psychologist-card'>
       {
@@ -20,7 +27,7 @@ const PsychologistCard = ({ psychologist: { name, specialty, image } }) => {
           <h2 className='psychologist-card__name'>{name}</h2>
           <p className='psychologist-card__specialty'>{specialty}</p>
         </div>
-        <button className='psychologist-card__info-btn'>Información</button>
+        <button className='psychologist-card__info-btn' onClick={showPsychologistInfo}>Información</button>
       </div>
     </div>
   )

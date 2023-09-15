@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    psychologistInfoActive: true
+    psychologistInfoActive: false
 }
 
 export const modalsSlice = createSlice({
