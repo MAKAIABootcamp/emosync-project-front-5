@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./clientFeed.scss"
 import PsychologistCard from '../../components/psychologistCard/PsychologistCard'
 import { useSelector } from 'react-redux'
+import PsychologistInfo from '../../components/modales/psychologistInfo/PsychologistInfo'
 
 const ClientFeed = () => {
   const user = useSelector(state => state.user)
