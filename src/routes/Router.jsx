@@ -19,6 +19,7 @@ import HistoryPsycho from '../pages/psychology/history/HistoryPsycho'
 import WeekSchedule from '../pages/psychology/weekSchedule/WeekSchedule'
 import ProfilePsycho from '../pages/psychology/profilePsycho/ProfilePsycho'
 import EditProfileClient from '../pages/editProfileClient/EditProfileClient'
+import ScheduleAppointment from '../pages/scheduleAppointment/scheduleAppointment'
 
 
 const Router = () => {
@@ -67,6 +68,9 @@ const Router = () => {
               userRole === "CLIENT" && (
                 <>
                   <Route path='/welcome' element={<Welcome />} />
+                  <Route path='/schedule-appointment' >
+                    <Route path=':psychologistId' element={<ScheduleAppointment />} />
+                  </Route>
                   <Route path='/' element={<ClientLayout />}>
                     <Route path='home' element={<ClientFeed />} />
                     <Route path='profile' element={<ClientProfile />} />

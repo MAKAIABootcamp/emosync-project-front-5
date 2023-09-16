@@ -54,7 +54,10 @@
             flex-direction: column;
             gap: 0.7rem;
             font-weight: 500;
-            color: $dark-azure-blue;
+
+            a {
+                color: $dark-azure-blue;
+            }
         }
     }
 
@@ -140,6 +143,7 @@
 
             &__item {
                 font-size: 16px;
+
                 a {
                     font-size: 16px;
                 }

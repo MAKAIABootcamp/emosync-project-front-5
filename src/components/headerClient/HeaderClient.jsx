@@ -6,11 +6,7 @@ const HeaderClient = ({ menuMobileActive, setMenuMobileActive }) => {
     const navMobile = [
         {
             name: "Inicio",
-            path: ""
-        },
-        {
-            name: "Psicólogos",
-            path: ""
+            path: "/home"
         },
         {
             name: "Citas Pendientes",
@@ -18,7 +14,7 @@ const HeaderClient = ({ menuMobileActive, setMenuMobileActive }) => {
         },
         {
             name: "Perfil",
-            path: ""
+            path: "/profile"
         }
     ]
     const [desktopMenu, setDesktopMenu] = useState(false)
@@ -74,7 +70,9 @@ const HeaderClient = ({ menuMobileActive, setMenuMobileActive }) => {
                                 <ul className="header__mobile-menu__list">
                                     {
                                         navMobile.map((element, index) => (
-                                            <li key={index + 1} onClick={handleMobileMenu}>{element.name}</li>
+                                            <li key={index + 1} onClick={handleMobileMenu}>
+                                                <Link to={element.path}>{element.name}</Link>
+                                            </li>
                                         ))
                                     }
                                 </ul>
@@ -85,11 +83,7 @@ const HeaderClient = ({ menuMobileActive, setMenuMobileActive }) => {
                     <nav className="header__desktop-menu">
                         <ul className="header__desktop-menu__list">
                             <li className="header__desktop-menu__item">
-                                Inicio
-                                <hr />
-                            </li>
-                            <li className="header__desktop-menu__item">
-                                <Link to="home">Psicólogos</Link>
+                                <Link to="home">Inicio</Link>
                                 <hr />
                             </li>
                             <li className="header__desktop-menu__item">
