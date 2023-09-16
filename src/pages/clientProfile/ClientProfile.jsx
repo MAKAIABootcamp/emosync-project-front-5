@@ -1,6 +1,6 @@
 import React from 'react'
 import "./clientProfile.scss"
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { reset } from '../../store/slides/auth/auth'
 import { logout } from '../../store/slides/user/user'
@@ -9,11 +9,21 @@ import { Link } from 'react-router-dom'
 const ClientProfile = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const { appointmentsPerMonth, cardNumber, displayName, subscription, email } = useSelector(state => state.user)
 
     const handleLogout = () => {
         dispatch(reset())
         dispatch(logout())
         navigate('/')
+    }
+
+    const handleSubscription = () => {
+        switch (subscription) {
+            case "BRONZE": return "Bronce"
+            case "SILVER": return "Plata"
+            case "GOLD": return "Oro"
+            default: return ""
+        }
     }
 
     const notifications = [
@@ -34,33 +44,33 @@ const ClientProfile = () => {
         },
     ]
 
+
+
     return (
         <section className='client-profile'>
             <div className='client-profile__profile'>
                 <div className='client-profile__info-container'>
                     <div className='client-profile__info'>
                         <h2 className='client-profile__info-title'>Nombre Completo</h2>
-                        <p className='client-profile__info-subtitle'>Alejandra Sanchez</p>
+                        <p className='client-profile__info-subtitle'>{displayName}</p>
                     </div>
                     <div className='client-profile__info'>
                         <h2 className='client-profile__info-title'>Correo Electrónico</h2>
-                        <p className='client-profile__info-subtitle'>alejandra@example.com</p>
+                        <p className='client-profile__info-subtitle'>{email}</p>
                     </div>
                     <div className='client-profile__info'>
                         <h2 className='client-profile__info-title'>Suscripción</h2>
-                        <p className='client-profile__info-subtitle'>Plata</p>
+                        <p className='client-profile__info-subtitle'>{handleSubscription()}</p>
                     </div>
                     <div className='client-profile__info'>
                         <h2 className='client-profile__info-title'>Citas cumplidas en el mes</h2>
-                        <p className='client-profile__info-subtitle'>0</p>
+                        <p className='client-profile__info-subtitle'>{appointmentsPerMonth}</p>
                     </div>
                     <div className='client-profile__info'>
                         <h2 className='client-profile__info-title'>Método de pago </h2>
-                        <p className='client-profile__info-subtitle'>******* 3456</p>
+                        <p className='client-profile__info-subtitle'>{cardNumber}</p>
                     </div>
-                    <button className='client-profile__btn-edit'>
-                        <Link to="/edit-profile">Editar Información</Link>
-                    </button>
+                    <button className='client-profile__btn-edit' onClick={() => navigate("/edit-profile")}> Editar Información</button>
                     <button className='client-profile__btn-emergency'>
                         <a href="https://api.whatsapp.com/send/?phone=%2B573107185211&text=Hola%2C+necesito+ayuda&type=phone_number&app_absent=0">
                             ¡Tengo una emergencia!

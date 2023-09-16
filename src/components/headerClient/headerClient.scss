@@ -71,7 +71,7 @@
         padding: 0.5rem 1rem;
 
         &__logo {
-            width: 1.5rem;
+            width: 1.6rem;
         }
 
         &__desktop-menu {
@@ -122,6 +122,26 @@
                     background-color: $dark-azure-blue;
                     bottom: -2px;
                     transition: all ease 0.5s;
+                }
+            }
+
+        }
+    }
+}
+
+@media screen and (min-width: 1100px) {
+    .header {
+
+        &__desktop-menu {
+
+            &__list {
+                gap: 0.7rem;
+            }
+
+            &__item {
+                font-size: 16px;
+                a {
+                    font-size: 16px;
                 }
             }
 
