@@ -14,7 +14,7 @@
 
     &__container {
         width: 85vw;
-        height: 85vh;
+        height: 540px;
         background-color: white;
         border-radius: 20px;
         position: relative;
@@ -83,5 +83,117 @@
         border-radius: 10px;
         cursor: pointer;
         font-weight: 600;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .psychologist-info {
+        &__container {
+            width: 70vw;
+            height: 610px;
+            max-width: 500px;
+        }
+
+        &__image-background {
+            height: 120px;
+            margin-bottom: 80px;
+        }
+
+        &__close-icon {
+            right: 1.2rem;
+            top: 1.2rem;
+            width: 1.5rem;
+        }
+
+        &__image {
+            width: 9rem;
+            height: 9rem;
+            top: 50px;
+        }
+
+        &__info-container {
+            padding: 0.5rem 2rem;
+            div {
+                margin-bottom: 0.5rem;
+            }
+        }
+
+        &__title {
+            font-size: 20px;
+        }
+
+        &__info {
+            font-size: 14px;
+            -webkit-line-clamp: 10;
+            line-height: 23px;
+        }
+
+        &__btn {
+            border: none;
+            background-color: $azure-blue;
+            color: white;
+            font-family: $font-monserrat;
+            padding: 0.6rem 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+        }
+    }
+}
+
+@media screen and (min-width: 11000px) {
+    .psychologist-info {
+        &__container {
+            width: 65vw;
+            height: 600px;
+            max-width: 500px;
+        }
+
+        &__image-background {
+            height: 110px;
+            margin-bottom: 70px;
+        }
+
+        &__close-icon {
+            right: 1.2rem;
+            top: 1.2rem;
+            width: 1.5rem;
+        }
+
+        &__image {
+            width: 8rem;
+            height: 8rem;
+            top: 45px;
+        }
+
+        &__info-container {
+            padding: 0.5rem 2rem;
+            div {
+                margin-bottom: 0.5rem;
+            }
+        }
+
+        &__title {
+            font-size: 20px;
+        }
+
+        &__info {
+            font-size: 14px;
+            -webkit-line-clamp: 10;
+            line-height: 23px;
+        }
+
+        &__btn {
+            border: none;
+            background-color: $azure-blue;
+            color: white;
+            font-family: $font-monserrat;
+            padding: 0.6rem 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+        }
     }
 }
