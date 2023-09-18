@@ -8,7 +8,6 @@ import './adminFeed.scss'
 const AdminFeed = () => {
   return (
     <>
-
       <aside className='AdminFeedContainer'>
         <HeaderAdmin />
         <section className='AdminFeedBody'>
@@ -37,7 +36,24 @@ const AdminFeed = () => {
                     <td><img src={detailsEmpty} alt="file" /></td>
                     <td><img src={detailsEmpty} alt="file" /></td>
                     <td><img src={detailsEmpty} alt="file" /></td>
-                    <td><span className='textYes'>Aceptar</span> <span className='text_'></span><span className='textNo'>Rechazar</span></td>
+                    <td >
+                      <div className='actionCell'>
+                        <span className='textYes'>Aceptar</span>
+                        <span className='textNo'>Rechazar</span>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr className='tablePsy__body__ind'>
+                    <td>Juliana Sanchez</td>
+                    <td><img src={detailsFilled} alt="file" className='detailsFilled' /></td>
+                    <td><img src={detailsFilled} alt="file" className='detailsFilled' /></td>
+                    <td><img src={detailsFilled} alt="file" className='detailsFilled' /></td>
+                    <td >
+                      <div className='actionCell'>
+                        <span className='textYes'>Aceptar</span>
+                        <span className='textNo'>Rechazar</span>
+                      </div>
+                    </td>
                   </tr>
                   <tr className='tablePsy__body__fin'>
                     <td className='bord4'></td>
@@ -53,9 +69,11 @@ const AdminFeed = () => {
               <p>Citas incumplidas</p>
               <table className='tableRpt'>
                 <thead className='tableRpt__head'>
-                  <th>Paciente</th>
-                  <th>Psicólogo tratante</th>
-                  <th>Motivo</th>
+                  <tr>
+                    <th>Paciente</th>
+                    <th>Psicólogo tratante</th>
+                    <th>Motivo</th>
+                  </tr>
                 </thead>
                 <tbody className='tableRpt__body'>
                   <tr className='tableRpt__body__ind'>
