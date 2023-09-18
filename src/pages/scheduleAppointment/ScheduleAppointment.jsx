@@ -1,6 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import "./scheduleAppointment.scss"
+import ConfirmAppointment from '../../components/modales/confirmAppointment/ConfirmAppointment'
 
 const ScheduleAppointment = () => {
     const navigate = useNavigate()
@@ -11,6 +12,7 @@ const ScheduleAppointment = () => {
 
     return (
         <main className='schedule-appointment'>
+            <ConfirmAppointment/>
             <figure className='schedule-appointment__return-container' onClick={handleReturn}>
                 <img className='schedule-appointment__return-icon' src="/Register/arrow-back.svg" alt="" />
                 <figcaption className='schedule-appointment__return-text'>Volver</figcaption>

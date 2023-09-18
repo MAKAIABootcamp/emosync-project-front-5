@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import PsychologistInfo from '../../components/modales/psychologistInfo/PsychologistInfo'
 
 const ClientFeed = () => {
-  const { psychologistInfoActive } = useSelector(state => state.modals)
+  const { modalActive } = useSelector(state => state.modals)
   const user = useSelector(state => state.user)
   const psicologos = [
     {
@@ -123,7 +123,7 @@ const ClientFeed = () => {
   return (
     <section className='client-feed'>
       {
-        psychologistInfoActive && (
+        modalActive && (
           <PsychologistInfo />
         )
       }

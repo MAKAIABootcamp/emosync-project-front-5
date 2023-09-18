@@ -1,17 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    psychologistInfoActive: false
+    modalActive: false
 }
 
 export const modalsSlice = createSlice({
     name: 'modals',
     initialState,
     reducers: {
-        setPsychologistInfoActive: (state) => {
-            state.psychologistInfoActive = !state.psychologistInfoActive;
+        setModalActive: (state) => {
+            state.modalActive = !state.modalActive;
         }
     }
 })
 
-export const { setPsychologistInfoActive } = modalsSlice.actions
+export const { setModalActive } = modalsSlice.actions

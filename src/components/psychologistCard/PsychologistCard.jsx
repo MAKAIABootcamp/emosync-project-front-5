@@ -1,13 +1,13 @@
 import React from 'react'
 import "./psychologistCard.scss"
 import { useDispatch } from 'react-redux'
-import { setPsychologistInfoActive } from '../../store/slides/modals/modals'
+import { setModalActive } from '../../store/slides/modals/modals'
 
 const PsychologistCard = ({ psychologist: { name, specialty, image } }) => {
   const dispatch = useDispatch()
 
   const showPsychologistInfo = () => {
-    dispatch(setPsychologistInfoActive())
+    dispatch(setModalActive())
   }
 
   return (

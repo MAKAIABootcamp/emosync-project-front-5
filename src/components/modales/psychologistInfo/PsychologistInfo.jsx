@@ -1,7 +1,7 @@
 import React from 'react'
 import "./psychologistInfo.scss"
 import { useDispatch } from 'react-redux'
-import { setPsychologistInfoActive } from '../../../store/slides/modals/modals'
+import { setModalActive } from '../../../store/slides/modals/modals'
 import { useNavigate } from 'react-router-dom'
 
 const PsychologistInfo = () => {
@@ -9,11 +9,11 @@ const PsychologistInfo = () => {
   const navigate = useNavigate()
 
   const closeModal = () => {
-    dispatch(setPsychologistInfoActive())
+    dispatch(setModalActive())
   }
 
   const scheduleAppointmentModal = () => {
-    dispatch(setPsychologistInfoActive())
+    dispatch(setModalActive())
     navigate("/schedule-appointment/1")
   }
 
