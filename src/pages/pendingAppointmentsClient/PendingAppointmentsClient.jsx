@@ -40,7 +40,32 @@ const PendingAppointmentsClient = () => {
             name: "Juliana Sánchez Sáenz",
             date: "7 Oct, 2:30pm",
         },
+        {
+            name: "Juliana Sánchez Sáenz",
+            date: "7 Oct, 2:30pm",
+        },
+        {
+            name: "Juliana Sánchez Sáenz",
+            date: "7 Oct, 2:30pm",
+        },
+        {
+            name: "Juliana Sánchez Sáenz",
+            date: "7 Oct, 2:30pm",
+        },
+        {
+            name: "Juliana Sánchez Sáenz",
+            date: "7 Oct, 2:30pm",
+        },
+        {
+            name: "Juliana Sánchez Sáenz",
+            date: "7 Oct, 2:30pm",
+        },
+        {
+            name: "Juliana Sánchez Sáenz",
+            date: "7 Oct, 2:30pm",
+        },
     ]
+    
     return (
         <section className='pending-appointments-client'>
             <h1 className='pending-appointments-client__title'>Citas pendientes para está semana</h1>
@@ -53,11 +78,17 @@ const PendingAppointmentsClient = () => {
                 </tr>
                 {
                     appointments.map((item, index) => (
-                        <tr key={index+1} className='pending-appointments-client__tr'>
-                            <td className='pending-appointments-client__td'>{item.name}</td>
+                        <tr key={index + 1} className='pending-appointments-client__tr'>
+                            <td className='pending-appointments-client__td'>
+                                <figure>
+                                    <img src="/User/exclamation-mark-svgrepo-com.svg" alt="" />
+                                    <figcaption>Da click aquí para reportar en caso tal de que la cita haya sido incumplida.</figcaption>
+                                </figure>
+                                {item.name}
+                            </td>
                             <td className='pending-appointments-client__td'>{item.date}</td>
-                            <td className='pending-appointments-client__td'><a href="">Link</a></td>
-                            <td className='pending-appointments-client__td'>Cancelar cita</td>
+                            <td className='pending-appointments-client__td link'><a href="">Link</a></td>
+                            <td className='pending-appointments-client__td cancel-appointment'>Cancelar cita</td>
                         </tr>
                     ))
                 }

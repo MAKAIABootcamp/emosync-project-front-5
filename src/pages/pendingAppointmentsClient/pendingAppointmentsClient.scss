@@ -26,16 +26,19 @@
     &__tr {
         width: 100%;
         border-bottom: 1px solid #E3E3E3;
+
         &:last-child {
             border-bottom: none;
         }
     }
 
-    &__th, &__td{
+    &__th,
+    &__td {
         width: 25%;
         padding: 0.5rem 0.3rem;
         text-align: center;
         border-right: 1px solid #E3E3E3;
+
         &:last-child {
             border-right: none;
         }
@@ -60,7 +63,160 @@
     }
 
     &__td {
+        font-weight: 400;
 
+        &:first-child {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            gap: 0.1rem;
+        }
+
+        figure {
+            display: flex;
+
+            img {
+                width: 1rem;
+                cursor: pointer;
+                filter: invert(48%) sepia(71%) saturate(4222%) hue-rotate(355deg) brightness(106%) contrast(90%);
+            }
+
+            figcaption {
+                display: none;
+            }
+        }
     }
 
+    .link {
+        a {
+            color: $azure-blue;
+            text-decoration: none;
+        }
+    }
+
+    .cancel-appointment {
+        color: $orange-hard;
+        cursor: pointer;
+    }
+
+}
+
+@media screen and (min-width: 768px) {
+    .pending-appointments-client {
+        padding: 1.5rem;
+
+        &__title {
+            font-size: 20px;
+            margin-bottom: 1.5rem;
+        }
+
+        &__table {
+            width: 80vw;
+        }
+
+        &__th,
+        &__td {
+            padding: 0.6rem 0.3rem;
+
+            &:nth-child(3) {
+                width: 5%;
+            }
+
+            &:nth-child(4) {
+                width: 10%;
+            }
+
+            &:nth-child(2) {
+                width: 15%;
+            }
+        }
+
+        &__th {
+            font-weight: 500;
+            font-size: 13px;
+        }
+
+        &__td {
+            font-size: 11px;
+
+            &:first-child {
+                gap: 0.5rem;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1100px) {
+    .pending-appointments-client {
+        padding: 2rem;
+
+        &__table {
+            max-width: 650px;
+        }
+
+        &__th {
+            font-size: 15px;
+        }
+
+        &__td {
+            font-size: 13px;
+            position: relative;
+
+            &:first-child {
+                gap: 0.7rem;
+            }
+
+            figure {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                cursor: pointer;
+
+                img {
+                    width: 1rem;
+                    filter: invert(48%) sepia(71%) saturate(4222%) hue-rotate(355deg) brightness(106%) contrast(90%);
+                }
+
+                &:hover figcaption {
+                    display: flex;
+                    position: absolute;
+                    background-color: white;
+                    top: -50px;
+                    font-size: 12px;
+                    color: #717171;
+                    padding: 0.5rem 0.8rem;
+                    width: 200px;
+                    border-radius: 15px;
+                    border: 1px solid #C1C1C1;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .pending-appointments-client {
+        padding: 2rem;
+
+        &__title {
+            font-size: 24px;
+        }
+
+        &__table {
+            max-width: 850px;
+        }
+
+        &__th {
+            font-size: 17px;
+        }
+
+        &__td {
+            &:first-child {
+                gap: 0.5rem;
+            }
+
+            font-size: 15px;
+        }
+    }
 }
