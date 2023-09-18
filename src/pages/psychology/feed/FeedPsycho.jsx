@@ -7,10 +7,10 @@ import { useSelector } from 'react-redux';
 const FeedPsycho = () => {
 
   const [userInfo, setUserInfo] = useState(false)
-  const [nameArray, setNameArray] = useState(false)
+  const [nameArray, setNameArray] = useState([])
   const cacheUser = useSelector(state => state.psycho.userInfo)
+  const [changer, setChanger]= useState(0)
 
- 
 useEffect(() => {
   setUserInfo(cacheUser[1])
   if(cacheUser[1]){
@@ -19,6 +19,11 @@ useEffect(() => {
   }
 }, [cacheUser])
 
+useEffect(() => {
+  setChanger(prevChanger => prevChanger +1)
+}, [userInfo])
+
+
 
   return (
     <main className='feed__father'>
@@ -26,7 +31,7 @@ useEffect(() => {
       <section className='feed'>
         <aside className='feed__welcome'>
 
-         { userInfo &&
+         { nameArray.length &&
          <h2 className='feed__welcome__title'>Bienvenid@, {nameArray[0]}</h2>}
           <figure className='feed__welcome__advicer'>
             <img src="/Psychologist/infografia.jpg" alt="infografia" />
