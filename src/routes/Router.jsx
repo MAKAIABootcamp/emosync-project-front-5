@@ -18,6 +18,8 @@ import CalendarPsycho from '../pages/psychology/calendar/CalendarPsycho'
 import HistoryPsycho from '../pages/psychology/history/HistoryPsycho'
 import WeekSchedule from '../pages/psychology/weekSchedule/WeekSchedule'
 import ProfilePsycho from '../pages/psychology/profilePsycho/ProfilePsycho'
+import AdminFeed from '../pages/adminViews/adminFeed/AdminFeed'
+import AdminConfig from '../pages/adminViews/adminConfig/AdminConfig'
 
 
 const Router = () => {
@@ -91,7 +93,8 @@ const Router = () => {
               userRole === "ADMIN" && (
                 <>
                   <Route path='/'>
-                    <Route path='home'/>
+                    <Route path='home' element={<AdminFeed />} />
+                    <Route path='config' element={<AdminConfig />} />
                   </Route>
                 </>
               )
