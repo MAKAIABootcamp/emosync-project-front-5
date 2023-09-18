@@ -31,7 +31,9 @@ const Welcome = () => {
                 tu perfil de manera sencilla, aquí encontrarás todas las opciones que necesitas para brindar una atención
                 de calidad a tus pacientes. Recuerda que la verificación como psicólogo es un paso importante para garantizar
                 la confianza de nuestros usuarios, así que no dudes en enviar tu diploma y tarjeta profesional para comenzar
-                a ejercer en la plataforma. ¡Estamos emocionados por el impacto positivo que aportarás a la comunidad Emosync!</p>
+                a ejercer en la plataforma. ¡Estamos emocionados por el impacto positivo que aportarás a la comunidad Emosync!
+                Te invitamos a terminar de llenar tu información en tu perfil, ¡agrega una descripción para llamar la atención!
+                y recuerda los psicologos que no sean verificados no podran prestar sus servicios hasta dicha verificación. </p>
             </>
           )
         }
