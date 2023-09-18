@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux'
 import PsychologistInfo from '../../components/modales/psychologistInfo/PsychologistInfo'
 
 const ClientFeed = () => {
+  const { psychologistInfoActive } = useSelector(state => state.modals)
   const user = useSelector(state => state.user)
   const psicologos = [
     {
@@ -119,9 +120,13 @@ const ClientFeed = () => {
     }
   ]
 
-  console.log(user)
   return (
     <section className='client-feed'>
+      {
+        psychologistInfoActive && (
+          <PsychologistInfo />
+        )
+      }
       <div className='client-feed__search-container'>
         <figure className='client-feed__search-icon-container'>
           <img className='client-feed__search-icon' src="/User/search.svg" alt="" />

@@ -1,11 +1,9 @@
 import React from 'react'
 import "./psychologistCard.scss"
-import { useDispatch, useSelector } from 'react-redux'
-import PsychologistInfo from '../modales/psychologistInfo/PsychologistInfo'
+import { useDispatch } from 'react-redux'
 import { setPsychologistInfoActive } from '../../store/slides/modals/modals'
 
 const PsychologistCard = ({ psychologist: { name, specialty, image } }) => {
-  const { psychologistInfoActive } = useSelector(state => state.modals)
   const dispatch = useDispatch()
 
   const showPsychologistInfo = () => {
@@ -14,11 +12,6 @@ const PsychologistCard = ({ psychologist: { name, specialty, image } }) => {
 
   return (
     <div className='psychologist-card'>
-      {
-        psychologistInfoActive && (
-          <PsychologistInfo />
-        )
-      }
       <figure className='psychologist-card__image-container'>
         <img className='psychologist-card__image' src={image} alt={`${name} image`} />
       </figure>
