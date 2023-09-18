@@ -20,6 +20,7 @@ import WeekSchedule from '../pages/psychology/weekSchedule/WeekSchedule'
 import ProfilePsycho from '../pages/psychology/profilePsycho/ProfilePsycho'
 import EditProfileClient from '../pages/editProfileClient/EditProfileClient'
 import ScheduleAppointment from '../pages/scheduleAppointment/scheduleAppointment'
+import PendingAppointmentsClient from '../pages/pendingAppointmentsClient/pendingAppointmentsClient'
 
 
 const Router = () => {
@@ -75,6 +76,7 @@ const Router = () => {
                     <Route path='home' element={<ClientFeed />} />
                     <Route path='profile' element={<ClientProfile />} />
                     <Route path='edit-profile' element={<EditProfileClient />} />
+                    <Route path='pending-appointments' element={<PendingAppointmentsClient />} />
                   </Route>
 
                 </>

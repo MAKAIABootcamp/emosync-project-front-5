@@ -10,7 +10,7 @@ const HeaderClient = ({ menuMobileActive, setMenuMobileActive }) => {
         },
         {
             name: "Citas Pendientes",
-            path: ""
+            path: "/pending-appointments"
         },
         {
             name: "Perfil",
@@ -87,7 +87,7 @@ const HeaderClient = ({ menuMobileActive, setMenuMobileActive }) => {
                                 <hr />
                             </li>
                             <li className="header__desktop-menu__item">
-                                Citas Pendientes
+                                <Link to="pending-appointments">Citas Pendientes</Link>
                                 <hr />
                             </li>
                             <li className="header__desktop-menu__item">
