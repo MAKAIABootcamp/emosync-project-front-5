@@ -7,6 +7,10 @@
     justify-content: center;
     position: relative;
 
+    &__fixed {
+        position: fixed;
+    }
+
     &__return-container {
         position: absolute;
         top: 1rem;
