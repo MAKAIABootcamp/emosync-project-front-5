@@ -2,12 +2,21 @@ import React, { useState } from 'react'
 import HeaderAdmin from '../../../components/headerAdmin/HeaderAdmin'
 import './adminConfig.scss'
 import defaultUser from '/Admin/defaultUser.jpg'
+import { useForm } from 'react-hook-form'
+import { useSelector } from 'react-redux'
 
 const AdminConfig = () => {
+  const { register, handleSubmit, formState: { errors }, reset } = useForm()
   const [isEdit, setIsedit] = useState(false)
+
   const changeStatus = () => {
-    setIsedit(true)
+    setIsedit(!isEdit)
   }
+  const onSubmit = (data) => {
+    console.log(data)
+    changeStatus()
+  }
+
   return (
     <aside className='AdminConfigContainer'>
       <HeaderAdmin />
@@ -16,20 +25,43 @@ const AdminConfig = () => {
           isEdit ? (
             <article className='AdminConfigBody__userEdit'>
               <h3>Editar información personal</h3>
-              <form>
-                <label>
-                  Foto de perfil
-                  <input type="file" />
-                </label>
-                <label>
-                  Nombre completo
-                  <input type="text" />
-                </label>
-                <label>
-                  Genero
-
-
-                </label>
+              <form className='AdminConfigBody__userEdit__form' onSubmit={handleSubmit(onSubmit)}>
+                <div>
+                  <label htmlFor="">Foto de perfil</label>
+                  <input
+                    className='pictureInput'
+                    type="file"
+                    {...register("pictureInput")}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="">Nombre completo</label>
+                  <input
+                    className='nameInput'
+                    type='text'
+                    {...register("nameInput", { required: true })}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="sexInput">Genero</label>
+                  <select
+                    className='sexInput'
+                    {...register("sexInput", { required: true })}>
+                    <option value="">Selecciona una opción</option>
+                    <option value="H">Hombre</option>
+                    <option value="M" >Mujer</option>
+                    <option value="O">Otro</option>
+                  </select>
+                </div>
+                <div>
+                  <label htmlFor="emailInput">Correo electronico</label>
+                  <input
+                    className='emailInput'
+                    type="text"
+                    {...register("emailInput", { required: true })}
+                  />
+                </div>
+                <input type="submit" value="Guardar cambios" className='submitInput' />
               </form>
             </article>
           )

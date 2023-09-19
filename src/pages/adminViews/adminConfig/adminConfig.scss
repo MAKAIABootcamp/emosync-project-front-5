@@ -67,5 +67,86 @@
         cursor: pointer;
       }
     }
+
+    &__userEdit {
+      gap: 2vh;
+      width: 50%;
+      min-width: 450px;
+      //border: red solid 1px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: $dark-azure-blue;
+
+      & h3 {
+        font-size: calc(16px + 0.5vw);
+      }
+
+      &__form {
+        display: flex;
+        flex-direction: column;
+        gap: 1vh;
+
+        & div {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5vh;
+
+          & label {
+            width: 100%;
+            font-weight: 500;
+          }
+
+          & input,
+          select {
+            border: 1px solid $light-gray;
+            padding: 5px;
+            border-radius: 20px;
+            width: 100%;
+
+            &:focus,
+            :active {
+              outline: none;
+              border: solid 1px $dark-azure-blue
+            }
+          }
+
+          //input tipo file
+          & .pictureInput {
+            font-size: 13px;
+            border: none;
+          }
+
+          & .pictureInput::file-selector-button {
+            background-color: white;
+            cursor: pointer;
+            border: 1px solid $light-gray;
+            padding: 0.2rem 0.5rem;
+            border-radius: 7px;
+            font-family: $font-poppins-core;
+            border-radius: 20px;
+          }
+
+          & .nameInput,
+          .emailInput {
+            padding-left: 10px;
+          }
+        }
+
+        .submitInput {
+          background-color: $dark-azure-blue;
+          color: white;
+          border-radius: 20px;
+          border: none;
+          cursor: pointer;
+          padding: 10px 50px;
+          font-size: calc(10px + 0.5vw);
+          font-weight: 700;
+          width: auto;
+          margin-top: 2vh;
+        }
+      }
+    }
   }
 }

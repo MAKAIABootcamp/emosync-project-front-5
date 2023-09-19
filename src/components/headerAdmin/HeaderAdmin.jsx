@@ -1,16 +1,21 @@
 import React from 'react'
 import './headerAdmin.scss'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { reset } from '../../store/slides/auth/auth'
 
 const HeaderAdmin = () => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const toNavi = (text) => {
     navigate(`/${text}`)
   }
 
   const toExit = () => {
-    console.log("aun no se puede salir")
+    dispatch(reset())
+    dispatch(logout())
+    navigate('/')
   }
 
   return (

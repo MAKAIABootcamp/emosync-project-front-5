@@ -40,7 +40,47 @@ export const firebaseApi = createApi({
       },
       invalidatesTags: ['user']
     }),
- 
+    getVerifDocs: builder.query({
+      providesTags: ['Docs', 'defaultCache'],
+      async queryFn() {
+        try {
+          const querySnapshot = await getDocs(collection(firebaseDB, `verificationDocuments`));
+          let docsArray = [];
+          querySnapshot.forEach((doc) => {
+            //console.log(doc.id, " => ", doc.data());
+            docsArray.push({
+              id: doc.id,
+              ...doc.data()
+            })
+          });
+          return { data: docsArray }
+        } catch (error) {
+          console.log(error);
+          return error
+        }
+      }
+    }),
+    getVerifReports: builder.query({
+      providesTags: ['Reports', 'defaultCache'],
+      async queryFn() {
+        try {
+          const querySnapshot = await getDocs(collection(firebaseDB, `appointments`));
+          let reportsArray = [];
+          querySnapshot.forEach((doc) => {
+            //console.log(doc.id, " => ", doc.data());
+            reportsArray.push({
+              id: doc.id,
+              ...doc.data()
+            })
+          });
+          return { data: reportsArray }
+        } catch (error) {
+          console.log(error);
+          return error
+        }
+      }
+    }),
+
   })
 
 })
@@ -48,6 +88,7 @@ export const firebaseApi = createApi({
 export const {
   useGetUserByIdQuery,
   useEditInfoUserMutation,
- } =
-  firebaseApi
+  useGetVerifDocsQuery,
+  useGetVerifReportsQuery,
+} = firebaseApi
 
