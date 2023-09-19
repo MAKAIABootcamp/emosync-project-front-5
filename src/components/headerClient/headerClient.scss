@@ -5,8 +5,6 @@
     padding: 0.7rem 1rem;
     justify-content: space-between;
     align-items: center;
-    position: sticky;
-    top: 0;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     background-color: white;
     z-index: 100;
@@ -56,7 +54,11 @@
             flex-direction: column;
             gap: 0.7rem;
             font-weight: 500;
-            color: $dark-azure-blue;
+
+            a {
+                color: $dark-azure-blue;
+                text-decoration: none;
+            }
         }
     }
 
@@ -73,7 +75,7 @@
         padding: 0.5rem 1rem;
 
         &__logo {
-            width: 1.5rem;
+            width: 1.6rem;
         }
 
         &__desktop-menu {
@@ -124,6 +126,27 @@
                     background-color: $dark-azure-blue;
                     bottom: -2px;
                     transition: all ease 0.5s;
+                }
+            }
+
+        }
+    }
+}
+
+@media screen and (min-width: 1100px) {
+    .header {
+
+        &__desktop-menu {
+
+            &__list {
+                gap: 0.7rem;
+            }
+
+            &__item {
+                font-size: 16px;
+
+                a {
+                    font-size: 16px;
                 }
             }
 

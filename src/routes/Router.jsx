@@ -18,6 +18,11 @@ import CalendarPsycho from '../pages/psychology/calendar/CalendarPsycho'
 import HistoryPsycho from '../pages/psychology/history/HistoryPsycho'
 import WeekSchedule from '../pages/psychology/weekSchedule/WeekSchedule'
 import ProfilePsycho from '../pages/psychology/profilePsycho/ProfilePsycho'
+import EditProfileClient from '../pages/editProfileClient/EditProfileClient'
+import ScheduleAppointment from '../pages/scheduleAppointment/scheduleAppointment'
+import PendingAppointmentsClient from '../pages/pendingAppointmentsClient/pendingAppointmentsClient'
+import AdminFeed from '../pages/adminViews/adminFeed/AdminFeed'
+import AdminConfig from '../pages/adminViews/adminConfig/AdminConfig'
 
 
 const Router = () => {
@@ -66,10 +71,16 @@ const Router = () => {
               userRole === "CLIENT" && (
                 <>
                   <Route path='/welcome' element={<Welcome />} />
+                  <Route path='/schedule-appointment' >
+                    <Route path=':psychologistId' element={<ScheduleAppointment />} />
+                  </Route>
                   <Route path='/' element={<ClientLayout />}>
                     <Route path='home' element={<ClientFeed />} />
                     <Route path='profile' element={<ClientProfile />} />
+                    <Route path='edit-profile' element={<EditProfileClient />} />
+                    <Route path='pending-appointments' element={<PendingAppointmentsClient />} />
                   </Route>
+
                 </>
               )
             }
@@ -80,10 +91,20 @@ const Router = () => {
                   <Route path='/'>
                     <Route path='home' element={<FeedPsycho />} />
                   </Route>
-                  <Route path='/calendarpsycho' element={<CalendarPsycho/>} />
-                  <Route path='/WeekSchedule' element={<WeekSchedule/>} />
-                  <Route path='/history' element={<HistoryPsycho/>} />
-                  <Route path='/profilePsycho' element={<ProfilePsycho/>} />
+                  <Route path='/calendarpsycho' element={<CalendarPsycho />} />
+                  <Route path='/WeekSchedule' element={<WeekSchedule />} />
+                  <Route path='/history' element={<HistoryPsycho />} />
+                  <Route path='/profilePsycho' element={<ProfilePsycho />} />
+                </>
+              )
+            }
+            {
+              userRole === "ADMIN" && (
+                <>
+                  <Route path='/'>
+                    <Route path='home' element={<AdminFeed />} />
+                    <Route path='config' element={<AdminConfig />} />
+                  </Route>
                 </>
               )
             }

@@ -1,0 +1,130 @@
+@import "../../../assets/styles/variables.scss";
+
+.report-appointment {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.37);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__container {
+        width: 80%;
+        background-color: white;
+        border-radius: 20px;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        padding: 1.5rem;
+    }
+
+    &__title {
+        text-align: center;
+        font-family: $font-monserrat;
+        color: $dark-azure-blue;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        font-size: 16px;
+    }
+
+    &__text {
+        text-align: center;
+        font-family: $font-poppins-core;
+        font-size: 13px;
+        font-weight: 400;
+        margin-bottom: 0.3rem
+    }
+    &__textarea {
+        resize: none;
+        width: 100%;
+        margin: 0.5rem 0;
+        height: 150px;
+        outline: none;
+        padding: 1rem;
+        border-radius: 10px;
+        border: 1px solid #DEDEDE;
+        font-family: $font-poppins-core;
+        font-size: 12px;
+
+        &:focus {
+            border-color: $azure-blue;
+        }
+    }
+
+    &__alert {
+        font-size: 11px;
+        color: #7B7B7B;
+        font-family: $font-poppins-core;
+        text-align: justify;
+    }
+
+    &__btn-container {
+        margin-top: 1rem;
+        display: flex;
+        gap: 0.5rem;
+        width: 100%;
+
+        button {
+            font-family: $font-monserrat;
+            color: white;
+            padding: 0.5rem;
+            width: 100%;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+    }
+
+    &__confirm {
+        background-color: $azure-blue;
+    }
+
+    &__cancel {
+        background-color: #CCCFCF;
+    }
+
+}
+
+@media screen and (min-width: 768px) {
+    .report-appointment {
+
+        &__container {
+            width: 400px;
+            padding: 2rem;
+        }
+
+        &__title {
+            font-size: 20px;
+        }
+
+        &__text {
+            font-size: 16px;
+        }
+
+        &__textarea {
+            font-size: 14px;
+        }
+
+        &__alert {
+            font-size: 13px;
+        }
+
+        &__btn-container {
+            gap: 1rem;
+
+            button {
+                padding: 0.6rem;
+                font-size: 14px;
+            }
+        }
+
+    }
+}
