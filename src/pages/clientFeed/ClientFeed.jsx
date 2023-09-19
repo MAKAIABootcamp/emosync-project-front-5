@@ -122,6 +122,7 @@ const ClientFeed = () => {
   ]
   const [psychologists, setPsychologists] = useState([])
   const [filteredData, setFilteredData] = useState([])
+  const [psychologistInfo, setPsychologistInfo] = useState({})
 
   useEffect(() => {
     validateData()
@@ -139,7 +140,7 @@ const ClientFeed = () => {
     <section className='client-feed'>
       {
         modalActive && (
-          <PsychologistInfo />
+          <PsychologistInfo psychologistInfo={psychologistInfo}/>
         )
       }
       <div className='client-feed__search-container'>
@@ -151,7 +152,7 @@ const ClientFeed = () => {
       <div className='client-feed__cards-container'>
         {
           filteredData.map((psychologist, index) => (
-            <PsychologistCard key={index + 1} psychologist={psychologist} />
+            <PsychologistCard key={index + 1} psychologist={psychologist} setPsychologistInfo={setPsychologistInfo} />
           ))
         }
       </div>
