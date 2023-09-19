@@ -2,10 +2,11 @@ import React from 'react'
 import "./pendingAppointmentsClient.scss"
 import { useDispatch, useSelector } from 'react-redux'
 import CancelAppointment from '../../components/modales/cancelAppointment/CancelAppointment'
-import { setModalActive } from '../../store/slides/modals/modals'
+import { setModalActive, setModalAuxActive } from '../../store/slides/modals/modals'
+import ReportAppointment from '../../components/modales/reportAppointment/ReportAppointment'
 
 const PendingAppointmentsClient = () => {
-    const { modalActive } = useSelector(state => state.modals)
+    const { modalActive, modalAuxActive } = useSelector(state => state.modals)
     const dispatch = useDispatch()
     const appointments = [
         {
@@ -74,11 +75,20 @@ const PendingAppointmentsClient = () => {
         dispatch(setModalActive())
     }
 
+    const handleReportAppointment = () => {
+        dispatch(setModalAuxActive())
+    }
+
     return (
         <section className='pending-appointments-client'>
             {
                 modalActive && (
-                    <CancelAppointment/>
+                    <CancelAppointment />
+                )
+            }
+            {
+                modalAuxActive && (
+                    <ReportAppointment />
                 )
             }
             <h1 className='pending-appointments-client__title'>Citas pendientes para está semana</h1>
@@ -93,7 +103,7 @@ const PendingAppointmentsClient = () => {
                     appointments.map((item, index) => (
                         <tr key={index + 1} className='pending-appointments-client__tr'>
                             <td className='pending-appointments-client__td'>
-                                <figure>
+                                <figure onClick={handleReportAppointment}>
                                     <img src="/User/exclamation-mark-svgrepo-com.svg" alt="" />
                                     <figcaption>Da click aquí para reportar en caso tal de que la cita haya sido incumplida.</figcaption>
                                 </figure>
@@ -101,7 +111,9 @@ const PendingAppointmentsClient = () => {
                             </td>
                             <td className='pending-appointments-client__td'>{item.date}</td>
                             <td className='pending-appointments-client__td link'><a href="">Link</a></td>
-                            <td className='pending-appointments-client__td cancel-appointment' onClick={handleCancelAppointment}>Cancelar cita</td>
+                            <td className='pending-appointments-client__td cancel-appointment' onClick={handleCancelAppointment}>
+                                Cancelar cita
+                            </td>
                         </tr>
                     ))
                 }

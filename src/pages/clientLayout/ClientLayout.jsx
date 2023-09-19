@@ -6,12 +6,13 @@ import { useSelector } from 'react-redux'
 
 const ClientLayout = () => {
   const [menuMobileActive, setMenuMobileActive] = useState(false)
-  const { modalActive } = useSelector(state => state.modals)
+  const { modalActive, modalAuxActive } = useSelector(state => state.modals)
 
   const validation = () => {
     switch (true) {
       case modalActive: return true;
       case menuMobileActive: return true;
+      case modalAuxActive: return true;
       default: return false;
     }
   }

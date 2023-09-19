@@ -55,7 +55,8 @@ const RegisterForm = ({ setStep }) => {
                 userRole,
                 verifiedSpecialty: false,
                 loginMethod: authGoogle ? "GOOGLE" : "EMAIL",
-                weeklyAgenda: []
+                weeklyAgenda: [],
+                stripe: []
             }
             await registerInFirebase(dataPsychologist, data.email, data.password)
             setChecking(false)
