@@ -38,6 +38,7 @@
         color: $azure-blue;
         font-weight: 500;
     }
+
     &__form-container {
         width: 100%;
         display: flex;
@@ -46,11 +47,12 @@
     }
 
     &__label {
-        display:flex;
+        display: flex;
         flex-direction: column;
         gap: 0.3rem;
+
         &--text {
-            font-family:  $font-monserrat;
+            font-family: $font-monserrat;
             color: $dark-azure-blue;
         }
     }
@@ -78,6 +80,13 @@
         grid-area: button;
         margin-top: 0.5rem;
         cursor: pointer;
+    }
+
+    &__alert {
+        font-family: $font-poppins-core;
+        font-size: 11px;
+        color: #797979;
+        margin-left: 12px;
     }
 
 }
@@ -110,6 +119,7 @@
 
         &__label {
             font-size: 18px;
+
             &--text {
                 margin-left: 5px;
             }
@@ -125,5 +135,8 @@
             }
         }
 
+        &__alert {
+            font-size: 13px;
+        }
     }
 }
