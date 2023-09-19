@@ -5,11 +5,14 @@ import { useNavigate } from 'react-router'
 import { reset } from '../../store/slides/auth/auth'
 import { logout } from '../../store/slides/user/user'
 import { Link } from 'react-router-dom'
+import NotificationClient from '../../components/modales/notificationClient/NotificationClient'
+import { setModalActive } from '../../store/slides/modals/modals'
 
 const ClientProfile = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const { appointmentsPerMonth, cardNumber, displayName, subscription, email } = useSelector(state => state.user)
+    const { modalActive } = useSelector(state => state.modals)
 
     const handleLogout = () => {
         dispatch(reset())
@@ -24,6 +27,10 @@ const ClientProfile = () => {
             case "GOLD": return "Oro"
             default: return ""
         }
+    }
+
+    const handleNotification = () => {
+        dispatch(setModalActive())
     }
 
     const notifications = [
@@ -44,11 +51,14 @@ const ClientProfile = () => {
         },
     ]
 
-
-
     return (
-        <section className='client-profile'>
-            <div className='client-profile__profile'>
+        < section className='client-profile' >
+            {
+                modalActive && (
+                    <NotificationClient/>
+                )
+            }
+            <div div className='client-profile__profile' >
                 <div className='client-profile__info-container'>
                     <div className='client-profile__info'>
                         <h2 className='client-profile__info-title'>Nombre Completo</h2>
@@ -81,13 +91,13 @@ const ClientProfile = () => {
                     <p className='client-profile__logout'>Cerrar Sesión</p>
                     <img className='client-profile__logout-icon' src="/User/logout.svg" alt="" />
                 </div>
-            </div>
+            </div >
             <div className='client-profile__notifications'>
                 <h1 className='client-profile__title'>Notificaciones</h1>
                 <ul className='client-profile__notifications-list'>
                     {
                         notifications.map((notification, index) => (
-                            <li key={index + 1} className='client-profile__container'>
+                            <li key={index + 1} className='client-profile__container' onClick={()=> handleNotification()}>
                                 <section className={
                                     `client-profile__notifications-item
                                     ${notification.isAccepted
@@ -110,7 +120,7 @@ const ClientProfile = () => {
                     }
                 </ul>
             </div>
-        </section>
+        </section >
     )
 }
 
