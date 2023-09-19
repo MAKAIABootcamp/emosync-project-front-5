@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { reset } from '../../store/slides/auth/auth'
 import { logout } from '../../store/slides/user/user'
-import { Link } from 'react-router-dom'
 import NotificationClient from '../../components/modales/notificationClient/NotificationClient'
 import { setModalActive } from '../../store/slides/modals/modals'
 
@@ -58,7 +57,8 @@ const ClientProfile = () => {
                     <NotificationClient/>
                 )
             }
-            <div div className='client-profile__profile' >
+
+            <div className='client-profile__profile' >
                 <div className='client-profile__info-container'>
                     <div className='client-profile__info'>
                         <h2 className='client-profile__info-title'>Nombre Completo</h2>
