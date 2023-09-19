@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import { setModalActive } from '../../../store/slides/modals/modals'
 import { useNavigate } from 'react-router-dom'
 
-const PsychologistInfo = ({ psychologistInfo: { displayName, description, specialty, photo } }) => {
+const PsychologistInfo = ({ psychologistInfo: { displayName, description, specialty, photo, id } }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -14,7 +14,7 @@ const PsychologistInfo = ({ psychologistInfo: { displayName, description, specia
 
   const scheduleAppointmentModal = () => {
     dispatch(setModalActive())
-    navigate("/schedule-appointment/1")
+    navigate(`/schedule-appointment/${id}`)
   }
 
   const handleDisplayName = () => {
