@@ -73,7 +73,7 @@ const ProfilePsycho = () => {
                 </section>
                 <section className="ProfilePsycho__description">
                     <h3>Descripcion</h3>
-                    <p>{userInfo.description}</p>
+                    <p>{userInfo.description == "" ? "You can write a description to improve your profile": userInfo.description}</p>
                 </section>
                 <button className="ProfilePsycho__goEdit">Editar Informacion</button>
             </article>

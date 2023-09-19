@@ -4,12 +4,10 @@ import HeaderPsycho from '../../../components/headerPsycho/HeaderPsycho'
 import { Calendar, dayjsLocalizer } from 'react-big-calendar'
 import dayjs from 'dayjs'
 const localizer = dayjsLocalizer(dayjs)
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Input } from "@nextui-org/react";
-
-//import googleCalendar from '../../../services/googleCalendar/googleCalendar'
-//import { getGoogleCalendarEvents } from '../../../services/googleServices/getGoogleCalendar'
-//import { createGoogleCalendarEvent } from '../../../services/googleServices/createGoogleCalendarEvent'
-
+import apiCalendar, { listAllEvents } from '../../../googleC';
+import Loader from '../../../components/loader/Loader'
+import ModalShowEvent from '../../../components/modalsPsycho/modalShowEvent/ModalShowEvent'
+import { modalAddStripe } from '../../../components/modalsPsycho/modalAddStrype/ModalAddStripe'
 
 
 
@@ -17,75 +15,100 @@ import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDi
 
 
 const CalendarPsycho = () => {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
   const [modalPlacement, setModalPlacement] = React.useState("auto");
   const email = 'sebasruiz15@gmail.com'
   const [infoEvent, setInfoEvent] = useState([]);
+  const [calendarState, setCalendarState]= useState(false)
+  const [openModal, setOpenModal] = useState(false)
+  const [modalEvent, setModalEvent] = useState(false)
+  const [events, setEvents] = useState([ ]);
+const  [hola, setHola] = useState(false)
+const  [hola2, setHola2] = useState(false)
+  useEffect(() => {
+      apiCalendar.handleAuthClick()
+     .then(response => {console.log(response)
+      setCalendarState(true)
+       listAllEvents()
+         .then(response2=> {
+          const {result} = response2
+          console.log(result.items);
+          setEvents((prevEvents) => [
+            ...prevEvents,
+            ...result.items.map((item) => ({
+              title: item.summary,
+              start: new Date(item.start.dateTime),
+              end: new Date(item.end.dateTime),
+              id: item.id
 
-  const [events, setEvents] = useState([
-    {
-      title: 'Evento 1',
-      start: new Date('2023-09-12T13:45:00-05:00'),
-      end: new Date('2023-09-12T14:00:00-05:00')
-    },
-    {
-      title: 'Evento 2',
-      start: new Date(2023, 8, 15),
-      end: new Date(2023, 8, 16),
-    },
-  ]);
-  // const fetchGoogleCalendarEvents = async () => {
-  //   try {
-  //     const googleEvents = await getGoogleCalendarEvents(email);
-  //     const combinedEvents = [...events, ...googleEvents];
-  //     setEvents(combinedEvents);
-  //   } catch (error) {
-  //     console.error('Error al obtener eventos de Google Calendar en el componente:', error);
-  //   }
-  // }
+            })),
+          ]);
+          setHola(true)
+        }
+          )
+    })
+   }, [])
 
-  // useEffect(() => {
-  //   fetchGoogleCalendarEvents();
-  // }, [])
+   useEffect(() => {
+    if(hola){
+      setHola2(true)
+    }
+    console.log(events);
+ 
+   }, [hola])
+   
 
 
 
+
+   
   const handleSelectSlot = (slotInfo) => {
-
-    onOpen()
     setInfoEvent(slotInfo)
   };
 
-
-
-
   const handleSelectEvent = (event) => {
     console.log(event);
+   
+    setModalEvent(event)
+    setOpenModal(true)
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const newEvent = {
-      title: e.target[0].value,
-      start: infoEvent.start,
-      end: infoEvent.end,
-    };
-    setEvents([...events, newEvent]);
-    // Agrega el nuevo evento a Google Calendar
-    // try {
-    //   const createdEvent = await createGoogleCalendarEvent(email, newEvent);
-    //   // Actualiza el estado de eventos con el nuevo evento
-    //   setEvents([...events, createdEvent]);
-    // } catch (error) {
-    //   console.error('Error al crear el evento en Google Calendar:', error);
-    // }
+  }
+
+  const handleAddStripe = () =>{
+    modalAddStripe()
   }
   return (
     <main className='CalendarPsycho__father'>
       <HeaderPsycho />
-  
+      {hola2 &&
       <div className='CalendarPsycho'>
+         <section className='CalendarPsycho__striper'>
+           <section>
+            <span>Horario</span>   <figure onClick={handleAddStripe}><img src="/Psychologist/plus.svg" alt="plus"/></figure>
+           </section>
+           <div>
+            <h3>Lunes</h3>
+            <article>
+             <figure><img src="/Psychologist/calendar.svg" alt="calendar"/></figure> 
+              <span>10:00 am - 12:00 pm </span>
+              <figure><img src="/Psychologist/delete.svg" alt="delete"/></figure> 
+            </article>
+            <article>
+             <figure><img src="/Psychologist/calendar.svg" alt="calendar"/></figure> 
+              <span>10:00 am - 12:00 pm </span>
+              <figure><img src="/Psychologist/delete.svg" alt="delete"/></figure> 
+            </article>
+            <article>
+             <figure><img src="/Psychologist/calendar.svg" alt="calendar"/></figure> 
+              <span>10:00 am - 12:00 pm </span>
+              <figure><img src="/Psychologist/delete.svg" alt="delete"/></figure> 
+            </article>
 
+           </div>
+         </section>
 
         <section>
           <Calendar className='CalendarPsycho__calendar'
@@ -97,40 +120,16 @@ const CalendarPsycho = () => {
             onSelectSlot={handleSelectSlot}
             onSelectEvent={handleSelectEvent}
           /></section>
+      {
+        openModal &&
+        <ModalShowEvent  event={modalEvent} close={setOpenModal}/>
+      }
+       
       </div>
+    
 
-      <Modal
-        isOpen={isOpen}
-        placement={modalPlacement}
-        onOpenChange={onOpenChange}
-      >
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <form onSubmit={handleSubmit}>
-                <ModalHeader className="flex flex-col gap-1">Crear evento</ModalHeader>
-                <ModalBody>
-                  <Input
-                  className='modal__input'
-                    label="Enter the name of the event"
-                    placeholder="Nombre del evento"
-                    type="text"
-                    variant="bordered" />
-                </ModalBody>
-                <ModalFooter className='modal__Psycho'>
-                  <Button  className='bg-[#c3c3c3] text-white rounded-large hover:bg-light-gray' variant="light" onPress={onClose} >
-                    Cerrar
-                  </Button>
-                  <Button  className="bg-azure-blue text-white hover:bg-light-gray" onPress={onClose} type='submit' >
-                    Crear
-                  </Button>
-
-                </ModalFooter>
-              </form>
-            </>
-          )}
-        </ModalContent>
-      </Modal>
+ }
+     
 
 
     </main>
