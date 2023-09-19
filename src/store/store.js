@@ -4,6 +4,7 @@ import { authSlice } from './slides/auth/auth';
 import { userSlice } from './slides/user/user';
 import { psychoSlice } from './slides/psychologist/psycho';
 import { modalsSlice } from './slides/modals/modals';
+import { adminSlice } from './slides/admin/adminReducer';
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     psycho: psychoSlice.reducer,
     modals: modalsSlice.reducer,
     [firebaseApi.reducerPath]: firebaseApi.reducer,
+    admin: adminSlice.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(firebaseApi.middleware)
 });

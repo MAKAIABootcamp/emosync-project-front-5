@@ -21,27 +21,6 @@ export const firebaseApi = createApi({
         }
       }
     }),
-    getPsychologists: builder.query({
-      providesTags: ['psychologists'],
-      async queryFn() {
-        const deliveryRef = collection(firebaseDB, "users");
-        try {
-          const queryPsychologists = await query(deliveryRef, where("userRole", "==", "PSYCHOLOGIST"), where("isVerified", "==", true))
-          const dataPsychologists = await getDocs(queryPsychologists);
-          let psychologists = []
-          dataPsychologists?.forEach((doc) => {
-            psychologists.push({
-              id: doc.id,
-              ...doc.data()
-            });
-          })
-          return { data: psychologists }
-        } catch (error) {
-          console.log(error);
-          return error
-        }
-      }
-    }),
     editInfoUser: builder.mutation({
       async queryFn({ formData, key }) {
         try {
@@ -61,6 +40,47 @@ export const firebaseApi = createApi({
       },
       invalidatesTags: ['user']
     }),
+    getVerifDocs: builder.query({
+      providesTags: ['Docs', 'defaultCache'],
+      async queryFn() {
+        try {
+          const querySnapshot = await getDocs(collection(firebaseDB, `verificationDocuments`));
+          let docsArray = [];
+          querySnapshot.forEach((doc) => {
+            //console.log(doc.id, " => ", doc.data());
+            docsArray.push({
+              id: doc.id,
+              ...doc.data()
+            })
+          });
+          return { data: docsArray }
+        } catch (error) {
+          console.log(error);
+          return error
+        }
+      }
+    }),
+    getVerifReports: builder.query({
+      providesTags: ['Reports', 'defaultCache'],
+      async queryFn() {
+        try {
+          const querySnapshot = await getDocs(collection(firebaseDB, `appointments`));
+          let reportsArray = [];
+          querySnapshot.forEach((doc) => {
+            //console.log(doc.id, " => ", doc.data());
+            reportsArray.push({
+              id: doc.id,
+              ...doc.data()
+            })
+          });
+          return { data: reportsArray }
+        } catch (error) {
+          console.log(error);
+          return error
+        }
+      }
+    }),
+
   })
 
 })
@@ -68,6 +88,6 @@ export const firebaseApi = createApi({
 export const {
   useGetUserByIdQuery,
   useEditInfoUserMutation,
-  useGetPsychologistsQuery
-} =
-  firebaseApi
+  useGetVerifDocsQuery,
+  useGetVerifReportsQuery,
+} = firebaseApi

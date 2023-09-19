@@ -21,6 +21,8 @@ import ProfilePsycho from '../pages/psychology/profilePsycho/ProfilePsycho'
 import EditProfileClient from '../pages/editProfileClient/EditProfileClient'
 import ScheduleAppointment from '../pages/scheduleAppointment/scheduleAppointment'
 import PendingAppointmentsClient from '../pages/pendingAppointmentsClient/pendingAppointmentsClient'
+import AdminFeed from '../pages/adminViews/adminFeed/AdminFeed'
+import AdminConfig from '../pages/adminViews/adminConfig/AdminConfig'
 
 
 const Router = () => {
@@ -100,7 +102,8 @@ const Router = () => {
               userRole === "ADMIN" && (
                 <>
                   <Route path='/'>
-                    <Route path='home' />
+                    <Route path='home' element={<AdminFeed />} />
+                    <Route path='config' element={<AdminConfig />} />
                   </Route>
                 </>
               )

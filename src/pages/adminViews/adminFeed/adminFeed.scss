@@ -1,0 +1,245 @@
+@import "../../../assets/styles/variables.scss";
+// @import "../../../assets/styles/reset.scss";
+
+.AdminFeedContainer {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+
+  & .AdminFeedBody {
+    height: 100vh;
+    width: 95vw;
+    display: flex;
+    flex-direction: column;
+    font-family: $font-poppins-core;
+    padding: 1vh 1vw;
+
+    &__info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 10vh;
+      //border: red solid 1px;
+      padding: 1vh 2vw;
+
+      &__welcome {
+        font-size: calc(14px + 2vh);
+        font-weight: bold;
+      }
+
+
+      &__picture {
+        height: 100%;
+
+        & img {
+          height: 100%;
+          border-radius: 100%;
+        }
+      }
+    }
+
+    &__tables {
+      padding: 1vh 2vw;
+      width: 100%;
+      height: 90vh;
+      display: flex;
+      justify-content: space-between;
+
+      &__psychologyst {
+        width: 60%;
+        //border: blue solid 1px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 1vh;
+        font-size: calc(6px + 0.5vw);
+
+        & p {
+          font-size: calc(12px + 0.5vw);
+        }
+
+        & .tablePsy {
+          border: 1px solid $light-gray;
+          box-shadow: $box-shadow-square;
+          border-radius: 20px;
+          height: 100%;
+          width: 100%;
+          border-collapse: collapse;
+
+          &__head {
+            //border: red solid 1px;
+            border-radius: 10px;
+
+          }
+
+          &__body {
+            //border: blue solid 1px;
+
+
+            &__ind {
+              width: 100%;
+              height: 10vh;
+
+              //border: orange solid 1px;
+              & td {
+                //border: red solid 1px;
+                height: 7vh;
+                text-align: center;
+
+                & img {
+                  height: 80%;
+                }
+
+
+                & .actionCell {
+                  display: flex;
+                  flex-wrap: wrap;
+                  justify-content: space-evenly;
+
+                  & .textYes {
+                    padding: 5px;
+                    background-color: $azure-blue;
+                    border-radius: 10px;
+                    color: white;
+                    cursor: pointer;
+                  }
+
+                  & .textNo {
+                    padding: 5px;
+                    background-color: $orange;
+                    border-radius: 10px;
+                    color: white;
+                    cursor: pointer;
+                  }
+                }
+              }
+            }
+
+            &__fin {
+              height: 100%;
+            }
+          }
+        }
+      }
+
+      &__report {
+        width: 30%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 1vh;
+        font-size: calc(6px + 0.5vw);
+
+        & p {
+          font-size: calc(12px + 0.5vw);
+        }
+
+        & .tableRpt {
+          border: 1px solid $light-gray;
+          box-shadow: $box-shadow-square;
+          border-radius: 20px;
+          height: 100%;
+          width: 100%;
+          border-collapse: collapse;
+
+          &__head {
+            border-radius: 10px;
+          }
+
+          &__body {
+            &__ind {
+              width: 100%;
+              height: 10vh;
+
+              & td {
+                height: 7vh;
+                text-align: center;
+
+                & .detailsFilled {
+                  cursor: pointer;
+                }
+
+                & img {
+                  height: 80%;
+                }
+              }
+            }
+          }
+        }
+      }
+
+
+
+    }
+  }
+}
+
+/* estilos especiales para arreglar la tabla*/
+.tablePsy {
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid transparent;
+  border-radius: 20px;
+
+}
+
+.tablePsy td,
+.tablePsy th {
+  border: 1px solid $light-gray;
+  border-left: 1px solid transparent;
+  border-top: 1px solid transparent;
+  padding: 8px;
+}
+
+.tablePsy thead tr th:last-child {
+  border-right: 1px solid transparent;
+}
+
+.tablePsy tbody tr:last-child td {
+  border-bottom: 1px solid transparent;
+}
+
+.tablePsy tbody tr td:last-child {
+  border-right: 1px solid transparent;
+}
+
+// version para la otra tabla
+.tableRpt {
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid transparent;
+  border-radius: 20px;
+
+}
+
+.tableRpt td,
+.tableRpt th {
+  border: 1px solid $light-gray;
+  border-left: 1px solid transparent;
+  border-top: 1px solid transparent;
+  padding: 8px;
+}
+
+.tableRpt thead tr th:last-child {
+  border-right: 1px solid transparent;
+}
+
+.tableRpt tbody tr:last-child td {
+  border-bottom: 1px solid transparent;
+}
+
+.tableRpt tbody tr td:last-child {
+  border-right: 1px solid transparent;
+}
+
+.detailsFilled {
+  cursor: pointer;
+}
+
+//estilos para el swal
+.no-border {
+  border: none !important;
+  /* Estilo para quitar el borde */
+}
