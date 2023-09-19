@@ -67,7 +67,6 @@ const fechaFormateada = obtenerFechaFormateada()
 
          { nameArray.length &&
          <h2 className='feed__welcome__title'>Bienvenid@, {nameArray[0]}</h2>}
-         <button onClick={()=>handleItemClick('sign-in')}>calendar</button>
           <figure className='feed__welcome__advicer'>
             <img src="/Psychologist/infografia.jpg" alt="infografia" />
           </figure>
