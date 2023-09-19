@@ -4,10 +4,10 @@ import PsychologistCard from '../../components/psychologistCard/PsychologistCard
 import { useSelector } from 'react-redux'
 import PsychologistInfo from '../../components/modales/psychologistInfo/PsychologistInfo'
 import { useGetPsychologistsQuery } from '../../store/api/firebaseApi'
+import { getPsychologists } from '../../services/getPsychologists'
 
 const ClientFeed = () => {
   const { modalActive } = useSelector(state => state.modals)
-  const user = useSelector(state => state.user)
   const psicologos = [
     {
       name: "Juliana Sánchez Sáenz ",
@@ -120,11 +120,20 @@ const ClientFeed = () => {
       image: "https://res.cloudinary.com/dd3qzm4in/image/upload/v1692829468/deliveryApp/client-1.jpg"
     }
   ]
-  const { data: psychologists, isSuccess } = useGetPsychologistsQuery()
+  const [psychologists, setPsychologists] = useState([])
+  const [filteredData, setFilteredData] = useState([])
 
   useEffect(() => {
+    validateData()
   }, [])
 
+  const validateData = async () => {
+    const { data } = await getPsychologists()
+    const aux = data;
+    aux.forEach((item) => item.specialty = !item.verifiedSpecialty ? "Psicólog@ General" : item.specialty)
+    setPsychologists(aux)
+    setFilteredData(aux)
+  }
 
   return (
     <section className='client-feed'>
@@ -141,7 +150,7 @@ const ClientFeed = () => {
       </div>
       <div className='client-feed__cards-container'>
         {
-          psicologos.map((psychologist, index) => (
+          filteredData.map((psychologist, index) => (
             <PsychologistCard key={index + 1} psychologist={psychologist} />
           ))
         }
