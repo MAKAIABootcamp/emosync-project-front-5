@@ -1,8 +1,12 @@
 import React from 'react'
 import "./pendingAppointmentsClient.scss"
+import { useDispatch, useSelector } from 'react-redux'
+import CancelAppointment from '../../components/modales/cancelAppointment/CancelAppointment'
+import { setModalActive } from '../../store/slides/modals/modals'
 
 const PendingAppointmentsClient = () => {
-
+    const { modalActive } = useSelector(state => state.modals)
+    const dispatch = useDispatch()
     const appointments = [
         {
             name: "Juliana Sánchez Sáenz",
@@ -65,9 +69,18 @@ const PendingAppointmentsClient = () => {
             date: "7 Oct, 2:30pm",
         },
     ]
-    
+
+    const handleCancelAppointment = () => {
+        dispatch(setModalActive())
+    }
+
     return (
         <section className='pending-appointments-client'>
+            {
+                modalActive && (
+                    <CancelAppointment/>
+                )
+            }
             <h1 className='pending-appointments-client__title'>Citas pendientes para está semana</h1>
             <table className='pending-appointments-client__table'>
                 <tr className='pending-appointments-client__tr'>
@@ -88,7 +101,7 @@ const PendingAppointmentsClient = () => {
                             </td>
                             <td className='pending-appointments-client__td'>{item.date}</td>
                             <td className='pending-appointments-client__td link'><a href="">Link</a></td>
-                            <td className='pending-appointments-client__td cancel-appointment'>Cancelar cita</td>
+                            <td className='pending-appointments-client__td cancel-appointment' onClick={handleCancelAppointment}>Cancelar cita</td>
                         </tr>
                     ))
                 }

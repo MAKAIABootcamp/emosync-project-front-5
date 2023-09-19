@@ -23,19 +23,19 @@ const ConfirmAppointment = () => {
     }
 
     return (
-        <article className='confirm_appointment'>
-            <section className='confirm_appointment__container'>
-                <h1 className='confirm_appointment__title'>¿La información está correcta?</h1>
-                <p className='confirm_appointment__text'>Si es asi, proceda a confirmar la cita</p>
+        <article className='confirm-appointment'>
+            <section className='confirm-appointment__container'>
+                <h1 className='confirm-appointment__title'>¿La información está correcta?</h1>
+                <p className='confirm-appointment__text'>Si es asi, proceda a confirmar la cita</p>
                 {
                     appointmentsPerMonth >= alertValidate && (
-                        <p className='confirm_appointment__alert'>Le recordamos que ya ha cumplido con la cantidad de citas gratis durante el mes
+                        <p className='confirm-appointment__alert'>Le recordamos que ya ha cumplido con la cantidad de citas gratis durante el mes
                             según su suscripción, está cita será cobrada en el momento que sea confirmada.</p>
                     )
                 }
-                <div className='confirm_appointment__btn-container'>
-                    <button className='confirm_appointment__confirm'>Confirmar</button>
-                    <button className='confirm_appointment__cancel' onClick={() => dispatch(setModalActive())}>Cancelar</button>
+                <div className='confirm-appointment__btn-container'>
+                    <button className='confirm-appointment__confirm'>Confirmar</button>
+                    <button className='confirm-appointment__cancel' onClick={() => dispatch(setModalActive())}>Cancelar</button>
                 </div>
             </section>
         </article>
