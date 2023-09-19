@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./clientFeed.scss"
 import PsychologistCard from '../../components/psychologistCard/PsychologistCard'
 import { useSelector } from 'react-redux'
 import PsychologistInfo from '../../components/modales/psychologistInfo/PsychologistInfo'
+import { useGetPsychologistsQuery } from '../../store/api/firebaseApi'
 
 const ClientFeed = () => {
   const { modalActive } = useSelector(state => state.modals)
@@ -119,6 +120,11 @@ const ClientFeed = () => {
       image: "https://res.cloudinary.com/dd3qzm4in/image/upload/v1692829468/deliveryApp/client-1.jpg"
     }
   ]
+  const { data: psychologists, isSuccess } = useGetPsychologistsQuery()
+
+  useEffect(() => {
+  }, [])
+
 
   return (
     <section className='client-feed'>
@@ -136,7 +142,7 @@ const ClientFeed = () => {
       <div className='client-feed__cards-container'>
         {
           psicologos.map((psychologist, index) => (
-            <PsychologistCard key={index + 1} psychologist={psychologist}/>
+            <PsychologistCard key={index + 1} psychologist={psychologist} />
           ))
         }
       </div>

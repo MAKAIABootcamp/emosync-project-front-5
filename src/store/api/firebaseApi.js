@@ -1,5 +1,5 @@
 import { createApi, fakeBaseQuery } from '@reduxjs/toolkit/query/react';
-import { getDocs, getDoc, addDoc, doc, collection, serverTimestamp, updateDoc } from "firebase/firestore"
+import { getDocs, getDoc, addDoc, doc, collection, serverTimestamp, updateDoc, query, where } from "firebase/firestore"
 import { firebaseDB } from '../../firebase/firebaseConfig';
 import { getAuth, updateEmail } from "firebase/auth";
 
@@ -15,6 +15,27 @@ export const firebaseApi = createApi({
           const userSnapshot = await getDoc(userRef);
           const user = userSnapshot.data();
           return { data: user }
+        } catch (error) {
+          console.log(error);
+          return error
+        }
+      }
+    }),
+    getPsychologists: builder.query({
+      providesTags: ['psychologists'],
+      async queryFn() {
+        const deliveryRef = collection(firebaseDB, "users");
+        try {
+          const queryPsychologists = await query(deliveryRef, where("userRole", "==", "PSYCHOLOGIST"), where("isVerified", "==", true))
+          const dataPsychologists = await getDocs(queryPsychologists);
+          let psychologists = []
+          dataPsychologists?.forEach((doc) => {
+            psychologists.push({
+              id: doc.id,
+              ...doc.data()
+            });
+          })
+          return { data: psychologists }
         } catch (error) {
           console.log(error);
           return error
@@ -40,7 +61,6 @@ export const firebaseApi = createApi({
       },
       invalidatesTags: ['user']
     }),
- 
   })
 
 })
@@ -48,6 +68,6 @@ export const firebaseApi = createApi({
 export const {
   useGetUserByIdQuery,
   useEditInfoUserMutation,
- } =
+  useGetPsychologistsQuery
+} =
   firebaseApi
-
