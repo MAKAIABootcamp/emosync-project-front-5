@@ -1,7 +1,7 @@
 @import "../../assets/styles/reset.scss";
 
 .layout {
-    height: 100vh;
+    height: calc(100vh - 63px);
     max-height: 100%;
     width: 100%;
 

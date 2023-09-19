@@ -1,5 +1,5 @@
 import { createApi, fakeBaseQuery } from '@reduxjs/toolkit/query/react';
-import { getDocs, getDoc, addDoc, doc, collection, serverTimestamp, updateDoc } from "firebase/firestore"
+import { getDocs, getDoc, addDoc, doc, collection, serverTimestamp, updateDoc, query, where } from "firebase/firestore"
 import { firebaseDB } from '../../firebase/firebaseConfig';
 import { getAuth, updateEmail } from "firebase/auth";
 
@@ -91,4 +91,3 @@ export const {
   useGetVerifDocsQuery,
   useGetVerifReportsQuery,
 } = firebaseApi
-

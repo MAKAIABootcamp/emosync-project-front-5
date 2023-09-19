@@ -3,6 +3,7 @@ import { firebaseApi } from './api/firebaseApi';
 import { authSlice } from './slides/auth/auth';
 import { userSlice } from './slides/user/user';
 import { psychoSlice } from './slides/psychologist/psycho';
+import { modalsSlice } from './slides/modals/modals';
 import { adminSlice } from './slides/admin/adminReducer';
 
 export const store = configureStore({
@@ -10,6 +11,7 @@ export const store = configureStore({
     auth: authSlice.reducer,
     user: userSlice.reducer,
     psycho: psychoSlice.reducer,
+    modals: modalsSlice.reducer,
     [firebaseApi.reducerPath]: firebaseApi.reducer,
     admin: adminSlice.reducer,
   },

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import InputMask from "react-input-mask";
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,7 +14,12 @@ const RegisterForm = ({ setStep }) => {
     const dispatch = useDispatch()
     const { register, handleSubmit, formState: { errors }, reset } = useForm()
     const [checking, setChecking] = useState(false)
+    const [error, setError] = useState(false)
     const navigate = useNavigate()
+
+    useEffect(() => {
+        validateErrors()
+    }, [errors])
 
     const onSubmit = async (data) => {
         setChecking(true)
@@ -50,7 +55,8 @@ const RegisterForm = ({ setStep }) => {
                 userRole,
                 verifiedSpecialty: false,
                 loginMethod: authGoogle ? "GOOGLE" : "EMAIL",
-                weeklyAgenda: []
+                weeklyAgenda: [],
+                stripe: []
             }
             await registerInFirebase(dataPsychologist, data.email, data.password)
             setChecking(false)
@@ -67,14 +73,14 @@ const RegisterForm = ({ setStep }) => {
                     text: 'Ese correo ya está en uso, prueba con otro!',
                 })
             } else {
-                localStorage.setItem("infoUser", JSON.stringify({userRole, key: resp}))
+                localStorage.setItem("infoUser", JSON.stringify({ userRole, key: resp }))
                 await dispatch(addNewUser(resp, data))
                 navigate("/welcome")
             }
             return
         }
 
-        localStorage.setItem("infoUser", JSON.stringify({userRole, key}))
+        localStorage.setItem("infoUser", JSON.stringify({ userRole, key }))
         await dispatch(addNewUser(key, data))
         navigate("/welcome")
     }
@@ -90,6 +96,71 @@ const RegisterForm = ({ setStep }) => {
         }
         return true;
     };
+
+    const formValidate = () => {
+        let message = '';
+        const inputs = inputsValidate();
+        inputs.forEach(item => {
+            if (errors[item]) {
+                console.log(message)
+                message = `${message} ${inputsName(item)}`
+            }
+        })
+        !message && setError(false)
+        return message;
+    }
+
+    const inputsValidate = () => {
+        let inputs = ['name', 'email', 'password'];
+        if (userRole === "CLIENT") {
+            inputs = [...inputs, 'subscription', 'cardName', 'cardNumber', 'expeditionDate', 'CVV'];
+        } else {
+            inputs = [...inputs, 'photo', 'specialty', 'typeOfBankAccount', 'bank', 'bankAccount'];
+        }
+        return inputs
+    }
+
+    const inputsName = (name) => {
+        switch (name) {
+            case "name": return "Nombre completo"
+            case "email": return "Correo Electrónico"
+            case "password": return "Contraseña"
+            case "subscription": return "Tipo de Suscripción"
+            case "cardName": return "Nombre de la tarjeta"
+            case "cardNumber": return "Número de la tarjeta"
+            case "expeditionDate": return "Fecha de expiración"
+            case "CVV": return "CVV"
+            case "photo": return "Foto de perfil"
+            case "specialty": return "Profesión"
+            case "typeOfBankAccount": return "Tipo de cuenta"
+            case "bank": return "Banco"
+            case "bankAccount": return "Número de cuenta"
+            default: return ""
+        }
+    }
+
+    const validateErrors = () => {
+        if (errors?.name ||
+            errors?.email ||
+            errors?.password ||
+            errors?.subscription ||
+            errors?.cardName ||
+            errors?.cardNumber ||
+            errors?.expeditionDate ||
+            errors?.CVV ||
+            errors?.photo ||
+            errors?.specialty ||
+            errors?.typeOfBankAccount ||
+            errors?.bank ||
+            errors?.bankAccount
+        ) {
+            setError(true)
+        } else {
+            setError(false)
+        }
+    }
+
+
 
     return (
         <>
@@ -212,7 +283,7 @@ const RegisterForm = ({ setStep }) => {
                                     {...register("photo", { required: userRole === "PSYCHOLOGIST" })} />
                             </label>
                             <label className='register__label'>
-                                Especialidad
+                                Profesión
                                 <input
                                     className='register__input'
                                     type="text"
@@ -249,6 +320,11 @@ const RegisterForm = ({ setStep }) => {
                 }
                 <button className='register__btn'>Registrarse</button>
             </form>
+            {
+                error && (
+                    <div className='register__message-error'>Los siguientes campos estan vacios o incompletos: {formValidate()}</div>
+                )
+            }
         </>
     )
 }
