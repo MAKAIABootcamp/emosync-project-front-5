@@ -35,17 +35,17 @@ const ClientProfile = () => {
     const notifications = [
         {
             psychologist: "Juliana Sanchez",
-            isAccepted: true,
+            status: "ACCEPTED",
             isView: false
         },
         {
             psychologist: "Juliana Sanchez",
-            isAccepted: false,
+            status: "REJECTED",
             isView: false
         },
         {
             psychologist: "Juliana Sanchez",
-            isAccepted: true,
+            status: "ACCEPTED",
             isView: true
         },
     ]
@@ -100,7 +100,7 @@ const ClientProfile = () => {
                             <li key={index + 1} className='client-profile__container' onClick={()=> handleNotification()}>
                                 <section className={
                                     `client-profile__notifications-item
-                                    ${notification.isAccepted
+                                    ${notification.status === "ACCEPTED"
                                         ? "client-profile__accepted"
                                         : "client-profile__rejected"}
                                     ${notification.isView ? "client-profile__viewed" : ""}

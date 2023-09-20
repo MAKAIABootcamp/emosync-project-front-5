@@ -81,7 +81,7 @@
 
     &__input {
         border: none;
-        outline: none;
+        outline: none !important;
         font-family: $font-poppins-core;
         width: 100%;
     }
@@ -99,7 +99,7 @@
         width: 40%;
         font-family: $font-poppins-core;
         padding: 7px;
-        background-color: $orange;
+        background-color: $orange !important;
         border: none;
         border-radius: 20px;
         color: white;
@@ -181,7 +181,7 @@
 
         &__input {
             border: none;
-            outline: none;
+            outline: none !important;
             font-family: $font-poppins-core;
             width: 100%;
             font-size: 15px;

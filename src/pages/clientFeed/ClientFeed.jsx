@@ -4,6 +4,8 @@ import PsychologistCard from '../../components/psychologistCard/PsychologistCard
 import { useSelector } from 'react-redux'
 import PsychologistInfo from '../../components/modales/psychologistInfo/PsychologistInfo'
 import { getPsychologists } from '../../services/getPsychologists'
+import EmptyState from '../../components/emptyState/EmptyState'
+import Loader from '../../components/loader/Loader'
 
 const ClientFeed = () => {
   const { modalActive } = useSelector(state => state.modals)
@@ -122,17 +124,21 @@ const ClientFeed = () => {
   const [psychologists, setPsychologists] = useState([])
   const [filteredData, setFilteredData] = useState([])
   const [psychologistInfo, setPsychologistInfo] = useState({})
+  const [isSearching, setIsSearching] = useState(false)
+  const [isChecking, setIsChecking] = useState(false)
 
   useEffect(() => {
     validateData()
   }, [])
 
   const validateData = async () => {
+    setIsChecking(true)
     const { data } = await getPsychologists()
     const aux = data;
     aux.forEach((item) => item.specialty = !item.verifiedSpecialty ? "Psicólog@ General" : item.specialty)
     setPsychologists(aux)
     setFilteredData(aux)
+    setIsChecking(false)
   }
 
   const filterBySpecialty = (event) => {
@@ -140,8 +146,10 @@ const ClientFeed = () => {
       if (event.target.value) {
         const dataFiltered = psychologists.filter((item) => item.specialty.toLowerCase().includes(event.target.value.toLowerCase()))
         setFilteredData([...dataFiltered])
+        setIsSearching(true)
       } else {
         setFilteredData([...psychologists])
+        setIsSearching(false)
       }
     }
   }
@@ -165,11 +173,21 @@ const ClientFeed = () => {
       </div>
       <div className='client-feed__cards-container'>
         {
-          filteredData.map((psychologist, index) => (
+          filteredData.length > 0 && filteredData.map((psychologist, index) => (
             <PsychologistCard key={index + 1} psychologist={psychologist} setPsychologistInfo={setPsychologistInfo} />
           ))
         }
       </div>
+      {
+        filteredData <= 0 && isSearching && (
+          <EmptyState type={"SEARCH"} />
+        )
+      }
+      {
+        filteredData <= 0 && isChecking && (
+          <Loader />
+        )
+      }
     </section>
   )
 }

@@ -107,7 +107,7 @@
 
             &:focus,
             :active {
-              outline: none;
+              outline: none !important;
               border: solid 1px $dark-azure-blue
             }
           }

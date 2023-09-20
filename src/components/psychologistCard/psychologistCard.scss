@@ -52,15 +52,19 @@
         font-family: $font-poppins-core;
         font-size: 13px;
         border-radius: 5px;
-    }
-}
-
-.psychologist-card {
-
-    &__info-btn {
         &:hover {
             cursor: pointer;
             background-color: #00b8ae;
+        }
+    }
+}
+
+@media screen and (min-width: 1100px) {
+    .psychologist-card {
+        &__image {
+            width: 140px;
+            height: 110px;
+            object-fit: cover;
         }
     }
 }

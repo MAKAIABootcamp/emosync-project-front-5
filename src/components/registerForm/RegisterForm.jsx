@@ -7,6 +7,7 @@ import Loader from '../loader/Loader';
 import { addNewUser, signUpWithEmailAndPassword } from '../../store/slides/auth/thunk';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import { swals } from '../../services/swals';
 
 
 const RegisterForm = ({ setStep }) => {
@@ -67,11 +68,7 @@ const RegisterForm = ({ setStep }) => {
         if (!authGoogle) {
             const resp = await dispatch(signUpWithEmailAndPassword({ email, password }))
             if (resp === "Firebase: Error (auth/email-already-in-use).") {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Ese correo ya está en uso, prueba con otro!',
-                })
+                swals("REGISTER-ERROR")
             } else {
                 localStorage.setItem("infoUser", JSON.stringify({ userRole, key: resp }))
                 await dispatch(addNewUser(resp, data))

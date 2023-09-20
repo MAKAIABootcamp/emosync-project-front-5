@@ -61,7 +61,7 @@
         padding: 0.3rem 0.8rem;
         border-radius: 10px;
         border: 1px solid $light-gray;
-        outline: none;
+        outline: none !important;
         font-family: $font-poppins-core;
         background-color: white;
         font-size: 13px;
@@ -89,6 +89,9 @@
         margin-left: 12px;
     }
 
+    &__disabled {
+        color: #797979;
+    }
 }
 
 @media screen and (min-width: 1400px) {
@@ -138,5 +141,13 @@
         &__alert {
             font-size: 13px;
         }
+    }
+}
+
+.swal2-confirm {
+    background-color: $azure-blue !important;
+    box-shadow: none !important;
+    &:hover {
+     transform: scale(1.02);
     }
 }
