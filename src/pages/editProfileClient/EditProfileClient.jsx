@@ -2,13 +2,33 @@ import React from 'react'
 import InputMask from "react-input-mask";
 import "./editProfileClient.scss"
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useForm } from 'react-hook-form';
+import { editInfoUser } from '../../store/slides/user/thunk';
 
 const EditProfileClient = () => {
     const navigate = useNavigate()
     const { cardNumber, displayName, loginMethod, subscription, email } = useSelector(state => state.user)
+    const { key } = useSelector(state => state.auth)
+    const { register, handleSubmit, formState: { errors }, reset } = useForm()
+    const dispatch = useDispatch()
+
+    const onSubmit = async (data) => {
+        const formData = data
+        formData.displayName === displayName && delete formData.displayName
+        formData.email === email && delete formData.email
+        formData.subscription === subscription && delete formData.subscription
+        formData.cardNumber === cardNumber && delete formData.cardNumber
+        const validate = validateFormData(formData)
+        validate && await dispatch(editInfoUser({formData, key}))
+    }
+
     const handleReturn = () => {
         navigate("/profile")
+    }
+
+    const validateFormData = (formData) => {
+        return formData?.displayName ? true : formData?.email ? true : formData?.subscription ? true : formData?.cardNumber ? true : false
     }
 
     return (
@@ -17,7 +37,7 @@ const EditProfileClient = () => {
                 <img className='edit-profile-client__return-icon' src="/Register/arrow-back.svg" alt="" />
                 <figcaption className='edit-profile-client__return-text'>Volver</figcaption>
             </figure>
-            <form className='edit-profile-client__form'>
+            <form onSubmit={handleSubmit(onSubmit)} className='edit-profile-client__form'>
                 <h1 className='edit-profile-client__title'>Editar Información Personal</h1>
                 <div className='edit-profile-client__form-container'>
                     <label className='edit-profile-client__label'>
@@ -26,6 +46,7 @@ const EditProfileClient = () => {
                             className='edit-profile-client__input'
                             type="text"
                             defaultValue={displayName}
+                            {...register("displayName")}
                         />
                     </label>
                     <label className='edit-profile-client__label'>
@@ -35,6 +56,7 @@ const EditProfileClient = () => {
                             type="email"
                             defaultValue={email}
                             disabled={loginMethod === "GOOGLE" ? "disabled" : ""}
+                            {...register("email")}
                         />
                         {
                             loginMethod === "GOOGLE" && (
@@ -46,29 +68,13 @@ const EditProfileClient = () => {
                     </label>
                     <label className='edit-profile-client__label'>
                         <p className='edit-profile-client__label--text'>Suscripción</p>
-                        <select className='edit-profile-client__input'>
-                            {
-                                subscription === "BRONZE" ? (
-                                    <>
-                                        <option value="BRONZE" selected>Bronce</option>
-                                        <option value="SILVER">Plata</option>
-                                        <option value="GOLD">Oro</option>
-                                    </>
-                                ) : subscription === "SILVER" ? (
-                                    <>
-                                        <option value="BRONZE" >Bronce</option>
-                                        <option value="SILVER" selected>Plata</option>
-                                        <option value="GOLD">Oro</option>
-                                    </>
-                                ) : (
-                                    <>
-                                        <option value="BRONZE" >Bronce</option>
-                                        <option value="SILVER" >Plata</option>
-                                        <option value="GOLD" selected>Oro</option>
-                                    </>
-                                )
-                            }
-
+                        <select className='edit-profile-client__input'
+                            {...register("subscription")}
+                            defaultValue={subscription}
+                        >
+                            <option value="BRONZE">Bronce</option>
+                            <option value="SILVER">Plata</option>
+                            <option value="GOLD">Oro</option>
                         </select>
                     </label>
                     <label className='edit-profile-client__label'>
@@ -78,6 +84,11 @@ const EditProfileClient = () => {
                             mask="9999 9999 9999 9999"
                             placeholder='1234 1234 1234 1234'
                             defaultValue={cardNumber}
+                            {...register("cardNumber", {
+                                pattern: {
+                                    value: /^[0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4}$/,
+                                }
+                            })}
                         />
                     </label>
                 </div>
