@@ -25,7 +25,7 @@ const ModalShowEvent = ({event, close }) => {
             </h2>
             <section className='modalShowEvent__content__inf'>
                 <section>
-                 <h3>Nombre del paciente</h3> 
+                 <h3>Nombre del evento</h3> 
                  <span>{event.title}</span>
                 </section>
                 <section>
@@ -38,7 +38,7 @@ const ModalShowEvent = ({event, close }) => {
                 </section>
                 <section>
                  <h3>Link de la reunión</h3> 
-                 <span>{end}</span>
+                 <a href={event.hangoutLink} className='modalShowEvent__content__inf__url'>{event.hangoutLink}</a>
                 </section>
                 
             </section>

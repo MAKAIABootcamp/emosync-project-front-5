@@ -8,6 +8,7 @@ import Router from './routes/Router.jsx'
 import { NextUIProvider } from "@nextui-org/react";
 import "./index.css"
 
+
 ReactDOM.createRoot(document.getElementById('root')).render(
     <ApiProvider api={firebaseApi}>
         <Provider store={store}>

@@ -54,6 +54,12 @@
                font-size: calc(10px + 0.5vw); 
             }
         }
+        &__url{
+          text-decoration: underline;
+          color: $azure-blue;
+          text-align: start;
+          font-size: calc(9px + 0.5vw); 
+        }
     }
     &__closer {
       float: right;

@@ -1,5 +1,6 @@
 import Swal from "sweetalert2"
 import "./main.scss"
+import { useEditDataUserMutation } from "../../../store/api/firebaseApi"
 
 
 export const modalAddStripe = async () => {
@@ -58,6 +59,8 @@ export const modalAddStripe = async () => {
             showCancelButton: true,
             confirmButtonColor: '#F26419',
              cancelButtonColor: '#A4A4A4',
+             confirmButtonText: 'Listo',
+             cancelButtonText: 'Cancelar',
             inputValidator: (value) => {
               return new Promise((resolve) => {
                 if (value !== undefined || null) {
@@ -92,6 +95,9 @@ export const modalAddStripe = async () => {
                 showCancelButton: true,
                 confirmButtonColor: '#F26419',
                  cancelButtonColor: '#A4A4A4',
+
+                 confirmButtonText: 'Listo',
+                 cancelButtonText: 'Cancelar',
                 inputValidator: (value) => {
                   return new Promise((resolve) => {
                     if (value !== undefined || null) {
@@ -104,7 +110,42 @@ export const modalAddStripe = async () => {
     
               })
               if(hourEnd){
-                Swal.fire(`You selected: ${day} ${hourStart} ${hourEnd}`)
+                const [editDataUser] = useEditDataUserMutation()
+                const dayExists = user.stripe.some(item => item.day === day);
+
+                if (!dayExists) {
+                  const key = user.key
+                  const formData = {
+                    stripe: [
+                      ...user.stripe,
+                      {
+                        day: day,
+                        start: hourStart,
+                        end: hourEnd,
+                      }
+                    ]
+                  };
+
+                  // Aquí puedes enviar formData o realizar cualquier otra operación con él
+                  await editDataUser({ formData, key })
+                  Swal.fire({
+                    title: 'Horario creado con exito!',
+                    confirmButtonColor: '#F26419',
+                    confirmButtonText: 'Listo',
+                  })
+
+
+
+                } else {
+                  Swal.fire({
+                    title: 'El día seleccionado ya lo tienes ocupado con otro horario diferente.',
+                    confirmButtonColor: '#F26419',
+                    confirmButtonText: 'Listo',
+                  })
+                }
+            
+
+                
               }
           }
       }

@@ -66,6 +66,7 @@ font-family: $font-monserrat;
         align-items: center;
         gap: 10px;
         &> h3{
+            text-transform: capitalize;
             width: 100%;
             text-align: center;
             border-top: 1px #c3c3c3 solid;

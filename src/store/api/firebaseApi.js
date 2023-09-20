@@ -79,6 +79,18 @@ export const firebaseApi = createApi({
           return error
         }
       }
+    }), editDataUser: builder.mutation({
+      async queryFn({ formData, key }) {
+        try {
+          const userRef = doc(firebaseDB, `users`, key);
+          const resp = await updateDoc(userRef, formData)
+          return true
+        } catch (error) {
+          console.log(error);
+          return error
+        }
+      },
+      invalidatesTags: ['user']
     }),
 
   })
@@ -90,4 +102,5 @@ export const {
   useEditInfoUserMutation,
   useGetVerifDocsQuery,
   useGetVerifReportsQuery,
+  useEditDataUserMutation,
 } = firebaseApi

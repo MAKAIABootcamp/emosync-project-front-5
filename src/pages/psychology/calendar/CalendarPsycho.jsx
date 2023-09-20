@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useId, useState } from 'react'
 import "./main.scss"
 import HeaderPsycho from '../../../components/headerPsycho/HeaderPsycho'
 import { Calendar, dayjsLocalizer } from 'react-big-calendar'
@@ -7,7 +7,10 @@ const localizer = dayjsLocalizer(dayjs)
 import apiCalendar, { listAllEvents } from '../../../googleC';
 import Loader from '../../../components/loader/Loader'
 import ModalShowEvent from '../../../components/modalsPsycho/modalShowEvent/ModalShowEvent'
-import { modalAddStripe } from '../../../components/modalsPsycho/modalAddStrype/ModalAddStripe'
+//import { modalAddStripe } from '../../../components/modalsPsycho/modalAddStrype/ModalAddStripe'
+import Swal from 'sweetalert2'
+import { useEditDataUserMutation, useGetUserByIdQuery } from '../../../store/api/firebaseApi'
+import { toast, Toaster } from 'sonner'
 
 
 
@@ -25,6 +28,139 @@ const CalendarPsycho = () => {
   const [events, setEvents] = useState([ ]);
 const  [hola, setHola] = useState(false)
 const  [hola2, setHola2] = useState(false)
+const [editDataUser] = useEditDataUserMutation()
+const user = JSON.parse(localStorage.getItem('infoUser'));
+const {data: userInfo2, isSuccess, isLoading} = useGetUserByIdQuery(user.key)
+const modalAddStripe = async () => {
+
+  const { value: day } = await Swal.fire({
+      title: 'Selecciona un día en el que quieras trabajar',
+      input: 'select',
+      inputOptions: {
+        lunes: 'Lunes',
+        martes: 'Martes',
+        miercoles: 'Miercoles',
+        jueves: 'Jueves',
+        viernes: 'Viernes',
+        sabado: 'Sabado',
+        domingo: 'Domingo'
+      },
+      inputPlaceholder: 'Selecciona un día',
+      showCancelButton: true,
+      confirmButtonColor: '#1CACA5',
+       cancelButtonColor: '#A4A4A4',
+       confirmButtonText: 'Listo',
+       cancelButtonText: 'Cancelar',
+      inputValidator: (value) => {
+        return new Promise((resolve) => {
+          if (value !== undefined || null) {
+            resolve()
+          } else {
+            resolve('Necesitas seleccionar un día')
+          }
+        })
+      }
+    })
+    if (day) {
+      const { value: hourStart } = await Swal.fire({
+          title: 'Selecciona la hora en la que quieras empezar a trabajar',
+          input: 'select',
+          inputOptions: {
+              8: '8:00 AM',
+              9: '9:00 AM',
+              10: '10:00 AM',
+              11: '11:00 AM',
+              12: '12:00 PM',
+              13: '1:00 PM',
+              14: '2:00 PM',
+              15: '3:00 PM',
+              16: '4:00 PM',
+              17: '5:00 PM',
+              18: '6:00 PM',
+              19: '7:00 PM',
+              20: '8:00 PM'
+          },
+          inputPlaceholder: 'Selecciona una hora',
+          showCancelButton: true,
+          confirmButtonColor: '#1CACA5',
+           cancelButtonColor: '#A4A4A4',
+           confirmButtonText: 'Listo',
+           cancelButtonText: 'Cancelar',
+          inputValidator: (value) => {
+            return new Promise((resolve) => {
+              if (value !== undefined || null) {
+                resolve()
+              } else {
+                resolve('Necesitas seleccionar una hora')
+              }
+            })
+          }
+
+        })
+        if (hourStart){  
+          const { value: hourEnd } = await Swal.fire({
+              title: 'Selecciona la hora en la que quieras terminar de trabajar',
+              input: 'select',
+              inputOptions: {
+                  9: '9:00 AM',
+                  10: '10:00 AM',
+                  11: '11:00 AM',
+                  12: '12:00 PM',
+                  13: '1:00 PM',
+                  14: '2:00 PM',
+                  15: '3:00 PM',
+                  16: '4:00 PM',
+                  17: '5:00 PM',
+                  18: '6:00 PM',
+                  19: '7:00 PM',
+                  20: '8:00 PM',
+                  21: '9:00 PM'
+              },
+              inputPlaceholder: 'Selecciona una hora',
+              showCancelButton: true,
+              confirmButtonColor: '#1CACA5',
+               cancelButtonColor: '#A4A4A4',
+               confirmButtonText: 'Listo',
+               cancelButtonText: 'Cancelar',
+              inputValidator: (value) => {
+                return new Promise((resolve) => {
+                  if (value !== undefined || null) {
+                    resolve()
+                  } else {
+                    resolve('Necesitas seleccionar una hora')
+                  }
+                })
+              }
+            })
+            if(hourEnd){
+              console.log(userInfo2.stripe);
+              let dayExists = userInfo2.stripe.some(item => item.day === day) 
+              if (!dayExists) {
+                const key = user.key
+                const formData = {
+                  stripe: [
+                    ...userInfo2.stripe,
+                    {
+                      day: day,
+                      start: hourStart,
+                      end: hourEnd,
+                    }
+                  ]
+                };
+                await editDataUser({ formData, key })
+                toast.success('¡Horario creado con exito!')
+              } else {
+                Swal.fire({
+                  
+                  title: 'El día seleccionado ya lo tienes ocupado con otro horario diferente.',
+                  confirmButtonColor: '#1CACA5',
+                  confirmButtonText: 'Listo',
+                })
+              }
+            }
+        }
+    }
+}
   useEffect(() => {
       apiCalendar.handleAuthClick()
      .then(response => {console.log(response)
@@ -39,8 +175,8 @@ const  [hola2, setHola2] = useState(false)
               title: item.summary,
               start: new Date(item.start.dateTime),
               end: new Date(item.end.dateTime),
-              id: item.id
-
+              id: item.id,
+              hangoutLink: item.hangoutLink,
             })),
           ]);
           setHola(true)
@@ -57,11 +193,6 @@ const  [hola2, setHola2] = useState(false)
  
    }, [hola])
    
-
-
-
-
-   
   const handleSelectSlot = (slotInfo) => {
     setInfoEvent(slotInfo)
   };
@@ -72,42 +203,151 @@ const  [hola2, setHola2] = useState(false)
     setModalEvent(event)
     setOpenModal(true)
   };
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-  }
-
   const handleAddStripe = () =>{
     modalAddStripe()
   }
+
+ const handleEditStripe = async (stripe) =>{
+  const { value: hourStart } = await Swal.fire({
+    title: `Selecciona la hora en la que quieras empezar a trabajar el ${stripe.day}`,
+    input: 'select',
+    inputOptions: {
+        8: '8:00 AM',
+        9: '9:00 AM',
+        10: '10:00 AM',
+        11: '11:00 AM',
+        12: '12:00 PM',
+        13: '1:00 PM',
+        14: '2:00 PM',
+        15: '3:00 PM',
+        16: '4:00 PM',
+        17: '5:00 PM',
+        18: '6:00 PM',
+        19: '7:00 PM',
+        20: '8:00 PM'
+    },
+    inputPlaceholder: 'Selecciona una hora',
+    showCancelButton: true,
+    confirmButtonColor: '#1CACA5',
+    cancelButtonColor: '#A4A4A4',
+    confirmButtonText: 'Listo',
+    cancelButtonText: 'Cancelar',
+    inputValidator: (value) => {
+      return new Promise((resolve) => {
+        if (value !== undefined || null) {
+          resolve()
+        } else {
+          resolve('Necesitas seleccionar una hora')
+        }
+      })
+    }
+  })
+  if (hourStart){  
+    const { value: hourEnd } = await Swal.fire({
+        title: `Selecciona la hora en la que quieras terminar de trabajar el ${stripe.day}`,
+        input: 'select',
+        inputOptions: {
+            9: '9:00 AM',
+            10: '10:00 AM',
+            11: '11:00 AM',
+            12: '12:00 PM',
+            13: '1:00 PM',
+            14: '2:00 PM',
+            15: '3:00 PM',
+            16: '4:00 PM',
+            17: '5:00 PM',
+            18: '6:00 PM',
+            19: '7:00 PM',
+            20: '8:00 PM',
+            21: '9:00 PM'
+        },
+        inputPlaceholder: 'Selecciona una hora',
+        showCancelButton: true,
+        confirmButtonColor: '#1CACA5',
+         cancelButtonColor: '#A4A4A4',
+         confirmButtonText: 'Listo',
+         cancelButtonText: 'Cancelar',
+        inputValidator: (value) => {
+          return new Promise((resolve) => {
+            if (value !== undefined || null) {
+              resolve()
+            } else {
+              resolve('Necesitas seleccionar una hora')
+            }
+          })
+        }
+      })
+      if(hourEnd){
+          const key = user.key
+          const newArray = userInfo2.stripe.map(item => {
+            if (item.day === stripe.day) {
+              return {
+                day: stripe.day,
+                start: hourStart,
+                end: hourEnd,
+              };
+            }
+            return item;
+          });
+          
+          const formData = {
+            stripe: newArray,
+          };
+          await editDataUser({ formData, key })
+          toast.success('¡Horario editado con exito!')
+      }}
+
+}
+ const handleDeleteStripe = async (stripe)=>{
+  Swal.fire({
+    title: '¿Deseas eliminar la siguiente franja?',
+    text: `Los ${stripe.day} de ${stripe.start} a ${stripe.end}`,
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#1CACA5',
+    cancelButtonColor: '#c3c3c3',
+    confirmButtonText: '¡Si!'
+  }).then(async (result) => {
+    if (result.isConfirmed) {
+      const key = user.key
+      const newArray = userInfo2.stripe.filter(item => {
+        return item.day !== stripe.day;
+      });
+      const formData = {
+        stripe: newArray,
+      };
+      await editDataUser({ formData, key })
+
+      toast.success('La franja ha sido eliminada con éxito')
+    }
+  })
+ }
+
   return (
     <main className='CalendarPsycho__father'>
       <HeaderPsycho />
+      <Toaster richColors position='bottom-left'/>
       {hola2 &&
       <div className='CalendarPsycho'>
          <section className='CalendarPsycho__striper'>
            <section>
             <span>Horario</span>   <figure onClick={handleAddStripe}><img src="/Psychologist/plus.svg" alt="plus"/></figure>
-           </section>
+           </section>{
+            isSuccess &&
            <div>
-            <h3>Lunes</h3>
-            <article>
-             <figure><img src="/Psychologist/calendar.svg" alt="calendar"/></figure> 
-              <span>10:00 am - 12:00 pm </span>
-              <figure><img src="/Psychologist/delete.svg" alt="delete"/></figure> 
-            </article>
-            <article>
-             <figure><img src="/Psychologist/calendar.svg" alt="calendar"/></figure> 
-              <span>10:00 am - 12:00 pm </span>
-              <figure><img src="/Psychologist/delete.svg" alt="delete"/></figure> 
-            </article>
-            <article>
-             <figure><img src="/Psychologist/calendar.svg" alt="calendar"/></figure> 
-              <span>10:00 am - 12:00 pm </span>
-              <figure><img src="/Psychologist/delete.svg" alt="delete"/></figure> 
-            </article>
-
-           </div>
+            {
+              userInfo2.stripe.map((item)=>(
+                <>
+                <h3>{item.day}</h3>
+                <article>
+                 <figure onClick={()=>handleEditStripe(item)}><img src="/Psychologist/calendar.svg" alt="calendar"/></figure> 
+                  <span>{item.start}:00 - {item.end}:00</span>
+                  <figure onClick={()=>handleDeleteStripe(item)}><img src="/Psychologist/delete.svg" alt="delete"/></figure> 
+                </article>
+                </>
+              ))
+            }
+           </div>}
          </section>
 
         <section>
@@ -124,14 +364,9 @@ const  [hola2, setHola2] = useState(false)
         openModal &&
         <ModalShowEvent  event={modalEvent} close={setOpenModal}/>
       }
-       
+
       </div>
-    
-
  }
-     
-
-
     </main>
   )
 }
