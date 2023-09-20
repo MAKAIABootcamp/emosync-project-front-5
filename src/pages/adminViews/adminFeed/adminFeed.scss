@@ -8,7 +8,7 @@
 
   & .AdminFeedBody {
     height: 100vh;
-    width: 97.5vw;
+    width: 98vw;
     display: flex;
     flex-direction: column;
     font-family: $font-poppins-core;
@@ -263,72 +263,73 @@
     }
 
   }
-}
 
-/* estilos especiales para arreglar la tabla*/
-.tablePsy {
-  border-collapse: separate;
-  border-spacing: 0;
-  border: 1px solid transparent;
-  border-radius: 20px;
+  /* estilos especiales para arreglar la tabla*/
+  //se colocan aqui dentro para evitar problemas
+  .tablePsy {
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid transparent;
+    border-radius: 20px;
 
-}
+  }
 
-.tablePsy td,
-.tablePsy th {
-  border: 1px solid $light-gray;
-  border-left: 1px solid transparent;
-  border-top: 1px solid transparent;
-  padding: 8px;
-}
+  .tablePsy td,
+  .tablePsy th {
+    border: 1px solid $light-gray;
+    border-left: 1px solid transparent;
+    border-top: 1px solid transparent;
+    padding: 8px;
+  }
 
-.tablePsy thead tr th:last-child {
-  border-right: 1px solid transparent;
-}
+  .tablePsy thead tr th:last-child {
+    border-right: 1px solid transparent;
+  }
 
-.tablePsy tbody tr:last-child td {
-  border-bottom: 1px solid transparent;
-}
+  .tablePsy tbody tr:last-child td {
+    border-bottom: 1px solid transparent;
+  }
 
-.tablePsy tbody tr td:last-child {
-  border-right: 1px solid transparent;
-}
+  .tablePsy tbody tr td:last-child {
+    border-right: 1px solid transparent;
+  }
 
-// version para la otra tabla
-.tableRpt {
-  border-collapse: separate;
-  border-spacing: 0;
-  border: 1px solid transparent;
-  border-radius: 20px;
+  // version para la otra tabla
+  .tableRpt {
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid transparent;
+    border-radius: 20px;
 
-}
+  }
 
-.tableRpt td,
-.tableRpt th {
-  border: 1px solid $light-gray;
-  border-left: 1px solid transparent;
-  border-top: 1px solid transparent;
-  padding: 8px;
-}
+  .tableRpt td,
+  .tableRpt th {
+    border: 1px solid $light-gray;
+    border-left: 1px solid transparent;
+    border-top: 1px solid transparent;
+    padding: 8px;
+  }
 
-.tableRpt thead tr th:last-child {
-  border-right: 1px solid transparent;
-}
+  .tableRpt thead tr th:last-child {
+    border-right: 1px solid transparent;
+  }
 
-.tableRpt tbody tr:last-child td {
-  border-bottom: 1px solid transparent;
-}
+  .tableRpt tbody tr:last-child td {
+    border-bottom: 1px solid transparent;
+  }
 
-.tableRpt tbody tr td:last-child {
-  border-right: 1px solid transparent;
-}
+  .tableRpt tbody tr td:last-child {
+    border-right: 1px solid transparent;
+  }
 
-.detailsFilled {
-  cursor: pointer;
-}
+  .detailsFilled {
+    cursor: pointer;
+  }
 
-//estilos para el swal
-.no-border {
-  border: none !important;
-  /* Estilo para quitar el borde */
+  //estilos para el swal
+  .no-border {
+    border: none !important;
+    /* Estilo para quitar el borde */
+  }
 }

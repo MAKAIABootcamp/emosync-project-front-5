@@ -13,6 +13,8 @@ import Swal from 'sweetalert2'
 
 const AdminFeed = () => {
   const { toVerify, toReport } = useSelector(state => state.admin)
+  const adminKey = useSelector(state => state.auth.key)
+  console.log(adminKey)
   const dispatch = useDispatch()
   const { data: docsArray } = useGetVerifDocsQuery()
   const { data: reportsArray } = useGetVerifReportsQuery()
