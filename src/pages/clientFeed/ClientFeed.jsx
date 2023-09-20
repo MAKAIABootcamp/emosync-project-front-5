@@ -4,6 +4,7 @@ import PsychologistCard from '../../components/psychologistCard/PsychologistCard
 import { useSelector } from 'react-redux'
 import PsychologistInfo from '../../components/modales/psychologistInfo/PsychologistInfo'
 import { getPsychologists } from '../../services/getPsychologists'
+import EmptyState from '../../components/emptyState/EmptyState'
 
 const ClientFeed = () => {
   const { modalActive } = useSelector(state => state.modals)
@@ -165,11 +166,16 @@ const ClientFeed = () => {
       </div>
       <div className='client-feed__cards-container'>
         {
-          filteredData.map((psychologist, index) => (
+          filteredData.length > 0 && filteredData.map((psychologist, index) => (
             <PsychologistCard key={index + 1} psychologist={psychologist} setPsychologistInfo={setPsychologistInfo} />
           ))
         }
       </div>
+      {
+        filteredData <= 0 && (
+          <EmptyState type={"SEARCH"} />
+        )
+      }
     </section>
   )
 }
