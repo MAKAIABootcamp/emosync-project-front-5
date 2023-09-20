@@ -1,77 +1,36 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./pendingAppointmentsClient.scss"
 import { useDispatch, useSelector } from 'react-redux'
 import CancelAppointment from '../../components/modales/cancelAppointment/CancelAppointment'
 import { setModalActive, setModalAuxActive } from '../../store/slides/modals/modals'
 import ReportAppointment from '../../components/modales/reportAppointment/ReportAppointment'
+import { getAppointmentsClient } from '../../services/getAppointmentsClient'
+import { getPsychologist } from '../../services/getPsychologist'
+import { updateAppointments } from '../../services/updateAppointments'
 
 const PendingAppointmentsClient = () => {
     const { modalActive, modalAuxActive } = useSelector(state => state.modals)
+    const { key } = useSelector(state => state.auth)
     const dispatch = useDispatch()
-    const appointments = [
-        {
-            name: "Juliana Sánchez Sáenz",
-            date: "7 Oct, 2:30pm",
-        },
-        {
-            name: "Juliana Sánchez Sáenz",
-            date: "7 Oct, 2:30pm",
-        },
-        {
-            name: "Juliana Sánchez Sáenz",
-            date: "7 Oct, 2:30pm",
-        },
-        {
-            name: "Juliana Sánchez Sáenz",
-            date: "7 Oct, 2:30pm",
-        },
-        {
-            name: "Juliana Sánchez Sáenz",
-            date: "7 Oct, 2:30pm",
-        },
-        {
-            name: "Juliana Sánchez Sáenz",
-            date: "7 Oct, 2:30pm",
-        },
-        {
-            name: "Juliana Sánchez Sáenz",
-            date: "7 Oct, 2:30pm",
-        },
-        {
-            name: "Juliana Sánchez Sáenz",
-            date: "7 Oct, 2:30pm",
-        },
-        {
-            name: "Juliana Sánchez Sáenz",
-            date: "7 Oct, 2:30pm",
-        },
-        {
-            name: "Juliana Sánchez Sáenz",
-            date: "7 Oct, 2:30pm",
-        },
-        {
-            name: "Juliana Sánchez Sáenz",
-            date: "7 Oct, 2:30pm",
-        },
-        {
-            name: "Juliana Sánchez Sáenz",
-            date: "7 Oct, 2:30pm",
-        },
-        {
-            name: "Juliana Sánchez Sáenz",
-            date: "7 Oct, 2:30pm",
-        },
-        {
-            name: "Juliana Sánchez Sáenz",
-            date: "7 Oct, 2:30pm",
-        },
-        {
-            name: "Juliana Sánchez Sáenz",
-            date: "7 Oct, 2:30pm",
-        },
-    ]
+    const [appointments, setAppointments] = useState([])
+    const [appointmentId, setAppointmentId] = useState("")
+    useEffect(() => {
+        getData()
+    }, [])
 
-    const handleCancelAppointment = () => {
+    const getData = async () => {
+        const { data } = await getAppointmentsClient(key)
+        let psychologistInfo = {}
+        const aux = data;
+        for (let i = 0; i < aux.length; i++) {
+            psychologistInfo = await getPsychologist(aux[i].psychologistKey)
+            aux[i].psychologistName = psychologistInfo.data.displayName;
+        }
+        setAppointments(aux)
+    }
+
+    const handleCancelAppointment = async (id) => {
+        setAppointmentId(id)
         dispatch(setModalActive())
     }
 
@@ -83,7 +42,10 @@ const PendingAppointmentsClient = () => {
         <section className='pending-appointments-client'>
             {
                 modalActive && (
-                    <CancelAppointment />
+                    <CancelAppointment
+                    appointmentId={appointmentId}
+                    appointments={appointments}
+                    setAppointments={setAppointments}/>
                 )
             }
             {
@@ -103,18 +65,18 @@ const PendingAppointmentsClient = () => {
                 </thead>
                 <tbody>
                     {
-                        appointments.map((item, index) => (
+                        appointments.length > 0 && appointments.map((item, index) => (
                             <tr key={index + 1} className='pending-appointments-client__tr'>
                                 <td className='pending-appointments-client__td'>
                                     <figure onClick={handleReportAppointment}>
                                         <img src="/User/exclamation-mark-svgrepo-com.svg" alt="" />
                                         <figcaption>Da click aquí para reportar en caso tal de que la cita haya sido incumplida.</figcaption>
                                     </figure>
-                                    {item.name}
+                                    {item.psychologistName}
                                 </td>
                                 <td className='pending-appointments-client__td'>{item.date}</td>
-                                <td className='pending-appointments-client__td link'><a href="">Link</a></td>
-                                <td className='pending-appointments-client__td cancel-appointment' onClick={handleCancelAppointment}>
+                                <td className='pending-appointments-client__td link'><a href={item.urlAppointment}>Link</a></td>
+                                <td className='pending-appointments-client__td cancel-appointment' onClick={()=> handleCancelAppointment(item.id)}>
                                     Cancelar cita
                                 </td>
                             </tr>
