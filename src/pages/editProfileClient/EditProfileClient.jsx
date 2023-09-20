@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { editInfoUser } from '../../store/slides/user/thunk';
 import Swal from 'sweetalert2';
+import { swals } from '../../services/swals';
 
 const EditProfileClient = () => {
     const navigate = useNavigate()
@@ -23,38 +24,13 @@ const EditProfileClient = () => {
         const validate = validateFormData(formData)
         const resp = validate ? await dispatch(editInfoUser({ formData, key })) : "NO-CHANGE"
         if (resp && resp !== "NO-CHANGE" && !formData.subscription) {
-            Swal.fire(
-                'Excelente!',
-                'Información cambiada con exito!',
-                'success'
-            ).then(
-                () => {
-                    navigate("/profile")
-                }
-            )
+            await swals("CHANGE-INFO", navigate)
         } else if (resp && resp !== "NO-CHANGE" && formData.subscription) {
-            Swal.fire(
-                'Excelente!',
-                'Información cambiada con exito, tu nueva suscripción se verá reflejado en tu siguiente cobro!',
-                'success'
-            ).then(
-                () => {
-                    navigate("/profile")
-                }
-
-            )
+            await swals("CHANGE-SUBSCRIPTION", navigate)
         } else if (resp === "NO-CHANGE") {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'No has hecho ningún cambio, vuelve a intentarlo!',
-            })
+            swals("NO-CHANGE")
         } else {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Hubo un error al guardar los cambios, vuelve a intentarlo!',
-            })
+            swals("ERROR-EDIT-INFO")
         }
     }
 
