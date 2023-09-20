@@ -1,10 +1,11 @@
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, limit, orderBy, query } from "firebase/firestore";
 import { firebaseDB } from "../firebase/firebaseConfig";
 
 export const getNotifications = async (idUser) => {
     try {
         const deliveryRef = collection(firebaseDB, `users/${idUser}/notifications`);
-        const querySnapshot = await getDocs(deliveryRef);
+        const dataNotificaciones = query(deliveryRef, orderBy("createdAt", "desc"), limit(10))
+        const querySnapshot = await getDocs(dataNotificaciones);
         const notifications = querySnapshot.docs.map(doc => ({
             id: doc.id,
             ...doc.data()

@@ -108,31 +108,36 @@ const ClientProfile = () => {
             </div >
             <div className='client-profile__notifications'>
                 <h1 className='client-profile__title'>Notificaciones</h1>
-                <ul className='client-profile__notifications-list'>
-                    {
-                        notifications.length > 0 && notifications.map((notification, index) => (
-                            <li key={index + 1} className='client-profile__container' onClick={() => handleNotification(notification)}>
-                                <section className={
-                                    `client-profile__notifications-item
+                {
+                    notifications.length > 0 && (
+                        <ul className='client-profile__notifications-list'>
+                            {
+                                notifications.map((notification, index) => (
+                                    <li key={index + 1} className='client-profile__container' onClick={() => handleNotification(notification)}>
+                                        <section className={
+                                            `client-profile__notifications-item
                                     ${notification.status === "ACCEPTED"
-                                        ? "client-profile__accepted"
-                                        : "client-profile__rejected"}
+                                                ? "client-profile__accepted"
+                                                : "client-profile__rejected"}
                                     ${notification.isRead ? "client-profile__viewed" : ""}
                                         `}>
-                                    <div></div>
-                                    <p>
-                                        {
-                                            `${notification.status === "ACCEPTED"
-                                                ? "Cita confirmada por "
-                                                : "Cita rechazada por "}
+                                            <div></div>
+                                            <p>
+                                                {
+                                                    `${notification.status === "ACCEPTED"
+                                                        ? "Cita confirmada por "
+                                                        : "Cita rechazada por "}
                                         ${notification.psychologistName}`}
-                                    </p>
-                                </section>
-                                <hr />
-                            </li>
-                        ))
-                    }
-                </ul>
+                                            </p>
+                                        </section>
+                                        <hr />
+                                    </li>
+                                ))
+                            }
+                        </ul>
+                    )
+                }
+
             </div>
         </section >
     )
