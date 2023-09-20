@@ -1,0 +1,13 @@
+@import "../../../assets/styles/variables.scss";
+@import "../../../assets/styles/reset.scss";
+
+
+.swal2-title, .swal2-popup, .swal2-modal, .swal2-select{
+    font-family: $font-monserrat;
+}
+.swal2-select{
+    cursor: pointer;
+}
+.swal2-cancel, .swal2-confirm{
+    border-radius: 22px !important;
+}

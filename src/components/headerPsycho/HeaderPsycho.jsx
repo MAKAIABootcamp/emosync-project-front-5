@@ -51,7 +51,7 @@ const logout = () => {
            <figure onClick={handleHistory}><img src="/Psychologist/pending-appointments.svg" alt="pending-appointments" /></figure>
         </section>
         <section className='headerPsycho__end'>
-           <figure><img src="/Psychologist/configuration.svg" alt="configuration" /></figure>
+           <figure onClick={toProfile}><img src="/Psychologist/configuration.svg" alt="configuration" /></figure>
            <figure className='headerPsycho__end__logout' onClick={logout}><img src="/Psychologist/logout.svg" alt="logout" /></figure>
         </section>
     </aside>

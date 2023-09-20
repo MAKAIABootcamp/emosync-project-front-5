@@ -3,6 +3,7 @@ import HeaderAdmin from '../../../components/headerAdmin/HeaderAdmin'
 import defaultUser from '/Admin/defaultUser.jpg'
 import detailsFilled from '/Admin/detailsFilled.svg'
 import detailsEmpty from '/Admin/detailsEmpty.svg'
+import xMark from '/Admin/close.svg'
 import './adminFeed.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { useGetVerifDocsQuery, useGetVerifReportsQuery } from '../../../store/api/firebaseApi'
@@ -18,6 +19,7 @@ const AdminFeed = () => {
 
   const [showTable01, setShowTable01] = useState(false)
   const [showTable02, setShowTable02] = useState(false)
+  const [showReportModal, setShowReportModal] = useState(false)
 
   useEffect(() => {
     if (docsArray && docsArray.length) {
@@ -55,6 +57,16 @@ const AdminFeed = () => {
       },
       buttonsStyling: false // Deshabilitar los estilos de botón predeterminados
     })
+  }
+
+  const changeReportModal = () => {
+    setShowReportModal(!showReportModal)
+  }
+  const fillReportModal = (obj) => {
+    setShowReportModal(obj)
+  }
+  const emptyReportModal = () => {
+    setShowReportModal(false)
   }
 
 
@@ -172,7 +184,8 @@ const AdminFeed = () => {
                     <tr className='tableRpt__body__ind' key={doc.id}>
                       <td>{doc.clientName}</td>
                       <td>{doc.psychologistName}</td>
-                      <td><img src={detailsFilled} alt="file" className='detailsFilled' /></td>
+                      <td><img src={detailsFilled} alt="file" className='detailsFilled'
+                        onClick={() => fillReportModal(doc)} /></td>
                     </tr>
                   ))
                   }
@@ -187,6 +200,55 @@ const AdminFeed = () => {
 
           </article>
         </section>
+        {
+          showReportModal &&
+          // (
+          //   // background
+          //   <div className='h-screen w-full fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-50'>
+          //     {/* modal box */}
+          //     <div className='bg-white rounded shadow-lg w-1/3'>
+          //       <div className='border-b px-4 py-2'>
+          //         <h3>Modal title</h3>
+          //       </div>
+          //       {/* modal body */}
+          //       <div className='p-3'>
+          //         Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, voluptatibus?
+          //       </div>
+          //       {/* modal btn box */}
+          //       <div className='flex justify-end items-center w-100 border-t p-3'>
+          //         <button className='bg-red-600 px-3 py-1 rounded text-white mr-1'>Paciente</button>
+          //         <button className='bg-red-600 px-3 py-1 rounded text-white mr-1' onClick={changeReportModal}>Psicólogo</button>
+          //       </div>
+          //     </div>
+          //   </div>
+          // )
+          (
+            <div className='modalReport'>
+              <div className='modalReport__box'>
+                <div className='modalReport__box__text1'>
+                  <p>Reporta</p>
+                  <span>Paciente: {showReportModal.clientName}</span>
+                </div>
+                <div className='modalReport__box__text2'>
+                  <p>Motivo de incumplimiento</p>
+                  <span>{showReportModal.consultationReason}, {showReportModal.reason}</span>
+                </div>
+                <div className='modalReport__box__text3'>
+                  <p>¿Quién recibe la penalización por incumplimiento?</p>
+                  <span>Si es el paciente quien lo recibe se le descontará la cita como si la hubiera tomado si por el contrario es el psicólogo se le reportara en la plataforma y al acumular 10 penalizaciones será inhabilitada su cuenta.</span>
+                </div>
+                <div className='modalReport__box__btn'>
+                  <button>Paciente</button>
+                  <button>Psicólogo</button>
+                </div>
+                <figure className='modalReport__box__close'>
+                  <img src={xMark} alt="close" onClick={emptyReportModal} />
+                </figure>
+              </div>
+
+            </div>
+          )
+        }
       </aside>
     </>
   )

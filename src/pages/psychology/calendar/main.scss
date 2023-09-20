@@ -8,6 +8,7 @@
     position: relative;
 }
 .CalendarPsycho{
+    gap: 20px;
 font-family: $font-monserrat;
    width: 100%;
    display: flex;
@@ -26,6 +27,66 @@ font-family: $font-monserrat;
    &__calendar{
     height: 80vh !important;
     width: 70vw;
+   }
+   &__striper{
+    width: 13vw;
+    min-width: 200px;
+    margin-bottom: auto;
+    margin-top: 30px;
+    display: flex;
+    height: auto;
+    max-height: 95vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0 10px 0 !important;
+    border: 1px $azure-blue solid !important;
+    gap: 15px;
+    overflow: auto;
+    &>section{
+        width: 100%;
+        display: flex;
+        font-size: calc(16px + 0.5vw);
+        color: $azure-blue;
+        padding: 0px 15px;
+        justify-content: space-between;
+        align-items: center;
+        &> figure{
+            cursor: pointer;
+            height: 24px;
+            &>img{
+                height: 100%;
+                width: 100%;
+            }
+        }
+    }
+    &>div{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        &> h3{
+            text-transform: capitalize;
+            width: 100%;
+            text-align: center;
+            border-top: 1px #c3c3c3 solid;
+        }
+    &> article{
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    &> span{
+        font-size: calc(8px + 0.5vw);
+    }
+    &> figure{
+        cursor: pointer;
+        height: 16px;
+        &>img{
+            height: 100%;
+            width: 100%;
+        }
+    }
+    }};
    }
 }
 
