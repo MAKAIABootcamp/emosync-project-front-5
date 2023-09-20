@@ -1,3 +1,5 @@
+import { doc, updateDoc } from "firebase/firestore";
+import { firebaseDB } from "../firebase/firebaseConfig";
 
 export const updateNotification = async (property,idUser, id) => {
     try {

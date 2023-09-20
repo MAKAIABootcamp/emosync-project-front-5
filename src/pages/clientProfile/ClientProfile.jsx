@@ -8,6 +8,7 @@ import NotificationClient from '../../components/modales/notificationClient/Noti
 import { setModalActive } from '../../store/slides/modals/modals'
 import { getNotifications } from '../../services/getNotifications'
 import { getPsychologist } from '../../services/getPsychologist'
+import { updateNotification } from '../../services/updateNotification'
 
 const ClientProfile = () => {
     const navigate = useNavigate()
@@ -50,16 +51,24 @@ const ClientProfile = () => {
         }
     }
 
-    const handleNotification = (selected) => {
+    const handleNotification = async (selected) => {
         dispatch(setModalActive())
         setNotification(selected)
+        const aux = notifications
+        if (!selected.isRead) {
+            aux.forEach((noti) => {
+                noti.isRead = noti.id === selected.id ? true : noti.isRead
+            })
+            setNotifications(aux)
+            await updateNotification({ isRead: true }, key, selected.id)
+        }
     }
 
     return (
         < section className='client-profile' >
             {
                 modalActive && (
-                    <NotificationClient notification={notification}/>
+                    <NotificationClient notification={notification} />
                 )
             }
 
