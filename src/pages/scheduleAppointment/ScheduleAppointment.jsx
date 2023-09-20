@@ -44,17 +44,17 @@ const ScheduleAppointment = () => {
                     <label className='schedule-appointment__label'>
                         <p className='schedule-appointment__label--text'>Fecha</p>
                         <select className='schedule-appointment__input'>
-                            <option value="BRONZE">Bronce</option>
-                            <option value="SILVER">Plata</option>
-                            <option value="GOLD">Oro</option>
+                            <option value="BRONZE">3 de Octubre</option>
+                            <option value="SILVER">4 de Octubre</option>
+                            <option value="GOLD">5 de Octubre</option>
                         </select>
                     </label>
                     <label className='schedule-appointment__label'>
                         <p className='schedule-appointment__label--text'>Hora</p>
                         <select className='schedule-appointment__input'>
-                            <option value="BRONZE">Bronce</option>
-                            <option value="SILVER">Plata</option>
-                            <option value="GOLD">Oro</option>
+                            <option value="BRONZE">1:00PM</option>
+                            <option value="SILVER">3:00PM</option>
+                            <option value="GOLD">4:00PM</option>
                         </select>
                     </label>
                     <label className='schedule-appointment__label'>
