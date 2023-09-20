@@ -143,3 +143,11 @@
         }
     }
 }
+
+.swal2-confirm {
+    background-color: $azure-blue !important;
+    box-shadow: none !important;
+    &:hover {
+     transform: scale(1.02);
+    }
+}

@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { editInfoUser } from '../../store/slides/user/thunk';
+import Swal from 'sweetalert2';
 
 const EditProfileClient = () => {
     const navigate = useNavigate()
@@ -16,11 +17,45 @@ const EditProfileClient = () => {
     const onSubmit = async (data) => {
         const formData = data
         formData.displayName === displayName && delete formData.displayName
-        formData.email === email && delete formData.email
+        formData.email === email || !formData.email && delete formData.email
         formData.subscription === subscription && delete formData.subscription
         formData.cardNumber === cardNumber && delete formData.cardNumber
         const validate = validateFormData(formData)
-        validate && await dispatch(editInfoUser({formData, key}))
+        const resp = validate ? await dispatch(editInfoUser({ formData, key })) : "NO-CHANGE"
+        if (resp && resp !== "NO-CHANGE" && !formData.subscription) {
+            Swal.fire(
+                'Excelente!',
+                'Información cambiada con exito!',
+                'success'
+            ).then(
+                () => {
+                    navigate("/profile")
+                }
+            )
+        } else if (resp && resp !== "NO-CHANGE" && formData.subscription) {
+            Swal.fire(
+                'Excelente!',
+                'Información cambiada con exito, tu nueva suscripción se verá reflejado en tu siguiente cobro!',
+                'success'
+            ).then(
+                () => {
+                    navigate("/profile")
+                }
+
+            )
+        } else if (resp === "NO-CHANGE") {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'No has hecho ningún cambio, vuelve a intentarlo!',
+            })
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Hubo un error al guardar los cambios, vuelve a intentarlo!',
+            })
+        }
     }
 
     const handleReturn = () => {
