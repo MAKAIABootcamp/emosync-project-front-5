@@ -31,7 +31,7 @@ const EditProfileClient = () => {
                     <label className='edit-profile-client__label'>
                         <p className='edit-profile-client__label--text'>Correo Electrónico</p>
                         <input
-                            className='edit-profile-client__input'
+                            className={`edit-profile-client__input  ${loginMethod === "GOOGLE" ? "edit-profile-client__disabled" : ""}`}
                             type="email"
                             defaultValue={email}
                             disabled={loginMethod === "GOOGLE" ? "disabled" : ""}

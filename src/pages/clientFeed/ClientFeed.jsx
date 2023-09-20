@@ -123,6 +123,7 @@ const ClientFeed = () => {
   const [psychologists, setPsychologists] = useState([])
   const [filteredData, setFilteredData] = useState([])
   const [psychologistInfo, setPsychologistInfo] = useState({})
+  const [isSearching, setIsSearching] = useState(false)
 
   useEffect(() => {
     validateData()
@@ -141,8 +142,10 @@ const ClientFeed = () => {
       if (event.target.value) {
         const dataFiltered = psychologists.filter((item) => item.specialty.toLowerCase().includes(event.target.value.toLowerCase()))
         setFilteredData([...dataFiltered])
+        setIsSearching(true)
       } else {
         setFilteredData([...psychologists])
+        setIsSearching(false)
       }
     }
   }
@@ -172,7 +175,7 @@ const ClientFeed = () => {
         }
       </div>
       {
-        filteredData <= 0 && (
+        filteredData <= 0 && isSearching && (
           <EmptyState type={"SEARCH"} />
         )
       }
