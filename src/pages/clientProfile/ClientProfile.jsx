@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./clientProfile.scss"
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
@@ -6,12 +6,35 @@ import { reset } from '../../store/slides/auth/auth'
 import { logout } from '../../store/slides/user/user'
 import NotificationClient from '../../components/modales/notificationClient/NotificationClient'
 import { setModalActive } from '../../store/slides/modals/modals'
+import { getNotifications } from '../../services/getNotifications'
+import { getPsychologist } from '../../services/getPsychologist'
+import { updateNotification } from '../../services/updateNotification'
 
 const ClientProfile = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const { appointmentsPerMonth, cardNumber, displayName, subscription, email } = useSelector(state => state.user)
+    const { key } = useSelector(state => state.auth)
     const { modalActive } = useSelector(state => state.modals)
+    const [notifications, setNotifications] = useState([])
+    const [notification, setNotification] = useState([])
+
+    useEffect(() => {
+        getData()
+    }, [])
+
+    const getData = async () => {
+        const { data } = await getNotifications(key)
+        let psychologistInfo = {}
+        const aux = data;
+        for (let i = 0; i < aux.length; i++) {
+            psychologistInfo = await getPsychologist(aux[i].psychologistKey)
+            aux[i].psychologistName = psychologistInfo.data.displayName;
+            aux[i].psychologistSpecialty = psychologistInfo.data.verifiedSpecialty ? psychologistInfo.data.specialty : "Psicolog@ General";
+        }
+        console.log(aux)
+        setNotifications(aux)
+    }
 
     const handleLogout = () => {
         dispatch(reset())
@@ -28,33 +51,24 @@ const ClientProfile = () => {
         }
     }
 
-    const handleNotification = () => {
+    const handleNotification = async (selected) => {
         dispatch(setModalActive())
+        setNotification(selected)
+        const aux = notifications
+        if (!selected.isRead) {
+            aux.forEach((noti) => {
+                noti.isRead = noti.id === selected.id ? true : noti.isRead
+            })
+            setNotifications(aux)
+            await updateNotification({ isRead: true }, key, selected.id)
+        }
     }
-
-    const notifications = [
-        {
-            psychologist: "Juliana Sanchez",
-            status: "ACCEPTED",
-            isView: false
-        },
-        {
-            psychologist: "Juliana Sanchez",
-            status: "REJECTED",
-            isView: false
-        },
-        {
-            psychologist: "Juliana Sanchez",
-            status: "ACCEPTED",
-            isView: true
-        },
-    ]
 
     return (
         < section className='client-profile' >
             {
                 modalActive && (
-                    <NotificationClient/>
+                    <NotificationClient notification={notification} />
                 )
             }
 
@@ -94,31 +108,36 @@ const ClientProfile = () => {
             </div >
             <div className='client-profile__notifications'>
                 <h1 className='client-profile__title'>Notificaciones</h1>
-                <ul className='client-profile__notifications-list'>
-                    {
-                        notifications.map((notification, index) => (
-                            <li key={index + 1} className='client-profile__container' onClick={()=> handleNotification()}>
-                                <section className={
-                                    `client-profile__notifications-item
+                {
+                    notifications.length > 0 && (
+                        <ul className='client-profile__notifications-list'>
+                            {
+                                notifications.map((notification, index) => (
+                                    <li key={index + 1} className='client-profile__container' onClick={() => handleNotification(notification)}>
+                                        <section className={
+                                            `client-profile__notifications-item
                                     ${notification.status === "ACCEPTED"
-                                        ? "client-profile__accepted"
-                                        : "client-profile__rejected"}
-                                    ${notification.isView ? "client-profile__viewed" : ""}
+                                                ? "client-profile__accepted"
+                                                : "client-profile__rejected"}
+                                    ${notification.isRead ? "client-profile__viewed" : ""}
                                         `}>
-                                    <div></div>
-                                    <p>
-                                        {
-                                            `${notification.isAccepted
-                                                ? "Cita confirmada por "
-                                                : "Cita rechazada por "}
-                                        ${notification.psychologist}`}
-                                    </p>
-                                </section>
-                                <hr />
-                            </li>
-                        ))
-                    }
-                </ul>
+                                            <div></div>
+                                            <p>
+                                                {
+                                                    `${notification.status === "ACCEPTED"
+                                                        ? "Cita confirmada por "
+                                                        : "Cita rechazada por "}
+                                        ${notification.psychologistName}`}
+                                            </p>
+                                        </section>
+                                        <hr />
+                                    </li>
+                                ))
+                            }
+                        </ul>
+                    )
+                }
+
             </div>
         </section >
     )
