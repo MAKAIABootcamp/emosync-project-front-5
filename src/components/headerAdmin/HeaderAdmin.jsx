@@ -14,7 +14,7 @@ const HeaderAdmin = () => {
 
   const toExit = () => {
     dispatch(reset())
-    dispatch(logout())
+    //dispatch(logout())
     navigate('/')
   }
 
