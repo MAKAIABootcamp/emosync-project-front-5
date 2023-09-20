@@ -326,7 +326,7 @@ const modalAddStripe = async () => {
   return (
     <main className='CalendarPsycho__father'>
       <HeaderPsycho />
-      <Toaster richColors position='bottom-left'/>
+      <Toaster richColors position='top-right'/>
       {hola2 &&
       <div className='CalendarPsycho'>
          <section className='CalendarPsycho__striper'>
