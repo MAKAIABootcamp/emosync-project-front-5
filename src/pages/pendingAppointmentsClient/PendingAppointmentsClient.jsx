@@ -7,6 +7,7 @@ import ReportAppointment from '../../components/modales/reportAppointment/Report
 import { getAppointmentsClient } from '../../services/getAppointmentsClient'
 import { getPsychologist } from '../../services/getPsychologist'
 import { updateAppointments } from '../../services/updateAppointments'
+import EmptyState from '../../components/emptyState/EmptyState'
 
 const PendingAppointmentsClient = () => {
     const { modalActive, modalAuxActive } = useSelector(state => state.modals)
@@ -43,9 +44,9 @@ const PendingAppointmentsClient = () => {
             {
                 modalActive && (
                     <CancelAppointment
-                    appointmentId={appointmentId}
-                    appointments={appointments}
-                    setAppointments={setAppointments}/>
+                        appointmentId={appointmentId}
+                        appointments={appointments}
+                        setAppointments={setAppointments} />
                 )
             }
             {
@@ -54,36 +55,43 @@ const PendingAppointmentsClient = () => {
                 )
             }
             <h1 className='pending-appointments-client__title'>Citas pendientes para está semana</h1>
-            <table className='pending-appointments-client__table'>
-                <thead className='pending-appointments-client__tr'>
-                    <tr>
-                        <th className='pending-appointments-client__th'>Psicólogo</th>
-                        <th className='pending-appointments-client__th'>Fecha de la cita</th>
-                        <th className='pending-appointments-client__th'>Enalces</th>
-                        <th className='pending-appointments-client__th'>Cancelación</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        appointments.length > 0 && appointments.map((item, index) => (
-                            <tr key={index + 1} className='pending-appointments-client__tr'>
-                                <td className='pending-appointments-client__td'>
-                                    <figure onClick={handleReportAppointment}>
-                                        <img src="/User/exclamation-mark-svgrepo-com.svg" alt="" />
-                                        <figcaption>Da click aquí para reportar en caso tal de que la cita haya sido incumplida.</figcaption>
-                                    </figure>
-                                    {item.psychologistName}
-                                </td>
-                                <td className='pending-appointments-client__td'>{item.date}</td>
-                                <td className='pending-appointments-client__td link'><a href={item.urlAppointment}>Link</a></td>
-                                <td className='pending-appointments-client__td cancel-appointment' onClick={()=> handleCancelAppointment(item.id)}>
-                                    Cancelar cita
-                                </td>
+            {
+                appointments.length > 0 ? (
+                    <table className='pending-appointments-client__table'>
+                        <thead className='pending-appointments-client__tr'>
+                            <tr>
+                                <th className='pending-appointments-client__th'>Psicólogo</th>
+                                <th className='pending-appointments-client__th'>Fecha de la cita</th>
+                                <th className='pending-appointments-client__th'>Enalces</th>
+                                <th className='pending-appointments-client__th'>Cancelación</th>
                             </tr>
-                        ))
-                    }
-                </tbody>
-            </table>
+                        </thead>
+                        <tbody>
+                            {
+                                appointments.map((item, index) => (
+                                    <tr key={index + 1} className='pending-appointments-client__tr'>
+                                        <td className='pending-appointments-client__td'>
+                                            <figure onClick={handleReportAppointment}>
+                                                <img src="/User/exclamation-mark-svgrepo-com.svg" alt="" />
+                                                <figcaption>Da click aquí para reportar en caso tal de que la cita haya sido incumplida.</figcaption>
+                                            </figure>
+                                            {item.psychologistName}
+                                        </td>
+                                        <td className='pending-appointments-client__td'>{item.date}</td>
+                                        <td className='pending-appointments-client__td link'><a href={item.urlAppointment}>Link</a></td>
+                                        <td className='pending-appointments-client__td cancel-appointment' onClick={() => handleCancelAppointment(item.id)}>
+                                            Cancelar cita
+                                        </td>
+                                    </tr>
+                                ))
+                            }
+                        </tbody>
+                    </table>
+                ) : (
+                    <EmptyState type={"APPOINTMENTS"}/>
+                )
+            }
+
         </section>
     )
 }

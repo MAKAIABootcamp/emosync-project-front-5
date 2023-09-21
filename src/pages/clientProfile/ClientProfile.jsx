@@ -9,6 +9,7 @@ import { setModalActive } from '../../store/slides/modals/modals'
 import { getNotifications } from '../../services/getNotifications'
 import { getPsychologist } from '../../services/getPsychologist'
 import { updateNotification } from '../../services/updateNotification'
+import EmptyState from '../../components/emptyState/EmptyState'
 
 const ClientProfile = () => {
     const navigate = useNavigate()
@@ -109,7 +110,7 @@ const ClientProfile = () => {
             <div className='client-profile__notifications'>
                 <h1 className='client-profile__title'>Notificaciones</h1>
                 {
-                    notifications.length > 0 && (
+                    notifications.length > 0 ? (
                         <ul className='client-profile__notifications-list'>
                             {
                                 notifications.map((notification, index) => (
@@ -135,6 +136,8 @@ const ClientProfile = () => {
                                 ))
                             }
                         </ul>
+                    ) : (
+                        <EmptyState type={"NOTIFICATIONS"}/>
                     )
                 }
 
