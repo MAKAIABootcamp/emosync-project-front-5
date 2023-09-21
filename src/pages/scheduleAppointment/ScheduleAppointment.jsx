@@ -67,7 +67,8 @@ const ScheduleAppointment = () => {
                                             <p className='schedule-appointment__label--text'>Fecha</p>
                                             <input
                                                 type="date"
-                                                className='schedule-appointment__input'
+                                                min={new Date().toISOString().slice(0, -8).split('T')[0]}
+                                                className='schedule-appointment__input  datepickerbg'
                                                 {...register("date")}
                                             />
                                         </label>
