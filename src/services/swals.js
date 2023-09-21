@@ -58,6 +58,27 @@ export const swals = (type, navigate = null) => {
                 text: 'Hubo un error al cancelar tu cita, vuelve a intentarlo!',
             })
             break;
+        case "REPORT-APPOINTMENTS":
+            Swal.fire(
+                'Excelente!',
+                'Tu cita a sido reportada con existo, gracias por tomarte el tiempo de reportarlo!',
+                'success'
+            )
+            break;
+        case "ERROR-REPORT-APPOINTMENTS":
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Hubo un error al reportar tu cita, vuelve a intentarlo!',
+            })
+            break;
+        case "EMPTY-INPUT":
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'No has escrito qué sucedió! si no llenas el campo, no podrás reportar la cita!',
+            })
+            break;
         default: break
     }
 }
