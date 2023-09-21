@@ -93,7 +93,7 @@ const ClientProfile = () => {
                     </div>
                     <div className='client-profile__info'>
                         <h2 className='client-profile__info-title'>Método de pago </h2>
-                        <p className='client-profile__info-subtitle'>{cardNumber}</p>
+                        <p className='client-profile__info-subtitle'>{`**** **** **** ${cardNumber.split(" ")[3]}`}</p>
                     </div>
                     <button className='client-profile__btn-edit' onClick={() => navigate("/edit-profile")}> Editar Información</button>
                     <button className='client-profile__btn-emergency'>
