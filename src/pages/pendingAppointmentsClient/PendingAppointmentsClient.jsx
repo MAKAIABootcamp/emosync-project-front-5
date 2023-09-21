@@ -15,6 +15,7 @@ const PendingAppointmentsClient = () => {
     const dispatch = useDispatch()
     const [appointments, setAppointments] = useState([])
     const [appointmentId, setAppointmentId] = useState("")
+
     useEffect(() => {
         getData()
     }, [])
@@ -35,7 +36,8 @@ const PendingAppointmentsClient = () => {
         dispatch(setModalActive())
     }
 
-    const handleReportAppointment = () => {
+    const handleReportAppointment = (id) => {
+        setAppointmentId(id)
         dispatch(setModalAuxActive())
     }
 
@@ -51,7 +53,11 @@ const PendingAppointmentsClient = () => {
             }
             {
                 modalAuxActive && (
-                    <ReportAppointment />
+                    <ReportAppointment
+                        appointmentId={appointmentId}
+                        appointments={appointments}
+                        setAppointments={setAppointments}
+                    />
                 )
             }
             <h1 className='pending-appointments-client__title'>Citas pendientes para está semana</h1>
@@ -71,7 +77,7 @@ const PendingAppointmentsClient = () => {
                                 appointments.map((item, index) => (
                                     <tr key={index + 1} className='pending-appointments-client__tr'>
                                         <td className='pending-appointments-client__td'>
-                                            <figure onClick={handleReportAppointment}>
+                                            <figure onClick={() => handleReportAppointment(item.id)}>
                                                 <img src="/User/exclamation-mark-svgrepo-com.svg" alt="" />
                                                 <figcaption>Da click aquí para reportar en caso tal de que la cita haya sido incumplida.</figcaption>
                                             </figure>
@@ -88,7 +94,7 @@ const PendingAppointmentsClient = () => {
                         </tbody>
                     </table>
                 ) : (
-                    <EmptyState type={"APPOINTMENTS"}/>
+                    <EmptyState type={"APPOINTMENTS"} />
                 )
             }
 
