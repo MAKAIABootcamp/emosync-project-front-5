@@ -40,13 +40,37 @@ const ReportAppointment = ({ appointmentId, appointments, setAppointments }) => 
 
     }
 
+    const printDate = (date) => {
+        const dateAux = new Date(date).toLocaleDateString()
+        return `${dateAux.split("/")[0]} ${month(dateAux.split("/")[1])}`
+    }
+
+    const month = (month) => {
+        switch (month) {
+            case "1": return "Ene"
+            case "2": return "Feb"
+            case "3": return "Mar"
+            case "4": return "Abr"
+            case "5": return "May"
+            case "6": return "Jun"
+            case "7": return "Jul"
+            case "8": return "Ago"
+            case "9": return "Sep"
+            case "10": return "Oct"
+            case "11": return "Nov"
+            case "12": return "Dic"
+            default: return ""
+        }
+    }
+
     return (
         <article className='report-appointment'>
             <section className='report-appointment__container'>
                 {
                     appointment?.id && (
                         <h1 className='report-appointment__title'>
-                            {`${appointment.psychologistName.split(" ")[0]} ${appointment.psychologistName.split(" ")[1]}`} - 7 Oct
+                            {`${appointment.psychologistName.split(" ")[0]} ${appointment.psychologistName.split(" ")[1]} -
+                            ${printDate(appointment.appointmentDate)}`}
                         </h1>
                     )
                 }
