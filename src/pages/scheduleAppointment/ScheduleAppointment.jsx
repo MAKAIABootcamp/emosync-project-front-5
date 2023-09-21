@@ -95,7 +95,11 @@ const ScheduleAppointment = () => {
                                 )
                             }
                         </div>
-                        <button className='schedule-appointment__btn-submit' >Agendar</button>
+                        {
+                            psychologist.stripe.length > 0 && (
+                                <button className='schedule-appointment__btn-submit' >Agendar</button>
+                            )
+                        }
                     </form>
                 )
             }

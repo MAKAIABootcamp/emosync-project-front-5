@@ -2,6 +2,7 @@ import React from 'react'
 import "./notificationClient.scss"
 import { useDispatch } from 'react-redux'
 import { setModalActive } from '../../../store/slides/modals/modals'
+import { printDate } from '../../../services/printDate'
 
 const NotificationClient = ({ notification }) => {
     const dispatch = useDispatch()
@@ -9,6 +10,8 @@ const NotificationClient = ({ notification }) => {
     const closeModal = () => {
         dispatch(setModalActive())
     }
+
+
 
     return (
         <article className='notification-client'>
@@ -27,7 +30,7 @@ const NotificationClient = ({ notification }) => {
                     ) : notification.status === "ACCEPTED" ? (
                         <>
                             <h2 className='notification-client__title'>Fecha de la cita</h2>
-                            <p className='notification-client__text'>7 Oct - 2:30pm</p>
+                            <p className='notification-client__text'>{printDate(notification.appointmentDate)}</p>
                             <p className='notification-client__alert'>Puedes acceder al link de la consulta en el apartado de citas pendientes.</p>
                         </>
                     ) : (
