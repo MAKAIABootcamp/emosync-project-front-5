@@ -127,7 +127,9 @@ const ClientProfile = () => {
                                                 {
                                                     `${notification.status === "ACCEPTED"
                                                         ? "Cita confirmada por "
-                                                        : "Cita rechazada por "}
+                                                        : notification.status === "REJECTED"
+                                                            ? "Cita rechazada por "
+                                                            : "Cita cancelada por "}
                                         ${notification.psychologistName}`}
                                             </p>
                                         </section>
@@ -137,7 +139,7 @@ const ClientProfile = () => {
                             }
                         </ul>
                     ) : (
-                        <EmptyState type={"NOTIFICATIONS"}/>
+                        <EmptyState type={"NOTIFICATIONS"} />
                     )
                 }
 

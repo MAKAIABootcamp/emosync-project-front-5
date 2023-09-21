@@ -24,11 +24,16 @@ const NotificationClient = ({ notification }) => {
                             <h2 className='notification-client__title'>Motivo de Rechazo</h2>
                             <p className='notification-client__text'>{notification.reason}</p>
                         </>
-                    ) : (
+                    ) : notification.status === "ACCEPTED" ? (
                         <>
                             <h2 className='notification-client__title'>Fecha de la cita</h2>
                             <p className='notification-client__text'>7 Oct - 2:30pm</p>
                             <p className='notification-client__alert'>Puedes acceder al link de la consulta en el apartado de citas pendientes.</p>
+                        </>
+                    ) : (
+                        <>
+                            <h2 className='notification-client__title'>Motivo de Cancelación</h2>
+                            <p className='notification-client__text'>{notification.reason}</p>
                         </>
                     )
                 }
