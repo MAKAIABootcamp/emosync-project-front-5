@@ -5,33 +5,76 @@ import ConfirmAppointment from '../../components/modales/confirmAppointment/Conf
 import { useDispatch, useSelector } from 'react-redux'
 import { setModalActive } from '../../store/slides/modals/modals'
 import { getPsychologist } from '../../services/getPsychologist'
-import { useForm } from 'react-hook-form'
+import { getHours } from '../../services/printDate'
 
 const ScheduleAppointment = () => {
     const { modalActive } = useSelector(state => state.modals)
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const { psychologistId } = useParams()
-    const [psychologist, setPsychologist] = useState()
-    const { register, handleSubmit, formState: { errors }, watch } = useForm()
+    const [psychologist, setPsychologist] = useState({})
+    const [dateSelected, setDateSelected] = useState("")
+    const [availableHours, setAvailableHours] = useState([])
+    const [availableDay, setAvailableDay] = useState(false)
 
     useEffect(() => {
         getData()
     }, [])
 
+    const getData = async () => {
+        const { data } = await getPsychologist(psychologistId)
+        data.stripe.forEach((element) => {
+            element.day = setDays(element.day)
+        })
+        setPsychologist(data)
+    }
+
     const handleReturn = () => {
         navigate("/home")
     }
 
-    const onSubmit = (data) => {
+    const onSubmit = (event) => {
+        event.preventDefault()
         if (psychologist.stripe.length > 0) {
             dispatch(setModalActive())
         }
     }
 
-    const getData = async () => {
-        const { data } = await getPsychologist(psychologistId)
-        setPsychologist(data)
+    const handleDate = (date) => {
+        setDateSelected(date)
+        const [year, month, day] = date.split("-")
+        const selectedDate = new Date().setFullYear(year, month - 1, day)
+        const selectedDay = new Date(selectedDate).getDay()
+        const selectedDayValidate = psychologist.stripe.some(element => element.day === selectedDay)
+        setAvailableDay(selectedDayValidate)
+        if (selectedDayValidate) {
+            const findDay = psychologist.stripe.find(element => element.day === selectedDay)
+            console.log(findDay)
+            const startHour = new Date(selectedDate).setHours(Number(findDay.start), 0, 0, 0)
+            const endHour = new Date(selectedDate).setHours(Number(findDay.end), 0, 0, 0)
+            let hoursAux = [];
+            let currentHour = startHour;
+
+            while (currentHour <= endHour) {
+                const hour = new Date(currentHour).getTime();
+                hoursAux.push(hour);
+                currentHour += 60 * 60 * 1000; // Agregar 1 hora (en milisegundos)
+            }
+            setAvailableHours(hoursAux)
+        }
+    }
+
+    const setDays = (day) => {
+        switch (day) {
+            case "lunes": return 1
+            case "martes": return 2
+            case "miercoles": return 3
+            case "jueves": return 4
+            case "viernes": return 5
+            case "sabado": return 6
+            case "domingo": return 0
+            default: return ""
+        }
     }
 
     return (
@@ -47,7 +90,7 @@ const ScheduleAppointment = () => {
             </figure>
             {
                 psychologist?.displayName && (
-                    <form className='schedule-appointment__form' onSubmit={handleSubmit(onSubmit)}>
+                    <form className='schedule-appointment__form' onSubmit={(event) => onSubmit(event)}>
                         <h1 className='schedule-appointment__title'>Agendar Cita</h1>
                         <div className='schedule-appointment__form-container'>
                             <label>
@@ -69,18 +112,23 @@ const ScheduleAppointment = () => {
                                                 type="date"
                                                 min={new Date().toISOString().slice(0, -8).split('T')[0]}
                                                 className='schedule-appointment__input  datepickerbg'
-                                                {...register("date")}
+                                                onChange={(event) => handleDate(event.target.value)}
                                             />
                                         </label>
                                         {
-                                            watch("date") && (
+                                            dateSelected && availableDay && (
                                                 <>
                                                     <label className='schedule-appointment__label'>
                                                         <p className='schedule-appointment__label--text'>Hora</p>
                                                         <select className='schedule-appointment__input'>
-                                                            <option value="BRONZE">1:00PM</option>
-                                                            <option value="SILVER">3:00PM</option>
-                                                            <option value="GOLD">4:00PM</option>
+                                                            <option value="">Elige una hora</option>
+                                                            {
+                                                                availableHours.length > 0 && availableHours.map((hour, index) => (
+                                                                    <option value={hour} key={index+1}>
+                                                                        {`${getHours(new Date(hour).getHours())}:00${new Date(hour).getHours() < 12 ? "AM" : "PM"}`}
+                                                                    </option>
+                                                                ))
+                                                            }
                                                         </select>
                                                     </label>
                                                     <label className='schedule-appointment__label'>

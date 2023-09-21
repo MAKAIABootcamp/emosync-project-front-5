@@ -3,10 +3,10 @@ export const printDate = (date) => {
     const hours = new Date(date).getHours()
     const minutes = new Date(date).getMinutes()
     return `${dateAux.split("/")[0]} ${month(dateAux.split("/")[1])} -
-        ${hours <= 12 ? hours : getHours(hours)}:${minutes < 10 ? `0${minutes}` : minutes}${hours < 12 ? "am" : "pm"}`
+        ${getHours(hours)}:${minutes < 10 ? `0${minutes}` : minutes}${hours < 12 ? "am" : "pm"}`
 }
 
-const month = (month) => {
+export const month = (month) => {
     switch (month) {
         case "1": return "Ene"
         case "2": return "Feb"
@@ -24,7 +24,7 @@ const month = (month) => {
     }
 }
 
-const getHours = (hour) => {
+export const getHours = (hour) => {
     switch (hour) {
         case 13: return 1
         case 14: return 2
@@ -38,6 +38,6 @@ const getHours = (hour) => {
         case 22: return 10
         case 23: return 11
         case 24: return 12
-        default: ""
+        default: return hour
     }
 }

@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import "./reportAppointment.scss"
 import { updateAppointments } from '../../../services/updateAppointments'
 import { swals } from '../../../services/swals'
+import { month } from '../../../services/printDate'
 
 const ReportAppointment = ({ appointmentId, appointments, setAppointments }) => {
     const dispatch = useDispatch()
@@ -43,24 +44,6 @@ const ReportAppointment = ({ appointmentId, appointments, setAppointments }) => 
     const printDate = (date) => {
         const dateAux = new Date(date).toLocaleDateString()
         return `${dateAux.split("/")[0]} ${month(dateAux.split("/")[1])}`
-    }
-
-    const month = (month) => {
-        switch (month) {
-            case "1": return "Ene"
-            case "2": return "Feb"
-            case "3": return "Mar"
-            case "4": return "Abr"
-            case "5": return "May"
-            case "6": return "Jun"
-            case "7": return "Jul"
-            case "8": return "Ago"
-            case "9": return "Sep"
-            case "10": return "Oct"
-            case "11": return "Nov"
-            case "12": return "Dic"
-            default: return ""
-        }
     }
 
     return (
