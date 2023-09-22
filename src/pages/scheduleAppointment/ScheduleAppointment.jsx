@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setModalActive } from '../../store/slides/modals/modals'
 import { getPsychologist } from '../../services/getPsychologist'
 import { getHours } from '../../services/printDate'
+import { getAppointmentsPsicologists } from '../../services/getAppointmentsClient'
 
 const ScheduleAppointment = () => {
     const { modalActive } = useSelector(state => state.modals)
@@ -14,8 +15,8 @@ const ScheduleAppointment = () => {
     const { psychologistId } = useParams()
     const [psychologist, setPsychologist] = useState({})
     const [dateSelected, setDateSelected] = useState("")
-    const [availableHours, setAvailableHours] = useState([])
     const [availableDay, setAvailableDay] = useState(false)
+    const [availableHours, setAvailableHours] = useState([])
 
     useEffect(() => {
         getData()
@@ -40,7 +41,7 @@ const ScheduleAppointment = () => {
         }
     }
 
-    const handleDate = (date) => {
+    const handleDate = async (date) => {
         setDateSelected(date)
         const [year, month, day] = date.split("-")
         const selectedDate = new Date().setFullYear(year, month - 1, day)
@@ -52,6 +53,8 @@ const ScheduleAppointment = () => {
             console.log(findDay)
             const startHour = new Date(selectedDate).setHours(Number(findDay.start), 0, 0, 0)
             const endHour = new Date(selectedDate).setHours(Number(findDay.end), 0, 0, 0)
+            const { data } = await getAppointmentsPsicologists(psychologistId, startHour, endHour)
+            console.log(data)
             let hoursAux = [];
             let currentHour = startHour;
 
@@ -60,6 +63,19 @@ const ScheduleAppointment = () => {
                 hoursAux.push(hour);
                 currentHour += 60 * 60 * 1000; // Agregar 1 hora (en milisegundos)
             }
+            let availableHours = []
+
+            if (data.length > 0) {
+                availableHours = hoursAux.filter(hour => {
+                    let aux = []
+                    data.forEach(appointment => {
+                        aux = !hour === appointment.appointmentDate && hour
+                    })
+                    return aux
+                })
+            }
+            console.log(hoursAux)
+            console.log(availableHours)
             setAvailableHours(hoursAux)
         }
     }
@@ -124,7 +140,7 @@ const ScheduleAppointment = () => {
                                                             <option value="">Elige una hora</option>
                                                             {
                                                                 availableHours.length > 0 && availableHours.map((hour, index) => (
-                                                                    <option value={hour} key={index+1}>
+                                                                    <option value={hour} key={index + 1}>
                                                                         {`${getHours(new Date(hour).getHours())}:00${new Date(hour).getHours() < 12 ? "AM" : "PM"}`}
                                                                     </option>
                                                                 ))
@@ -135,6 +151,7 @@ const ScheduleAppointment = () => {
                                                         <p className='schedule-appointment__label--text'>Motivo de consulta</p>
                                                         <textarea className='schedule-appointment__input'></textarea>
                                                     </label>
+                                                    <button className='schedule-appointment__btn-submit' >Agendar</button>
                                                 </>
                                             )
                                         }
@@ -144,11 +161,6 @@ const ScheduleAppointment = () => {
                                 )
                             }
                         </div>
-                        {
-                            psychologist.stripe.length > 0 && (
-                                <button className='schedule-appointment__btn-submit' >Agendar</button>
-                            )
-                        }
                     </form>
                 )
             }
