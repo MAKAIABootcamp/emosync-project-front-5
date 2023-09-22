@@ -41,7 +41,7 @@ export const swals = (type, navigate = null) => {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'No has hecho ningún cambio, vuelve a intentarlo!',
+                text: 'Hubo un error al editar tu información, vuelve a intentarlo!',
             })
             break;
         case "CANCEL-APPOINTMENTS":
@@ -85,6 +85,20 @@ export const swals = (type, navigate = null) => {
                 'Tu cita a sido confirmada con existo, gracias por utilizar nuestro servicio!',
                 'success'
             )
+            break;
+        case "EMPTY-INPUT-CONFIRM-APPOINTMENT":
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'No has suministrado la información necesaria para agendar tu cita, llena los campos y vuelve a intentarlo!',
+            })
+            break;
+        case "ERROR-CONFIRM-APPOINTMENT":
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Hubo un error al confirmar tu cita, por favor vuelve a intentarlo!',
+            })
             break;
         default: break
     }

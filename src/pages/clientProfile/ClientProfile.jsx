@@ -33,7 +33,6 @@ const ClientProfile = () => {
             aux[i].psychologistName = psychologistInfo.data.displayName;
             aux[i].psychologistSpecialty = psychologistInfo.data.verifiedSpecialty ? psychologistInfo.data.specialty : "Psicolog@ General";
         }
-        console.log(aux)
         setNotifications(aux)
     }
 

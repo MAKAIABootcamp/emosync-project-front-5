@@ -13,7 +13,6 @@ const ReportAppointment = ({ appointmentId, appointments, setAppointments }) => 
 
     useEffect(() => {
         const auxAppointment = appointments.find((appointment) => appointment.id === appointmentId)
-        console.log(auxAppointment)
         setAppointment(auxAppointment)
     }, [])
 

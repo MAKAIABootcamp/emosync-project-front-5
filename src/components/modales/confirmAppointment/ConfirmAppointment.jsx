@@ -28,20 +28,28 @@ const ConfirmAppointment = ({ props: { date, reason, psychologist, psychologistI
     }
 
     const confirmAppointment = async () => {
-        const infoAppointment = {
-            createdAt: new Date().getTime(),
-            appointmentDate: Number(date),
-            clientKey: key,
-            consultationReason: reason,
-            psychologistKey: psychologistId,
-            status: "PENDING",
-            updatedAt: new Date().getTime(),
-        }
-        const resp = await createAppointment(infoAppointment)
-        if (resp) {
-            swals("CONFIRM-APPOINTMENT")
-            navigate("/home")
-            dispatch(setModalActive())
+        if(date && reason) {
+            const infoAppointment = {
+                createdAt: new Date().getTime(),
+                appointmentDate: Number(date),
+                clientKey: key,
+                consultationReason: reason,
+                psychologistKey: psychologistId,
+                status: "PENDING",
+                updatedAt: new Date().getTime(),
+            }
+
+            const resp = await createAppointment(infoAppointment)
+            if (resp) {
+                swals("CONFIRM-APPOINTMENT")
+                navigate("/home")
+                dispatch(setModalActive())
+            } else {
+                swals("ERROR-CONFIRM-APPOINTMENT")
+            }
+
+        } else {
+            swals("EMPTY-INPUT-CONFIRM-APPOINTMENT")
         }
 
     }

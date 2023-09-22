@@ -136,32 +136,42 @@ const ScheduleAppointment = () => {
                                             />
                                         </label>
                                         {
-                                            dateSelected && availableDay && availableHours.length > 0 && (
+                                            dateSelected && (
                                                 <>
-                                                    <label className='schedule-appointment__label'>
-                                                        <p className='schedule-appointment__label--text'>Hora</p>
-                                                        <select
-                                                            className='schedule-appointment__input'
-                                                            onChange={(event) => setSelectedHour(event.target.value)}
-                                                        >
-                                                            <option value="">Elige una hora</option>
-                                                            {
-                                                                availableHours.map((hour, index) => (
-                                                                    <option value={hour} key={index + 1}>
-                                                                        {`${getHours(new Date(hour).getHours())}:00${new Date(hour).getHours() < 12 ? "AM" : "PM"}`}
-                                                                    </option>
-                                                                ))
-                                                            }
-                                                        </select>
-                                                    </label>
-                                                    <label className='schedule-appointment__label'>
-                                                        <p className='schedule-appointment__label--text'>Motivo de consulta</p>
-                                                        <textarea
-                                                            className='schedule-appointment__input'
-                                                            onChange={(event) => setReason(event.target.value)}
-                                                        ></textarea>
-                                                    </label>
-                                                    <button className='schedule-appointment__btn-submit' >Agendar</button>
+                                                    {
+                                                        availableDay && availableHours.length > 0 ? (
+                                                            <>
+                                                                <label className='schedule-appointment__label'>
+                                                                    <p className='schedule-appointment__label--text'>Hora</p>
+                                                                    <select
+                                                                        className='schedule-appointment__input'
+                                                                        onChange={(event) => setSelectedHour(event.target.value)}
+                                                                    >
+                                                                        <option value="">Elige una hora</option>
+                                                                        {
+                                                                            availableHours.map((hour, index) => (
+                                                                                <option value={hour} key={index + 1}>
+                                                                                    {`${getHours(new Date(hour).getHours())}:00${new Date(hour).getHours() < 12 ? "AM" : "PM"}`}
+                                                                                </option>
+                                                                            ))
+                                                                        }
+                                                                    </select>
+                                                                </label>
+                                                                <label className='schedule-appointment__label'>
+                                                                    <p className='schedule-appointment__label--text'>Motivo de consulta</p>
+                                                                    <textarea
+                                                                        className='schedule-appointment__input'
+                                                                        onChange={(event) => setReason(event.target.value)}
+                                                                    ></textarea>
+                                                                </label>
+                                                                <button className='schedule-appointment__btn-submit' >Agendar</button>
+                                                            </>
+                                                        ) : (
+                                                            <p className='schedule-appointment__label--text'>
+                                                                No hay citas disponibles para la fecha seleccionada.
+                                                            </p>
+                                                        )
+                                                    }
                                                 </>
                                             )
                                         }
