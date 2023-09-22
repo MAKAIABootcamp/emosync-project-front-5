@@ -20,7 +20,7 @@ const ScheduleAppointment = () => {
     const [selectedHour, setSelectedHour] = useState("")
     const [reason, setReason] = useState("")
     const propsConfirmAppointment = {
-        date:selectedHour,
+        date: selectedHour,
         reason,
         psychologist,
         psychologistId
@@ -101,7 +101,7 @@ const ScheduleAppointment = () => {
         <main className={`schedule-appointment ${modalActive ? "schedule-appointment__fixed" : ""}`}>
             {
                 modalActive && (
-                    <ConfirmAppointment props={propsConfirmAppointment}/>
+                    <ConfirmAppointment props={propsConfirmAppointment} />
                 )
             }
             <figure className='schedule-appointment__return-container' onClick={handleReturn}>
@@ -136,7 +136,7 @@ const ScheduleAppointment = () => {
                                             />
                                         </label>
                                         {
-                                            dateSelected && availableDay && (
+                                            dateSelected && availableDay && availableHours.length > 0 && (
                                                 <>
                                                     <label className='schedule-appointment__label'>
                                                         <p className='schedule-appointment__label--text'>Hora</p>
@@ -146,7 +146,7 @@ const ScheduleAppointment = () => {
                                                         >
                                                             <option value="">Elige una hora</option>
                                                             {
-                                                                availableHours.length > 0 && availableHours.map((hour, index) => (
+                                                                availableHours.map((hour, index) => (
                                                                     <option value={hour} key={index + 1}>
                                                                         {`${getHours(new Date(hour).getHours())}:00${new Date(hour).getHours() < 12 ? "AM" : "PM"}`}
                                                                     </option>

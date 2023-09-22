@@ -79,6 +79,13 @@ export const swals = (type, navigate = null) => {
                 text: 'No has escrito qué sucedió! si no llenas el campo, no podrás reportar la cita!',
             })
             break;
+        case "CONFIRM-APPOINTMENT":
+            Swal.fire(
+                'Excelente!',
+                'Tu cita a sido confirmada con existo, gracias por utilizar nuestro servicio!',
+                'success'
+            )
+            break;
         default: break
     }
 }

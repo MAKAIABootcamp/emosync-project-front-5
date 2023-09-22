@@ -2,12 +2,16 @@ import React, { useEffect, useState } from 'react'
 import "./confirmAppointment.scss"
 import { useDispatch, useSelector } from 'react-redux'
 import { setModalActive } from '../../../store/slides/modals/modals'
+import { swals } from '../../../services/swals'
+import { useNavigate } from 'react-router-dom'
+import { createAppointment } from '../../../services/createAppointment'
 
 const ConfirmAppointment = ({ props: { date, reason, psychologist, psychologistId } }) => {
     const { appointmentsPerMonth, subscription } = useSelector(state => state.user)
     const { key } = useSelector(state => state.auth)
     const dispatch = useDispatch()
     const [alertValidate, setAlertValidate] = useState(0)
+    const navigate = useNavigate()
 
     useEffect(() => {
         valdiate()
@@ -23,7 +27,7 @@ const ConfirmAppointment = ({ props: { date, reason, psychologist, psychologistI
         }
     }
 
-    const confirmAppointment = () => {
+    const confirmAppointment = async () => {
         const infoAppointment = {
             createdAt: new Date().getTime(),
             appointmentDate: Number(date),
@@ -33,8 +37,13 @@ const ConfirmAppointment = ({ props: { date, reason, psychologist, psychologistI
             status: "PENDING",
             updatedAt: new Date().getTime(),
         }
-        
-        dispatch(setModalActive())
+        const resp = await createAppointment(infoAppointment)
+        if (resp) {
+            swals("CONFIRM-APPOINTMENT")
+            navigate("/home")
+            dispatch(setModalActive())
+        }
+
     }
     return (
         <article className='confirm-appointment'>
