@@ -99,7 +99,6 @@ const RegisterForm = ({ setStep }) => {
         const inputs = inputsValidate();
         inputs.forEach(item => {
             if (errors[item]) {
-                console.log(message)
                 message = `${message} ${inputsName(item)}`
             }
         })

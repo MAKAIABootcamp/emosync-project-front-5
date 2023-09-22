@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import "./reportAppointment.scss"
 import { updateAppointments } from '../../../services/updateAppointments'
 import { swals } from '../../../services/swals'
+import { month } from '../../../services/printDate'
 
 const ReportAppointment = ({ appointmentId, appointments, setAppointments }) => {
     const dispatch = useDispatch()
@@ -12,7 +13,6 @@ const ReportAppointment = ({ appointmentId, appointments, setAppointments }) => 
 
     useEffect(() => {
         const auxAppointment = appointments.find((appointment) => appointment.id === appointmentId)
-        console.log(auxAppointment)
         setAppointment(auxAppointment)
     }, [])
 
@@ -40,13 +40,19 @@ const ReportAppointment = ({ appointmentId, appointments, setAppointments }) => 
 
     }
 
+    const printDate = (date) => {
+        const dateAux = new Date(date).toLocaleDateString()
+        return `${dateAux.split("/")[0]} ${month(dateAux.split("/")[1])}`
+    }
+
     return (
         <article className='report-appointment'>
             <section className='report-appointment__container'>
                 {
                     appointment?.id && (
                         <h1 className='report-appointment__title'>
-                            {`${appointment.psychologistName.split(" ")[0]} ${appointment.psychologistName.split(" ")[1]}`} - 7 Oct
+                            {`${appointment.psychologistName.split(" ")[0]} ${appointment.psychologistName.split(" ")[1]} -
+                            ${printDate(appointment.appointmentDate)}`}
                         </h1>
                     )
                 }

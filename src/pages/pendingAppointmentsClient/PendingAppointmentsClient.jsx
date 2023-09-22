@@ -8,6 +8,7 @@ import { getAppointmentsClient } from '../../services/getAppointmentsClient'
 import { getPsychologist } from '../../services/getPsychologist'
 import { updateAppointments } from '../../services/updateAppointments'
 import EmptyState from '../../components/emptyState/EmptyState'
+import { printDate } from '../../services/printDate'
 
 const PendingAppointmentsClient = () => {
     const { modalActive, modalAuxActive } = useSelector(state => state.modals)
@@ -68,7 +69,7 @@ const PendingAppointmentsClient = () => {
                             <tr>
                                 <th className='pending-appointments-client__th'>Psicólogo</th>
                                 <th className='pending-appointments-client__th'>Fecha de la cita</th>
-                                <th className='pending-appointments-client__th'>Enalces</th>
+                                <th className='pending-appointments-client__th'>Enlaces</th>
                                 <th className='pending-appointments-client__th'>Cancelación</th>
                             </tr>
                         </thead>
@@ -83,7 +84,7 @@ const PendingAppointmentsClient = () => {
                                             </figure>
                                             {item.psychologistName}
                                         </td>
-                                        <td className='pending-appointments-client__td'>{item.date}</td>
+                                        <td className='pending-appointments-client__td'>{printDate(item.appointmentDate)}</td>
                                         <td className='pending-appointments-client__td link'><a href={item.urlAppointment}>Link</a></td>
                                         <td className='pending-appointments-client__td cancel-appointment' onClick={() => handleCancelAppointment(item.id)}>
                                             Cancelar cita
