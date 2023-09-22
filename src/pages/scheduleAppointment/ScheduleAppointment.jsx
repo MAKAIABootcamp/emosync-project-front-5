@@ -17,7 +17,14 @@ const ScheduleAppointment = () => {
     const [dateSelected, setDateSelected] = useState("")
     const [availableDay, setAvailableDay] = useState(false)
     const [availableHours, setAvailableHours] = useState([])
-
+    const [selectedHour, setSelectedHour] = useState("")
+    const [reason, setReason] = useState("")
+    const propsConfirmAppointment = {
+        date:selectedHour,
+        reason,
+        psychologist,
+        psychologistId
+    }
     useEffect(() => {
         getData()
     }, [])
@@ -50,11 +57,9 @@ const ScheduleAppointment = () => {
         setAvailableDay(selectedDayValidate)
         if (selectedDayValidate) {
             const findDay = psychologist.stripe.find(element => element.day === selectedDay)
-            console.log(findDay)
             const startHour = new Date(selectedDate).setHours(Number(findDay.start), 0, 0, 0)
             const endHour = new Date(selectedDate).setHours(Number(findDay.end), 0, 0, 0)
             const { data } = await getAppointmentsPsicologists(psychologistId, startHour, endHour)
-            console.log(data)
             let hoursAux = [];
             let currentHour = startHour;
 
@@ -63,20 +68,19 @@ const ScheduleAppointment = () => {
                 hoursAux.push(hour);
                 currentHour += 60 * 60 * 1000; // Agregar 1 hora (en milisegundos)
             }
-            let availableHours = []
+            let availableHours = hoursAux;
 
             if (data.length > 0) {
-                availableHours = hoursAux.filter(hour => {
-                    let aux = []
-                    data.forEach(appointment => {
-                        aux = !hour === appointment.appointmentDate && hour
-                    })
-                    return aux
+                let aux = []
+
+                data.forEach(appointment => {
+                    aux.push(appointment.appointmentDate)
                 })
+
+                availableHours = hoursAux.filter(hour => hour !== aux.find(item => hour === item))
             }
-            console.log(hoursAux)
-            console.log(availableHours)
-            setAvailableHours(hoursAux)
+
+            setAvailableHours(availableHours)
         }
     }
 
@@ -97,7 +101,7 @@ const ScheduleAppointment = () => {
         <main className={`schedule-appointment ${modalActive ? "schedule-appointment__fixed" : ""}`}>
             {
                 modalActive && (
-                    <ConfirmAppointment />
+                    <ConfirmAppointment props={propsConfirmAppointment}/>
                 )
             }
             <figure className='schedule-appointment__return-container' onClick={handleReturn}>
@@ -136,7 +140,10 @@ const ScheduleAppointment = () => {
                                                 <>
                                                     <label className='schedule-appointment__label'>
                                                         <p className='schedule-appointment__label--text'>Hora</p>
-                                                        <select className='schedule-appointment__input'>
+                                                        <select
+                                                            className='schedule-appointment__input'
+                                                            onChange={(event) => setSelectedHour(event.target.value)}
+                                                        >
                                                             <option value="">Elige una hora</option>
                                                             {
                                                                 availableHours.length > 0 && availableHours.map((hour, index) => (
@@ -149,7 +156,10 @@ const ScheduleAppointment = () => {
                                                     </label>
                                                     <label className='schedule-appointment__label'>
                                                         <p className='schedule-appointment__label--text'>Motivo de consulta</p>
-                                                        <textarea className='schedule-appointment__input'></textarea>
+                                                        <textarea
+                                                            className='schedule-appointment__input'
+                                                            onChange={(event) => setReason(event.target.value)}
+                                                        ></textarea>
                                                     </label>
                                                     <button className='schedule-appointment__btn-submit' >Agendar</button>
                                                 </>

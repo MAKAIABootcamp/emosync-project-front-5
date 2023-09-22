@@ -3,8 +3,9 @@ import "./confirmAppointment.scss"
 import { useDispatch, useSelector } from 'react-redux'
 import { setModalActive } from '../../../store/slides/modals/modals'
 
-const ConfirmAppointment = () => {
+const ConfirmAppointment = ({ props: { date, reason, psychologist, psychologistId } }) => {
     const { appointmentsPerMonth, subscription } = useSelector(state => state.user)
+    const { key } = useSelector(state => state.auth)
     const dispatch = useDispatch()
     const [alertValidate, setAlertValidate] = useState(0)
 
@@ -22,19 +23,38 @@ const ConfirmAppointment = () => {
         }
     }
 
+    const confirmAppointment = () => {
+        const infoAppointment = {
+            createdAt: new Date().getTime(),
+            appointmentDate: Number(date),
+            clientKey: key,
+            consultationReason: reason,
+            psychologistKey: psychologistId,
+            status: "PENDING",
+            updatedAt: new Date().getTime(),
+        }
+        
+        dispatch(setModalActive())
+    }
     return (
         <article className='confirm-appointment'>
             <section className='confirm-appointment__container'>
-                <h1 className='confirm-appointment__title'>¿La información está correcta?</h1>
-                <p className='confirm-appointment__text'>Si es asi, proceda a confirmar la cita</p>
+                <h1 className='confirm-appointment__title'>¿La información es correcta?</h1>
+                <p className='confirm-appointment__text'>Si es así, proceda a confirmar la cita</p>
                 {
-                    appointmentsPerMonth >= alertValidate && (
+                    appointmentsPerMonth >= alertValidate && !psychologist.verifiedSpecialty && (
                         <p className='confirm-appointment__alert'>Le recordamos que ya ha cumplido con la cantidad de citas gratis durante el mes
-                            según su suscripción, está cita será cobrada en el momento que sea confirmada.</p>
+                            según su suscripción, esta cita será cobrada en el momento que sea confirmada.</p>
+                    )
+                }
+                {
+                    psychologist.verifiedSpecialty && (
+                        <p className='confirm-appointment__alert'>Esta cita será con un especialista, realizaremos el cobro de la misma
+                            según su suscripción.</p>
                     )
                 }
                 <div className='confirm-appointment__btn-container'>
-                    <button className='confirm-appointment__confirm'>Confirmar</button>
+                    <button className='confirm-appointment__confirm' onClick={confirmAppointment}>Confirmar</button>
                     <button className='confirm-appointment__cancel' onClick={() => dispatch(setModalActive())}>Cancelar</button>
                 </div>
             </section>
