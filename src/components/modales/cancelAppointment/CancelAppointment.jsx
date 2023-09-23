@@ -23,7 +23,8 @@ const CancelAppointment = ({ appointmentId, appointments, setAppointments }) => 
         <article className='cancel-appointment-modal'>
             <section className='cancel-appointment-modal__container'>
                 <p className='cancel-appointment-modal__alert'>Se descontará la cita de la cantidad de citas que has tomado
-                    este mes, si la cita fue cobrada como cita extra se devolverá tu dinero.</p>
+                    este mes (dado el caso de que sea con un psicólogo general),
+                    si la cita fue cobrada como cita extra se devolverá tu dinero.</p>
                 <div className='cancel-appointment-modal__btn-container'>
                     <button className='cancel-appointment-modal__confirm' onClick={handleCancelAppointment}>Cancelar cita</button>
                     <button className='cancel-appointment-modal__cancel' onClick={() => dispatch(setModalActive())}>

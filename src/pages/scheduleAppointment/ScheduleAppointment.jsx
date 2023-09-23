@@ -80,6 +80,9 @@ const ScheduleAppointment = () => {
                 availableHours = hoursAux.filter(hour => hour !== aux.find(item => hour === item))
             }
 
+            const currentDay = new Date().getTime()
+            availableHours = availableHours.filter(hour => hour > currentDay)
+            
             setAvailableHours(availableHours)
         }
     }
