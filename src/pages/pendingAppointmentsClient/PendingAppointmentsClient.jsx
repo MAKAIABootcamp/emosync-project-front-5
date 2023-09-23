@@ -16,7 +16,13 @@ const PendingAppointmentsClient = () => {
     const dispatch = useDispatch()
     const [appointments, setAppointments] = useState([])
     const [appointmentId, setAppointmentId] = useState("")
-
+    const [verifiedSpecialty, setVerifiedSpecialty] = useState("")
+    const propsCancelAppointment = {
+        appointmentId,
+        appointments,
+        setAppointments,
+        verifiedSpecialty
+    }
     useEffect(() => {
         getData()
     }, [])
@@ -28,11 +34,13 @@ const PendingAppointmentsClient = () => {
         for (let i = 0; i < aux.length; i++) {
             psychologistInfo = await getPsychologist(aux[i].psychologistKey)
             aux[i].psychologistName = psychologistInfo.data.displayName;
+            aux[i].verifiedSpecialty = psychologistInfo.data.verifiedSpecialty;
         }
         setAppointments(aux)
     }
 
-    const handleCancelAppointment = async (id) => {
+    const handleCancelAppointment = async (id, verifiedSpecialty) => {
+        setVerifiedSpecialty(verifiedSpecialty)
         setAppointmentId(id)
         dispatch(setModalActive())
     }
@@ -47,9 +55,7 @@ const PendingAppointmentsClient = () => {
             {
                 modalActive && (
                     <CancelAppointment
-                        appointmentId={appointmentId}
-                        appointments={appointments}
-                        setAppointments={setAppointments} />
+                    propsCancelAppointment={propsCancelAppointment} />
                 )
             }
             {
@@ -86,7 +92,7 @@ const PendingAppointmentsClient = () => {
                                         </td>
                                         <td className='pending-appointments-client__td'>{printDate(item.appointmentDate)}</td>
                                         <td className='pending-appointments-client__td link'><a href={item.urlAppointment}>Link</a></td>
-                                        <td className='pending-appointments-client__td cancel-appointment' onClick={() => handleCancelAppointment(item.id)}>
+                                        <td className='pending-appointments-client__td cancel-appointment' onClick={() => handleCancelAppointment(item.id, item.verifiedSpecialty)}>
                                             Cancelar cita
                                         </td>
                                     </tr>

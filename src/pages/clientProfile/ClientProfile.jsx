@@ -87,7 +87,7 @@ const ClientProfile = () => {
                         <p className='client-profile__info-subtitle'>{handleSubscription()}</p>
                     </div>
                     <div className='client-profile__info'>
-                        <h2 className='client-profile__info-title'>Citas agendadas con Psicólogo General en el mes</h2>
+                        <h2 className='client-profile__info-title'>Citas con Psicólogo General en el mes</h2>
                         <p className='client-profile__info-subtitle'>{appointmentsPerMonth}</p>
                     </div>
                     <div className='client-profile__info'>

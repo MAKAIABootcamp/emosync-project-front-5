@@ -26,7 +26,7 @@ export const userSlice = createSlice({
             state.subscription = payload.subscription
             state.email = payload.email
         },
-        editInfo: (state, {payload}) => {
+        editInfo: (state, { payload }) => {
             state.displayName = payload?.displayName ? payload.displayName : state.displayName
             state.email = payload?.email ? payload.email : state.email
             state.subscription = payload?.subscription ? payload.subscription : state.subscription
@@ -40,8 +40,11 @@ export const userSlice = createSlice({
             state.loginMethod = null
             state.subscription = null
             state.email = null
+        },
+        updateAppointmentsPerMonthValue: (state) => {
+            state.appointmentsPerMonth = state.appointmentsPerMonth - 1;
         }
     }
 })
 
-export const { setIsChecking, login, logout, editInfo } = userSlice.actions
+export const { setIsChecking, login, logout, editInfo, updateAppointmentsPerMonthValue } = userSlice.actions
