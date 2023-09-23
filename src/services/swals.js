@@ -82,7 +82,7 @@ export const swals = (type, navigate = null) => {
         case "CONFIRM-APPOINTMENT":
             Swal.fire(
                 'Excelente!',
-                'Tu cita a sido confirmada con existo, gracias por utilizar nuestro servicio!',
+                'Tu cita a sido confirmada con existo, gracias por utilizar nuestro servicio! Se te notificará en caso de que la cita que agendaste sea confirmada o por el contrario rechazada.',
                 'success'
             )
             break;
