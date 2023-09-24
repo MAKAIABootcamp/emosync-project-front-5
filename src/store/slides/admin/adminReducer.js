@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   toVerify: [],
-  toReport: []
+  toReport: [],
+  adminInfo: {},
 }
 
 export const adminSlice = createSlice({
@@ -15,7 +16,16 @@ export const adminSlice = createSlice({
     setReportsToVefiry: (state, { payload }) => {
       state.toReport = payload;
     },
+    setAdminInfo: (state, { payload }) => {
+      state.adminInfo = payload;
+    },
+    updateAdminInfo: (state, { payload }) => {
+      state.adminInfo = { ...state.adminInfo, payload }
+    },
+    resetAllAdminData: (state) => {
+      state = initialState;
+    },
   }
 })
 
-export const { setDocsToVefiry, setReportsToVefiry } = adminSlice.actions
+export const { setDocsToVefiry, setReportsToVefiry, setAdminInfo, updateAdminInfo, resetAllAdminData } = adminSlice.actions

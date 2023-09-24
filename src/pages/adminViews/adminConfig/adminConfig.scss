@@ -31,13 +31,17 @@
       }
 
       & figure {
-        width: 20%;
+        width: 30%;
+        height: 30%;
 
         & img {
           width: 100%;
+          height: 100%;
+          object-fit: contain;
           border-radius: 100%;
           border: 1px solid $light-gray;
           padding: 2px;
+          contain: content;
         }
       }
 
