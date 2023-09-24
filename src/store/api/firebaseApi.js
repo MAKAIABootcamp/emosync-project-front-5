@@ -93,6 +93,82 @@ export const firebaseApi = createApi({
       },
       invalidatesTags: ['user']
     }),
+    getAppointPsicho: builder.query({
+      providesTags: ['psychoAppoint'],
+      async queryFn(key) {
+        try {
+          const deliveryRef = collection(firebaseDB, "appointments");
+          const queryAppointments = await query(deliveryRef,
+            where("psychologistKey", "==", key),
+            where("status", "in", ["PENDING", "ACCEPTED"]),
+          )
+          const dataAppointments = await getDocs(queryAppointments);
+          let appointments = []
+          dataAppointments?.forEach((doc) => {
+            appointments.push({
+              id: doc.id,
+              ...doc.data()
+            });
+          })
+          return { data: appointments }
+        } catch (error) {
+          console.log(error);
+          return error
+        }
+      }
+    }),
+    editAppointPsicho: builder.mutation({
+      async queryFn({ formData, id }) {
+        try {
+          console.log(formData);
+          const userRef = doc(firebaseDB, `appointments`, id);
+          await updateDoc(userRef, formData)
+          return true
+        } catch (error) {
+          console.log(error);
+          return error
+        }
+      },
+      invalidatesTags: ['psychoAppoint', 'psychoClients']
+    }),
+    getClientPsychologist: builder.mutation({
+      providesTags: ['psychoClients'],
+      async queryFn({ id }) {
+        console.log(id);
+        try {
+          const userRef = doc(firebaseDB, `users`, id);
+          const userSnapshot = await getDoc(userRef);
+          const user = userSnapshot.data();
+          return { data: user }
+        } catch (error) {
+          console.log(error);
+          return error
+        }
+      }
+    }),
+    getClientsPsycho: builder.query({
+      providesTags: ['psychoClients'],
+      async queryFn({ listIds }) {
+        console.log(listIds);
+        const q = query(collection(db, 'nombreDeTuColección'), where('id', 'in', listIds));
+        try {
+          const querySnapshot = await getDocs(q);
+          let docsArray = [];
+          querySnapshot.forEach((doc) => {
+            docsArray.push({
+              id: doc.id,
+              ...doc.data()
+            })
+          });
+          return {data: docsArray}
+        } catch (error) {
+          console.log(error);
+          return error
+        }
+      },
+    })
+
+
   })
 
 })
@@ -102,5 +178,9 @@ export const {
   useEditInfoUserMutation,
   useGetVerifDocsQuery,
   useGetVerifReportsQuery,
-  useEditDataUserMutation
+  useEditDataUserMutation,
+  useGetAppointPsichoQuery,
+  useEditAppointPsichoMutation,
+  useGetClientPsychologistMutation,
+  useGetClientsPsychoQuery,
 } = firebaseApi

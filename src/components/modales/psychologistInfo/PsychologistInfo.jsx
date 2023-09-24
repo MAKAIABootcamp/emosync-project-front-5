@@ -42,7 +42,12 @@ const PsychologistInfo = ({ psychologistInfo: { displayName, description, specia
           </div>
           <div>
             <h2 className='psychologist-info__title'>Un poco sobre {handleDisplayName()}</h2>
-            <p className='psychologist-info__info'>{description}</p>
+            <p className='psychologist-info__info'>{
+            description === "" ?
+            `Actualmente ${handleDisplayName()} no tiene información disponible`
+            : description
+            
+            }</p>
           </div>
         </div>
         <button className='psychologist-info__btn' onClick={scheduleAppointmentModal}>Agendar cita</button>

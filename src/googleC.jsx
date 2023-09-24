@@ -36,7 +36,7 @@ const handleItemClick = async (name) => {
   
     //Crear evento
   
-    const createAnEvent = async () => {
+   export const createAnEvent = async (appointEvent) => {
       try {
         // Define los detalles del evento
         const event = {
