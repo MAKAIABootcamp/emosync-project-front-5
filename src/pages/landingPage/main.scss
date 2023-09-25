@@ -31,6 +31,30 @@
       display: flex;
       padding: 20px 30px;
       gap: 20px;
+      justify-content: space-between;
+      width: 100%;
+      &__buttons{
+        display: flex;
+        gap: 20px;
+        @include tablet {
+          //padding: 10px;
+          gap: 10px;
+        }
+        @include mobile {
+         // padding: 3px;
+          gap: 10px;
+        }
+      }
+      &>figure{
+        height: 60px;
+        @include mobile {
+          height: 30px;
+        }
+        &>img{
+          height: 100%;
+          width: 100%;
+        }
+      }
       @include tablet {
         padding: 10px;
         gap: 10px;

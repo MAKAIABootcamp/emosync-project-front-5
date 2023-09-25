@@ -3,13 +3,14 @@ import "./main.scss";
 import HeaderPsycho from '../../../components/headerPsycho/HeaderPsycho';
 import { useSelector } from 'react-redux';
 import apiCalendar, { listAllEvents } from '../../../googleC';
-import { useEditAppointPsichoMutation, useGetAppointPsichoQuery, useGetClientPsychologistMutation, useGetUserByIdQuery } from '../../../store/api/firebaseApi';
+import { useAddClientAppointmentsMutation, useEditAppointPsichoMutation, useGetAppointPsichoQuery, useGetClientPsychologistMutation, useGetUserByIdQuery } from '../../../store/api/firebaseApi';
 import { obtenerFechaFormateada } from '../../../components/modalsPsycho/modalAddStrype/ModalAddStripe';
 import { conversorToCalendarDate, convertirFechaEnMilisegundos } from '../../../services/dateManagement/conversorDate';
 import { getPsychologist } from '../../../services/getPsychologist';
 import ModalAppointInfo from '../../../components/modalsPsycho/appointInfo/ModalAppointInfo';
 import ModalReject from '../../../components/modalsPsycho/modalReject/ModalReject';
 import { Toaster, toast } from 'sonner';
+import PostAppoint from '../../../components/modalsPsycho/postAppoint/PostAppoint';
 
 
 const FeedPsycho = () => {
@@ -23,10 +24,16 @@ const FeedPsycho = () => {
   const { data: userInfo2, isSuccess, isLoading } = useGetUserByIdQuery(user.key)
   const { data: appointments, isSuccess: successAppoint } = useGetAppointPsichoQuery(user.key)
   const [pendingAppoint, setPendingAppoint] = useState([])
+  const [acceptedAppoint, setAcceptedAppoint] = useState([])
   const [openPending, setOpenPending] = useState(false)
   const [modalPending, setModalPending] = useState(false)
   const [openReject, setOpenReject] = useState(false)
   const [modalReject, setModalReject] = useState(false)
+  const [openAppoint, setOpenAppoint] = useState(false)
+  const [modalAppoint, setModalAppoint] = useState(false)
+  const [addClientAppointments] = useAddClientAppointmentsMutation()
+
+
   const [editAppointPsicho] = useEditAppointPsichoMutation()
   const [getClientPsychologist] = useGetClientPsychologistMutation()
 
@@ -68,7 +75,8 @@ const FeedPsycho = () => {
       };
       console.log(event);
       const response = await apiCalendar.createEventWithVideoConference(event);
-      const hangoutLink = response.result.hangoutLink
+      const hangoutLink = response.result.hangoutLink;
+      const  idClient = appoint.clientKey
       const formData = {
         status: "ACCEPTED",
         urlAppointment: hangoutLink,
@@ -76,6 +84,9 @@ const FeedPsycho = () => {
       }
       const id = appoint.id
       await editAppointPsicho({ formData, id })
+      await addClientAppointments({idClient})
+
+
       toast.success('¡Cita confirmada con éxito!')
 
       return response
@@ -122,7 +133,7 @@ const FeedPsycho = () => {
   useEffect(() => {
     if (successAppoint) {
       const pendingAppointments = appointments.filter((appoint) => appoint.status === "PENDING");
-
+      const acceptedAppointments = appointments.filter((appoint) => appoint.status === "ACCEPTED");
       const fetchClientInfo = async (clientKey) => {
         const id = clientKey
         const clientInfo = await getClientPsychologist({id});
@@ -138,6 +149,7 @@ const FeedPsycho = () => {
           updatedPendingAppointments.push({
             clientName: clientInfo.displayName,
             clientEmail: clientInfo.email,
+            clientKey: appoint.clientKey,
             time,
             consultationReason: appoint.consultationReason,
             id: appoint.id,
@@ -148,13 +160,49 @@ const FeedPsycho = () => {
         setPendingAppoint(updatedPendingAppointments);
       };
 
+      const updateAcceptedAppointments = async () => {
+        const updatedAcceptedAppointments = [];
+        const currentDate = new Date().getTime();
+
+        const dayAcceptedAppointments = acceptedAppointments.filter((appoint) => {
+          const citaDate = appoint.appointmentDate;
+          return citaDate >= currentDate && citaDate < currentDate + 86400000; // 86400000 milisegundos en un día
+        });
+        for (const appoint of dayAcceptedAppointments) {
+          const time = convertirFechaEnMilisegundos(appoint.appointmentDate);
+          const { data: clientInfo } = await fetchClientInfo(appoint.clientKey);
+          updatedAcceptedAppointments.push({
+            clientName: clientInfo.displayName,
+            clientEmail: clientInfo.email,
+            clientKey: appoint.clientKey,
+            time,
+            consultationReason: appoint.consultationReason,
+            id: appoint.id,
+            pureTime: appoint.appointmentDate,
+            hangoutURL: appoint.urlAppointment
+          });
+          console.log(appoint.urlAppointment);
+        }
+
+        setAcceptedAppoint(updatedAcceptedAppointments);
+      };
+
       updatePendingAppointments();
+      updateAcceptedAppointments()
     }
 
 
   }, [successAppoint])
 
+const handleHangout = (url) =>{
+  window.open(url, '_blank');
+ 
+}
 
+const handleAppoint = (appoint)=>{
+  setModalAppoint(appoint)
+  setOpenAppoint(true)
+}
 
   const fechaFormateada = obtenerFechaFormateada()
   return (
@@ -172,24 +220,30 @@ const FeedPsycho = () => {
         </aside>
         <aside className='feed__appointments'>
           <section className='feed__appointments__appoint'>
-            <h2 >Citas para hoy, {fechaFormateada}</h2>
+            <h2 >Proximas citas, {fechaFormateada}</h2>
+            {
+                acceptedAppoint.length ?
             <section className='feed__appointments__appoint__table'>
-              <div className='feed__appointments__appoint__table__celda upLeft'> <input type="checkbox" /> <span>Alejandra Sanchez</span></div>
-              <div className='feed__appointments__appoint__table__celda upMiddle' ><span>12:00pm</span></div>
-              <div className='feed__appointments__appoint__table__celda upRight'><strong>Entra al link de la cita</strong></div>
-              <div className='feed__appointments__appoint__table__celda'><input type="checkbox" /> <span>Alejandra Sanchez</span></div>
-              <div className='feed__appointments__appoint__table__celda'><span>12:00pm</span></div>
-              <div className='feed__appointments__appoint__table__celda'><strong>Entra al link de la cita</strong></div>
-              <div className='feed__appointments__appoint__table__celda'><input type="checkbox" /> <span>Alejandra Sanchez</span></div>
-              <div className='feed__appointments__appoint__table__celda'><span>12:00pm</span></div>
-              <div className='feed__appointments__appoint__table__celda'><strong>Entra al link de la cita</strong></div>
-              <div className='feed__appointments__appoint__table__celda downLeft'><input type="checkbox" /> <span>Alejandra Sanchez</span></div>
-              <div className='feed__appointments__appoint__table__celda'><span>12:00pm</span></div>
-              <div className='feed__appointments__appoint__table__celda downRight'><strong>Entra al link de la cita</strong></div>
+               {
+                acceptedAppoint.sort((a, b) => a.pureTime - b.pureTime)
+                .map((appoint, index) => (
+                  <>
+                 <div key={appoint.id} className='feed__appointments__appoint__table__celda upLeft appoint' onClick={()=>handleAppoint(appoint)}> <input type="checkbox" disabled /> <span>{appoint.clientName}</span></div>
+                <div key={appoint.time} className='feed__appointments__appoint__table__celda upMiddle' ><span>{appoint.time}</span></div>
+                <div key={index} className='feed__appointments__appoint__table__celda upRight'><strong onClick={()=> handleHangout(appoint.hangoutURL)}>Entra al link de la cita</strong></div>
+                </>
+                ))
+}
 
             </section>
+            :  
+            <section className='feed__appointments__pendingAppoint__table table__none'>
+            <div className='feed__appointments__pendingAppoint__table__celda  celda__none'>No hay citas pendientes por confirmar o rechazar.</div>
 
           </section>
+}
+          </section>
+       
           <section className='feed__appointments__pendingAppoint'>
             <h2 >Citas pendientes por confirmar</h2>
             {
@@ -234,6 +288,11 @@ const FeedPsycho = () => {
         openReject &&
         <ModalReject appoint={modalReject} close={setOpenReject} />
       }
+        {
+        openAppoint &&
+        <PostAppoint appoint={modalAppoint} close={setOpenAppoint} psicoInf={userInfo2}/>
+      }
+
     </main>
   )
 }

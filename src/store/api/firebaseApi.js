@@ -1,5 +1,5 @@
 import { createApi, fakeBaseQuery } from '@reduxjs/toolkit/query/react';
-import { getDocs, getDoc, addDoc, doc, collection, serverTimestamp, updateDoc, query, where } from "firebase/firestore"
+import { getDocs, getDoc, addDoc, doc, collection, serverTimestamp, updateDoc, query, where, increment } from "firebase/firestore"
 import { firebaseDB } from '../../firebase/firebaseConfig';
 import { getAuth, updateEmail } from "firebase/auth";
 
@@ -166,8 +166,46 @@ export const firebaseApi = createApi({
           return error
         }
       },
-    })
-
+    }),
+    editHistoryUser: builder.mutation({
+      async queryFn({ formHistory, idUser }) {
+        try {
+          console.log(formHistory);
+           const userRef = collection(firebaseDB, `users`, idUser, 'history');
+           await addDoc(userRef, formHistory)
+          return true
+        } catch (error) {
+          console.log(error);
+          return error
+        }
+      },
+      invalidatesTags: ['psychoAppoint', 'psychoClients']
+    }),
+    addClientAppointments: builder.mutation({
+      async queryFn({  idClient }) {
+        try {
+                const userRef = doc(firebaseDB, `users`, idClient);
+                await updateDoc(userRef, {appointmentsPerMonth: increment(1)})
+                return true
+        } catch (error) {
+          console.log(error);
+          return error
+        }
+      },
+    }),
+    reduceClientAppointments: builder.mutation({
+      async queryFn({  idClient }) {
+        try {
+                console.log(idClient);
+                const userRef = doc(firebaseDB, `users`, idClient);
+                await updateDoc(userRef, {appointmentsPerMonth: increment(-1)})
+                return true
+        } catch (error) {
+          console.log(error);
+          return error
+        }
+      },
+    }),
 
   })
 
@@ -183,4 +221,7 @@ export const {
   useEditAppointPsichoMutation,
   useGetClientPsychologistMutation,
   useGetClientsPsychoQuery,
+  useEditHistoryUserMutation,
+  useAddClientAppointmentsMutation,
+  useReduceClientAppointmentsMutation
 } = firebaseApi

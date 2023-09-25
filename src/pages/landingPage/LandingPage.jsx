@@ -20,8 +20,11 @@ const LandingPage = () => {
       <header className='landingPage__header'>
         <figure className='landingPage__header__banner'><img src="/Aboutus/banner.svg" alt="banner" /></figure>
         <nav className='landingPage__header__nav'>
+          <figure><img src="/WhiteLogo.svg" alt="logo" /></figure>
+          <section  className='landingPage__header__nav__buttons'>
           <button className='landingPage__header__nav__button1' onClick={toLogin}>Entrar</button>
           <button className='landingPage__header__nav__button2' onClick={toRegister}>Registrarse</button>
+          </section>
         </nav>
         <button className='landingPage__header__start' onClick={toRegister}>Comienza Aqui</button>
       </header>

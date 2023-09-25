@@ -128,6 +128,7 @@
           border-bottom: 0.1vw solid #e0e0e0;
           display: flex;
           justify-content: space-evenly;
+          
         }
         & .downRight {
           border: 0;
@@ -148,4 +149,7 @@
 }
 .celda__none{
   border: 0;
+}
+.appoint{
+  cursor: pointer;
 }
