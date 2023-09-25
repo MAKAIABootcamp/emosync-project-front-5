@@ -23,7 +23,7 @@ import ScheduleAppointment from '../pages/scheduleAppointment/ScheduleAppointmen
 import PendingAppointmentsClient from '../pages/pendingAppointmentsClient/PendingAppointmentsClient'
 import AdminFeed from '../pages/adminViews/adminFeed/AdminFeed'
 import AdminConfig from '../pages/adminViews/adminConfig/AdminConfig'
-
+import EditProfilePsycho from '../pages/editProfilePsycho/EditProfilePsycho'
 
 const Router = () => {
   const { isAuthenticated, userRole } = useSelector(state => state.auth)
@@ -95,6 +95,7 @@ const Router = () => {
                   <Route path='/WeekSchedule' element={<WeekSchedule />} />
                   <Route path='/history' element={<HistoryPsycho />} />
                   <Route path='/profilePsycho' element={<ProfilePsycho />} />
+                  <Route path='/edit-profilePsycho' element={<EditProfilePsycho />} />
                 </>
               )
             }

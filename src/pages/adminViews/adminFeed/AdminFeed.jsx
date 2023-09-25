@@ -9,12 +9,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useGetVerifDocsQuery, useGetVerifReportsQuery } from '../../../store/api/firebaseApi'
 import { setDocsToVefiry, setReportsToVefiry } from '../../../store/slides/admin/adminReducer'
 import Swal from 'sweetalert2'
+import { getAdminInfo } from '../../../store/slides/admin/adminAction'
 
 
 const AdminFeed = () => {
-  const { toVerify, toReport } = useSelector(state => state.admin)
+  const { toVerify, toReport, adminInfo } = useSelector(state => state.admin)
   const adminKey = useSelector(state => state.auth.key)
-  console.log(adminKey)
   const dispatch = useDispatch()
   const { data: docsArray } = useGetVerifDocsQuery()
   const { data: reportsArray } = useGetVerifReportsQuery()
@@ -22,6 +22,15 @@ const AdminFeed = () => {
   const [showTable01, setShowTable01] = useState(false)
   const [showTable02, setShowTable02] = useState(false)
   const [showReportModal, setShowReportModal] = useState(false)
+
+  useEffect(() => {
+    dispatch(getAdminInfo(adminKey))
+  }, [])
+
+  useEffect(() => {
+    console.log("info del admin: ", adminInfo)
+  }, [adminInfo])
+
 
   useEffect(() => {
     if (docsArray && docsArray.length) {
@@ -77,12 +86,25 @@ const AdminFeed = () => {
       <aside className='AdminFeedContainer'>
         <HeaderAdmin />
         <section className='AdminFeedBody'>
-          <article className='AdminFeedBody__info'>
-            <p className='AdminFeedBody__info__welcome'>Bienvenid@, Mariana</p>
-            <figure className='AdminFeedBody__info__picture'>
-              <img src={defaultUser} alt="user" />
-            </figure>
-          </article>
+          {
+            adminInfo?.userRole ?
+              (
+                <article className='AdminFeedBody__info'>
+                  <p className='AdminFeedBody__info__welcome'>{adminInfo.sex == "H" ? ("Bienvenido") : ("Bienvenida")}, {adminInfo.displayName}</p>
+                  <figure className='AdminFeedBody__info__picture'>
+                    <img src={adminInfo.photo} alt="user" />
+                  </figure>
+                </article>
+              ) : (
+                <article className='AdminFeedBody__info'>
+                  <p className='AdminFeedBody__info__welcome'>Bienvenid@, admin</p>
+                  <figure className='AdminFeedBody__info__picture'>
+                    <img src={defaultUser} alt="user" />
+                  </figure>
+                </article>
+              )
+          }
+
           <article className='AdminFeedBody__tables'>
             <div className='AdminFeedBody__tables__psychologyst'>
               <p>Psicologos pendientes por verificar</p>
