@@ -22,7 +22,7 @@ export const updateAdminInfoFirebase = (id, adminInfo) => {
   return async (dispatch) => {
     try {
       const resp = await setDoc(doc(firebaseDB, "users", id), adminInfo)
-      dispatch(updateAdminInfo(adminInfo))
+      dispatch(setAdminInfo(adminInfo))
     } catch (error) {
       console.log("error en updateAdminInfo", error)
       return null

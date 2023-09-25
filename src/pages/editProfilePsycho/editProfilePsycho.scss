@@ -1,0 +1,102 @@
+@import "../../assets/styles/variables.scss";
+
+.EditProfilePsycho {
+  display: flex;
+  position: relative;
+
+  &__form {
+    font-family: Montserrat Alternates;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-width: 550px;
+    width: 100%;
+    justify-self: center;
+    padding: 20px 0px;
+
+    &__title {
+      color: $azure-blue;
+      font-size: calc(14x + 0.5vw);
+      font-weight: 700;
+      text-transform: capitalize;
+      text-align: center;
+      width: 40%;
+      min-width: 550px;
+    }
+
+    &__subtitle {
+      width: 40%;
+      min-width: 550px;
+    }
+
+    &__extraText {
+      width: 40%;
+      min-width: 550px;
+    }
+
+    & div {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      width: 40%;
+      min-width: 550px;
+
+      & label {
+        font-size: calc(11px + 0.5vw);
+        font-weight: 500;
+      }
+
+      & input,
+      select,
+      textarea {
+        border: 1px solid $light-gray;
+        padding: 5px;
+        border-radius: 20px;
+        width: 100%;
+
+        &:focus,
+        :active {
+          outline: none !important;
+          border: solid 1px $dark-azure-blue
+        }
+      }
+
+      & .inputImage {
+        font-size: 13px;
+        border: none;
+      }
+
+      & .inputImage::file-selector-button {
+        background-color: white;
+        cursor: pointer;
+        border: 1px solid $light-gray;
+        padding: 0.2rem 0.5rem;
+        border-radius: 7px;
+        font-family: $font-poppins-core;
+        border-radius: 20px;
+      }
+    }
+
+    & textarea {
+      width: 40%;
+      min-width: 550px;
+    }
+
+    &__edit {
+      cursor: pointer;
+      font-family: Montserrat Alternates;
+      background-color: $azure-blue;
+      border: 1px $azure-blue solid;
+      border-radius: 10px;
+      padding: 8px 15px;
+      color: #fff;
+
+      &:hover {
+        color: $azure-blue;
+        background-color: #fff;
+      }
+    }
+  }
+}
