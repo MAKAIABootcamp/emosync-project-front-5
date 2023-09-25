@@ -38,6 +38,7 @@ const WeekSchedule = () => {
                     updatedPendingAppointments.push({
                         clientName: clientInfo.displayName,
                         clientEmail: clientInfo.email,
+                        clientKey: appoint.clientKey,
                         time,
                         consultationReason: appoint.consultationReason,
                         id: appoint.id,
@@ -49,7 +50,6 @@ const WeekSchedule = () => {
             };
             updateAcceptedAppointments();
         }
-
     }, [successAppoint])
 
     const handleSelectCancel = (appoint) => {
