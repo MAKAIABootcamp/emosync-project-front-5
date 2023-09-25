@@ -23,17 +23,17 @@
       text-transform: capitalize;
       text-align: center;
       width: 40%;
-      min-width: 550px;
+      min-width: 400px;
     }
 
     &__subtitle {
       width: 40%;
-      min-width: 550px;
+      min-width: 400px;
     }
 
     &__extraText {
       width: 40%;
-      min-width: 550px;
+      min-width: 400px;
     }
 
     & div {
@@ -41,7 +41,7 @@
       flex-direction: column;
       gap: 5px;
       width: 40%;
-      min-width: 550px;
+      min-width: 400px;
 
       & label {
         font-size: calc(11px + 0.5vw);
@@ -81,7 +81,7 @@
 
     & textarea {
       width: 40%;
-      min-width: 550px;
+      min-width: 400px;
     }
 
     &__edit {

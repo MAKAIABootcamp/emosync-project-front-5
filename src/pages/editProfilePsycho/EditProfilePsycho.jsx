@@ -53,6 +53,7 @@ const EditProfilePsycho = () => {
     }
     console.log("objeto a enviar: ", objToSend)
     dispatch(updatePsychoInfoFirebase(user.key, objToSend))
+    navigate(-1)
   }
 
   return (
