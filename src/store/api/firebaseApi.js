@@ -206,6 +206,20 @@ export const firebaseApi = createApi({
         }
       },
     }),
+    addNotifyUser: builder.mutation({
+      async queryFn({ formNotify, idClient }) {
+        try {
+          console.log(formNotify);
+           const userRef = collection(firebaseDB, `users`, idClient, 'notifications');
+           await addDoc(userRef, formNotify)
+          return true
+        } catch (error) {
+          console.log(error);
+          return error
+        }
+      },
+      invalidatesTags: ['psychoAppoint', 'psychoClients']
+    }),
 
   })
 
@@ -223,5 +237,6 @@ export const {
   useGetClientsPsychoQuery,
   useEditHistoryUserMutation,
   useAddClientAppointmentsMutation,
-  useReduceClientAppointmentsMutation
+  useReduceClientAppointmentsMutation,
+  useAddNotifyUserMutation
 } = firebaseApi

@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import "./main.scss"
-import { useEditAppointPsichoMutation, useReduceClientAppointmentsMutation } from '../../../store/api/firebaseApi'
+import { useAddNotifyUserMutation, useEditAppointPsichoMutation, useReduceClientAppointmentsMutation } from '../../../store/api/firebaseApi'
 import { toast } from 'sonner'
 const ModalCancel = ({appoint, close}) => {
     const [cancelText, setCancelText] = useState("")
     const [editAppointPsicho] = useEditAppointPsichoMutation()
     const [reduceClientAppointments] = useReduceClientAppointmentsMutation()
+    const [addNotifyUser] = useAddNotifyUserMutation()
+    const user = JSON.parse(localStorage.getItem('infoUser'));
  const id = appoint.id
  const idClient = appoint.clientKey
 
@@ -28,10 +30,19 @@ const ModalCancel = ({appoint, close}) => {
             updatedAt: new Date().getTime(),
             cancelBy: "PSYCHOLOGIST"
         }
+        const formNotify = {
+            createdAt: new Date().getTime(),
+            isRead: false,
+            psychologistKey: user.key,
+            reason: cancelText,
+            status: "CANCELLED",
+            updatedAt: new Date().getTime(),
+        }
       //  const idClient = appoint.clientKey
 
        const response = await editAppointPsicho({formData, id})
         const response2 =  await reduceClientAppointments({idClient})
+        const response3 = await addNotifyUser({formNotify, idClient})
        toast.success('¡Cita cancelada con éxito!')
        close(false)
 

@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import "./main.scss"
-import { useEditAppointPsichoMutation } from '../../../store/api/firebaseApi'
+import { useAddNotifyUserMutation, useEditAppointPsichoMutation } from '../../../store/api/firebaseApi'
 import { toast } from 'sonner'
 
 const ModalReject = ({appoint, close}) => {
     const [rejectText, setRejectText] = useState("")
     const [editAppointPsicho] = useEditAppointPsichoMutation()
+    const [addNotifyUser] = useAddNotifyUserMutation()
+    const user = JSON.parse(localStorage.getItem('infoUser'));
  const id = appoint.id
     const handleClose = (e)=>{
         e.preventDefault()
@@ -26,8 +28,18 @@ const ModalReject = ({appoint, close}) => {
             updatedAt: new Date().getTime(),
         }
 
+        const formNotify = {
+            createdAt: new Date().getTime(),
+            isRead: false,
+            psychologistKey: user.key,
+            reason: rejectText,
+            status: "REJECTED",
+            appointId: id,
+            updatedAt: new Date().getTime(),
+        }
+        const idClient = appoint.clientKey
        const response = await editAppointPsicho({formData, id})
-
+       const response3 = await addNotifyUser({formNotify, idClient})
        toast.success('¡Cita cancelada con éxito!')
        close(false)
 

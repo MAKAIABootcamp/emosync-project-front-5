@@ -3,7 +3,7 @@ import "./main.scss";
 import HeaderPsycho from '../../../components/headerPsycho/HeaderPsycho';
 import { useSelector } from 'react-redux';
 import apiCalendar, { listAllEvents } from '../../../googleC';
-import { useAddClientAppointmentsMutation, useEditAppointPsichoMutation, useGetAppointPsichoQuery, useGetClientPsychologistMutation, useGetUserByIdQuery } from '../../../store/api/firebaseApi';
+import { useAddClientAppointmentsMutation, useAddNotifyUserMutation, useEditAppointPsichoMutation, useGetAppointPsichoQuery, useGetClientPsychologistMutation, useGetUserByIdQuery } from '../../../store/api/firebaseApi';
 import { obtenerFechaFormateada } from '../../../components/modalsPsycho/modalAddStrype/ModalAddStripe';
 import { conversorToCalendarDate, convertirFechaEnMilisegundos } from '../../../services/dateManagement/conversorDate';
 import { getPsychologist } from '../../../services/getPsychologist';
@@ -31,6 +31,7 @@ const FeedPsycho = () => {
   const [modalReject, setModalReject] = useState(false)
   const [openAppoint, setOpenAppoint] = useState(false)
   const [modalAppoint, setModalAppoint] = useState(false)
+  const [addNotifyUser] = useAddNotifyUserMutation()
   const [addClientAppointments] = useAddClientAppointmentsMutation()
 
 
@@ -83,8 +84,18 @@ const FeedPsycho = () => {
         updatedAt: new Date().getTime(),
       }
       const id = appoint.id
+      const formNotify = {
+        createdAt: new Date().getTime(),
+        isRead: false,
+        psychologistKey: user.key,
+        status: "ACCEPTED",
+        appointId: id,
+        updatedAt: new Date().getTime(),
+    }
+     
       await editAppointPsicho({ formData, id })
       await addClientAppointments({idClient})
+      const response3 = await addNotifyUser({formNotify, idClient})
 
 
       toast.success('¡Cita confirmada con éxito!')

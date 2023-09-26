@@ -87,15 +87,15 @@
     &__edit {
       cursor: pointer;
       font-family: Montserrat Alternates;
-      background-color: $azure-blue;
+      
       border: 1px $azure-blue solid;
       border-radius: 10px;
       padding: 8px 15px;
-      color: #fff;
+      color: $azure-blue;
 
       &:hover {
-        color: $azure-blue;
-        background-color: #fff;
+        background-color: $azure-blue;
+        color: #fff;
       }
     }
   }

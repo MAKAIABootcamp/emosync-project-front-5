@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './main.scss'
 import HeaderPsycho from '../../../components/headerPsycho/HeaderPsycho'
 import { useNavigate } from "react-router-dom"
-import { useGetAppointPsichoQuery, useGetClientPsychologistMutation } from '../../../store/api/firebaseApi'
+import { useAddNotifyUserMutation, useGetAppointPsichoQuery, useGetClientPsychologistMutation } from '../../../store/api/firebaseApi'
 import { convertirFechaEnMilisegundos } from '../../../services/dateManagement/conversorDate'
 import ModalCancel from '../../../components/modalsPsycho/modalCancel/ModalCancel'
 import { Toaster } from 'sonner'
@@ -18,6 +18,7 @@ const WeekSchedule = () => {
     const [acceptedAppoint, setAcceptedAppoint] = useState([])
     const [openCancel, setOpenCancel] = useState(false)
     const [modalCancel, setModalCancel] = useState(false)
+   
     const handleHistory = (appoint) => {
         navigate('/history')
     }
