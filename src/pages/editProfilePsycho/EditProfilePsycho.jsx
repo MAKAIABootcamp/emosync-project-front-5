@@ -7,6 +7,8 @@ import { useGetUserByIdQuery } from '../../store/api/firebaseApi';
 import Loader from '../../components/loader/Loader';
 import './editProfilePsycho.scss'
 import { updatePsychoInfoFirebase } from '../../store/slides/psychologist/psychoThunks';
+import uploadFile from '../../services/updaloadFile';
+import { createVerificationDocument } from '../../services/createAppointment';
 
 const EditProfilePsycho = () => {
   const { register, handleSubmit, watch, formState: { errors }, reset } = useForm()
@@ -38,22 +40,79 @@ const EditProfilePsycho = () => {
 
 
 
-  const editPsycho = (data) => {
+  const editPsycho = async (data) => {
     //console.log(data)
-    let objToSend = {
-      updatedAt: new Date().getTime(),
-      displayName: data.inputName,
-      sex: data.inputSex,
-      specialty: data.inputProfSpecText,
-      email: data.inputEmail,
-      typeOfBankAccount: data.inputBankType,
-      bank: data.inputBankName,
-      bankAccount: data.inputBankNum,
-      description: data.inputProfile
+    //creacion de peticion de verificacion
+
+    if ((data.inputPicDiploma.length) || (data.inputProfCard.length) || (data.inputProfSpecImg.length)) {
+      if (data.inputPicDiploma.length == 0) {
+        data.inputPicDiploma = "";
+      } else {
+        const image1 = await uploadFile(data.inputPicDiploma[0])
+        data.inputPicDiploma = image1;
+      }
+
+      if (data.inputProfCard.length == 0) {
+        data.inputProfCard = "";
+      } else {
+        const image2 = await uploadFile(data.inputProfCard[0])
+        data.inputProfCard = image2;
+      }
+
+      if (data.inputProfSpecImg.length == 0) {
+        data.inputProfSpecImg = "";
+      } else {
+        const image3 = await uploadFile(data.inputProfSpecImg[0])
+        data.inputProfSpecImg = image3;
+      }
+
+      let DocToVerify = {
+        createdAt: new Date().getTime(),
+        isVerified: false,
+        professionalDiploma: data.inputPicDiploma,
+        professionalCard: data.inputProfCard,
+        specialtyDiploma: data.inputProfSpecImg,
+        psychologistKey: user.key,
+        psychologistName: userInfo2.displayName,
+        updatedAt: new Date().getTime(),
+      }
+      const respT = await createVerificationDocument(DocToVerify)
+      console.log("la respuesta de la creacion del doc de verificacion fue: ", respT)
     }
-    console.log("objeto a enviar: ", objToSend)
-    dispatch(updatePsychoInfoFirebase(user.key, objToSend))
-    navigate(-1)
+    //actualizacion de estado
+    if (data.inputPicture.length == 0) {
+      let objToSend = {
+        updatedAt: new Date().getTime(),
+        displayName: data.inputName,
+        sex: data.inputSex,
+        specialty: data.inputProfSpecText,
+        email: data.inputEmail,
+        typeOfBankAccount: data.inputBankType,
+        bank: data.inputBankName,
+        bankAccount: data.inputBankNum,
+        description: data.inputProfile,
+      }
+      console.log("objeto a enviar: ", objToSend)
+      dispatch(updatePsychoInfoFirebase(user.key, objToSend))
+      navigate(-1)
+    } else {
+      const image = await uploadFile(data.inputPicture[0])
+      let objToSend = {
+        updatedAt: new Date().getTime(),
+        displayName: data.inputName,
+        sex: data.inputSex,
+        specialty: data.inputProfSpecText,
+        email: data.inputEmail,
+        typeOfBankAccount: data.inputBankType,
+        bank: data.inputBankName,
+        bankAccount: data.inputBankNum,
+        description: data.inputProfile,
+        photo: image
+      }
+      console.log("objeto a enviar: ", objToSend)
+      dispatch(updatePsychoInfoFirebase(user.key, objToSend))
+      navigate(-1)
+    }
   }
 
   return (
