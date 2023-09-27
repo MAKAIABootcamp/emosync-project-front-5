@@ -67,7 +67,7 @@ const PendingAppointmentsClient = () => {
           />
         )
       }
-      <h1 className='pending-appointments-client__title'>Citas pendientes para está semana</h1>
+      <h1 className='pending-appointments-client__title'>Citas pendientes</h1>
       {
         appointments.length > 0 ? (
           <table className='pending-appointments-client__table'>
