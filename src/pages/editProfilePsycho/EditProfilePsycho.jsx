@@ -27,7 +27,7 @@ const EditProfilePsycho = () => {
   useEffect(() => {
     reset({
       inputName: userInfo2.displayName,
-      inputSex: userInfo2.sex,
+
       inputProfSpecText: userInfo2.specialty,
       inputEmail: userInfo2.email,
       inputBankType: userInfo2.typeOfBankAccount,
@@ -86,7 +86,7 @@ const EditProfilePsycho = () => {
       let objToSend = {
         updatedAt: new Date().getTime(),
         displayName: data.inputName,
-        sex: data.inputSex,
+
         specialty: data.inputProfSpecText,
         email: data.inputEmail,
         typeOfBankAccount: data.inputBankType,
@@ -102,7 +102,7 @@ const EditProfilePsycho = () => {
       let objToSend = {
         updatedAt: new Date().getTime(),
         displayName: data.inputName,
-        sex: data.inputSex,
+
         specialty: data.inputProfSpecText,
         email: data.inputEmail,
         typeOfBankAccount: data.inputBankType,
@@ -142,17 +142,6 @@ const EditProfilePsycho = () => {
               />
             </div>
 
-            <div>
-              <label >Género</label>
-              <select
-                className='sexInput'
-                {...register("inputSex", { required: true })}>
-                <option value="">Selecciona una opción</option>
-                <option value="H">Masculino</option>
-                <option value="M">Femenino</option>
-                <option value="O">Otro</option>
-              </select>
-            </div>
             <h3 className='EditProfilePsycho__form__subtitle'>Verificación</h3>
             <span className='EditProfilePsycho__form__extraText'>A continuación, adjunta una foto de los documentos solicitados, debes enviar tanto el diploma de la carrera como la tarjeta profesional, si no será rechazada la verificación.</span>
 
