@@ -93,7 +93,9 @@
         align-items: center;
         justify-content: center;
         gap: 20px;
-        width: 35%;
+        width: 45%;
+      
+        
         @include tablet{
         
             width: 80%;
@@ -111,6 +113,7 @@
             color: #6A6A6A;
             font-size: calc(6px + 0.5vw);
             line-height: 20px;
+            max-height: 300px;
             @include tablet{
         
                 font-size: calc(9px + 0.5vw);
