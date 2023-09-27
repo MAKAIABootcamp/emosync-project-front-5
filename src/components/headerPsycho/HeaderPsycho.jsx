@@ -6,6 +6,7 @@ import Loader from '../loader/Loader'
 import { useDispatch } from "react-redux"
 import { addUserInfo } from '../../store/slides/psychologist/psycho'
 import { reset } from '../../store/slides/auth/auth'
+import useScreenSize from '../../assets/hooks/useScreenSize'
 
 
 const HeaderPsycho = () => {
@@ -36,10 +37,11 @@ const logout = () => {
   dispatch(reset())
   navigate('/')
 }
-
+const {width}= useScreenSize()
 
   return (
-    <  section className='Header__Psycho'>
+  
+     <section className={width > 800 ? 'Header__Psycho' : 'Header__Psycho__mobile' }>
 
     <aside className='headerPsycho '>
         <figure>
@@ -55,7 +57,7 @@ const logout = () => {
            <figure className='headerPsycho__end__logout' onClick={logout}><img src="/Psychologist/logout.svg" alt="logout" /></figure>
         </section>
     </aside>
-    <figure>
+    <figure  className='headerPsycho__profile'>
      { isSuccess ?
      <img src={userInfo.photo} alt="psychologist" onClick={toProfile}/>
     : <Loader/>

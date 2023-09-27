@@ -91,6 +91,7 @@ const FeedPsycho = () => {
         status: "ACCEPTED",
         appointId: id,
         updatedAt: new Date().getTime(),
+        appointmentDate: appoint.pureTime
     }
      
       await editAppointPsicho({ formData, id })

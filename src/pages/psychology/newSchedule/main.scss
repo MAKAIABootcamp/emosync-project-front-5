@@ -3,6 +3,9 @@
 .NewSchedule__father {
     display: flex;
     position: relative;
+    @include tablet{
+        flex-direction: column;
+      }
   }
 
   .NewSchedule{
@@ -13,6 +16,10 @@
     align-items: center;
     padding: 20px 15px;
     gap: 30px;
+    @include tablet {
+        order: 1;
+
+      }
     &__title{
         display: flex;
         align-items: center;
@@ -43,6 +50,10 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        @include tablet {
+            order: 1;
+          
+          }
         &__title{
            line-height: 22px;
             padding: 22px 0 10px 0px;

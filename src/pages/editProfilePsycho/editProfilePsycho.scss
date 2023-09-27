@@ -3,7 +3,10 @@
 .EditProfilePsycho {
   display: flex;
   position: relative;
-
+  @include tablet{
+    flex-direction: column;
+  }
+ 
   &__form {
     font-family: Montserrat Alternates;
     display: flex;
@@ -15,7 +18,16 @@
     width: 100%;
     justify-self: center;
     padding: 20px 0px;
-
+    order: 1;
+    @include tablet{
+      min-width: 0;
+      padding: 30px 10px;
+      padding-bottom: 40px;
+      & label{
+        font-weight: 900;
+   
+    }
+    }
     &__title {
       color: $azure-blue;
       font-size: calc(14x + 0.5vw);
@@ -24,16 +36,29 @@
       text-align: center;
       width: 40%;
       min-width: 400px;
+      @include tablet{
+        font-size: calc(11x + 0.5vw);
+        min-width: 0px;
+        width: 90%;
+      }
     }
 
     &__subtitle {
       width: 40%;
       min-width: 400px;
+      @include tablet{
+        min-width: 0;
+        width: 90%;
+      }
     }
 
     &__extraText {
       width: 40%;
       min-width: 400px;
+      @include tablet{
+        min-width: 0;
+        width: 90%;
+      }
     }
 
     & div {
@@ -42,7 +67,10 @@
       gap: 5px;
       width: 40%;
       min-width: 400px;
-
+      @include tablet{
+        min-width: 0;
+        width: 90%;
+      }
       & label {
         font-size: calc(11px + 0.5vw);
         font-weight: 500;
@@ -82,6 +110,10 @@
     & textarea {
       width: 40%;
       min-width: 400px;
+      @include tablet{
+        min-width: 0;
+        width: 100%;
+      }
     }
 
     &__edit {

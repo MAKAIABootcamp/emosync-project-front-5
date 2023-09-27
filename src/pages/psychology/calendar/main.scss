@@ -6,6 +6,9 @@
 .CalendarPsycho__father{
     display: flex;
     position: relative;
+    @include mobile{
+        flex-direction: column;
+      }
 }
 .CalendarPsycho{
     gap: 20px;
@@ -14,9 +17,15 @@ font-family: $font-monserrat;
    display: flex;
    justify-content: center;
    align-items: center;
+   @include mobile {
+    order: 1;
+    flex-direction: column;
+    padding-bottom: 50px;
+  }
    & button{
     font-family: $font-poppins-core;
     cursor: pointer;
+
 }
    &> section{
     border: 1px $azure-blue solid;
@@ -27,6 +36,10 @@ font-family: $font-monserrat;
    &__calendar{
     height: 80vh !important;
     width: 70vw;
+    @include mobile {
+        width: 90vw;
+        font-size: 12px;
+      }
    }
    &__striper{
     width: 13vw;

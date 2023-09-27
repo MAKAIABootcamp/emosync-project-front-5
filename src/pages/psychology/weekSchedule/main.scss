@@ -3,6 +3,9 @@
 .WeekSchedule__father {
     display: flex;
     position: relative;
+    @include tablet{
+      flex-direction: column;
+    }
   }
   .WeekSchedule{
     display: flex;
@@ -12,6 +15,9 @@
     justify-content: flex-start;
     gap: 40px;
     margin-top: 15vh;
+    @include mobile{
+
+    }
     &__pager{
       display: flex;
       gap: 10px;
@@ -43,6 +49,9 @@
       display: grid;
       grid-template-rows: repeat(auto-fill, minmax(1fr, auto));
       grid-template-columns: repeat(4, 1fr);
+      @include tablet{
+        width: 95vw;
+}
       &__celda {
         font-family: $font-poppins-core;
         border-top: 0.1vw solid #e0e0e0;
@@ -53,11 +62,16 @@
         justify-content: center;
         font-weight: 400;
         gap: 10px;
-      
+        @include tablet{
+          font-size: calc(9px + 0.4vw);
+          padding: 5px;
+  }
         & h3{
           font-weight: 500;
           font-size: calc(12px + 0.4vw);
-          
+           @include tablet{
+            font-size: calc(10px + 0.4vw);
+    }
         }
         & figure {
           height: 15px;
