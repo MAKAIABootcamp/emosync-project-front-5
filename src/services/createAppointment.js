@@ -10,13 +10,3 @@ export const createAppointment = async (appointment) => {
     return false
   }
 }
-
-export const createVerificationDocument = async (VerDoc) => {
-  try {
-    await addDoc(collection(firebaseDB, "verificationDocuments"), VerDoc);
-    return true
-  } catch (error) {
-    console.log(error);
-    return false
-  }
-}
