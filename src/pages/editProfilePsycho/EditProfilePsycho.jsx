@@ -9,6 +9,7 @@ import './editProfilePsycho.scss'
 import { updatePsychoInfoFirebase } from '../../store/slides/psychologist/psychoThunks';
 import uploadFile from '../../services/updaloadFile';
 import { createVerificationDocument } from '../../services/verificationDocumentServices';
+import { Toaster, toast } from 'sonner';
 
 const EditProfilePsycho = () => {
   const { register, handleSubmit, watch, formState: { errors }, reset } = useForm()
@@ -79,6 +80,7 @@ const EditProfilePsycho = () => {
         updatedAt: new Date().getTime(),
       }
       const respT = await createVerificationDocument(DocToVerify)
+
       console.log("la respuesta de la creacion del doc de verificacion fue: ", respT)
     }
     //actualizacion de estado
@@ -113,12 +115,14 @@ const EditProfilePsycho = () => {
       }
       console.log("objeto a enviar: ", objToSend)
       dispatch(updatePsychoInfoFirebase(user.key, objToSend))
+      toast.success('Cambios aplicados con exito')
       navigate(-1)
     }
   }
 
   return (
     <aside className='EditProfilePsycho'>
+      <Toaster richColors position='top-right'/>
       <HeaderPsycho />
       {
         isSuccess ? (
