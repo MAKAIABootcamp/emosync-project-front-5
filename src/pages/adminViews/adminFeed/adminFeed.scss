@@ -14,6 +14,7 @@
     font-family: $font-poppins-core;
     padding: 1vh 1vw;
     position: relative;
+    overflow: auto;
 
     &__info {
       display: flex;
@@ -24,8 +25,12 @@
       padding: 1vh 2vw;
 
       &__welcome {
-        font-size: calc(14px + 2vh);
+        font-size: calc(14px + 2vw);
         font-weight: bold;
+
+        @include mobile {
+          font-size: calc(10px + 2vw);
+        }
       }
 
 
@@ -49,6 +54,13 @@
       display: flex;
       justify-content: space-between;
 
+      @include mobile {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 50px;
+      }
+
       &__psychologyst {
         width: 60%;
         //border: blue solid 1px;
@@ -58,6 +70,10 @@
         justify-content: flex-start;
         gap: 1vh;
         font-size: calc(6px + 0.5vw);
+
+        @include mobile {
+          width: 100%;
+        }
 
         & p {
           font-size: calc(12px + 0.5vw);
@@ -136,6 +152,10 @@
         gap: 1vh;
         font-size: calc(6px + 0.5vw);
 
+        @include mobile {
+          width: 100%;
+        }
+
         & p {
           font-size: calc(12px + 0.5vw);
         }
@@ -205,6 +225,12 @@
       gap: 10px;
       position: relative;
 
+      @include mobile {
+        width: 80vw;
+        min-width: 350px;
+        height: 440px;
+      }
+
       & div {
         gap: 5px;
         text-align: justify;
@@ -213,10 +239,18 @@
         & p {
           font-weight: 500;
           font-size: 18px;
+
+          @include mobile {
+            font-size: calc(6px + 2vw);
+          }
         }
 
         & span {
           color: $light-gray;
+
+          @include mobile {
+            font-size: calc(4px + 2vw);
+          }
         }
       }
 
@@ -242,6 +276,11 @@
           width: 150px;
           font-size: 18px;
 
+          @include mobile {
+            font-size: calc(6px + 2vw);
+            width: 120px;
+          }
+
 
           &:hover {
             border: 1px solid $orange-hard;
@@ -265,6 +304,103 @@
       }
     }
 
+  }
+
+  & .modalValDoc {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: $font-poppins-core;
+
+    &__form {
+      width: 540px;
+      height: 440px;
+      background-color: white;
+      border-radius: 20px;
+      padding: 30px 60px 30px 30px;
+      opacity: none;
+      align-self: center;
+      justify-self: center;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      gap: 10px;
+
+      @include mobile {
+        width: 350px;
+        height: 400px;
+        justify-content: space-evenly;
+      }
+
+      &__title {
+        font-size: calc(8px + 2vh);
+
+        @include mobile {
+          font-size: calc(6px + 2vw);
+        }
+
+        & span {
+          color: red;
+        }
+      }
+
+      &__input {
+        resize: none;
+        width: 100%;
+        height: 200px;
+        padding: 20px;
+        border-radius: 20px;
+        border: $light-gray solid 1px;
+
+        @include mobile {
+          height: 150px;
+        }
+
+      }
+
+      &__text {
+        font-size: calc(4px + 2vh);
+        color: $light-gray;
+
+        @include mobile {
+          font-size: calc(4px + 2vw);
+        }
+      }
+
+      &__btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+
+        & button {
+          padding: 5px 15px;
+          border-radius: 20px;
+          color: white;
+          width: 150px;
+          font-size: 18px;
+
+          @include mobile {
+            font-size: calc(8px + 2vw);
+            width: 100px;
+          }
+        }
+
+        & .btn1 {
+          border: 1px solid $orange;
+          background-color: $orange;
+        }
+
+        & .btn2 {
+          border: 1px solid $light-gray;
+          background-color: $light-gray;
+        }
+      }
+    }
   }
 
   /* estilos especiales para arreglar la tabla*/

@@ -8,7 +8,7 @@ import Loader from '../../components/loader/Loader';
 import './editProfilePsycho.scss'
 import { updatePsychoInfoFirebase } from '../../store/slides/psychologist/psychoThunks';
 import uploadFile from '../../services/updaloadFile';
-import { createVerificationDocument } from '../../services/createAppointment';
+import { createVerificationDocument } from '../../services/verificationDocumentServices';
 
 const EditProfilePsycho = () => {
   const { register, handleSubmit, watch, formState: { errors }, reset } = useForm()
@@ -74,6 +74,8 @@ const EditProfilePsycho = () => {
         specialtyDiploma: data.inputProfSpecImg,
         psychologistKey: user.key,
         psychologistName: userInfo2.displayName,
+        generalStatus: userInfo2.isVerified,
+        specStatus: userInfo2.verifiedSpecialty,
         updatedAt: new Date().getTime(),
       }
       const respT = await createVerificationDocument(DocToVerify)
