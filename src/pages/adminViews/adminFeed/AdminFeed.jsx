@@ -332,14 +332,15 @@ const AdminFeed = () => {
                     <td>Juliana Sanchez</td>
                     <td><img src={detailsFilled} alt="file" className='detailsFilled' /></td>
                   </tr> */}
-                  {toReport.length && toReport.map((doc) => doc.isVerified == false && (
-                    <tr className='tableRpt__body__ind' key={doc.id}>
-                      <td>{doc.clientName}</td>
-                      <td>{doc.psychologistName}</td>
-                      <td><img src={detailsFilled} alt="file" className='detailsFilled'
-                        onClick={() => fillReportModal(doc)} /></td>
-                    </tr>
-                  ))
+                  {toReport.length && toReport.map((doc) => ((doc.isVerified == false) && (doc.status == "UNFULFILLED")) &&
+                    (
+                      <tr className='tableRpt__body__ind' key={doc.id}>
+                        <td>{doc.clientName}</td>
+                        <td>{doc.psychologistName}</td>
+                        <td><img src={detailsFilled} alt="file" className='detailsFilled'
+                          onClick={() => fillReportModal(doc)} /></td>
+                      </tr>
+                    ))
                   }
                   <tr className='tableRpt__body__fin'>
                     <td ></td>
