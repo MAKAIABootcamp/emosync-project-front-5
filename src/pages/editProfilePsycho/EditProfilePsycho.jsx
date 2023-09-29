@@ -83,33 +83,56 @@ const EditProfilePsycho = () => {
     }
     //actualizacion de estado
     if (data.inputPicture.length == 0) {
-      let objToSend = {
-        updatedAt: new Date().getTime(),
-        displayName: data.inputName,
-
-        specialty: data.inputProfSpecText,
-        email: data.inputEmail,
-        typeOfBankAccount: data.inputBankType,
-        bank: data.inputBankName,
-        bankAccount: data.inputBankNum,
-        description: data.inputProfile,
+      let objToSend = {}
+      if (userInfo2.loginMethod == 'GOOGLE') {
+        objToSend = {
+          updatedAt: new Date().getTime(),
+          displayName: data.inputName,
+          specialty: data.inputProfSpecText,
+          typeOfBankAccount: data.inputBankType,
+          bank: data.inputBankName,
+          bankAccount: data.inputBankNum,
+          description: data.inputProfile,
+        }
+      } else {
+        objToSend = {
+          updatedAt: new Date().getTime(),
+          displayName: data.inputName,
+          specialty: data.inputProfSpecText,
+          email: data.inputEmail,
+          typeOfBankAccount: data.inputBankType,
+          bank: data.inputBankName,
+          bankAccount: data.inputBankNum,
+          description: data.inputProfile,
+        }
       }
       console.log("objeto a enviar: ", objToSend)
       dispatch(updatePsychoInfoFirebase(user.key, objToSend))
       navigate(-1)
     } else {
       const image = await uploadFile(data.inputPicture[0])
-      let objToSend = {
-        updatedAt: new Date().getTime(),
-        displayName: data.inputName,
-
-        specialty: data.inputProfSpecText,
-        email: data.inputEmail,
-        typeOfBankAccount: data.inputBankType,
-        bank: data.inputBankName,
-        bankAccount: data.inputBankNum,
-        description: data.inputProfile,
-        photo: image
+      let objToSend = {}
+      if (userInfo2.loginMethod == 'GOOGLE') {
+        objToSend = {
+          updatedAt: new Date().getTime(),
+          displayName: data.inputName,
+          specialty: data.inputProfSpecText,
+          typeOfBankAccount: data.inputBankType,
+          bank: data.inputBankName,
+          bankAccount: data.inputBankNum,
+          description: data.inputProfile,
+        }
+      } else {
+        objToSend = {
+          updatedAt: new Date().getTime(),
+          displayName: data.inputName,
+          specialty: data.inputProfSpecText,
+          email: data.inputEmail,
+          typeOfBankAccount: data.inputBankType,
+          bank: data.inputBankName,
+          bankAccount: data.inputBankNum,
+          description: data.inputProfile,
+        }
       }
       console.log("objeto a enviar: ", objToSend)
       dispatch(updatePsychoInfoFirebase(user.key, objToSend))

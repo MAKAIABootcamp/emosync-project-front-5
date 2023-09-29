@@ -69,10 +69,15 @@
         align-items: center;
         justify-content: flex-start;
         gap: 1vh;
-        font-size: calc(6px + 0.5vw);
+        font-size: calc(10px + 0.5vw);
+
+        @include tablet {
+          font-size: calc(8px + 0.5vw);
+        }
 
         @include mobile {
           width: 100%;
+          font-size: calc(6px + 0.5vw);
         }
 
         & p {
@@ -150,7 +155,11 @@
         align-items: center;
         justify-content: flex-start;
         gap: 1vh;
-        font-size: calc(6px + 0.5vw);
+        font-size: calc(10px + 0.5vw);
+
+        @include tablet {
+          font-size: calc(8px + 0.5vw);
+        }
 
         @include mobile {
           width: 100%;
@@ -471,4 +480,8 @@
     border: none !important;
     /* Estilo para quitar el borde */
   }
+}
+
+.shiny {
+  color: $azure-blue;
 }
