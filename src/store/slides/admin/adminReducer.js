@@ -4,6 +4,7 @@ const initialState = {
   toVerify: [],
   toReport: [],
   adminInfo: {},
+  usersAdmin: []
 }
 
 export const adminSlice = createSlice({
@@ -25,7 +26,10 @@ export const adminSlice = createSlice({
     resetAllAdminData: (state) => {
       state = initialState;
     },
+    setUsersForAdmin: (state, { payload }) => {
+      state.usersAdmin = payload;
+    }
   }
 })
 
-export const { setDocsToVefiry, setReportsToVefiry, setAdminInfo, updateAdminInfo, resetAllAdminData } = adminSlice.actions
+export const { setDocsToVefiry, setReportsToVefiry, setAdminInfo, updateAdminInfo, resetAllAdminData, setUsersForAdmin } = adminSlice.actions

@@ -27,13 +27,22 @@
       align-items: center;
       color: $dark-azure-blue;
 
+      @include mobile {
+        min-width: 325px;
+      }
+
       & h3 {
-        font-size: calc(12px + 0.5vw);
+        font-size: calc(16px + 0.5vw);
+        text-align: center;
+
+        @include mobile {
+          width: 80%;
+        }
       }
 
       & figure {
-        width: 30%;
-        height: 30%;
+        width: 100px;
+        height: 100px;
 
         & img {
           width: 100%;
@@ -50,26 +59,34 @@
         width: 40%;
         text-align: center;
 
+        @include mobile {
+          width: 80%;
+        }
+
         & p {
           width: 100%;
-          font-size: calc(10px + 0.5vw);
+          font-size: calc(14px + 0.5vw);
           font-weight: 500;
         }
 
         & span {
           width: 100%;
-          font-size: calc(8px + 0.5vw);
+          font-size: calc(12px + 0.5vw);
           color: $light-gray;
         }
       }
 
       &__edit {
-        padding: 5px 10px;
         background-color: $dark-azure-blue;
         color: white;
-        border-radius: 10px;
-        font-size: calc(10px + 0.5vw);
+        border-radius: 20px;
+        border: none;
         cursor: pointer;
+        padding: 10px 50px;
+        font-size: calc(12px + 0.5vw);
+        font-weight: 700;
+        width: auto;
+        margin-top: 2vh;
       }
     }
 
@@ -146,7 +163,7 @@
           border: none;
           cursor: pointer;
           padding: 10px 50px;
-          font-size: calc(10px + 0.5vw);
+          font-size: calc(12px + 0.5vw);
           font-weight: 700;
           width: auto;
           margin-top: 2vh;
