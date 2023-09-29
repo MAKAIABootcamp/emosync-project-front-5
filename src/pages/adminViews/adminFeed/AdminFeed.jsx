@@ -9,15 +9,17 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useGetVerifDocsQuery, useGetVerifReportsQuery } from '../../../store/api/firebaseApi'
 import { setDocsToVefiry, setReportsToVefiry } from '../../../store/slides/admin/adminReducer'
 import Swal from 'sweetalert2'
-import { getAdminInfo, getDocsToVerify, getReportsToVerify } from '../../../store/slides/admin/adminAction'
+import { getAdminInfo, getDocsToVerify, getReportsToVerify, getUsersForAdmin } from '../../../store/slides/admin/adminAction'
 import { createNotificationToPsycho, editVerificationDocument, updatePsychoFromVerDoc } from '../../../services/verificationDocumentServices'
 import { useForm } from 'react-hook-form'
 import { updateAppointments } from '../../../services/updateAppointments'
 import { recoverClientandPenalizePsycho } from '../../../services/updateUser'
+import { getPsychologists } from '../../../services/getPsychologists'
 
+import { Toaster, toast } from 'sonner'
 
 const AdminFeed = () => {
-  const { toVerify, toReport, adminInfo } = useSelector(state => state.admin)
+  const { toVerify, toReport, adminInfo, usersAdmin } = useSelector(state => state.admin)
   const adminKey = useSelector(state => state.auth.key)
   const dispatch = useDispatch()
   //const { data: docsArray } = useGetVerifDocsQuery()
@@ -34,6 +36,10 @@ const AdminFeed = () => {
   useEffect(() => {
     dispatch(getAdminInfo(adminKey))
   }, [])
+  //obtener info de usuarios
+  useEffect(() => {
+    dispatch(getUsersForAdmin())
+  }, [])
   //actualizaciones de tabla
   useEffect(() => {
     dispatch(getDocsToVerify())
@@ -45,6 +51,9 @@ const AdminFeed = () => {
   useEffect(() => {
     console.log("info del admin: ", adminInfo)
   }, [adminInfo])
+  useEffect(() => {
+    console.log("info de todos los usuarios: ", usersAdmin)
+  }, [usersAdmin])
   useEffect(() => {
     console.log("info de verificaciones: ", toVerify)
   }, [toVerify])
@@ -106,6 +115,12 @@ const AdminFeed = () => {
     const resp1 = await updateAppointments({ isVerified: true }, showReportModal.id)
     console.log("respuesta del reporte: ", resp1)
     emptyReportModal()
+    setShowTable02(!showTable02)
+    if (resp1 == true) {
+      toast.success('Se ha finalizado el reporte con éxito')
+    } else {
+      toast.error('Hubo un problema a la hora de finalizar el reporte ')
+    }
   }
   const shameOnPsycho = async () => {
     console.log("culpa del psicologo")
@@ -114,7 +129,12 @@ const AdminFeed = () => {
     const resp2 = await recoverClientandPenalizePsycho(showReportModal.clientKey, showReportModal.psychologistKey)
     console.log("cambios en cliente y psicologo? ", resp2)
     emptyReportModal()
-    setShowTable02(showTable02)
+    setShowTable02(!showTable02)
+    if (resp1 == true) {
+      toast.success('Se ha finalizado el reporte con éxito')
+    } else {
+      toast.error('Hubo un problema a la hora de finalizar el reporte ')
+    }
   }
 
   //validacion de documentos
@@ -142,6 +162,16 @@ const AdminFeed = () => {
     console.log("respuesta a actualizacion de VerDoc ", respY)
     emptyValDocModal()
     setShowTable01(!showTable01)
+    if (respZ == true) {
+      toast.success('Se ha notificado al psicólogo')
+    } else {
+      toast.error('Hubo un problema al notificar al psicólogo')
+    }
+    if (respY == true) {
+      toast.success('Se ha archivado el documento')
+    } else {
+      toast.error('Hubo un problema con el documento')
+    }
   }
 
   const validateYesDoc = async (doc) => {
@@ -164,6 +194,11 @@ const AdminFeed = () => {
       }
       const respX = await updatePsychoFromVerDoc(doc.psychologistKey, updatePsycho)
       console.log("se actualizo al psicologo? ", respX)
+      if (respX == true) {
+        toast.success('Se ha actualizado la información del psicólogo')
+      } else {
+        toast.error('Hubo un error a la hora de actualizar la información del psicólogo')
+      }
     } else if ((!doc.professionalDiploma.length) && (!doc.professionalCard.length) && (doc.specialtyDiploma.length)) {
       const textToSend = {
         subject: "Validación de documentos",
@@ -182,6 +217,11 @@ const AdminFeed = () => {
       }
       const respX = await updatePsychoFromVerDoc(doc.psychologistKey, updatePsycho)
       console.log("se actualizo al psicologo? ", respX)
+      if (respX == true) {
+        toast.success('Se ha actualizado la información del psicólogo')
+      } else {
+        toast.error('Hubo un error a la hora de actualizar la información del psicólogo')
+      }
     } else if ((doc.professionalDiploma.length) && (doc.professionalCard.length) && (!doc.specialtyDiploma.length)) {
       const textToSend = {
         subject: "Validación de documentos",
@@ -200,11 +240,21 @@ const AdminFeed = () => {
       }
       const respX = await updatePsychoFromVerDoc(doc.psychologistKey, updatePsycho)
       console.log("se actualizo al psicologo? ", respX)
+      if (respX == true) {
+        toast.success('Se ha actualizado la información del psicólogo')
+      } else {
+        toast.error('Hubo un error a la hora de actualizar la información del psicólogo')
+      }
     }
     //ahora se valida la revision de documentos
     const respY = await editVerificationDocument(doc.id, { isVerified: true })
     console.log("respuesta a actualizacion de VerDoc ", respY)
     setShowTable01(!showTable01)
+    if (respY == true) {
+      toast.success('Se ha archivado el documento')
+    } else {
+      toast.error('Hubo un problema con el documento')
+    }
   }
 
 
@@ -262,7 +312,14 @@ const AdminFeed = () => {
                     toVerify.length && toVerify.map((doc) => doc.isVerified == false &&
                       (
                         <tr className='tablePsy__body__ind' key={doc.id}>
-                          <td>{doc.psychologistName}</td>
+                          <td className={
+                            usersAdmin.map((user, index) => ((user.id == doc.psychologistKey) && (user.isVerified)) && (" shiny")
+                            )}>
+                            {
+                              usersAdmin.map((user) => user.id === doc.psychologistKey &&
+                                (user.displayName))
+                            }
+                          </td>
                           <td>
                             {
                               doc.professionalDiploma ?
@@ -286,7 +343,6 @@ const AdminFeed = () => {
                             }
                           </td>
                           <td>
-
                             {
                               doc.specialtyDiploma ?
                                 (
@@ -335,8 +391,14 @@ const AdminFeed = () => {
                   {toReport.length && toReport.map((doc) => ((doc.isVerified == false) && (doc.status == "UNFULFILLED")) &&
                     (
                       <tr className='tableRpt__body__ind' key={doc.id}>
-                        <td>{doc.clientName}</td>
-                        <td>{doc.psychologistName}</td>
+                        <td>{
+                          usersAdmin.map((user) => user.id === doc.clientKey &&
+                            (user.displayName))
+                        }</td>
+                        <td>{
+                          usersAdmin.map((user) => user.id === doc.psychologistKey &&
+                            (user.displayName))
+                        }</td>
                         <td><img src={detailsFilled} alt="file" className='detailsFilled'
                           onClick={() => fillReportModal(doc)} /></td>
                       </tr>
@@ -426,6 +488,12 @@ const AdminFeed = () => {
           )
         }
       </aside >
+      <div>
+        <Toaster />
+        <button onClick={() => toast('My first toast')}>
+          Give me a toast
+        </button>
+      </div>
     </>
   )
 }

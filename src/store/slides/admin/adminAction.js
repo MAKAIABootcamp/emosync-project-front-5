@@ -1,5 +1,5 @@
 import { collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
-import { setAdminInfo, setDocsToVefiry, setReportsToVefiry, updateAdminInfo } from "./adminReducer";
+import { setAdminInfo, setDocsToVefiry, setReportsToVefiry, setUsersForAdmin, updateAdminInfo } from "./adminReducer";
 import { firebaseDB } from "../../../firebase/firebaseConfig";
 
 export const getAdminInfo = (adminKey) => {
@@ -63,6 +63,24 @@ export const getReportsToVerify = () => {
       dispatch(setReportsToVefiry(reportsArray))
     } catch (error) {
       console.log("error getReportsToVerify", error)
+    }
+  }
+}
+
+export const getUsersForAdmin = () => {
+  return async (dispatch) => {
+    try {
+      const querySnapshot = await getDocs(collection(firebaseDB, `users`));
+      let usersArray = [];
+      querySnapshot.forEach((doc) => {
+        usersArray.push({
+          id: doc.id,
+          ...doc.data()
+        })
+      });
+      dispatch(setUsersForAdmin(usersArray))
+    } catch (error) {
+      console.log("error getDocsToVerify", error)
     }
   }
 }
