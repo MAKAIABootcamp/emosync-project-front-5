@@ -1,18 +1,37 @@
-import React, { useEffect, useId, useState } from 'react'
+import React, { useEffect, useId, useMemo, useState } from 'react'
 import "./main.scss"
 import HeaderPsycho from '../../../components/headerPsycho/HeaderPsycho'
-import { Calendar, dayjsLocalizer } from 'react-big-calendar'
+import { Calendar, dateFnsLocalizer, momentLocalizer } from 'react-big-calendar'
 import dayjs from 'dayjs'
-const localizer = dayjsLocalizer(dayjs)
+
+//dayjs.locale('es')
+import moment from "moment";
+//const localizer = dayjsLocalizer(dayjs)
 import apiCalendar, { listAllEvents } from '../../../googleC';
 import Loader from '../../../components/loader/Loader'
 import ModalShowEvent from '../../../components/modalsPsycho/modalShowEvent/ModalShowEvent'
-//import { modalAddStripe } from '../../../components/modalsPsycho/modalAddStrype/ModalAddStripe'
 import Swal from 'sweetalert2'
 import { useEditDataUserMutation, useGetUserByIdQuery } from '../../../store/api/firebaseApi'
 import { toast, Toaster } from 'sonner'
+import format from 'date-fns/format'
+import parse from 'date-fns/parse'
+import startOfWeek from 'date-fns/startOfWeek'
+import getDay from 'date-fns/getDay'
 
+import es from 'moment/locale/es.js';
+  
+  const localizer = momentLocalizer(moment);
 
+// const locales = {
+//    es: es,
+// };
+// const localizer = dateFnsLocalizer({
+//   format,
+//   parse,
+//   startOfWeek,
+//   getDay,
+//   locales,
+// });
 
 
 
@@ -31,6 +50,7 @@ const  [hola2, setHola2] = useState(false)
 const [editDataUser] = useEditDataUserMutation()
 const user = JSON.parse(localStorage.getItem('infoUser'));
 const {data: userInfo2, isSuccess, isLoading} = useGetUserByIdQuery(user.key)
+const [culture, setCulture] = useState('es')
 const modalAddStripe = async () => {
 
   const { value: day } = await Swal.fire({
@@ -323,6 +343,29 @@ const modalAddStripe = async () => {
   })
  }
 
+ const cultures = ['en', 'en-GB', 'es', 'fr', 'ar-AE']
+ const lang = {
+   es: {
+     week: 'Semana',
+     work_week: 'Semana de trabajo',
+     day: 'Día',
+     month: 'Mes',
+     previous: 'Atrás',
+     next: 'Después',
+     today: 'Hoy',
+     agenda: 'Agenda',
+ 
+     showMore: (total) => `+${total} más`,
+   },}
+   const { defaultDate, messages } = useMemo(
+    () => ({
+      defaultDate: new Date(2015, 3, 1),
+      messages: lang[culture],
+    }),
+    [culture]
+  )
+
+
   return (
     <main className='CalendarPsycho__father'>
       <HeaderPsycho />
@@ -357,6 +400,9 @@ const modalAddStripe = async () => {
             startAccessor="start"
             endAccessor="end"
             selectable={true}
+            
+            culture={culture}
+            messages={messages}
             onSelectSlot={handleSelectSlot}
             onSelectEvent={handleSelectEvent}
           /></section>
