@@ -68,11 +68,11 @@
         font-family: $font-poppins-core;
         text-align: justify;
         display: -webkit-box;
-        -webkit-line-clamp: 9;
+        -webkit-line-clamp: 7;
         -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
-        line-height: 25px;
+        line-height: 23px;
         color: #4e4e4e;
     }
 
@@ -85,6 +85,7 @@
         border-radius: 10px;
         cursor: pointer;
         font-weight: 600;
+        font-size: 14px;
         margin-bottom: 1rem;
     }
 }

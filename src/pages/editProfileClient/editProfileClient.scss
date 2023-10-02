@@ -18,6 +18,9 @@
         color: $azure-blue;
         font-weight: 700;
         cursor: pointer;
+        figcaption {
+            font-size: 18px;
+        }
     }
 
     &__return-icon {
@@ -54,17 +57,18 @@
         &--text {
             font-family: $font-monserrat;
             color: $dark-azure-blue;
+            font-size: 17px;
         }
     }
 
     &__input {
-        padding: 0.3rem 0.8rem;
+        padding: 0.5rem 0.8rem;
         border-radius: 10px;
         border: 1px solid $light-gray;
         outline: none !important;
         font-family: $font-poppins-core;
         background-color: white;
-        font-size: 13px;
+        font-size: 15px;
         width: 100%;
     }
 
@@ -80,6 +84,8 @@
         grid-area: button;
         margin-top: 0.5rem;
         cursor: pointer;
+        font-size: 15px;
+        font-weight: 500;
     }
 
     &__alert {
@@ -96,6 +102,11 @@
 
 @media screen and (min-width: 1400px) {
     .edit-profile-client {
+        &__return-container {
+            figcaption {
+                font-size: 20px;
+            }
+        }
 
         &__return-container {
             top: 1.5rem;
@@ -108,12 +119,12 @@
         }
 
         &__form {
-            width: 420px;
+            width: 520px;
             gap: 1.7rem;
         }
 
         &__title {
-            font-size: 24px;
+            font-size: 26px;
         }
 
         &__form-container {
@@ -121,25 +132,26 @@
         }
 
         &__label {
-            font-size: 18px;
-
             &--text {
                 margin-left: 5px;
+                font-size: 20px;
             }
         }
 
         &__input {
-            font-size: 15px;
+            font-size: 18px;
+            padding: 0.6rem 1rem;
         }
 
         &__btn-submit {
+            font-size: 18px;
             &:hover {
                 background-color: #46c0ba;
             }
         }
 
         &__alert {
-            font-size: 13px;
+            font-size: 16px;
         }
     }
 }
