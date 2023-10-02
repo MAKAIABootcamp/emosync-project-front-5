@@ -143,6 +143,9 @@ const AdminFeed = () => {
   }
   const emptyValDocModal = () => {
     setShowValDocModal(false)
+    reset({
+      VerDocDesc: ""
+    })
   }
 
   const validateNoDoc = async (data) => {
@@ -490,9 +493,9 @@ const AdminFeed = () => {
       </aside >
       <div>
         <Toaster />
-        <button onClick={() => toast('My first toast')}>
+        {/* <button onClick={() => toast('My first toast')}>
           Give me a toast
-        </button>
+        </button> */}
       </div>
     </>
   )

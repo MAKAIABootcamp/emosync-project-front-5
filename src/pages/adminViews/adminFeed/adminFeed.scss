@@ -121,6 +121,7 @@
                   display: flex;
                   flex-wrap: wrap;
                   justify-content: space-evenly;
+                  gap: 5px;
 
                   & .textYes {
                     padding: 5px;
@@ -346,10 +347,10 @@
       }
 
       &__title {
-        font-size: calc(8px + 2vh);
+        font-size: calc(12px + 1vh);
 
         @include mobile {
-          font-size: calc(6px + 2vw);
+          font-size: calc(10px + 1vw);
         }
 
         & span {
@@ -372,11 +373,11 @@
       }
 
       &__text {
-        font-size: calc(4px + 2vh);
+        font-size: calc(8px + 1vh);
         color: $light-gray;
 
         @include mobile {
-          font-size: calc(4px + 2vw);
+          font-size: calc(8px + 1vw);
         }
       }
 
@@ -394,7 +395,7 @@
           font-size: 18px;
 
           @include mobile {
-            font-size: calc(8px + 2vw);
+            font-size: calc(12px + 1vw);
             width: 100px;
           }
         }
