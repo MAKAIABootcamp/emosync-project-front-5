@@ -7,7 +7,7 @@
 
     &__title {
         font-family: $font-monserrat;
-        font-size: 18px;
+        font-size: 20px;
         color: $azure-blue;
         font-weight: 500;
         text-align: center;
@@ -16,7 +16,7 @@
 
     &__table {
         font-family: $font-poppins-core;
-        font-size: 10px;
+        font-size: 12px;
         font-weight: 500;
         width: 95vw;
         border-collapse: collapse;
@@ -60,7 +60,7 @@
     &__th {
         color: $dark-azure-blue;
         font-weight: 500;
-        font-size: 11px;
+        font-size: 13px;
     }
 
     &__td {
@@ -78,7 +78,7 @@
             display: flex;
 
             img {
-                width: 1rem;
+                width: 1.7rem;
                 cursor: pointer;
                 filter: invert(48%) sepia(71%) saturate(4222%) hue-rotate(355deg) brightness(106%) contrast(90%);
             }
@@ -108,7 +108,7 @@
         padding: 1.5rem;
 
         &__title {
-            font-size: 20px;
+            font-size: 22px;
             margin-bottom: 1.5rem;
         }
 
@@ -135,11 +135,11 @@
 
         &__th {
             font-weight: 500;
-            font-size: 13px;
+            font-size: 15px;
         }
 
         &__td {
-            font-size: 11px;
+            font-size: 14px;
 
             &:first-child {
                 gap: 0.5rem;
@@ -155,15 +155,15 @@
             font-size: 24px;
         }
         &__table {
-            max-width: 650px;
+            max-width: 700px;
         }
 
         &__th {
-            font-size: 15px;
+            font-size: 18px;
         }
 
         &__td {
-            font-size: 13px;
+            font-size: 15px;
             position: relative;
 
             &:first-child {
@@ -184,8 +184,8 @@
                     display: flex;
                     position: absolute;
                     background-color: white;
-                    top: -70px;
-                    font-size: 12px;
+                    top: -90px;
+                    font-size: 14px;
                     color: #717171;
                     padding: 0.5rem 0.8rem;
                     width: 200px;
@@ -202,7 +202,7 @@
         padding: 2rem;
 
         &__title {
-            font-size: 24px;
+            font-size: 26px;
         }
 
         &__table {
@@ -210,7 +210,7 @@
         }
 
         &__th {
-            font-size: 17px;
+            font-size: 19px;
         }
 
         &__td {
@@ -218,7 +218,7 @@
                 gap: 0.5rem;
             }
 
-            font-size: 15px;
+            font-size: 17px;
         }
     }
 }

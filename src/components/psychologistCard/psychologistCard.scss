@@ -12,7 +12,7 @@
     }
 
     &__image {
-        width: 110px;
+        width: 130px;
         height: 110px;
         object-fit: cover;
     }
@@ -40,7 +40,7 @@
 
     &__specialty {
         font-size: 13px;
-        color: #ACACAC;
+        color: rgb(104, 104, 104);
     }
 
     &__info-btn {
@@ -65,6 +65,29 @@
             width: 140px;
             height: 110px;
             object-fit: cover;
+        }
+    }
+}
+
+@media screen and (min-width: 1300px) {
+    .psychologist-card {
+
+        &__image {
+            width: 160px;
+            height: 120px;
+        }
+
+        &__name {
+            font-size: 19px;
+        }
+
+        &__specialty {
+            font-size: 16px;
+        }
+
+        &__info-btn {
+            font-size: 16px;
+            border-radius: 5px;
         }
     }
 }
