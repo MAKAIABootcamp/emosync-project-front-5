@@ -85,6 +85,7 @@ const AdminConfig = () => {
                   <input
                     className='pictureInput'
                     type="file"
+                    accept="image/jpeg, image/png"
                     {...register("pictureInput")}
                     onChange={(e) => handleFile(e)}
                   />
