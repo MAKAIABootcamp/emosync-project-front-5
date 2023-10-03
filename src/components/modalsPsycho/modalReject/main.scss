@@ -1,0 +1,107 @@
+@import "../../../assets/styles/variables.scss";
+@import "../../../assets/styles/reset.scss";
+
+.modalShowReject {
+  display: flex;
+  position: fixed;
+  z-index: 4;
+  justify-content: center;
+  align-items: center;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.6);
+  &__content {
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    height: 60vh;
+    max-height: 450px;
+    width: 50vw;
+    max-width: 600px;
+    cursor: default;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-radius: 40px;
+    padding: 40px 60px;
+    text-align: center;
+    gap: 20px;
+    &__title{
+        font-family: $font-poppins-core;
+        font-size: calc(12px + 0.4vw);
+        color: #000;
+        &> span {
+            color: $orange;
+        }
+    }
+    &__inf{
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+
+        gap: 20px;
+        &>section{
+            display: flex;
+            flex-direction: column;
+              align-items: start;
+              gap: 10px;
+              width: 100%;
+             text-align: start;
+            &> textarea{
+                border: 0.1vw solid #e0e0e0;
+                width: 100%;
+                border-radius: 10px;
+                height: 100px;
+                resize: none;
+                //max-height: 100px;
+                padding: 10px;
+            }
+            &> h3{
+                font-size: calc(14px + 0.5vw);
+                font-family: $font-poppins-core;
+                font-weight: 500;
+            }
+            &> span{
+               font-size: calc(9px + 0.3vw);
+               font-family: $font-poppins-core;
+               color: $light-gray;
+               width: 100%;
+              cursor: text;
+            }
+        }
+        &__buttons{
+            display: flex;
+            flex-direction: row !important;
+            justify-content: center;
+            color: #fff;
+            font-family: $font-monserrat;
+            font-size: calc(10px + 0.5vw);
+            flex-wrap: wrap;
+            
+        }
+        &__confirm{
+            background-color: $orange;
+            padding: 5px 35px;
+            border-radius: 20px;
+            &:hover{
+                background-color: $light-orange;
+            }
+        }
+        &__cancel{
+            padding: 5px 35px;
+            background-color: #CCCFCF;
+            border-radius: 20px;
+            &:hover{
+                background-color: #c3c3c3;
+            }
+        }
+    }
+  }
+}

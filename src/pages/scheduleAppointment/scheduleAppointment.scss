@@ -1,0 +1,198 @@
+@import "../../assets/styles/variables.scss";
+
+.schedule-appointment {
+    padding: 4.5rem 2rem 2rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+
+    &__fixed {
+        position: fixed;
+    }
+
+    &__return-container {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.2rem;
+        font-family: $font-monserrat;
+        color: $azure-blue;
+        font-weight: 700;
+        cursor: pointer;
+    }
+
+    &__return-icon {
+        width: 2.5rem;
+        filter: invert(61%) sepia(21%) saturate(1535%) hue-rotate(128deg) brightness(88%) contrast(84%);
+    }
+
+    &__form {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 1.3rem;
+        width: 100%;
+        border: 1px solid rgb(204, 204, 204);
+        padding: 1rem 1.5rem;
+        border-radius: 15px;
+    }
+
+    &__title {
+        font-family: $font-monserrat;
+        font-size: 20px;
+        color: $azure-blue;
+        font-weight: 500;
+    }
+
+    &__form-container {
+        width: 100%;
+        display: flex;
+        gap: 0.7rem;
+        flex-direction: column;
+    }
+
+    &__label {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+
+        &--text {
+            font-family: $font-monserrat;
+            color: $dark-azure-blue;
+            font-size: 18px;
+            font-weight: 500;
+        }
+    }
+
+    &__subtitle {
+        font-family: $font-poppins-core;
+        font-size: 14px;
+        color: #575757;
+    }
+
+    &__input {
+        padding: 0.5rem 0.8rem;
+        border-radius: 10px;
+        border: 1px solid $light-gray;
+        outline: none !important;
+        font-family: $font-poppins-core;
+        background-color: white;
+        font-size: 13px;
+        width: 100%;
+        resize: none;
+    }
+
+    textarea {
+        height: 100px;
+    }
+
+    &__btn-submit {
+        background-color: $azure-blue;
+        border: none;
+        padding: 0.4rem 1.5rem;
+        width: max-content;
+        align-self: center;
+        font-family: $font-poppins-core;
+        color: white;
+        border-radius: 10px;
+        grid-area: button;
+        cursor: pointer;
+        font-size: 15px;
+    }
+
+
+}
+
+.datepickerbg {
+    color-scheme: normal;
+}
+
+@media screen and (min-width: 768px) {
+    .schedule-appointment {
+
+        &__form {
+            width: 400px;
+            height: max-content;
+        }
+
+        &__title {
+            font-size: 24px;
+        }
+
+        &__form-container {
+            gap: 1rem;
+        }
+
+        &__label {
+            &--text {
+                font-size: 19px;
+            }
+        }
+
+        &__subtitle {
+            font-size: 15px;
+        }
+
+        &__input {
+            font-size: 15px;
+
+            option {
+                font-size: 14px;
+            }
+        }
+
+        textarea {
+            height: 100px;
+        }
+
+        &__btn-submit {
+            font-size: 15px;
+        }
+
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .schedule-appointment {
+        &__return-container {
+            figcaption {
+                font-size: 19px;
+            }
+        }
+
+        &__title {
+            font-size: 26px;
+        }
+
+        &__label {
+            &--text {
+                font-size: 22px;
+            }
+        }
+
+        &__subtitle {
+            font-size: 18px;
+        }
+
+        &__input {
+            font-size: 16px;
+
+            option {
+                font-size: 16px;
+            }
+        }
+
+        textarea {
+            height: 100px;
+        }
+
+        &__btn-submit {
+            margin-top: 0.7rem;
+            font-size: 18px;
+        }
+
+    }
+}

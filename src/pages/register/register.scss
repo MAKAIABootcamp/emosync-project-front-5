@@ -1,0 +1,356 @@
+@import "../../assets/styles/reset.scss";
+@import "../../assets/styles/variables.scss";
+
+.register {
+    width: 100vw;
+    height: 100vh;
+    max-height: 100%;
+    background-image: url("/Register/bg-mobile.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: $font-poppins-core;
+
+    &__form-container {
+        width: 80%;
+        height: 80%;
+        overflow: auto;
+        border-radius: 30px;
+        box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        background-color: white;
+        padding: 1.5rem 1.3rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__text-container {
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.2rem;
+        margin-bottom: 1rem;
+    }
+
+    &__arrow-back {
+        width: 2rem;
+        filter: invert(45%) sepia(89%) saturate(408%) hue-rotate(128deg) brightness(104%) contrast(85%);
+        cursor: pointer;
+    }
+
+    &__text {
+        font-size: 12px;
+        text-align: center;
+        line-height: 15px;
+
+        span {
+            font-family: $font-monserrat;
+            color: $azure-blue;
+            font-weight: 600;
+        }
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        gap: 0.7rem;
+        width: 100%;
+    }
+
+    &__label {
+        display: flex;
+        flex-direction: column;
+        gap: 0.1rem;
+        font-size: 13px;
+
+        input[type=file] {
+            font-size: 13px;
+            width: 100%;
+        }
+
+        input[type=file]::file-selector-button {
+            background-color: white;
+            cursor: pointer;
+            border: 1px solid $light-gray;
+            padding: 0.2rem 0.5rem;
+            border-radius: 7px;
+            font-family: $font-poppins-core;
+        }
+    }
+
+    &__input {
+        padding: 0.34rem 0.8rem;
+        border-radius: 10px;
+        border: 1px solid $light-gray;
+        outline: none !important;
+        font-family: $font-poppins-core;
+        background-color: white;
+        font-size: 13px;
+        width: 100%;
+    }
+
+    &__alert {
+        font-size: 11px;
+        color: $light-gray;
+        line-height: 15px;
+        margin-top: 0.2rem;
+        padding: 0 0.3rem;
+    }
+
+    &__btn,
+    &__btn-continue {
+        background-color: $orange;
+        border: none;
+        padding: 0.6rem 1.5rem;
+        width: max-content;
+        align-self: center;
+        font-family: $font-poppins-core;
+        color: white;
+        border-radius: 10px;
+        grid-area: button;
+        margin-top: 0.5rem;
+        font-size: 14px;
+    }
+
+    &__select-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    &__select-title {
+        font-size: 18px;
+        font-weight: 600;
+        font-family: $font-monserrat;
+        margin-bottom: 0.7rem;
+
+        span {
+            color: $azure-blue;
+        }
+    }
+
+    &__select-text {
+        text-align: center;
+        font-size: 12px;
+        margin-bottom: 1rem;
+    }
+
+    &__type-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    &__type-image-container {
+        padding: 0.7rem;
+        border: 1px solid $light-gray;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        font-size: 13px;
+        font-family: $font-monserrat;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        gap: 0.5rem;
+    }
+
+    &__type-image {
+        width: 5rem;
+    }
+
+    &__inactive-btn {
+        background-color: #F7A57A;
+    }
+
+    &__selected {
+        border: 1px solid $orange;
+        box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25)
+    }
+
+    &__message-error {
+        text-align: center;
+        margin-top: 1rem;
+        font-size: 12px;
+        color: rgb(196, 3, 3);
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .register {
+        background-image: url("/Register/bg-tablet.svg");
+
+        &__form-container {
+            width: 75%;
+            height: 85%;
+            max-height: 620px;
+            justify-content: center;
+            padding: 2.5rem;
+        }
+
+        &__text-container {
+            flex-direction: row;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        &__arrow-back {
+            width: 3rem;
+            filter: invert(45%) sepia(89%) saturate(408%) hue-rotate(128deg) brightness(104%) contrast(85%);
+        }
+
+        &__text {
+            font-size: 14px;
+            line-height: 19px;
+        }
+
+        &__form {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.2rem;
+            row-gap: 1.3rem;
+            grid-template-areas:
+                ". ."
+                ". ."
+                ". ."
+                ". ."
+                "button button";
+            place-items: center;
+        }
+
+        &__label {
+            font-size: 14px;
+            position: relative;
+            width: 100%;
+
+            input[type=file] {
+                font-size: 14px;
+            }
+
+            input[type=file]::file-selector-button {
+                padding: 0.3rem 0.7rem;
+                border-radius: 10px;
+            }
+        }
+
+        &__alert {
+            position: absolute;
+            bottom: -16px;
+            font-size: 10px;
+            color: $light-gray;
+            line-height: 15px;
+            margin-top: 0.2rem;
+            padding: 0 0.3rem;
+        }
+
+        &__btn,
+        &__btn-continue {
+            font-size: 16px;
+        }
+
+        &__select-title {
+            font-size: 22px;
+        }
+
+        &__select-text {
+            font-size: 14px;
+            margin-bottom: 1.5rem;
+        }
+
+        &__type-container {
+            gap: 1rem;
+        }
+
+        &__type-image-container {
+            padding: 1rem;
+            border-radius: 20px;
+            font-size: 15px;
+        }
+
+        &__type-image {
+            width: 7rem;
+        }
+    }
+}
+
+@media screen and (min-width: 1100px) {
+    .register {
+        background-image: url("/Register/bg-desktop-1100.svg");
+        background-position: top left;
+
+        &__form-container {
+            width: 75%;
+            height: 85%;
+            max-height: 590px;
+            max-width: 900px;
+        }
+
+        &__form {
+            width: 70%;
+            gap: 1rem;
+        }
+
+        &__text {
+            max-width: 80%;
+            margin: 0 auto;
+            font-size: 18px;
+            line-height: 28px;
+        }
+
+        &__label {
+            font-size: 18px;
+            position: relative;
+            width: 100%;
+
+            input[type=file] {
+                font-size: 16px;
+            }
+
+            input {
+                font-size: 16px;
+            }
+        }
+
+        &__btn,
+        &__btn-continue {
+            margin-top: 2rem;
+            cursor: pointer;
+        }
+
+        &__select-title {
+            font-size: 24px;
+        }
+
+        &__select-text {
+            font-size: 19px;
+            max-width: 650px;
+        }
+
+        &__type-container {
+            gap: 1.5rem;
+        }
+
+        &__type-image-container {
+            font-size: 19px;
+
+            &:hover {
+                cursor: pointer;
+                transform: scale(1.04);
+            }
+        }
+
+        &__type-image {
+            width: 10rem;
+        }
+
+        &__message-error {
+            font-size: 14px;
+        }
+    }
+}

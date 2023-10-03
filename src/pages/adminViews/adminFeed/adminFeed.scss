@@ -1,0 +1,488 @@
+@import "../../../assets/styles/variables.scss";
+// @import "../../../assets/styles/reset.scss";
+
+.AdminFeedContainer {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+
+  & .AdminFeedBody {
+    height: 100vh;
+    width: 98vw;
+    display: flex;
+    flex-direction: column;
+    font-family: $font-poppins-core;
+    padding: 1vh 1vw;
+    position: relative;
+    overflow: auto;
+
+    &__info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 10vh;
+      //border: red solid 1px;
+      padding: 1vh 2vw;
+
+      &__welcome {
+        font-size: calc(14px + 2vw);
+        font-weight: bold;
+
+        @include mobile {
+          font-size: calc(10px + 2vw);
+        }
+      }
+
+
+      &__picture {
+        height: 100%;
+        width: 10vh;
+
+        & img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          border-radius: 100%;
+        }
+      }
+    }
+
+    &__tables {
+      padding: 1vh 2vw;
+      width: 100%;
+      height: 90vh;
+      display: flex;
+      justify-content: space-between;
+
+      @include mobile {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 50px;
+      }
+
+      &__psychologyst {
+        width: 60%;
+        //border: blue solid 1px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 1vh;
+        font-size: calc(10px + 0.5vw);
+
+        @include tablet {
+          font-size: calc(8px + 0.5vw);
+        }
+
+        @include mobile {
+          width: 100%;
+          font-size: calc(6px + 0.5vw);
+        }
+
+        & p {
+          font-size: calc(12px + 0.5vw);
+        }
+
+        & .tablePsy {
+          border: 1px solid $light-gray;
+          box-shadow: $box-shadow-square;
+          border-radius: 20px;
+          height: 100%;
+          width: 100%;
+          border-collapse: collapse;
+
+          &__head {
+            //border: red solid 1px;
+            border-radius: 10px;
+
+          }
+
+          &__body {
+            //border: blue solid 1px;
+
+
+            &__ind {
+              width: 100%;
+              height: 10vh;
+
+              //border: orange solid 1px;
+              & td {
+                //border: red solid 1px;
+                height: 7vh;
+
+                & img {
+                  height: 80%;
+                  width: 100%;
+                }
+
+
+                & .actionCell {
+                  display: flex;
+                  flex-wrap: wrap;
+                  justify-content: space-evenly;
+                  gap: 5px;
+
+                  & .textYes {
+                    padding: 5px;
+                    background-color: $azure-blue;
+                    border-radius: 10px;
+                    color: white;
+                    cursor: pointer;
+                  }
+
+                  & .textNo {
+                    padding: 5px;
+                    background-color: $orange;
+                    border-radius: 10px;
+                    color: white;
+                    cursor: pointer;
+                  }
+                }
+              }
+            }
+
+            &__fin {
+              height: 100%;
+            }
+          }
+        }
+      }
+
+      &__report {
+        width: 30%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 1vh;
+        font-size: calc(10px + 0.5vw);
+
+        @include tablet {
+          font-size: calc(8px + 0.5vw);
+        }
+
+        @include mobile {
+          width: 100%;
+        }
+
+        & p {
+          font-size: calc(12px + 0.5vw);
+        }
+
+        & .tableRpt {
+          border: 1px solid $light-gray;
+          box-shadow: $box-shadow-square;
+          border-radius: 20px;
+          height: 100%;
+          width: 100%;
+          border-collapse: collapse;
+
+          &__head {
+            border-radius: 10px;
+          }
+
+          &__body {
+            &__ind {
+              width: 100%;
+              height: 10vh;
+
+              & td {
+                height: 7vh;
+                text-align: center;
+
+                & .detailsFilled {
+                  cursor: pointer;
+                }
+
+                & img {
+                  height: 80%;
+                  width: 100%;
+                }
+              }
+            }
+          }
+        }
+      }
+
+
+
+    }
+  }
+
+  & .modalReport {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: $font-poppins-core;
+
+    &__box {
+      width: 540px;
+      height: 440px;
+      background-color: white;
+      border-radius: 20px;
+      padding: 30px 60px 30px 30px;
+      opacity: none;
+      align-self: center;
+      justify-self: center;
+      display: flex;
+      //flex-direction: column;
+      flex-wrap: wrap;
+      gap: 10px;
+      position: relative;
+
+      @include mobile {
+        width: 80vw;
+        min-width: 350px;
+        height: 440px;
+      }
+
+      & div {
+        gap: 5px;
+        text-align: justify;
+        width: 100%;
+
+        & p {
+          font-weight: 500;
+          font-size: 18px;
+
+          @include mobile {
+            font-size: calc(6px + 2vw);
+          }
+        }
+
+        & span {
+          color: $light-gray;
+
+          @include mobile {
+            font-size: calc(4px + 2vw);
+          }
+        }
+      }
+
+      &__text3 {
+        & p {
+          text-align: center;
+        }
+      }
+
+      &__btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 25px;
+
+
+        & button {
+          border: 1px solid $orange;
+          background-color: $orange;
+          padding: 5px 15px;
+          border-radius: 20px;
+          color: white;
+          width: 150px;
+          font-size: 18px;
+
+          @include mobile {
+            font-size: calc(6px + 2vw);
+            width: 120px;
+          }
+
+
+          &:hover {
+            border: 1px solid $orange-hard;
+            background-color: $orange-hard;
+          }
+        }
+      }
+
+      &__close {
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        cursor: pointer;
+
+        & img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+
+  }
+
+  & .modalValDoc {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: $font-poppins-core;
+
+    &__form {
+      width: 540px;
+      height: 440px;
+      background-color: white;
+      border-radius: 20px;
+      padding: 30px 60px 30px 30px;
+      opacity: none;
+      align-self: center;
+      justify-self: center;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      gap: 10px;
+
+      @include mobile {
+        width: 350px;
+        height: 400px;
+        justify-content: space-evenly;
+      }
+
+      &__title {
+        font-size: calc(12px + 1vh);
+
+        @include mobile {
+          font-size: calc(10px + 1vw);
+        }
+
+        & span {
+          color: red;
+        }
+      }
+
+      &__input {
+        resize: none;
+        width: 100%;
+        height: 200px;
+        padding: 20px;
+        border-radius: 20px;
+        border: $light-gray solid 1px;
+
+        @include mobile {
+          height: 150px;
+        }
+
+      }
+
+      &__text {
+        font-size: calc(8px + 1vh);
+        color: $light-gray;
+
+        @include mobile {
+          font-size: calc(8px + 1vw);
+        }
+      }
+
+      &__btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+
+        & button {
+          padding: 5px 15px;
+          border-radius: 20px;
+          color: white;
+          width: 150px;
+          font-size: 18px;
+
+          @include mobile {
+            font-size: calc(12px + 1vw);
+            width: 100px;
+          }
+        }
+
+        & .btn1 {
+          border: 1px solid $orange;
+          background-color: $orange;
+        }
+
+        & .btn2 {
+          border: 1px solid $light-gray;
+          background-color: $light-gray;
+        }
+      }
+    }
+  }
+
+  /* estilos especiales para arreglar la tabla*/
+  //se colocan aqui dentro para evitar problemas
+  .tablePsy {
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid transparent;
+    border-radius: 20px;
+
+  }
+
+  .tablePsy td,
+  .tablePsy th {
+    border: 1px solid $light-gray;
+    border-left: 1px solid transparent;
+    border-top: 1px solid transparent;
+    padding: 8px;
+  }
+
+  .tablePsy thead tr th:last-child {
+    border-right: 1px solid transparent;
+  }
+
+  .tablePsy tbody tr:last-child td {
+    border-bottom: 1px solid transparent;
+  }
+
+  .tablePsy tbody tr td:last-child {
+    border-right: 1px solid transparent;
+  }
+
+  // version para la otra tabla
+  .tableRpt {
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid transparent;
+    border-radius: 20px;
+
+  }
+
+  .tableRpt td,
+  .tableRpt th {
+    border: 1px solid $light-gray;
+    border-left: 1px solid transparent;
+    border-top: 1px solid transparent;
+    padding: 8px;
+  }
+
+  .tableRpt thead tr th:last-child {
+    border-right: 1px solid transparent;
+  }
+
+  .tableRpt tbody tr:last-child td {
+    border-bottom: 1px solid transparent;
+  }
+
+  .tableRpt tbody tr td:last-child {
+    border-right: 1px solid transparent;
+  }
+
+  .detailsFilled {
+    cursor: pointer;
+  }
+
+  //estilos para el swal
+  .no-border {
+    border: none !important;
+    /* Estilo para quitar el borde */
+  }
+}
+
+.shiny {
+  color: $azure-blue;
+}

@@ -1,0 +1,165 @@
+@import "../../assets/styles/variables.scss";
+
+.edit-profile-client {
+    padding: 4rem 2rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+
+    &__return-container {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.2rem;
+        font-family: $font-monserrat;
+        color: $azure-blue;
+        font-weight: 700;
+        cursor: pointer;
+        figcaption {
+            font-size: 18px;
+        }
+    }
+
+    &__return-icon {
+        width: 2.5rem;
+        filter: invert(61%) sepia(21%) saturate(1535%) hue-rotate(128deg) brightness(88%) contrast(84%);
+    }
+
+    &__form {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 1.3rem;
+    }
+
+    &__title {
+        font-family: $font-monserrat;
+        font-size: 20px;
+        color: $azure-blue;
+        font-weight: 500;
+    }
+
+    &__form-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+    }
+
+    &__label {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+
+        &--text {
+            font-family: $font-monserrat;
+            color: $dark-azure-blue;
+            font-size: 17px;
+        }
+    }
+
+    &__input {
+        padding: 0.5rem 0.8rem;
+        border-radius: 10px;
+        border: 1px solid $light-gray;
+        outline: none !important;
+        font-family: $font-poppins-core;
+        background-color: white;
+        font-size: 15px;
+        width: 100%;
+    }
+
+    &__btn-submit {
+        background-color: $azure-blue;
+        border: none;
+        padding: 0.6rem 1.5rem;
+        width: max-content;
+        align-self: center;
+        font-family: $font-poppins-core;
+        color: white;
+        border-radius: 10px;
+        grid-area: button;
+        margin-top: 0.5rem;
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: 500;
+    }
+
+    &__alert {
+        font-family: $font-poppins-core;
+        font-size: 11px;
+        color: #797979;
+        margin-left: 12px;
+    }
+
+    &__disabled {
+        color: #797979;
+    }
+}
+
+@media screen and (min-width: 1400px) {
+    .edit-profile-client {
+        &__return-container {
+            figcaption {
+                font-size: 20px;
+            }
+        }
+
+        &__return-container {
+            top: 1.5rem;
+            left: 1.5rem;
+            font-size: 18px;
+        }
+
+        &__return-icon {
+            width: 3rem;
+        }
+
+        &__form {
+            width: 520px;
+            gap: 1.7rem;
+        }
+
+        &__title {
+            font-size: 26px;
+        }
+
+        &__form-container {
+            gap: 1rem;
+        }
+
+        &__label {
+            &--text {
+                margin-left: 5px;
+                font-size: 20px;
+            }
+        }
+
+        &__input {
+            font-size: 18px;
+            padding: 0.6rem 1rem;
+        }
+
+        &__btn-submit {
+            font-size: 18px;
+            &:hover {
+                background-color: #46c0ba;
+            }
+        }
+
+        &__alert {
+            font-size: 16px;
+        }
+    }
+}
+
+.swal2-confirm {
+    background-color: $azure-blue !important;
+    box-shadow: none !important;
+    &:hover {
+     transform: scale(1.02);
+    }
+}

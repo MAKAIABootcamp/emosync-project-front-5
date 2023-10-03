@@ -1,0 +1,53 @@
+@import "../../assets/styles/variables.scss";
+
+.HeaderAdminContainer {
+  height: 100vh;
+  width: 2vw;
+  min-width: 30px;
+  background-color: $dark-azure-blue;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-between;
+  padding: 2vh 0px;
+
+  & .HeaderAdmin__nav {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 2vh;
+    align-items: center;
+    justify-content: center;
+
+    &__btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      //border: red solid 1px;
+      cursor: pointer;
+
+      & img {
+        width: 70%;
+        //border: blue solid 1px;
+      }
+    }
+
+    & .fig1 {
+      padding-left: 20%;
+
+      & img {
+        width: 100%;
+      }
+    }
+  }
+
+  & .HeaderAdmin__logo {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & img {
+      width: 80%;
+    }
+  }
+}

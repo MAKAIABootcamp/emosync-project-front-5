@@ -1,0 +1,28 @@
+@import "../../../assets/styles/variables.scss";
+
+.HistoryPsycho{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 40px;
+    margin-top: 15vh;
+
+    & h2 {
+        color: $azure-blue;
+        font-family: Montserrat Alternates;
+        font-size: calc(16px + 0.5vw);
+        font-style: normal;
+        font-weight: 500;
+      }
+    // & .cell_details{
+    //     width: 100px;
+    //     border-right: 0;
+
+    //   }
+      &__table{
+
+         width: 70%;
+      }
+}

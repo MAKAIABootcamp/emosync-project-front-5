@@ -1,0 +1,150 @@
+@import "../../assets/styles/reset.scss";
+@import "../../assets/styles/variables.scss";
+
+
+
+.Header__Psycho{
+    display: flex;
+}
+.headerPsycho__profile{
+    height: calc(60px + 0.5vw);
+    width:  calc(60px + 0.5vw);
+    position: absolute;
+    z-index: 1;
+    top: 20px;
+    right: 20px;
+    border-radius: 50%;
+    border: 1px #c3c3c3 solid;
+   overflow: hidden;
+    cursor: pointer;
+    @include tablet{
+        height: calc(40px + 0.5vw);
+    width:  calc(40px + 0.5vw);
+    top: 10px;
+    right: 10px;
+    }
+
+    &>img{
+        width: 100%;
+        border-radius: 50%;
+        height: 100%;
+        object-fit: cover;
+        &:hover{
+            filter: contrast(80%);
+            transform: scale(1.1);
+        }
+    }
+}
+
+.Header__Psycho__tablet{
+    order: 2;
+    display: flex;
+    
+}
+.headerPsycho{
+    display: flex;
+    flex-direction: column;
+   
+    background-color: $azure-blue;
+    height: 100dvh;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 0px;
+    width: 40px;
+    position: sticky;top: 0; 
+    z-index: 100;
+    @include tablet{
+        display: flex;
+    flex-direction: row;
+    height: 20px;
+    width: 100vw;
+    z-index: 2;
+
+    position: fixed;
+    bottom:  0;
+    top: auto;
+    background-color: $azure-blue;
+   
+    }
+    & label{
+        font-weight: 700;
+        border: 1px red solid;
+    }
+    & figure{
+        cursor: pointer;
+    }
+    &> figure{
+        @include tablet{
+            height: 20px;
+            padding-left: 5px;
+        }
+        height: 40px;
+        &> img{
+            height: 100%;
+        }
+    }
+    &__middle{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 20px;
+        @include tablet{
+            flex-direction: row;
+            gap: 20px;
+            justify-content: center;
+         
+            width: 95px;
+        
+        }
+        &> figure{
+            height: 25px;
+            width: 25px;
+            position: relative;
+            @include tablet{
+                height: 18px;
+                width: 18px;
+            }
+            &> img{
+                height: 100%;
+                width: 100%;
+            }
+        }
+        &__active{
+           position: relative;
+        }
+    }
+    &__end{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 20px;
+        @include tablet{
+            flex-direction: row;
+            gap: 20px;
+         
+             
+             
+         justify-content: flex-end;
+           
+             
+                //width: 100px;
+            
+        }
+        &> figure{
+            height: 25px;
+            width: 25px;
+            @include tablet{
+                height: 18px;
+                width: 18px;
+            }
+            &> img{
+                height: 100%;
+                object-fit: cover;
+                width: 100%;
+            }
+        }
+    &__logout{
+       margin-left: 6px;
+    }
+    }
+}

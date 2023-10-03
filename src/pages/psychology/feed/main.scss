@@ -1,0 +1,232 @@
+@import "../../../assets/styles/variables.scss";
+
+.feed__father {
+  display: flex;
+  position: relative;
+  @include tablet{
+    flex-direction: column;
+  }
+}
+
+.feed {
+  font-family: $font-monserrat;
+  display: flex;
+  height: 100dvh;
+  width: 100%;
+  padding: 0 calc(20px + 0.5vw);;
+  @include tablet {
+    order: 1;
+    flex-direction: column;
+    
+  }
+  &__welcome {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    @include tablet {
+      width: 100%;
+    }
+    &__subtitle{
+      font-size: calc(10px + 0.5vw);
+      font-weight: 600;
+    }
+    &__title {
+      color: $azure-blue;
+      font-weight: 500;
+      font-size: calc(20px + 0.5vw);
+      text-align: center;
+    }
+
+    &__adviser {
+      width: 90%;
+      display: flex;
+     flex-wrap: wrap;
+     justify-content: center;
+     gap: 10px;
+      padding-bottom: 10px;
+        &__square{
+        background-color: #fff;
+        width: calc(100px + 6vw);
+        height: 190px;
+        padding: 15px;
+        border: 1px solid #d1d1d1;
+        border-radius: 15px;
+        @include tablet {
+          width:calc(100px + 6vw);
+          height: 155px;
+          overflow: auto;
+        }
+        @include mobile {
+          height: 145px;
+        }
+        & > figure {
+          width: calc(30px + 0.5vw);
+          height: calc(30px + 0.5vw);
+          margin-bottom: 10px;
+          margin-left: auto;
+          margin-right: auto;
+          @include mobile {
+            width: calc(20px + 0.5vw);
+            height: calc(20px + 0.5vw);
+          }
+          & > img {
+            height: 100%;
+            width: 100%;
+          }
+        }
+        & > h3 {
+          font-size: calc(5px + 0.5vw);
+          font-weight: 600;
+          text-align: center;
+          @include mobile {
+
+            padding-top: 9px;
+            font-size: calc(5px + 0.5vw);
+          }
+        }
+        & > p {
+          text-align: center;
+          padding-top: 9px;
+          font-size: calc(5px + 0.5vw);
+        }
+      }   
+    }
+  }
+  &__appointments {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+    height: 100vh;
+    padding: 0 0 0 calc(20px + 0.5vw);
+    @include tablet {
+      width: 100%;
+      padding-bottom: 50px;
+    }
+    & table {
+      border-collapse: separate;
+      width: auto;
+      background-color: transparent;
+      border-spacing: 0px;
+      border: 1px solid #e3e3e3;
+      & th,
+      td {
+        border: 1px solid #e3e3e3;
+        padding: 8px;
+        text-align: left;
+      }
+    }
+    &__appoint,
+    &__pendingAppoint {
+      //border: 1px solid #E3E3E3;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      & h2 {
+        color: $azure-blue;
+        font-family: Montserrat Alternates;
+        font-size: calc(16px + 0.5vw);
+       
+        font-style: normal;
+        font-weight: 500;
+        @include tablet{
+          font-size: calc(12px + 0.5vw);
+      }
+      }
+      &__table {
+        border: 1px solid #e3e3e3;
+        border-radius: 20px;
+        display: grid;
+        grid-template-rows: repeat(auto-fill, minmax(1fr, auto));
+        grid-template-columns: repeat(3, 1fr);
+        max-height: 200px;
+        overflow: scroll;
+        overflow-x: hidden;
+        @include tablet{
+          max-height: 500px;
+      }
+        &__celda {
+          font-family: $font-poppins-core;
+          border: 0.1vw solid #e0e0e0;
+          padding: 10px;
+          text-align: center;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: 400;
+          gap: 10px;
+          @include tablet{
+            gap: 2px;
+            flex-direction: column;
+              font-size : calc(6px + 0.5vw);
+         
+          }
+          
+          & figure {
+            height: 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            & img {
+              height: 100%;
+              width: 100%;
+            }
+          }
+          & strong {
+            color: $azure-blue;
+            cursor: pointer;
+            font-weight: 500;
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+          & p {
+            color: $orange-hard;
+            cursor: pointer;
+            font-weight: 400;
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+        & .upRight {
+          border: 0;
+          border-bottom: 0.1vw solid #e0e0e0;
+        }
+        & .upMiddle {
+          border-top: 0;
+        }
+        & .upLeft {
+          border: 0;
+          border-bottom: 0.1vw solid #e0e0e0;
+          display: flex;
+          justify-content: space-evenly;
+          
+        }
+        & .downRight {
+          border: 0;
+        }
+        & .downLeft {
+          border: 0;
+        }
+      }
+    }
+  }
+}
+
+.table__none{
+  display: flex !important;
+  justify-content: center;
+
+
+}
+.celda__none{
+  border: 0;
+}
+.appoint{
+  cursor: pointer;
+}

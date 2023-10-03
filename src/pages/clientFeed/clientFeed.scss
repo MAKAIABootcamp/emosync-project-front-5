@@ -1,0 +1,81 @@
+@import "../../assets/styles/variables.scss";
+
+.client-feed {
+    width: 100%;
+    padding-top: 25px;
+    position: relative;
+
+    &__search-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid $light-gray;
+        width: max-content;
+        margin: 0 auto;
+        padding: 0.5rem 1rem;
+        border-radius: 33px;
+        gap: 0.7rem;
+    }
+
+    &__search-icon {
+        width: 20px;
+        filter: invert(73%) sepia(94%) saturate(2%) hue-rotate(325deg) brightness(92%) contrast(80%);
+    }
+
+    &__input {
+        border: none;
+        width: 60vw;
+        outline: none !important;
+        font-family: $font-poppins-core;
+        font-weight: 400;
+    }
+
+    &__cards-container {
+        padding: 1.3rem;
+        display: grid;
+        gap: 0.8rem;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .client-feed {
+
+        &__cards-container {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+}
+
+@media screen and (min-width: 1100px) {
+    .client-feed {
+
+        &__cards-container {
+            grid-template-columns: repeat(3, 1fr);
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .client-feed {
+
+        &__cards-container {
+            grid-template-columns: repeat(3, 360px);
+        }
+
+        &__input {
+            font-size: 18px;
+            width: 50vw;
+        }
+    }
+}
+
+@media screen and (min-width: 1500px) {
+    .client-feed {
+
+        &__cards-container {
+            grid-template-columns: repeat(4, 360px);
+        }
+    }
+}
