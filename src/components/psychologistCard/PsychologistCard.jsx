@@ -21,7 +21,7 @@ const PsychologistCard = ({ psychologist, setPsychologistInfo }) => {
           <h2 className='psychologist-card__name'>{psychologist.displayName}</h2>
           <p className='psychologist-card__specialty'>{psychologist.specialty}</p>
         </div>
-        <button className='psychologist-card__info-btn' onClick={showPsychologistInfo}>Conóceme</button>
+        <button className='psychologist-card__info-btn' onClick={showPsychologistInfo}>Información</button>
       </div>
     </div>
   )

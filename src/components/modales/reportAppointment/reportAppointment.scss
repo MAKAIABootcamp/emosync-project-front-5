@@ -31,13 +31,13 @@
         color: $dark-azure-blue;
         font-weight: 600;
         margin-bottom: 0.5rem;
-        font-size: 17px;
+        font-size: 16px;
     }
 
     &__text {
         text-align: center;
         font-family: $font-poppins-core;
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 400;
         margin-bottom: 0.3rem
     }
@@ -59,8 +59,8 @@
     }
 
     &__alert {
-        font-size: 13px;
-        color: #696969;
+        font-size: 11px;
+        color: #7B7B7B;
         font-family: $font-poppins-core;
         text-align: justify;
     }
@@ -80,7 +80,6 @@
             border-radius: 10px;
             font-weight: 600;
             cursor: pointer;
-            font-size: 13px;
         }
     }
 
@@ -124,38 +123,6 @@
             button {
                 padding: 0.6rem;
                 font-size: 14px;
-            }
-        }
-
-    }
-}
-
-
-@media screen and (min-width: 1440px) {
-    .report-appointment {
-
-        &__title {
-            font-size: 23px;
-        }
-
-        &__text {
-            font-size: 18px;
-        }
-
-        &__textarea {
-            font-size: 17px;
-        }
-
-        &__alert {
-            font-size: 15px;
-        }
-
-        &__btn-container {
-            gap: 1rem;
-
-            button {
-                padding: 0.6rem;
-                font-size: 17px;
             }
         }
 

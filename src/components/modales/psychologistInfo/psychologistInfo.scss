@@ -14,7 +14,7 @@
 
     &__container {
         width: 85vw;
-        height: max-content;
+        height: 540px;
         background-color: white;
         border-radius: 20px;
         position: relative;
@@ -29,7 +29,7 @@
         height: 100px;
         width: 100%;
         background-color: $azure-blue;
-        margin-bottom: 40px;
+        margin-bottom: 60px;
     }
 
     &__close-icon {
@@ -54,26 +54,25 @@
     &__info-container {
         padding: 0.5rem 1.5rem;
         margin-bottom: 1rem;
-        width: 100%;
     }
 
     &__title {
         font-family: $font-poppins-core;
-        font-size: 18px;
+        font-size: 16px;
         font-weight: 400;
     }
 
     &__info {
-        font-size: 15px;
+        font-size: 13px;
         font-family: $font-poppins-core;
         text-align: justify;
         display: -webkit-box;
-        -webkit-line-clamp: 7;
+        -webkit-line-clamp: 10;
         -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
-        line-height: 23px;
-        color: #4e4e4e;
+        line-height: 18px;
+        color: #6A6A6A;
     }
 
     &__btn {
@@ -85,8 +84,6 @@
         border-radius: 10px;
         cursor: pointer;
         font-weight: 600;
-        font-size: 14px;
-        margin-bottom: 1rem;
     }
 }
 
@@ -94,7 +91,7 @@
     .psychologist-info {
         &__container {
             width: 70vw;
-            height: max-content;
+            height: 610px;
             max-width: 500px;
         }
 
@@ -127,7 +124,7 @@
         }
 
         &__info {
-            font-size: 16px;
+            font-size: 14px;
             -webkit-line-clamp: 7;
             line-height: 23px;
         }
@@ -142,7 +139,6 @@
             cursor: pointer;
             font-weight: 600;
             font-size: 14px;
-            margin-bottom: 1.5rem;
         }
     }
 }
@@ -151,6 +147,7 @@
     .psychologist-info {
         &__container {
             width: 65vw;
+            height: 610px;
             max-width: 500px;
         }
 
@@ -179,13 +176,13 @@
         }
 
         &__title {
-            font-size: 20px;
+            font-size: 18px;
         }
 
         &__info {
-            font-size: 17px;
-            line-height: 26px;
+            font-size: 14px;
             -webkit-line-clamp: 8;
+            line-height: 23px;
         }
 
         &__btn {
@@ -198,39 +195,6 @@
             cursor: pointer;
             font-weight: 600;
             font-size: 14px;
-        }
-    }
-}
-
-@media screen and (min-width: 1440px) {
-    .psychologist-info {
-        &__container {
-            height: max-content;
-        }
-
-        &__image-background {
-            height: 140px;
-            margin-bottom: 75px;
-        }
-
-        &__image {
-            width: 10rem;
-            height: 10rem;
-            top: 45px;
-        }
-
-        &__title {
-            font-size: 20px;
-        }
-
-        &__info {
-            font-size: 17px;
-            line-height: 27px;
-        }
-
-        &__btn {
-            font-size: 17px;
-
         }
     }
 }
