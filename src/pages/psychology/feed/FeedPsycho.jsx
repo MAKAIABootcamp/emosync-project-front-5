@@ -77,7 +77,7 @@ const FeedPsycho = () => {
       console.log(event);
       const response = await apiCalendar.createEventWithVideoConference(event);
       const hangoutLink = response.result.hangoutLink;
-      const  idClient = appoint.clientKey
+      const idClient = appoint.clientKey
       const formData = {
         status: "ACCEPTED",
         urlAppointment: hangoutLink,
@@ -92,11 +92,11 @@ const FeedPsycho = () => {
         appointId: id,
         updatedAt: new Date().getTime(),
         appointmentDate: appoint.pureTime
-    }
-     
+      }
+
       await editAppointPsicho({ formData, id })
-      await addClientAppointments({idClient})
-      const response3 = await addNotifyUser({formNotify, idClient})
+      await addClientAppointments({ idClient })
+      const response3 = await addNotifyUser({ formNotify, idClient })
 
 
       toast.success('¡Cita confirmada con éxito!')
@@ -148,7 +148,7 @@ const FeedPsycho = () => {
       const acceptedAppointments = appointments.filter((appoint) => appoint.status === "ACCEPTED");
       const fetchClientInfo = async (clientKey) => {
         const id = clientKey
-        const clientInfo = await getClientPsychologist({id});
+        const clientInfo = await getClientPsychologist({ id });
         return clientInfo;
       };
 
@@ -206,15 +206,15 @@ const FeedPsycho = () => {
 
   }, [successAppoint])
 
-const handleHangout = (url) =>{
-  window.open(url, '_blank');
- 
-}
+  const handleHangout = (url) => {
+    window.open(url, '_blank');
 
-const handleAppoint = (appoint)=>{
-  setModalAppoint(appoint)
-  setOpenAppoint(true)
-}
+  }
+
+  const handleAppoint = (appoint) => {
+    setModalAppoint(appoint)
+    setOpenAppoint(true)
+  }
 
   const fechaFormateada = obtenerFechaFormateada()
   return (
@@ -226,36 +226,61 @@ const handleAppoint = (appoint)=>{
 
           {nameArray.length &&
             <h2 className='feed__welcome__title'>Bienvenid@, {nameArray[0]}</h2>}
-          <figure className='feed__welcome__advicer'>
-            <img src="/Psychologist/infografia.jpg" alt="infografia" />
-          </figure>
+          <h2 className='feed__welcome__subtitle'>Para tomar en cuenta</h2>
+          <section className='feed__welcome__adviser'>
+            <article className='feed__welcome__adviser__square'>
+              <figure><img src="/Psychologist/Punctual.svg" alt="Punctual" /></figure>
+              <h3>Sé puntual y organizado</h3>
+              <p>La impresión del usuario es importante.</p>
+            </article>
+            <article className='feed__welcome__adviser__square'>
+              <figure><img src="/Psychologist/time.svg" alt="time" /></figure>
+              <h3>Maneja el tiempo</h3>
+              <p>Cada asesoría dura una hora; realiza el cierre 5 minutos antes.</p>
+            </article>
+            <article className='feed__welcome__adviser__square'>
+              <figure><img src="/Psychologist/free.svg" alt="freedom" /></figure>
+              <h3>Sé libre</h3>
+              <p>Cada psicólogo puede llevar el proceso como desee, siempre que el paciente lo decida.</p>
+            </article>
+            <article className='feed__welcome__adviser__square'>
+              <figure><img src="/Psychologist/register.svg" alt="register" /></figure>
+              <h3>Registra tu sesión</h3>
+              <p>Al finalizar cada asesoría, llena el apartado de impresión diagnóstica.</p>
+            </article>
+            <article className='feed__welcome__adviser__square'>
+              <figure><img src="/Psychologist/professional.svg" alt="professional" /></figure>
+              <h3>Sé profesional</h3>
+              <p>Vela por el beneficio del paciente y siempre mantén tu carácter profesional.</p>
+            </article>
+          </section>
         </aside>
         <aside className='feed__appointments'>
           <section className='feed__appointments__appoint'>
             <h2 >Proximas citas, {fechaFormateada}</h2>
             {
-                acceptedAppoint.length ?
-            <section className='feed__appointments__appoint__table'>
-               {
-                acceptedAppoint.sort((a, b) => a.pureTime - b.pureTime)
-                .map((appoint, index) => (
-                  <>
-                 <div key={appoint.id} className='feed__appointments__appoint__table__celda upLeft appoint' onClick={()=>handleAppoint(appoint)}> <input type="checkbox" disabled /> <span>{appoint.clientName}</span></div>
-                <div key={appoint.time} className='feed__appointments__appoint__table__celda upMiddle' ><span>{appoint.time}</span></div>
-                <div key={index} className='feed__appointments__appoint__table__celda upRight'><strong onClick={()=> handleHangout(appoint.hangoutURL)}>Entra al link de la cita</strong></div>
-                </>
-                ))
-}
+              acceptedAppoint.length ?
+                <section className='feed__appointments__appoint__table'>
+                  {
+                    acceptedAppoint.sort((a, b) => a.pureTime - b.pureTime)
+                      .map((appoint, index) => (
+                        <>
+                          <div key={appoint.id} className='feed__appointments__appoint__table__celda upLeft appoint' onClick={() => handleAppoint(appoint)}> <input type="checkbox" disabled /> <span>{appoint.clientName}</span></div>
+                          <div key={appoint.time} className='feed__appointments__appoint__table__celda upMiddle' ><span>{appoint.time}</span></div>
+                          <div key={index} className='feed__appointments__appoint__table__celda upRight'><strong onClick={() => handleHangout(appoint.hangoutURL)}>Entra al link de la cita</strong></div>
+                        </>
+                      ))
+                  }
 
-            </section>
-            :  
-            <section className='feed__appointments__pendingAppoint__table table__none'>
-            <div className='feed__appointments__pendingAppoint__table__celda  celda__none'>No hay citas pendientes por confirmar o rechazar.</div>
+                </section>
+                :
+                <section className='feed__appointments__pendingAppoint__table table__none'>
+                  <div className='feed__appointments__pendingAppoint__table__celda  celda__none'>No hay citas pendientes por confirmar o rechazar.</div>
 
+                </section>
+            }
           </section>
-}
-          </section>
-       
+
           <section className='feed__appointments__pendingAppoint'>
             <h2 >Citas pendientes por confirmar</h2>
             {
@@ -300,9 +325,9 @@ const handleAppoint = (appoint)=>{
         openReject &&
         <ModalReject appoint={modalReject} close={setOpenReject} />
       }
-        {
+      {
         openAppoint &&
-        <PostAppoint appoint={modalAppoint} close={setOpenAppoint} psicoInf={userInfo2}/>
+        <PostAppoint appoint={modalAppoint} close={setOpenAppoint} psicoInf={userInfo2} />
       }
 
     </main>
