@@ -30,24 +30,25 @@ const ProfilePsycho = () => {
   return (
     <main className='ProfilePsycho__father'>
       <HeaderPsycho />
-      {isSuccess ?
-
+      {isSuccess ? (
         <article className="ProfilePsycho">
-          <h2 className="ProfilePsycho__title">{userInfo2.specialty}, {nameArray[0]} {nameArray[1]}</h2>
-          <figure className="ProfilePsycho__picture"><img src={userInfo2.photo} alt="psychologist" /></figure>
+          <h2 className="ProfilePsycho__title">
+            {userInfo2.specialty}, {nameArray[0]} {nameArray[1]}
+          </h2>
+          <figure className="ProfilePsycho__picture">
+            <img src={userInfo2.photo} alt="psychologist" />
+          </figure>
           <section className="ProfilePsycho__inf">
             <section className="ProfilePsycho__inf__column">
               <div>
                 <h2>Nombre Completo</h2>
-                <p className="ProfilePsycho__inf__column__name">{userInfo2.displayName}</p>
+                <p className="ProfilePsycho__inf__column__name">
+                  {userInfo2.displayName}
+                </p>
               </div>
               <div>
-                <h2>Estado de Verificacion</h2>
-                {userInfo2.isVerified ?
-
-                  <p>Verificado</p>
-                  : <p>No verificado</p>
-                }
+                <h2>Estado de Verificación</h2>
+                {userInfo2.isVerified ? <p>Verificado</p> : <p>No verificado</p>}
               </div>
               <div>
                 <h2>Tipo de Cuenta</h2>
@@ -60,12 +61,11 @@ const ProfilePsycho = () => {
             </section>
             <section className="ProfilePsycho__inf__column">
               <div>
-                <h2>Profesion</h2>
+                <h2>Profesión</h2>
                 <p>{userInfo2.specialty}</p>
               </div>
-
               <div>
-                <h2>Correo Electronico</h2>
+                <h2>Correo Electrónico</h2>
                 <p>{userInfo2.email}</p>
               </div>
               <div>
@@ -73,22 +73,28 @@ const ProfilePsycho = () => {
                 <p>{userInfo2.bank}</p>
               </div>
               <div>
-                <h2>Citas incumplidas</h2>
+                <h2>Citas Incumplidas</h2>
                 <p>{userInfo2.missedAppointments}</p>
               </div>
             </section>
           </section>
           <section className="ProfilePsycho__description">
-            <h3>Descripcion</h3>
-            <p>{userInfo2.description == "" ? "You can write a description to improve your profile" : userInfo2.description}</p>
+            <h3>Descripción</h3>
+            <p>
+              {userInfo2.description === ""
+                ? "Puedes escribir una descripción para mejorar tu perfil"
+                : userInfo2.description}
+            </p>
           </section>
-          <button className="ProfilePsycho__goEdit" onClick={toEdit} >Editar Informacion</button>
+          <button className="ProfilePsycho__goEdit" onClick={toEdit}>
+            Editar Información
+          </button>
         </article>
-        : <Loader />
-      }
-
+      ) : (
+        <Loader />
+      )}
     </main>
-  )
+  );
 }
 
 export default ProfilePsycho

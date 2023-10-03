@@ -20,7 +20,7 @@
     
   }
   &__welcome {
-    width: 30%;
+    width: 40%;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -37,15 +37,18 @@
     }
     &__advicer {
         height: 80%;
+        width: 100%;
+
       & > img {
+        width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain;
         border-radius: 34px;
       }
     }
   }
   &__appointments {
-    width: 70%;
+    width: 60%;
     display: flex;
     flex-direction: column;
     justify-content: center;
