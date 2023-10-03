@@ -26,8 +26,8 @@
     }
 
     &__alert {
-        font-size: 13px;
-        color: #464646;
+        font-size: 11px;
+        color: #7B7B7B;
         font-family: $font-poppins-core;
         text-align: justify;
     }
@@ -47,7 +47,6 @@
             border-radius: 10px;
             font-weight: 600;
             cursor: pointer;
-            font-size: 13px;
         }
     }
 
@@ -79,24 +78,6 @@
             button {
                 padding: 0.6rem;
                 font-size: 14px;
-            }
-        }
-
-    }
-}
-
-@media screen and (min-width: 1300px) {
-    .cancel-appointment-modal {
-
-        &__alert {
-            font-size: 17px;
-        }
-
-        &__btn-container {
-
-            button {
-                padding: 0.6rem;
-                font-size: 17px;
             }
         }
 

@@ -45,7 +45,6 @@
         font-size: 12px;
         text-align: center;
         line-height: 15px;
-
         span {
             font-family: $font-monserrat;
             color: $azure-blue;
@@ -69,16 +68,16 @@
         input[type=file] {
             font-size: 13px;
             width: 100%;
-        }
+          }
 
-        input[type=file]::file-selector-button {
+          input[type=file]::file-selector-button {
             background-color: white;
             cursor: pointer;
             border: 1px solid $light-gray;
             padding: 0.2rem 0.5rem;
             border-radius: 7px;
             font-family: $font-poppins-core;
-        }
+          }
     }
 
     &__input {
@@ -100,8 +99,7 @@
         padding: 0 0.3rem;
     }
 
-    &__btn,
-    &__btn-continue {
+    &__btn, &__btn-continue {
         background-color: $orange;
         border: none;
         padding: 0.6rem 1.5rem;
@@ -112,7 +110,6 @@
         border-radius: 10px;
         grid-area: button;
         margin-top: 0.5rem;
-        font-size: 14px;
     }
 
     &__select-container {
@@ -128,7 +125,6 @@
         font-weight: 600;
         font-family: $font-monserrat;
         margin-bottom: 0.7rem;
-
         span {
             color: $azure-blue;
         }
@@ -216,11 +212,11 @@
             gap: 1.2rem;
             row-gap: 1.3rem;
             grid-template-areas:
-                ". ."
-                ". ."
-                ". ."
-                ". ."
-                "button button";
+            ". ."
+            ". ."
+            ". ."
+            ". ."
+            "button button";
             place-items: center;
         }
 
@@ -231,12 +227,12 @@
 
             input[type=file] {
                 font-size: 14px;
-            }
+              }
 
-            input[type=file]::file-selector-button {
+              input[type=file]::file-selector-button {
                 padding: 0.3rem 0.7rem;
                 border-radius: 10px;
-            }
+              }
         }
 
         &__alert {
@@ -249,8 +245,7 @@
             padding: 0 0.3rem;
         }
 
-        &__btn,
-        &__btn-continue {
+        &__btn, &__btn-continue {
             font-size: 16px;
         }
 
@@ -299,26 +294,9 @@
         &__text {
             max-width: 80%;
             margin: 0 auto;
-            font-size: 18px;
-            line-height: 28px;
         }
 
-        &__label {
-            font-size: 18px;
-            position: relative;
-            width: 100%;
-
-            input[type=file] {
-                font-size: 16px;
-            }
-
-            input {
-                font-size: 16px;
-            }
-        }
-
-        &__btn,
-        &__btn-continue {
+        &__btn, &__btn-continue {
             margin-top: 2rem;
             cursor: pointer;
         }
@@ -328,8 +306,8 @@
         }
 
         &__select-text {
-            font-size: 19px;
-            max-width: 650px;
+            font-size: 16px;
+            max-width: 450px;
         }
 
         &__type-container {
@@ -337,8 +315,7 @@
         }
 
         &__type-image-container {
-            font-size: 19px;
-
+            font-size: 16px;
             &:hover {
                 cursor: pointer;
                 transform: scale(1.04);
@@ -346,7 +323,7 @@
         }
 
         &__type-image {
-            width: 10rem;
+            width: 7rem;
         }
 
         &__message-error {

@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { editInfoUser } from '../../store/slides/user/thunk';
+import Swal from 'sweetalert2';
 import { swals } from '../../services/swals';
 
 const EditProfileClient = () => {
@@ -15,7 +16,6 @@ const EditProfileClient = () => {
     const dispatch = useDispatch()
 
     const onSubmit = async (data) => {
-
         const formData = data
         formData.displayName === displayName && delete formData.displayName
         formData.email === email || !formData.email && delete formData.email
