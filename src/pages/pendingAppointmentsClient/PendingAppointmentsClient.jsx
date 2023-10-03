@@ -91,7 +91,7 @@ const PendingAppointmentsClient = () => {
                       {item.psychologistName}
                     </td>
                     <td className='pending-appointments-client__td'>{printDate(item.appointmentDate)}</td>
-                    <td className='pending-appointments-client__td link'><a href={item.urlAppointment}>Link</a></td>
+                    <td className='pending-appointments-client__td link'><a href={item.urlAppointment} target="_blank">Link</a></td>
                     <td className='pending-appointments-client__td cancel-appointment' onClick={() => handleCancelAppointment(item.id, item.verifiedSpecialty)}>
                       Cancelar cita
                     </td>

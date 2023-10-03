@@ -145,7 +145,7 @@ const EditProfilePsycho = () => {
 
   return (
     <aside className='EditProfilePsycho'>
-      <Toaster richColors position='top-right'/>
+      <Toaster richColors position='top-right' />
       <HeaderPsycho />
       {
         isSuccess ? (
@@ -156,6 +156,7 @@ const EditProfilePsycho = () => {
               <input
                 className='inputImage'
                 type="file"
+                accept="image/jpeg, image/png"
                 {...register("inputPicture")}
               />
             </div>
@@ -177,6 +178,7 @@ const EditProfilePsycho = () => {
               <input
                 className='inputImage'
                 type="file"
+                accept="image/jpeg, image/png"
                 {...register("inputPicDiploma")}
               />
             </div>
@@ -185,6 +187,7 @@ const EditProfilePsycho = () => {
               <input
                 className='inputImage'
                 type="file"
+                accept="image/jpeg, image/png"
                 {...register("inputProfCard")}
               />
             </div>
@@ -193,6 +196,7 @@ const EditProfilePsycho = () => {
               <input
                 className='inputImage'
                 type="file"
+                accept="image/jpeg, image/png"
                 {...register("inputProfSpecImg")}
               />
             </div>
