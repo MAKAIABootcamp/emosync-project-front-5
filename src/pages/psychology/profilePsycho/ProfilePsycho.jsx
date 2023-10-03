@@ -32,7 +32,7 @@ const ProfilePsycho = () => {
       <HeaderPsycho />
       {isSuccess ? (
         <article className="ProfilePsycho">
-          <h2 className="ProfilePsycho__title">
+          <h2 className="ProfilePsycho__title"> 
             {userInfo2.specialty}, {nameArray[0]} {nameArray[1]}
           </h2>
           <figure className="ProfilePsycho__picture">
