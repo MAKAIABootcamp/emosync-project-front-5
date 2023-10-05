@@ -43,6 +43,10 @@ Emosync has 3 different types of users: patients, psychologists and administrato
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=plastic&logo=javascript&logoColor=%23F7DF1E) <br/>
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=plastic&logo=html5&logoColor=white) <br/>
 
+### Deployment:
+-------------
+https://emosync-d2f42.web.app/
+
 ### Authors:
 -------------
 [José Roberto Henao Garcés](https://github.com/josexdjose14) <br/>
